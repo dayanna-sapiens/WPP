@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.wpp.web", "com.wpp.web\com.wpp.web.csproj", "{7759B844-BFC6-4C7E-A68D-1BD34AADA899}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.wpp.test", "com.wpp.test\com.wpp.test.csproj", "{997BCDAA-2EA5-423B-B416-D7872C1A9C7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.wpp.framework", "com.wpp.framework\com.wpp.framework.csproj", "{2F85243E-3C92-4BFA-B4FA-0AC2357F212F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.wpp.bl", "com.wpp.bl\com.wpp.bl.csproj", "{C648D3DF-1B90-4DBC-B722-E3584F83EAFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.wpp.models", "com.wpp.models\com.wpp.models.csproj", "{2CC56892-029F-47A2-8E41-4343BFD4B403}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.wpp.entities", "com.wpp.entities\com.wpp.entities.csproj", "{2A41DA3F-6606-4704-BD3B-F5B621585E10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.wpp.mapper", "com.wpp.mapper\com.wpp.mapper.csproj", "{189293CB-0499-425C-BA74-F82D509B803A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7759B844-BFC6-4C7E-A68D-1BD34AADA899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7759B844-BFC6-4C7E-A68D-1BD34AADA899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7759B844-BFC6-4C7E-A68D-1BD34AADA899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7759B844-BFC6-4C7E-A68D-1BD34AADA899}.Release|Any CPU.Build.0 = Release|Any CPU
+		{997BCDAA-2EA5-423B-B416-D7872C1A9C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{997BCDAA-2EA5-423B-B416-D7872C1A9C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{997BCDAA-2EA5-423B-B416-D7872C1A9C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{997BCDAA-2EA5-423B-B416-D7872C1A9C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F85243E-3C92-4BFA-B4FA-0AC2357F212F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F85243E-3C92-4BFA-B4FA-0AC2357F212F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F85243E-3C92-4BFA-B4FA-0AC2357F212F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F85243E-3C92-4BFA-B4FA-0AC2357F212F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C648D3DF-1B90-4DBC-B722-E3584F83EAFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C648D3DF-1B90-4DBC-B722-E3584F83EAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C648D3DF-1B90-4DBC-B722-E3584F83EAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C648D3DF-1B90-4DBC-B722-E3584F83EAFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CC56892-029F-47A2-8E41-4343BFD4B403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CC56892-029F-47A2-8E41-4343BFD4B403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CC56892-029F-47A2-8E41-4343BFD4B403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CC56892-029F-47A2-8E41-4343BFD4B403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A41DA3F-6606-4704-BD3B-F5B621585E10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A41DA3F-6606-4704-BD3B-F5B621585E10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A41DA3F-6606-4704-BD3B-F5B621585E10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A41DA3F-6606-4704-BD3B-F5B621585E10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{189293CB-0499-425C-BA74-F82D509B803A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{189293CB-0499-425C-BA74-F82D509B803A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{189293CB-0499-425C-BA74-F82D509B803A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{189293CB-0499-425C-BA74-F82D509B803A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
