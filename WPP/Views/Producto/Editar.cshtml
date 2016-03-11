@@ -1,0 +1,171 @@
+﻿@model WPP.Model.ModuloContratos.ProductoModel
+@{
+    ViewBag.Title = "Editar Producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var jsonSerialiser = new System.Web.Script.Serialization.JavaScriptSerializer();
+    String jsonCategorias = jsonSerialiser.Serialize(ViewBag.ListaCategoria);
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Editar Producto</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Editar", "Producto", FormMethod.Post, new { id = "frmEditarProducto", @class = "form-horizontal" }))
+            {
+
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.RutasRecoleccion)
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.Compania)
+                @Html.Hidden("LstCategorias", jsonCategorias)
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Descripcion, new { @Class = "form-control", id = "Descripcion" })
+                    @Html.ValidationMessageFor(m => m.Descripcion)
+                </div>
+                <div class="form-group">
+                    <label for="Categoria">Tipo de Producto</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Categoria, new SelectList(ViewBag.ListaCategoria, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Categoria" })
+                    @Html.ValidationMessageFor(m => m.Categoria)
+                </div>
+                <div class="form-group" style="display:none;" id="divPrecio">
+                    <label for="Precio">Precio</label>
+                    @Html.TextBoxFor(m => m.Precio, new { @Class = "form-control", id = "Precio" })
+                    @Html.ValidationMessageFor(m => m.Precio)
+                </div>
+                <div class="form-group" style="display:none;" id="divMoneda">
+                    <label for="Moneda">Moneda</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Moneda, new List<SelectListItem>{
+                                            new SelectListItem() {Text = "Colones", Value="Colones"},
+                                            new SelectListItem() {Text = "Dólares", Value="Dolares"}
+                                            }, new { @class = "form-control", id = "Moneda" })
+                    @Html.ValidationMessageFor(m => m.Moneda)
+                </div>
+                <div class="form-group">
+                    <label for="UnidadCobro">Unidad de Cobro</label>
+                    @Html.DropDownListFor(m => m.UnidadCobro, new SelectList(ViewBag.ListaUnidadCobro, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "UnidadCobro" })
+                    @Html.ValidationMessageFor(m => m.UnidadCobro)
+                </div>
+                <div class="form-group">
+                    <label for="ProcesoCobro">Proceso que genera el cobro</label>
+                    @Html.DropDownListFor(m => m.ProcesoCobro, new SelectList(ViewBag.ListaProcesoCobro, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "ProcesoCobro" })
+                    @Html.ValidationMessageFor(m => m.ProcesoCobro)
+                </div>
+                <div class="form-group">
+                    <label for="TipoEquipo">Tipo de equipo</label>    <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.TipoEquipo, new SelectList(ViewBag.ListaTipoEquipo, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "TipoEquipo" })
+                    @Html.ValidationMessageFor(m => m.TipoEquipo)
+                </div>
+                <div class="form-group">
+                    <label for="Tamano">Tamaño</label>
+                    @Html.DropDownListFor(m => m.Tamano, new SelectList(ViewBag.ListaTamano, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Tamano" })
+                    @Html.ValidationMessageFor(m => m.Tamano)
+                </div>
+                <div class="form-group">
+                    <label for="Estado">Estado</label>    <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Estado, new SelectList(ViewBag.ListaEstado, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Estado" })
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+                <div class="form-group">
+                    <label for="chkRutasRecoleccion">¿Acepta rutas recolección?</label>
+                    <br />
+                    <input id="aceptaSi" type="radio" name="rutaRecoleccion" value="1">Si
+                    <input id="aceptano" type="radio" name="rutaRecoleccion" value="0">No
+                </div>
+
+                <button type="submit" class="btn btn-primary">Editar</button>
+                @Html.ActionLink("Cancelar", "Index", "Producto", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        var json = $("#LstCategorias").val();
+        var lstCategorias = $.parseJSON(json);
+
+        // Se setea el dataset que indica si es de tipo Disposicion
+        var lstCat = document.getElementById("Categoria");
+        for (var i = 0; i < lstCat.length; i++) {
+            var actual = lstCat[i];
+            if (i != 0) {
+                var c = lstCategorias[i - 1];
+                actual.dataset.disposicion = lstCategorias[i - 1].Tipo;
+            }
+            else {
+                actual.dataset.disposicion = "Ninguno";
+            }
+        }
+
+        OnchangeCategoria();
+      
+        $("#Categoria").change(function () {
+            OnchangeCategoria();
+        });
+
+
+        if ($("#RutasRecoleccion").val() == "" || $("#RutasRecoleccion").val() == "False") {
+            $("#RutasRecoleccion").val(false);
+            $("#aceptano").prop("checked", true);
+        }
+        else {
+            $("#RutasRecoleccion").val(true);
+            $("#aceptaSi").prop("checked", true);
+        }
+
+        $("input:radio[name='rutaRecoleccion']").change(function () {
+            actual = $("#RutasRecoleccion").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {
+                actual = append;
+                $("#RutasRecoleccion").val(actual=="0" ? false:true);
+
+            } else {
+                $("#RutasRecoleccion").val(true);
+            }
+        });
+
+
+    });// end document ready
+
+    function OnchangeCategoria() {
+        var opcion = $("#Categoria option:selected");
+        var disposicion = opcion[0].dataset.disposicion;
+        if (disposicion == "DisposicionFinal") {
+            $("#divPrecio").css("display", "block");
+            $("#divMoneda").css("display", "block");
+        }
+        else {
+            $("#divPrecio").css("display", "none");
+            $("#divMoneda").css("display", "none");
+        }
+
+    }
+
+</script>

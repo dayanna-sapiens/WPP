@@ -1,0 +1,292 @@
+﻿@{
+    ViewBag.Title = "Facturación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (null != TempData["alertMessage"])
+    {
+        <script type="text/javascript">
+
+            swal("", "@TempData["alertMessage"]", "error");
+            /// ("@TempData["alertMessage"]");
+        </script>
+    }
+
+
+    long consecutivo = ViewBag.Consecutivo == null ? 0 : ViewBag.Consecutivo;
+    double venta = ViewBag.TipoCambioVenta == null ? 0 : ViewBag.TipoCambioVenta.Valor;
+}
+
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:2%;">
+        <h2>Filtrar por: </h2>
+
+     
+            @Html.Hidden("Consecutivo", @consecutivo)
+            @Html.Hidden("TipoCambioVenta", @venta)
+            @Html.Hidden("Factura")
+            <p>
+                Último formulario impreso: @Html.TextBox("ConsecutivoFactura", "", new { @class = "form-control col-lg-3", @readonly = "readonly", id = "ConsecutivoFactura" })
+            </p>
+            <p>
+                Tipo de Cambio: @Html.TextBox("TipoCambio", "", new { @class = "form-control col-lg-3", @readonly = "readonly", id = "TipoCambio" })
+            </p>
+            <p>
+                Desde: @Html.TextBox("searchStringDesde", "", new { @class = "form-control col-lg-3", @readonly = "readonly", id = "searchStringDesde" })
+            </p>
+            <p>
+                Hasta: @Html.TextBox("searchStringHasta", "", new { @class = "form-control", @readonly = "readonly", id = "searchStringHasta" })
+            </p>
+            <p>
+                Número Cliente: @Html.TextBox("searchStringNumeroCliente", "", new { @class = "form-control", id="searchStringNumeroCliente" })
+            </p>
+            <p>
+                Cliente: @Html.TextBox("searchStringCliente", "", new { @class = "form-control", id="searchStringCliente" })
+            </p>
+            <p>
+                Número Contrato: @Html.TextBox("searchStringNumeroContrato", "", new { @class = "form-control", id = "searchStringNumeroContrato" })
+            </p>
+            <p>
+                Contrato: @Html.TextBox("searchStringContrato", "", new { @class = "form-control", id="searchStringContrato" })
+            </p>
+            <p>
+                <button value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </p>
+        
+    </div>
+
+
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>Facturación</h2>
+
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+
+
+
+        <div class="table-responsive" style="height:400px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-facturas">
+                <thead>
+                    <tr>
+                        <th>
+                            Fecha
+                        </th>
+                        <th>
+                            Estado
+                        </th>
+                        <th>
+                            Cliente
+                        </th>
+                        <th>
+                            Contrato
+                        </th>
+                        <th>
+                            Moneda
+                        </th>
+                        <th>
+                            Usuario
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tblFacturas"></tbody>
+            </table>
+        </div>
+        <br />
+        <button  value="Facturar" id="btnFacturar" class="btn btn-primary">Facturar <i class="fa fa-list-alt"></i></button>
+
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+
+        var today = new Date();
+        $('#searchStringHasta').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        $('#searchStringDesde').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        $("#btnBuscar").click();
+
+        $("#ConsecutivoFactura").val($("#Consecutivo").val());
+        $("#TipoCambio").val($("#TipoCambioVenta").val());
+
+    });
+
+    $("#btnFacturar").click(function () {
+
+        var factura = $("#Factura").val();
+
+        if (factura != "" && factura != "0") {
+            var path = "/Facturacion/Facturar?factura=" + factura;
+            $.ajax({
+                type: 'POST',
+                url: path,
+                success: function (data) {
+                    if (data != null) {
+
+                        $("#btnBuscar").click();
+                        swal("", "Se realizó el proceso de facturación de manera exitosa", "success");
+
+                        window.open("/Facturacion/ReporteFacturacion?id=" + factura, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+                    }
+                    else {
+                        swal("", "Hubo un error al realizar el proceso de facturación", "error");
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    swal("", "Hubo un error al realizar el proceso de facturación", "error");
+                },
+                traditional: true
+
+            });
+        }
+        else {
+            swal("Datos incompletos", "Debe seleccionar la prefactura que desea facturar", "error");
+        }
+    });
+
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnBuscar").click(function () {
+
+        var desde = $("#searchStringDesde").val();
+        var hasta = $("#searchStringHasta").val();
+        var cliente = $("#searchStringCliente").val();
+        var numContrato = $("#searchStringNumeroContrato").val();
+        var contrato = $("#searchStringContrato").val();
+        var numCliente = $("#searchStringNumeroCliente").val();
+
+        var path = "/Facturacion/BusquedaPrefacturacion?desde=" + desde + "&hasta=" + hasta + "&cliente=" + cliente
+                             + "&numCliente=" + numCliente + "&contrato=" + contrato + "&numContrato=" + numContrato;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                if (data != null) {
+                    CargarFacturas(data);
+                }
+                else {
+                    $("#tblFacturas tr").remove();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#tblFacturas tr").remove();
+            },
+            traditional: true
+
+        });
+
+    });
+
+
+
+    // Lista los contratos encontrados que hayan coincidido con la informacion ingresada
+    function CargarFacturas(data) {
+        $("#tblFacturas tr").remove();
+
+        var tabla = $("#tblFacturas")[0];
+
+        for (var i = 0; i < data.length; i++) {
+
+            var row = document.createElement("tr");
+            row.id = "Factura" + data[i].Id;
+
+            // ID de factura
+            var id = document.createElement("td");
+            id.innerText = data[i].Id;
+            id.innerHTML = data[i].Id;
+            id.style.display = "none";
+            row.appendChild(id);
+
+            // Fecha
+            var stringFecha = data[i].CreateDate;
+            stringFecha = stringFecha.substring(6, 19);
+            var date = new Date(Number(stringFecha));
+            var fecha = document.createElement("td");
+            fecha.innerText = convertDate(date);
+            fecha.innerHTML = convertDate(date);
+            row.appendChild(fecha);
+
+            // Estado
+            var estado = document.createElement("td");
+            estado.innerText = data[i].Estado;
+            estado.innerHTML = data[i].Estado;
+            row.appendChild(estado);
+
+            // Cliente
+            var cliente = document.createElement("td");
+            cliente.innerText = data[i].ClienteDescripcion;
+            cliente.innerHTML = data[i].ClienteDescripcion;
+            row.appendChild(cliente);
+
+            // Contrato
+            var contrato = document.createElement("td");
+            contrato.innerText = data[i].ContratoDescripcion;
+            contrato.innerHTML = data[i].ContratoDescripcion;
+            row.appendChild(contrato);
+
+            // Moneda
+            var moneda = document.createElement("td");
+            moneda.innerText = data[i].Moneda;
+            moneda.innerHTML = data[i].Moneda;
+            row.appendChild(moneda);
+
+            // Usuario
+            var usuario = document.createElement("td");
+            usuario.innerText = data[i].CreatedBy;
+            usuario.innerHTML = data[i].CreatedBy;
+            row.appendChild(usuario);
+
+            //// Formulario
+            //var formulario = document.createElement("td");
+            //formulario.innerText = data[i].Consecutivo;
+            //formulario.innerHTML = data[i].Consecutivo;
+            //row.appendChild(formulario);
+
+            tabla.appendChild(row);
+
+            $('#Factura' + data[i].Id).attr("onClick", "javascript:SelectRow('" + data[i].Id + "'); return false;");
+        }
+
+    }
+
+
+    // función para obtener la información de la factura seleccionada
+    function SelectRow(id) {
+        //var equipo = id;
+        $("#tblFacturas tr").css("background-color", "#FFF");
+        var row = $('#Factura' + id).css("background-color", "#D0EA93");
+        $("#Factura").val(id);
+    }
+
+    // Este metodo se encarga de dar formato a la fecha para que se muestre en el listado
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+
+</script>

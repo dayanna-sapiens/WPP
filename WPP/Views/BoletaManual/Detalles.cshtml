@@ -1,0 +1,142 @@
+﻿@model WPP.Model.ModuloBascula.BoletaManualModel
+
+@{
+    ViewBag.Title = "Boleta Manual";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    String Cliente = ViewBag.Cliente != null ? ViewBag.Cliente : "";
+    String Equipo = ViewBag.Equipo != null ? ViewBag.Equipo : "";
+    String FechaFormato = Model.Fecha.ToString("dd/MM/yyyy");
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Detalles de de la Boleta Manual</h2>
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="form-group">
+            <label for="NumeroBoleta">Número de Boleta:</label>
+            @Html.DisplayFor(m => m.NumeroBoleta, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Sitio">Sitio:</label>
+            @Html.DisplayFor(m => m.SitioDescripcion, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Fecha">Fecha:</label>
+            @*@Html.DisplayFor(m => m.Fecha, new { @Class = "form-control" })*@
+            @Html.Raw(@FechaFormato)
+        </div>
+        <div class="form-group">
+            <label for="Hora">Hora:</label>
+            @Html.DisplayFor(m => m.Hora, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="OTR">OTR:</label>
+            @Html.DisplayFor(m => m.OTRConsecutivo, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Eje2">Equipo:</label>
+            @Html.Raw(@Equipo)
+        </div>
+        <div class="form-group">
+            <label for="Eje3">Cliente:</label>
+            @Html.Raw(@Cliente)
+        </div>
+        <div class="form-group">
+            <label for="DescripcionCliente">Facturar a nombre de: </label>
+            @Html.DisplayFor(m => m.DescripcionCliente, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Peso">Observaciones:</label>
+            @Html.DisplayFor(m => m.Observaciones, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="PesoBruto">Peso Bruto:</label>
+            @Html.DisplayFor(m => m.PesoBruto, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="PesoTara">Peso Tara:</label>
+            @Html.DisplayFor(m => m.PesoTara, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="PesoNeto">Peso Neto:</label>
+            @Html.DisplayFor(m => m.PesoNeto, new { @Class = "form-control" })
+        </div>
+
+        <div class="form-group">
+          @*  <a id="btnReimprimir" class="btn btn-primary">Reimprimir <span class="glyphicon glyphicon-print" aria-hidden="true"></span></a>*@  
+            @if (Session["Roles"].ToString().Contains("Administrador de Boletas Manuales (Báscula)"))
+            {
+                <a id="btnAnular" class="btn btn-primary">Anular  <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></a>
+            }
+            @Html.ActionLink("Regresar", "Index", "BoletaManual", null, new { @Class = "btn btn-primary" })
+            @Html.ActionLink("Index", "Index", "BoletaManual", null, new { @Class = "btn btn-primary", id = "btnIndex", @hidden = "hidden", @style = "display:none;" })
+        </div>
+
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        // Función para dar formato numérico
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+
+
+    });// end document ready
+
+
+
+
+
+    // Cambia el estado de la boleta,
+    // indicando que esta boleta debe terminarse ya que el equipo necesita repesaje
+    $("#btnReimprimir").click(function () {
+
+    });
+
+    $("#btnAnular").click(function () {
+        var boleta = $("#Id").val();
+
+        $.ajax({
+            url: '/BoletaManual/AnularBoletaManual?id=' + boleta,
+            type: 'POST',
+            success: function (data) {
+                if (data != true) {
+                    document.getElementById("btnEditar").click();
+                }
+                else {
+
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+            },
+            traditional: true
+        })
+    });
+
+</script>
+
+

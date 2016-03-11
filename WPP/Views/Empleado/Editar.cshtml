@@ -1,0 +1,69 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.EmpleadoRecoleccionModel
+@{
+    ViewBag.Title = "Empleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Editar Empleado</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Editar", "Empleado", FormMethod.Post, new { id = "frmEditarEmpleado", @class = "form-horizontal" }))
+            {
+
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.Id)
+
+                <div class="form-group">
+                    <label for="descripcion">Nombre</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Nombre, new { @Class = "form-control", @readonly="readonly" })
+                    @Html.ValidationMessageFor(m => m.Nombre)
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Cédula</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Cedula, new { @Class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Cedula)
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Código</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Codigo, new { @Class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Codigo)
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Puesto</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Puesto, new { @Class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Puesto)
+                </div>
+                <div class="form-group">
+                    <label for="Categoria">Jornada Laboral</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Jornada, new SelectList(ViewBag.ListaJornada, "Id", "Descripcion"), String.Empty, new { @class = "form-control", id = "Jornada" })
+                    @Html.ValidationMessageFor(m => m.Jornada)
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Editar</button>
+                @Html.ActionLink("Cancelar", "Index", "Jornada", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+
+</script>

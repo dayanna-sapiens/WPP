@@ -1,0 +1,263 @@
+﻿@model PagedList.IPagedList<WPP.Entities.Objects.ModuloBascula.Bascula>
+@using WPP.Model;
+@using PagedList.Mvc;
+@using PagedList;
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Boletas Báscula";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (null != TempData["alertMessage"])
+    {
+        <script type="text/javascript">
+
+            swal("", "@TempData["alertMessage"]", "error");
+            /// ("@TempData["alertMessage"]");
+        </script>
+    }
+}
+
+
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:5%;">
+        <h2>Filtrar por: </h2>
+
+        @using (Html.BeginForm(Html.BeginForm("Buscar", "Bascula", FormMethod.Get)))
+        {
+            <p>
+                Boleta: @Html.TextBox("searchStringBoleta", ViewBag.CurrentDescripcion as string, new { @class = "form-control col-lg-3" })
+            </p>
+            <p>
+                Cliente: @Html.TextBox("searchStringCliente", ViewBag.currentFilterTipo as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Equipo: @Html.TextBox("searchStringEquipo", ViewBag.currentFilterEquipo as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Estado: @Html.DropDownList("searchStringEstado", new List<SelectListItem>{
+                    new SelectListItem() {Text = "Activo", Value="Activo"},
+                    new SelectListItem() {Text = "Anulada", Value="Anulada"},
+                    new SelectListItem() {Text = "Repesaje", Value="Repesaje"}
+                 }, ViewBag.currentFilterEstado as string, new { @Class = "form-control", id = "searchStringEstado" })
+            </p>
+            <p>
+                Filas: @Html.DropDownList("searchStringFilas", new List<SelectListItem>{
+                    new SelectListItem() {Text = "10", Value="10"},
+                    new SelectListItem() {Text = "25", Value="25"},
+                    new SelectListItem() {Text = "50", Value="50"},
+                    new SelectListItem() {Text = "100", Value="100"}
+                 }, ViewBag.currentFilterFilas as string, new { @Class = "form-control", id = "searchStringFilas" })
+            </p>
+            <p>
+                <button type="submit" value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </p>
+        }
+    </div>
+
+
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>Boletas</h2>
+
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+        
+        <br />
+        @if (null == TempData["alertMessage"])
+        {
+            if (Session["Roles"].ToString().Contains("Administrador de Boletas de Báscula") || Session["Roles"].ToString().Contains("Editor de Boletas de Báscula"))
+            {
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Crear Boleta
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("BoletaConOTR", "Bascula")">Con OTR</a></li>
+                        <li><a href="@Url.Action("BoletaSinOTR", "Bascula")">Sin OTR</a></li>
+                    </ul>
+                </div>
+            }
+        }
+        <br /><br />
+        <div class="table-responsive" style="height:300px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-boleta">
+                <tr>
+                    <th>
+                        @Html.ActionLink("Boleta", "Buscar", "Bascula", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterBoleta = ViewBag.CurrentBoleta,
+                   currentFilterCliente = ViewBag.CurrentCliente,
+                   currentFilterEquipo = ViewBag.CurrentEquipo,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Cliente", "Buscar", "Bascula", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterBoleta = ViewBag.CurrentBoleta,
+                   currentFilterCliente = ViewBag.CurrentCliente,
+                   currentFilterEquipo = ViewBag.CurrentEquipo,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Equipo", "Buscar", "Bascula", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterBoleta = ViewBag.CurrentBoleta,
+                   currentFilterCliente = ViewBag.CurrentCliente,
+                   currentFilterEquipo = ViewBag.CurrentEquipo,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Estado", "Buscar", "Bascula", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterBoleta = ViewBag.CurrentBoleta,
+                   currentFilterCliente = ViewBag.CurrentCliente,
+                   currentFilterEquipo = ViewBag.CurrentEquipo,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>  
+                    @*<th></th>*@
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Boleta)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Contrato.Cliente.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Equipo.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                            @*<th>
+                                @if (item.OTR != null)
+                                {
+                                    <a href="@Url.Action("EditarBasculaConOTR", "Bascula", new { IdBoleta = item.Id })" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("EditarBoletaSinOTR", "Bascula", new { IdBoleta = item.Id })" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                }
+                                
+                            </th>*@
+                            @if(item.Estado == "Repesaje")
+                            { 
+                                if (Session["Roles"].ToString().Contains("Administrador de Boletas de Báscula") || Session["Roles"].ToString().Contains("Editor de Boletas de Báscula"))
+                                {
+                                    <th>
+                                        @if (item.OTR != null)
+                                        {
+                                            <a href="@Url.Action("RepesarBoletaConOTR", "Bascula", new { IdBoleta = item.Id })" data-toggle="tooltip" title="Repesaje">
+                                                <span class="glyphicon glyphicon-scale" style="font-size:medium" aria-hidden="true"></span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("RepesarBoletaSinOTR", "Bascula", new { IdBoleta = item.Id })" data-toggle="tooltip" title="Repesaje">
+                                                <span class="glyphicon glyphicon-scale" style="font-size:medium" aria-hidden="true"></span>
+                                            </a>
+                                        }
+
+                                    </th>
+                                }
+                            }
+                            else
+                            {
+                                <th></th> 
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de Boletas de Báscula") || Session["Roles"].ToString().Contains("Editor de Boletas de Báscula") || Session["Roles"].ToString().Contains("Consultor de Boletas de Báscula"))
+                            {
+                                <th>
+                                    @if (item.OTR != null)
+                                    {
+                                        <a href="@Url.Action("DetallesBoletaConOTR", "Bascula", new { IdBoleta = item.Id })" data-toggle="tooltip" title="Detalles">
+                                            <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("DetallesBoletaSinOTR", "Bascula", new { IdBoleta = item.Id })" data-toggle="tooltip" title="Detalles">
+                                            <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>
+                                    }
+
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de Boletas de Báscula"))
+                            {
+                                <th>
+                                    @if (item.OTR != null)
+                                    {
+                                        <a href="@Url.Action("EliminarBoletaConOTR", "Bascula", new { IdBoleta = item.Id })" data-toggle="tooltip" title="Eliminar">
+                                            <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("EliminarBoletaSinOTR", "Bascula", new { IdBoleta = item.Id })" data-toggle="tooltip" title="Eliminar">
+                                            <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>
+                                    }
+
+                                </th>
+                            }
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+        <div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Buscar", "Bascula",
+                                new
+                                {
+                                    page,
+                                    sortOrder = ViewBag.CurrentSort,
+                                    currentFilterBoleta = ViewBag.CurrentBoleta,
+                                    currentFilterCliente = ViewBag.CurrentCliente,
+                                    currentFilterEquipo = ViewBag.CurrentEquipo,
+                                    currentFilterEstado = ViewBag.CurrentEstado,
+                                    currentFilterFilas = ViewBag.CurrentFilas
+                                }))
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+        $(document).load(function () {
+            document.getElementById("btnBuscar").click();
+        })
+
+        $(document).ready(function () {
+            function editarProducto(IdProducto) {
+            }
+        });// end document ready
+
+</script>

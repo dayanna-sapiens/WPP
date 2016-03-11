@@ -1,0 +1,51 @@
+﻿@model WPP.Model.ModuloBascula.ContenedorModel
+
+@{
+    ViewBag.Title = "Detalles del Contenedor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Detalles del Contenedor</h2>
+
+        <div class="form-group">
+            <label for="Descripcion">Descripción:</label>
+            @Html.DisplayFor(m => m.Descripcion, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Codigo">Código:</label>
+            @Html.DisplayFor(m => m.Codigo, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Estado">Estado</label>
+            @Html.DisplayFor(m => m.Estado, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Eje1">Eje1</label>
+            @Html.DisplayFor(m => m.Eje1, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Eje2">Eje2</label>
+            @Html.DisplayFor(m => m.Eje2, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Eje3">Eje3</label>
+            @Html.DisplayFor(m => m.Eje3, new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Peso">Peso</label>
+            @Html.DisplayFor(m => m.Peso, new { @Class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.ActionLink("Regresar", "Index", "Contenedor", null, new { @Class = "btn btn-primary" })
+        </div>
+
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+

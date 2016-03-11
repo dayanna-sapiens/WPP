@@ -1,0 +1,64 @@
+﻿body {
+      padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+input {
+    text-transform: uppercase;
+}
+
+.banner {
+  border-color:rgb(241, 238, 238);
+  background-image:url('../../Images/BANNER WPP.jpg'); 
+  background-repeat: no-repeat;
+}
+
+.field-validation-error{
+    color : red;
+}
+
+.no-th-link {
+    color:#337AB7;
+}
+
+.footer-wpp {
+    height:41px; 
+    background-color:#2E4A71; 
+    color:white; 
+    text-align:center; 
+    font-size:medium;
+}
+
+footer > div > p {
+    padding-top:8px;
+}
+
+
+.bnt-seleccionar-compania{
+        width: 400px;
+    height: 40px;
+}
+
+.autocomplete-suggestions 
+{ 
+    border: 1px solid #999;
+    background: #FFF; 
+    cursor: default; 
+    overflow: auto; 
+    -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
+    -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
+    box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
+
+}
+.error-message {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    margin-left: -150px;
+    width: 300px;
+    z-index: 9999;
+}
+
+.form-cargar {
+    padding-left:3%;
+}

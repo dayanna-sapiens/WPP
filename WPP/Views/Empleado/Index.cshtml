@@ -1,0 +1,170 @@
+﻿@model PagedList.IPagedList<WPP.Entities.Objects.ModuloOperacionRecoleccion.EmpleadoRecoleccion>
+@using WPP.Model;
+@using PagedList.Mvc;
+@using PagedList;
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Empleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:5%;">
+        <h2>Filtrar por: </h2>
+
+        @using (Html.BeginForm(Html.BeginForm("Buscar", "Empleado", FormMethod.Get)))
+        {
+            <div class="form-group">
+                <label>Nombre:</label> @Html.TextBox("searchStringNombre", ViewBag.CurrentNombre as string, new { id = "searchStringNombre", @class = "form-control col-lg-3", @readonly = "readonly" })
+            </div>
+            <div class="form-group">
+                <label>Cédula:</label> @Html.TextBox("searchStringCedula", ViewBag.CurrentCedula as string, new { id = "searchStringCedula", @class = "form-control col-lg-3", @readonly = "readonly" })
+            </div>
+            <div class="form-group">
+                <label>Código:</label> @Html.TextBox("searchStringCodigo", ViewBag.CurrentCodigo as string, new { id = "searchStringCodigo", @class = "form-control col-lg-3", @readonly = "readonly" })
+            </div>
+            <div class="form-group">
+                <label>Puesto:</label> @Html.TextBox("searchStringPuesto", ViewBag.CurrentPuesto as string, new { id = "searchStringPuesto", @class = "form-control col-lg-3", @readonly = "readonly" })
+            </div>
+            <div class="form-group">
+                <label>Filas:</label> @Html.DropDownList("searchStringFilas", new List<SelectListItem>{
+                    new SelectListItem() {Text = "10", Value="10"},
+                    new SelectListItem() {Text = "25", Value="25"},
+                    new SelectListItem() {Text = "50", Value="50"},
+                    new SelectListItem() {Text = "100", Value="100"}
+                 }, ViewBag.currentFilterFilas as string, new { @Class = "form-control", id = "searchStringFilas" })
+            </div>
+            <p>
+                <button type="submit" value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </p>
+        }
+    </div>
+
+
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>Empleados</h2>
+
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+
+        <br /><br />
+
+
+        <div class="table-responsive" style="height:300px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-producto">
+                <tr>
+                    <th>
+                        @Html.ActionLink("Nombre", "Buscar", "Empelado", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentNombre = ViewBag.CurrentNombre,
+                   currentCedula = ViewBag.CurrentCedula,
+                   currentCodigo = ViewBag.CurrentCodigo,
+                   currentPuesto = ViewBag.CurrentPuesto
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Cédula", "Buscar", "Empleado", new
+               {
+                   sortOrder = ViewBag.CedulaSortParam,
+                   currentNombre = ViewBag.CurrentNombre,
+                   currentCedula = ViewBag.CurrentCedula,
+                   currentCodigo = ViewBag.CurrentCodigo,
+                   currentPuesto = ViewBag.CurrentPuesto
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Código", "Buscar", "Empleado", new
+               {
+                   sortOrder = ViewBag.CodigoSortParam,
+                   currentNombre = ViewBag.CurrentNombre,
+                   currentCedula = ViewBag.CurrentCedula,
+                   currentCodigo = ViewBag.CurrentCodigo,
+                   currentPuesto = ViewBag.CurrentPuesto
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Puesto", "Buscar", "Empleado", new
+               {
+                   sortOrder = ViewBag.PuestoSortParam,
+                   currentNombre = ViewBag.CurrentNombre,
+                   currentCedula = ViewBag.CurrentCedula,
+                   currentCodigo = ViewBag.CurrentCodigo,
+                   currentPuesto = ViewBag.CurrentPuesto
+               }, null)
+                    </th>
+                    <th></th>
+                </tr>
+
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                       
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Cedula)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Puesto)</td>
+
+                            @if (Session["Roles"].ToString().Contains("Administrador de Empleados") || Session["Roles"].ToString().Contains("Consultor de Empleado"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Detalles", "Empleado", new { id = item.Id })" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de Empleados"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Editar", "Empleado", new { id = item.Id })" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de Empleados"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Eliminar", "Empleado", new { id = item.Id })" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            }
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+        <div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Buscar", "Empleado",
+                                new
+                                {
+                                    page,
+                                    sortOrder = ViewBag.NombreSortParam,
+                                    currentNombre = ViewBag.CurrentNombre,
+                                    currentCedula = ViewBag.CurrentCedula,
+                                    currentCodigo = ViewBag.CurrentCodigo,
+                                    currentPuesto = ViewBag.CurrentPuesto
+                                }))
+
+        </div>
+
+
+    </div>
+</div>
+
+

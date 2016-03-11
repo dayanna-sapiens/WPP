@@ -1,0 +1,166 @@
+﻿@model PagedList.IPagedList<WPP.Entities.Objects.ModuloOperacionRecoleccion.RellenoSanitario>
+@using WPP.Model;
+@using PagedList.Mvc;
+@using PagedList;
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Relleno Sanitario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:5%;">
+        <h2>Filtrar por: </h2>
+
+        @using (Html.BeginForm(Html.BeginForm("Buscar", "RellenoSanitario", FormMethod.Get)))
+        {
+            <div class="form-group">
+                Nombre: @Html.TextBox("searchStringNombre", ViewBag.currentFilterNombre as string, new { @class = "form-control col-lg-3" })
+            </div>
+            <div class="form-group">
+                Estado: @Html.TextBox("searchStringEstado", ViewBag.currentFilterEstado as string, new { @class = "form-control" })
+            </div>         
+
+            <div class="form-group">
+                Filas: @Html.DropDownList("searchStringFilas", new List<SelectListItem>{
+                    new SelectListItem() {Text = "10", Value="10"},
+                    new SelectListItem() {Text = "25", Value="25"},
+                    new SelectListItem() {Text = "50", Value="50"},
+                    new SelectListItem() {Text = "100", Value="100"}
+                 }, ViewBag.currentFilterFilas as string, new { @Class = "form-control", id = "searchStringFilas" })
+            </div>
+            <div>
+                <button type="submit" value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </div>
+        }
+    </div>
+
+
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>Rellenos Sanitarios</h2>
+
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+
+        <br /><br />
+
+        @if (Session["Roles"].ToString().Contains("Administrador de Rellenos Sanitarios") || Session["Roles"].ToString().Contains("Editor de Rellenos Sanitarios"))
+        {
+            @Html.ActionLink("Crear Relleno Sanitario", "Crear", "RellenoSanitario", new { @class = "btn btn-primary" })
+            <br /><br />
+        }
+
+
+        <div class="table-responsive" style="height:300px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-producto">
+                <tr>
+                    <th>
+                        @Html.ActionLink("Nombre", "Buscar", "RellenoSanitario", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterNombre = ViewBag.CurrentNombre,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Estado", "Buscar", "RellenoSanitario", new
+               {
+                   sortOrder = ViewBag.PlacaSortParam,
+                   currentFilterNombre = ViewBag.CurrentNombre,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>
+                 
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            @if (item.Estado)
+                            {
+                                <td>Activo</td>
+                            }
+                            else
+                            {
+                                <td>Inactivo</td>
+                            }
+                               
+                            @if (Session["Roles"].ToString().Contains("Administrador de Rellenos Sanitarios") || Session["Roles"].ToString().Contains("Editor de Rellenos Sanitarios") || Session["Roles"].ToString().Contains("Consultor de Rellenos Sanitarios"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Detalles", "RellenoSanitario", new { id = item.Id })" data-toggle="tooltip" title="Detalles">
+                                        <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de Rellenos Sanitarios") || Session["Roles"].ToString().Contains("Editor de Rellenos Sanitarios"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Editar", "RellenoSanitario", new { id = item.Id })" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de Rellenos Sanitarios"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Eliminar", "RellenoSanitario", new { id = item.Id })" data-toggle="tooltip" title="Eliminar">
+                                        <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            }
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+        <div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Buscar", "RellenoSanitario",
+                                new
+                                {
+                                    page,
+                                    sortOrder = ViewBag.CurrentSort,
+                                    currentFilterNombre = ViewBag.CurrentNombre,
+                                    currentFilterEstado = ViewBag.CurrentEstado,
+                                }))
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).load(function () {
+        document.getElementById("btnBuscar").click();
+    })
+
+    $(document).ready(function () {
+        function editarProducto(IdProducto) {
+        }
+    });// end document ready
+
+</script>

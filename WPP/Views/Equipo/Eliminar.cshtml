@@ -1,0 +1,60 @@
+﻿@model WPP.Model.ModuloBascula.EquipoModel
+
+@{
+    ViewBag.Title = "Eliminar Equipo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Eliminar Equipo</h2>
+        @using (Html.BeginForm("Eliminar", "Equipo", FormMethod.Post, new { id = "frmEliminarEquipo", @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(m=>m.Id)
+            
+            <div class="form-group">
+                <label for="Nombre">Nombre</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                @Html.DisplayFor(m => m.Nombre, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Placa">Placa</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                @Html.DisplayFor(m => m.Placa, new { @Class = "form-control" })
+            </div>
+            <div class="form-group" >
+                <label for="Marca">Marca</label>
+                @Html.DisplayFor(m => m.Marca, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="TipoCombustible">Tipo de Combustible</label>
+                @Html.DisplayFor(m => m.TipoCombustible, new { @Class = "form-control" })
+            </div>
+            <div class="form-group" >
+                <label for="Eje1">Eje1</label>
+                @Html.DisplayFor(m => m.Eje1, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Eje2">Eje2</label>
+                @Html.DisplayFor(m => m.Eje2, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Eje3">Eje3</label>
+                @Html.DisplayFor(m => m.Eje3, new { @Class = "form-control" })
+            </div>
+            <div class="form-group" >
+                <label for="Peso">Peso</label>
+                @Html.DisplayFor(m => m.Peso, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Peso">Tipo</label>
+                @Html.DisplayFor(m => m.Tipo, new { @Class = "form-control" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ok</button>
+            @Html.ActionLink("Cancelar", "Index", "Equipo", null, new { @Class = "btn btn-primary" })
+
+        }
+
+    </div>
+    <div class="col-md-3"></div>
+</div>

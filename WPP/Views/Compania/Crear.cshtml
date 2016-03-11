@@ -1,0 +1,120 @@
+﻿@model WPP.Model.CompaniaModel
+@{
+    ViewBag.Title = "Crear Compañía";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Crear Compañía</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Crear", "Compania", FormMethod.Post, new { id = "frmCrearCompania", @class = "form-horizontal" }))
+            {
+                              
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m=>m.ClienteId)
+                
+                <div class="form-group">
+                    <label for="Grupo" >Grupo</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Grupo, new SelectList(ViewBag.ListaGrupo, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Grupo" })
+                    @Html.ValidationMessageFor(m => m.Grupo)
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre de la Compañía</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Nombre, new { @Class = "form-control", id = "Nombre" })
+                    @Html.ValidationMessageFor(m => m.Nombre)
+                </div>
+                <div class="form-group">
+                    <label for="Tipo">Tipo</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Tipo, new SelectList(ViewBag.ListaTipoCompania, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Tipo" })
+                    @Html.ValidationMessageFor(m => m.Tipo)
+                </div>
+                <div class="form-group">
+                    <label for="NombreCorto">Nombre Corto</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.NombreCorto, new { @Class = "form-control", id = "NombreCorto" })
+                    @Html.ValidationMessageFor(m => m.NombreCorto)
+                </div>
+                <div class="form-group">
+                    <label for="Cedula">Cédula</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Cedula, new { @Class = "form-control", id = "Cedula" })
+                    @Html.ValidationMessageFor(m => m.Cedula)
+                </div>
+                <div class="form-group">
+                    <label for="RepresentanteLegal">Representante Legal</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.RepresentanteLegal, new { @Class = "form-control", id = "RepresentanteLegal" })
+                    @Html.ValidationMessageFor(m => m.RepresentanteLegal)
+                </div>
+                <div class="form-group">
+                    <label for="Telefono">Teléfono</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Telefono, new { @Class = "form-control", id = "Telefono" })
+                    @Html.ValidationMessageFor(m => m.Telefono)
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Email, new { @Class = "form-control", id = "Email" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+                <div class="form-group">
+                    <label for="Cliente">¿Desea incluir esta compañía como cliente?</label>
+                    <br />
+                    <input id="clienteSi" type="radio" name="cliente" value="1" checked="checked">Si
+                    <input id="clienteNo" type="radio" name="cliente" value="0">No
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Crear</button>
+                @Html.ActionLink("Cancelar", "Index", "Compania", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>   
+    </div>
+    <div class="col-md-3"></div>
+ 
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        if ($("#ClienteId").val() == "") {
+            $("#ClienteId").val("1");
+        }
+
+        $("input:radio[name='cliente']").change(function () {
+            actual = $("#ClienteId").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {              
+                actual = append;
+                $("#ClienteId").val(actual);
+               
+            } else {
+                $("#ClienteId").val("1");
+            }
+        });
+        
+    });// end document ready
+
+  
+</script>

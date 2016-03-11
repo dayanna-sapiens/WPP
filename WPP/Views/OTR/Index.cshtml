@@ -1,0 +1,277 @@
+﻿@model PagedList.IPagedList<WPP.Entities.Objects.ModuloOperacionRecoleccion.OTR>
+@using WPP.Model;
+@using PagedList.Mvc;
+@using PagedList;
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "OTR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:5%;">
+        <h2>Filtrar por: </h2>
+
+        @using (Html.BeginForm(Html.BeginForm("Buscar", "OTR", FormMethod.Get)))
+        {
+            <p>
+                OTR: @Html.TextBox("searchStringOTR", ViewBag.CurrentOTR as string, new { @class = "form-control col-lg-3" })
+            </p>
+            <p>
+                Equipo: @Html.TextBox("searchStringEquipo", ViewBag.currentFilterEquipo as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Estado: @Html.TextBox("searchStringEstado", ViewBag.currentFilterEstado as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Ruta Recolección: @Html.TextBox("searchStringRutaRecoleccion", ViewBag.currentFilterRutaRecoleccion as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Tipo: @Html.TextBox("searchStringTipo", ViewBag.currentFilterTipo as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Filas: @Html.DropDownList("searchStringFilas", new List<SelectListItem>{
+                            new SelectListItem() {Text = "10", Value="10"},
+                            new SelectListItem() {Text = "25", Value="25"},
+                            new SelectListItem() {Text = "50", Value="50"},
+                            new SelectListItem() {Text = "100", Value="100"}
+                         }, ViewBag.currentFilterFilas as string, new { @Class = "form-control", id = "searchStringFilas" })
+            </p>
+            <p>
+                <button type="submit" value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </p>
+        }
+    </div>
+
+
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>OTR</h2>
+
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+
+        <br /><br />
+
+        @if (Session["Roles"].ToString().Contains("Administrador de OTR") || Session["Roles"].ToString().Contains("Editor de OTR"))
+        {
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Crear OTR
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="@Url.Action("CrearOTR", "OTR", new { tipo = "Municipal" })">Municipal</a></li>
+                    <li><a href="@Url.Action("CrearOTR", "OTR", new { tipo = "Comercial" })">Comercial</a></li>
+                    <li><a href="@Url.Action("CrearOTRRollOff", "OTR", new { tipo = "Roll-Off" })">Roll Off</a></li>
+                    <li><a href="@Url.Action("CrearOTR", "OTR", new { tipo = "Servicios Internos" })">Servicios Internos</a></li>
+                    @*<li><a href="@Url.Action("BoletaSinOTR", "OTR")">Roll Off</a></li>*@
+                </ul>
+            </div>
+            <br /><br />
+        }
+
+
+        <div class="table-responsive" style="height:300px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-compania">
+                <tr>
+                    <th>
+                        @Html.ActionLink("OTR", "Buscar", "OTR", new
+                       {
+                           sortOrder = ViewBag.OTRSortParam,
+                           currentFilterOTR = ViewBag.CurrentOTR,
+                           currentFilterEquipo = ViewBag.CurrentEquipo,
+                           currentFilterEstado = ViewBag.CurrentEstado,
+                           currentFilterRutaRecoleccion = ViewBag.CurrentRutaRecoleccion,
+                           currentFilterTipo = ViewBag.CurrentTipo
+                       }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Equipo", "Buscar", "OTR", new
+                       {
+                           sortOrder = ViewBag.EquipoSortParam,
+                           currentFilterOTR = ViewBag.CurrentOTR,
+                           currentFilterEquipo = ViewBag.CurrentEquipo,
+                           currentFilterEstado = ViewBag.CurrentEstado,
+                           currentFilterRutaRecoleccion = ViewBag.CurrentRutaRecoleccion,
+                           currentFilterTipo = ViewBag.CurrentTipo
+                       }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Estado", "Buscar", "OTR", new
+                        {
+                            sortOrder = ViewBag.EstadoSortParam,
+                            currentFilterOTR = ViewBag.CurrentOTR,
+                            currentFilterEquipo = ViewBag.CurrentEquipo,
+                            currentFilterEstado = ViewBag.CurrentEstado,
+                            currentFilterRutaRecoleccion = ViewBag.CurrentRutaRecoleccion,
+                            currentFilterTipo = ViewBag.CurrentTipo
+                        }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Ruta Recolección", "Buscar", "OTR", new
+                       {
+                           sortOrder = ViewBag.RutaRecoleccionSortParam,
+                           currentFilterOTR = ViewBag.CurrentOTR,
+                           currentFilterEquipo = ViewBag.CurrentEquipo,
+                           currentFilterEstado = ViewBag.CurrentEstado,
+                           currentFilterRutaRecoleccion = ViewBag.CurrentRutaRecoleccion,
+                           currentFilterTipo = ViewBag.CurrentTipo
+                       }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Tipo", "Buscar", "OTR", new
+                       {
+                           sortOrder = ViewBag.TipoSortParam,
+                           currentFilterOTR = ViewBag.CurrentOTR,
+                           currentFilterEquipo = ViewBag.CurrentEquipo,
+                           currentFilterEstado = ViewBag.CurrentEstado,
+                           currentFilterRutaRecoleccion = ViewBag.CurrentRutaRecoleccion,
+                           currentFilterTipo = ViewBag.CurrentTipo
+                       }, null)
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Consecutivo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Equipo.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                            <td>@Html.DisplayFor(modelItem => item.RutaRecoleccion.Descripcion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+                            @if (Session["Roles"].ToString().Contains("Administrador de OTR") || Session["Roles"].ToString().Contains("Editor de OTR"))
+                            {
+                                 <th>
+                                    @if (item.Estado == "Procesada")
+                                    {                                   
+                                        <a href="@Url.Action("EstadisticasOTR", "OTR", new { id = item.Id })" data-toggle="tooltip" title="Estadísticas OTR">
+                                            <span class="glyphicon glyphicon-dashboard" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>  
+                                    }
+
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de OTR"))
+                            {
+                                <th>
+                                    @if (item.Estado == "Activo")
+                                    {
+                                        if (item.Tipo == "Roll-Off")
+                                        {
+                                            <a href="@Url.Action("CerrarOTR", "OTR", new { id = item.Id })" data-toggle="tooltip" title="Cerrar OTR">
+                                                <span class="glyphicon glyphicon-paste" style="font-size:medium" aria-hidden="true"></span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("CerrarOTR", "OTR", new { id = item.Id })" data-toggle="tooltip" title="Cerrar OTR">
+                                                <span class="glyphicon glyphicon-paste" style="font-size:medium" aria-hidden="true"></span>
+                                            </a>
+                                        }
+
+                                    }
+
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de OTR") || Session["Roles"].ToString().Contains("Editor de OTR") || Session["Roles"].ToString().Contains("Consultor de OTR"))
+                            {
+                                <th>
+                                    @if (item.Tipo == "Roll-Off")
+                                    {
+                                        <a href="@Url.Action("DetallesOTRRollOff", "OTR", new { id = item.Id })" data-toggle="tooltip" title="Detalles">
+                                            <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("DetallesOTR", "OTR", new { id = item.Id })" data-toggle="tooltip" title="Detalles">
+                                            <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>
+                                    }                               
+
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de OTR") || Session["Roles"].ToString().Contains("Editor de OTR"))
+                            {
+                                <th>
+                                    @if (item.Estado != "Procesada" && item.Estado != "Cerrado" && item.Estado != "Anulada")
+                                    { 
+                                        if (item.Tipo == "Roll-Off")
+                                        {
+                                            <a href="@Url.Action("EditarOTRRollOff", "OTR", new { id = item.Id })" data-toggle="tooltip" title="Editar">
+                                                <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("EditarOTR", "OTR", new { id = item.Id })" data-toggle="tooltip" title="Editar">
+                                                <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                            </a>
+                                        }
+                                    }
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de OTR"))
+                            {
+                                <th>
+                                    @if (item.Estado != "Procesada" && item.Estado != "Cerrado" && item.Estado != "Anulada")
+                                    {
+                                        if (item.Tipo == "Roll-Off")
+                                        {
+                                            <a href="@Url.Action("EliminarOTRRollOff", "OTR", new { id = item.Id })" data-toggle="tooltip" title="Eliminar">
+                                                <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("EliminarOTR", "OTR", new { id = item.Id })" data-toggle="tooltip" title="Eliminar">
+                                                <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                            </a>
+
+                                        }
+                                    }
+                                </th>
+                            }
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+        <div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Buscar", "OTR",
+                                new
+                                {
+                                    page,
+                                    sortOrder = ViewBag.CurrentSort,
+                                    currentFilterOTR = ViewBag.CurrentOTR,
+                                    currentFilterEquipo = ViewBag.CurrentEquipo,
+                                    currentFilterEstado = ViewBag.CurrentEstado,
+                                    currentFilterRutaRecoleccion = ViewBag.CurrentRutaRecoleccion,
+                                    currentFilterFilas = ViewBag.CurrentFilas
+                                }))
+
+        </div>
+
+
+    </div>
+</div>
+
+

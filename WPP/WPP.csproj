@@ -1,0 +1,1890 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4EB664AE-CEB8-49BF-AFE9-842942D4BD77}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WPP</RootNamespace>
+    <AssemblyName>WPP</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Excel">
+      <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions">
+      <HintPath>..\packages\Ninject.Extensions.Conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Interception">
+      <HintPath>..\packages\Ninject.Extensions.Interception.3.2.0.0\lib\net45-full\Ninject.Extensions.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PasswordHash">
+      <HintPath>..\packages\PasswordHash.1.1\lib\net40\PasswordHash.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Controllers\AnunciosController.cs" />
+    <Compile Include="Controllers\BasculaController.cs" />
+    <Compile Include="Controllers\BoletaManualController.cs" />
+    <Compile Include="Controllers\CategoriaProductoController.cs" />
+    <Compile Include="Controllers\CierreCajaController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\CombustibleController.cs" />
+    <Compile Include="Controllers\CompaniaController.cs" />
+    <Compile Include="Controllers\ConfiguracionPuertoController.cs" />
+    <Compile Include="Controllers\ConsecutivoBasculaController.cs" />
+    <Compile Include="Controllers\ConsecutivoFacturacionController.cs" />
+    <Compile Include="Controllers\ContenedorController.cs" />
+    <Compile Include="Controllers\ContratoController.cs" />
+    <Compile Include="Controllers\ControlOperacionesController.cs" />
+    <Compile Include="Controllers\CostoCamionController.cs" />
+    <Compile Include="Controllers\CostoHoraController.cs" />
+    <Compile Include="Controllers\CostoRutaRecoleccionController.cs" />
+    <Compile Include="Controllers\CuadrillaController.cs" />
+    <Compile Include="Controllers\DiasFestivosController.cs" />
+    <Compile Include="Controllers\EmpleadoController.cs" />
+    <Compile Include="Controllers\EquipoController.cs" />
+    <Compile Include="Controllers\FacturacionController.cs" />
+    <Compile Include="Controllers\JornadaController.cs" />
+    <Compile Include="Controllers\NominaController.cs" />
+    <Compile Include="Controllers\OTRController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\PuntoFacturacionController.cs" />
+    <Compile Include="Controllers\RellenoSanitarioController.cs" />
+    <Compile Include="Controllers\RutaRecoleccionController.cs" />
+    <Compile Include="Controllers\ServicioController.cs" />
+    <Compile Include="Controllers\SweetController.cs" />
+    <Compile Include="Controllers\TipoCambioController.cs" />
+    <Compile Include="Datos\Administracion\ds_ClienteBitacora.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ClienteBitacora.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Administracion\ds_ClienteDetalle.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ClienteDetalle.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Administracion\ds_ClienteGeneral.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ClienteGeneral.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Administracion\ds_Compania.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Compania.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Administracion\ds_Contactos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Contactos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Administracion\ds_Ubicacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Ubicacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Administracion\ds_Usuarios.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Usuarios.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Bascula\ds_Contenedor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Contenedor.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Bascula\ds_Equipo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Equipo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Bascula\ds_ToneladasXBoleta.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ToneladasXBoleta.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Bascula\ds_ToneladasXCompania.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ToneladasXCompania.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\CierreCaja\ds_CierreCaja.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_CierreCaja.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\CierreCaja\ds_PagosTarjeta.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_PagosTarjeta.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Contratos\ds_CategoriaProductos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_CategoriaProductos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Contratos\ds_ContratoBitacora.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ContratoBitacora.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Contratos\ds_Contratos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Contratos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Contratos\ds_Contratos1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Contratos1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Contratos\ds_ContratosDetalle.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ContratosDetalle.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Contratos\ds_ContratosXEjecutivo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ContratosXEjecutivo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Contratos\ds_Productos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Productos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Contratos\ds_ProductosContrato.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ProductosContrato.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Contratos\ds_Servicios.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Servicios.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\ControlOperaciones\ds_CierreCajaDetallado.Designer.cs">
+      <DependentUpon>ds_CierreCajaDetallado.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Datos\ControlOperaciones\ds_CierreCajaGeneral.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_CierreCajaGeneral.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\ControlOperaciones\ds_ControlRecoleccionDiario.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ControlRecoleccionDiario.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\ControlOperaciones\ds_Cuadrilla.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Cuadrilla.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\ControlOperaciones\ds_FacturacionDetallado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_FacturacionDetallado.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\ControlOperaciones\ds_FacturacionGeneral.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_FacturacionGeneral.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\ControlOperaciones\ds_OTR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_OTR.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Facturacion\ds_Facturacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Facturacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Facturacion\ds_ItemsFactura.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ItemsFactura.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Facturacion\ds_ListaFacturas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ListaFacturas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Facturacion\ds_Prefacturacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Prefacturacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Facturacion\ds_RecibosxServicio.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_RecibosxServicio.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Facturacion\ds_Reversion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Reversion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Facturacion\ds_TotalUnidadesPrefacturacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_TotalUnidadesPrefacturacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\OperacionRecoleccion\ds_CuadrillaPorTonelada.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_CuadrillaPorTonelada.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\OperacionRecoleccion\ds_CuadrillaXTonelada.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_CuadrillaXTonelada.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\OperacionRecoleccion\ds_OTRComercial.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_OTRComercial.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\OperacionRecoleccion\ds_OTRMunicipal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_OTRMunicipal.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\OperacionRecoleccion\ds_OTRRollOff.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_OTRRollOff.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\OperacionRecoleccion\ds_RutaRecoleccion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_RutaRecoleccion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\MailHelper.cs" />
+    <Compile Include="Helpers\WPPConstants.cs" />
+    <Compile Include="Helpers\WPPHelper.cs" />
+    <Compile Include="Helpers\WPPTipoCambio.cs" />
+    <Compile Include="Models\Facturacion\PrefacturaModel.cs" />
+    <Compile Include="Models\Generales\UsuarioModel.cs" />
+    <Compile Include="Reportes\Administracion\rpt_ClienteBitacora.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ClienteBitacora.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Administracion\rpt_ClienteDetalle.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ClienteDetalle.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Administracion\rpt_ClienteGeneral.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ClienteGeneral.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Administracion\rpt_CompaniaDetalle.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_CompaniaDetalle.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Administracion\rpt_CompaniaGeneral.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_CompaniaGeneral.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Administracion\rpt_Contactos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_Contactos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Administracion\rpt_Ubicacion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_Ubicacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Administracion\rpt_Usuarios.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_Usuarios.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\rpt_ContenedorDetalle.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ContenedorDetalle.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\rpt_ContenedorGeneral.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ContenedorGeneral.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\rpt_Equipo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_Equipo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\rpt_ToneladasXBoleta.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ToneladasXBoleta.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CierreCaja\rpt_CierreCaja.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_CierreCaja.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CierreCaja\rpt_CierreCajaGeneral.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_CierreCajaGeneral.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CierreCaja\rpt_PagosTarjeta.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_PagosTarjeta.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contratos\rpt_CategoriaProductos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_CategoriaProductos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contratos\rpt_ContratoBitacora.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ContratoBitacora.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contratos\rpt_Contratos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_Contratos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contratos\rpt_ContratosDetalle.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ContratosDetalle.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contratos\rpt_ContratosXCliente.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ContratosXCliente.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contratos\rpt_ContratosXEjecutivo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ContratosXEjecutivo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contratos\rpt_Productos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_Productos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contratos\rpt_ProductosContrato.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ProductosContrato.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contratos\rpt_ProductosXCategoria.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ProductosXCategoria.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_CierreCaja.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_CierreCaja.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_CierreCajaAgrupado.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_CierreCajaAgrupado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_ComparativoHorasControlDiario.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ComparativoHorasControlDiario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_ControlOperacionDiario1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ControlOperacionDiario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_DieselConsumidoControlDiario.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_DieselConsumidoControlDiario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_FacturacionDetallado.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_FacturacionDetallado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_FacturacionDetalladoAgrupado.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_FacturacionDetalladoAgrupado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_FacturacionGeneral.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_FacturacionGeneral.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_FacturacionGeneralAgrupado1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_FacturacionGeneralAgrupado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_HorasEfectivasControlDiario.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_HorasEfectivasControlDiario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_OTR.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_OTR.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_PromediosControlDiario.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_PromediosControlDiario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_ResumenControlDiario.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ResumenControlDiario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_ToneladasXCompania.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ToneladasXCompania.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_TotalDieselControlDiario.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_TotalDieselControlDiario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_TotalToneladasControlDiario.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_TotalToneladasControlDiario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ControlOperaciones\rpt_TotalViajesControlDiario.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_TotalViajesControlDiario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\rpt_DetalleFactura.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_DetalleFactura.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\rpt_Facturacion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_Facturacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\rpt_ListaFacturas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ListaFacturas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\rpt_Prefacturacion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_Prefacturacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\rpt_RecibosxServicio.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_RecibosxServicio.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\rpt_Reversion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_Reversion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\rpt_TotalUnidadesFacturacion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_TotalUnidadesFacturacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Recoleccion\rpt_Cuadrilla.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_Cuadrilla.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Recoleccion\rpt_CuadrillaXTonelada.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_CuadrillaXTonelada.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Recoleccion\rpt_OTRMunicipal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_OTRMunicipal.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Recoleccion\rpt_OTRComercial.cs">
+      <DependentUpon>rpt_OTRComercial.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\Recoleccion\rpt_OTRRollOff.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_OTRRollOff.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Recoleccion\rpt_RutaRecoleccionDetalle.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_RutaRecoleccionDetalle.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Recoleccion\rpt_RutaRecoleccionXTipo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_RutaRecoleccionXTipo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Security\AccessDeniedAuthorizeAttribute.cs" />
+    <Compile Include="Security\IWPPMembershipProvider.cs" />
+    <Compile Include="Security\SecurityHelper.cs" />
+    <Compile Include="Security\WPPRolesProvider.cs" />
+    <Compile Include="Security\WPPMembershipProvider.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\jasny-bootstrap.css" />
+    <Content Include="Content\jasny-bootstrap.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.structure.min.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\jquery-ui.theme.min.css" />
+    <Content Include="Content\menu.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\sweetalert.css" />
+    <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
+    <Content Include="Content\sweetalert\docs.css" />
+    <Content Include="Content\sweetalert\sweet-alert.css" />
+    <Content Include="Content\sweetalert\thumbs-up.jpg" />
+    <Content Include="Datos\ControlOperaciones\ds_CierreCajaDetallado.xsc">
+      <DependentUpon>ds_CierreCajaDetallado.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\ControlOperaciones\ds_CierreCajaDetallado.xss">
+      <DependentUpon>ds_CierreCajaDetallado.xsd</DependentUpon>
+    </Content>
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\sweetalert\sweet-alert-combine.less" />
+    <Content Include="Content\sweetalert\sweet-alert-animations.less" />
+    <Content Include="Content\sweetalert\sweet-alert.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Datos\CierreCaja\ds_CierreCaja.xsc">
+      <DependentUpon>ds_CierreCaja.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Administracion\ds_Usuarios.xsc">
+      <DependentUpon>ds_Usuarios.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Administracion\ds_ClienteGeneral.xsc">
+      <DependentUpon>ds_ClienteGeneral.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Administracion\ds_ClienteDetalle.xsc">
+      <DependentUpon>ds_ClienteDetalle.xsd</DependentUpon>
+    </Content>
+    <Content Include="Content\jasny-bootstrap.css.map" />
+    <Content Include="Datos\Administracion\ds_ClienteBitacora.xsc">
+      <DependentUpon>ds_ClienteBitacora.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Administracion\ds_ClienteBitacora.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ClienteBitacora.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Administracion\ds_ClienteBitacora.xss">
+      <DependentUpon>ds_ClienteBitacora.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Administracion\ds_ClienteDetalle.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ClienteDetalle.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Administracion\ds_ClienteDetalle.xss">
+      <DependentUpon>ds_ClienteDetalle.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Administracion\ds_ClienteGeneral.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ClienteGeneral.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Administracion\ds_ClienteGeneral.xss">
+      <DependentUpon>ds_ClienteGeneral.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Administracion\ds_Contactos.xsc">
+      <DependentUpon>ds_Contactos.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Administracion\ds_Compania.xsc">
+      <DependentUpon>ds_Compania.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Administracion\ds_Compania.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Compania.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Administracion\ds_Compania.xss">
+      <DependentUpon>ds_Compania.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Administracion\ds_Contactos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Contactos.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Administracion\ds_Contactos.xss">
+      <DependentUpon>ds_Contactos.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Administracion\ds_Ubicacion.xsc">
+      <DependentUpon>ds_Ubicacion.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Administracion\ds_Ubicacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Ubicacion.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Administracion\ds_Ubicacion.xss">
+      <DependentUpon>ds_Ubicacion.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Administracion\ds_Usuarios.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Usuarios.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Administracion\ds_Usuarios.xss">
+      <DependentUpon>ds_Usuarios.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Bascula\ds_ToneladasXBoleta.xsc">
+      <DependentUpon>ds_ToneladasXBoleta.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Bascula\ds_Equipo.xsc">
+      <DependentUpon>ds_Equipo.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Bascula\ds_Contenedor.xsc">
+      <DependentUpon>ds_Contenedor.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Bascula\ds_Contenedor.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Contenedor.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Bascula\ds_Contenedor.xss">
+      <DependentUpon>ds_Contenedor.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Bascula\ds_Equipo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Equipo.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Bascula\ds_Equipo.xss">
+      <DependentUpon>ds_Equipo.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Bascula\ds_ToneladasXBoleta.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ToneladasXBoleta.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Bascula\ds_ToneladasXBoleta.xss">
+      <DependentUpon>ds_ToneladasXBoleta.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Bascula\ds_ToneladasXCompania.xsc">
+      <DependentUpon>ds_ToneladasXCompania.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Bascula\ds_ToneladasXCompania.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ToneladasXCompania.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Bascula\ds_ToneladasXCompania.xss">
+      <DependentUpon>ds_ToneladasXCompania.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\CierreCaja\ds_CierreCaja.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_CierreCaja.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\CierreCaja\ds_CierreCaja.xss">
+      <DependentUpon>ds_CierreCaja.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Facturacion\ds_Facturacion.xsc">
+      <DependentUpon>ds_Facturacion.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\CierreCaja\ds_PagosTarjeta.xsc">
+      <DependentUpon>ds_PagosTarjeta.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\CierreCaja\ds_PagosTarjeta.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_PagosTarjeta.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\CierreCaja\ds_PagosTarjeta.xss">
+      <DependentUpon>ds_PagosTarjeta.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\ControlOperaciones\ds_FacturacionGeneral.xsc">
+      <DependentUpon>ds_FacturacionGeneral.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\ControlOperaciones\ds_FacturacionDetallado.xsc">
+      <DependentUpon>ds_FacturacionDetallado.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Contratos\ds_Contratos1.xsc">
+      <DependentUpon>ds_Contratos1.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Contratos\ds_CategoriaProductos.xsc">
+      <DependentUpon>ds_CategoriaProductos.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Contratos\ds_CategoriaProductos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_CategoriaProductos.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Contratos\ds_CategoriaProductos.xss">
+      <DependentUpon>ds_CategoriaProductos.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Contratos\ds_Contratos.xsc">
+      <DependentUpon>ds_Contratos.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Contratos\ds_ContratoBitacora.xsc">
+      <DependentUpon>ds_ContratoBitacora.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Contratos\ds_ContratoBitacora.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ContratoBitacora.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Contratos\ds_ContratoBitacora.xss">
+      <DependentUpon>ds_ContratoBitacora.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Contratos\ds_Contratos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Contratos.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Contratos\ds_Contratos.xss">
+      <DependentUpon>ds_Contratos.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Contratos\ds_Contratos1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Contratos1.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Contratos\ds_Contratos1.xss">
+      <DependentUpon>ds_Contratos1.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Contratos\ds_ContratosDetalle.xsc">
+      <DependentUpon>ds_ContratosDetalle.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Contratos\ds_ContratosDetalle.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ContratosDetalle.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Contratos\ds_ContratosDetalle.xss">
+      <DependentUpon>ds_ContratosDetalle.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Contratos\ds_ProductosContrato.xsc">
+      <DependentUpon>ds_ProductosContrato.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Contratos\ds_Productos.xsc">
+      <DependentUpon>ds_Productos.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Contratos\ds_ContratosXEjecutivo.xsc">
+      <DependentUpon>ds_ContratosXEjecutivo.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Contratos\ds_ContratosXEjecutivo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ContratosXEjecutivo.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Contratos\ds_ContratosXEjecutivo.xss">
+      <DependentUpon>ds_ContratosXEjecutivo.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Contratos\ds_Productos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Productos.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Contratos\ds_Productos.xss">
+      <DependentUpon>ds_Productos.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Contratos\ds_ProductosContrato.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ProductosContrato.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Contratos\ds_ProductosContrato.xss">
+      <DependentUpon>ds_ProductosContrato.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Contratos\ds_Servicios.xsc">
+      <DependentUpon>ds_Servicios.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Contratos\ds_Servicios.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Servicios.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Contratos\ds_Servicios.xss">
+      <DependentUpon>ds_Servicios.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\ControlOperaciones\ds_CierreCajaDetallado.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_CierreCajaDetallado.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\ControlOperaciones\ds_ControlRecoleccionDiario.xsc">
+      <DependentUpon>ds_ControlRecoleccionDiario.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\ControlOperaciones\ds_CierreCajaGeneral.xsc">
+      <DependentUpon>ds_CierreCajaGeneral.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\ControlOperaciones\ds_CierreCajaGeneral.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_CierreCajaGeneral.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\ControlOperaciones\ds_CierreCajaGeneral.xss">
+      <DependentUpon>ds_CierreCajaGeneral.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\ControlOperaciones\ds_ControlRecoleccionDiario.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ControlRecoleccionDiario.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\ControlOperaciones\ds_ControlRecoleccionDiario.xss">
+      <DependentUpon>ds_ControlRecoleccionDiario.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\ControlOperaciones\ds_Cuadrilla.xsc">
+      <DependentUpon>ds_Cuadrilla.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\ControlOperaciones\ds_Cuadrilla.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Cuadrilla.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\ControlOperaciones\ds_Cuadrilla.xss">
+      <DependentUpon>ds_Cuadrilla.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\ControlOperaciones\ds_FacturacionDetallado.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_FacturacionDetallado.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\ControlOperaciones\ds_FacturacionDetallado.xss">
+      <DependentUpon>ds_FacturacionDetallado.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\ControlOperaciones\ds_FacturacionGeneral.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_FacturacionGeneral.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\ControlOperaciones\ds_FacturacionGeneral.xss">
+      <DependentUpon>ds_FacturacionGeneral.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\ControlOperaciones\ds_OTR.xsc">
+      <DependentUpon>ds_OTR.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\ControlOperaciones\ds_OTR.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_OTR.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\ControlOperaciones\ds_OTR.xss">
+      <DependentUpon>ds_OTR.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Facturacion\ds_Facturacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Facturacion.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Facturacion\ds_Facturacion.xss">
+      <DependentUpon>ds_Facturacion.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Facturacion\ds_RecibosxServicio.xsc">
+      <DependentUpon>ds_RecibosxServicio.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Facturacion\ds_Prefacturacion.xsc">
+      <DependentUpon>ds_Prefacturacion.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Facturacion\ds_ListaFacturas.xsc">
+      <DependentUpon>ds_ListaFacturas.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Facturacion\ds_ItemsFactura.xsc">
+      <DependentUpon>ds_ItemsFactura.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Facturacion\ds_ItemsFactura.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ItemsFactura.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Facturacion\ds_ItemsFactura.xss">
+      <DependentUpon>ds_ItemsFactura.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Facturacion\ds_ListaFacturas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ListaFacturas.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Facturacion\ds_ListaFacturas.xss">
+      <DependentUpon>ds_ListaFacturas.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Facturacion\ds_Prefacturacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Prefacturacion.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Facturacion\ds_Prefacturacion.xss">
+      <DependentUpon>ds_Prefacturacion.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Facturacion\ds_RecibosxServicio.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_RecibosxServicio.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Facturacion\ds_RecibosxServicio.xss">
+      <DependentUpon>ds_RecibosxServicio.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Facturacion\ds_TotalUnidadesPrefacturacion.xsc">
+      <DependentUpon>ds_TotalUnidadesPrefacturacion.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Facturacion\ds_Reversion.xsc">
+      <DependentUpon>ds_Reversion.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Facturacion\ds_Reversion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Reversion.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Facturacion\ds_Reversion.xss">
+      <DependentUpon>ds_Reversion.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Facturacion\ds_TotalUnidadesPrefacturacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_TotalUnidadesPrefacturacion.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Facturacion\ds_TotalUnidadesPrefacturacion.xss">
+      <DependentUpon>ds_TotalUnidadesPrefacturacion.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\OperacionRecoleccion\ds_CuadrillaXTonelada.xsc">
+      <DependentUpon>ds_CuadrillaXTonelada.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\OperacionRecoleccion\ds_CuadrillaPorTonelada.xsc">
+      <DependentUpon>ds_CuadrillaPorTonelada.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\OperacionRecoleccion\ds_CuadrillaPorTonelada.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_CuadrillaPorTonelada.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\OperacionRecoleccion\ds_CuadrillaPorTonelada.xss">
+      <DependentUpon>ds_CuadrillaPorTonelada.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\OperacionRecoleccion\ds_CuadrillaXTonelada.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_CuadrillaXTonelada.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\OperacionRecoleccion\ds_CuadrillaXTonelada.xss">
+      <DependentUpon>ds_CuadrillaXTonelada.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\OperacionRecoleccion\ds_RutaRecoleccion.xsc">
+      <DependentUpon>ds_RutaRecoleccion.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\OperacionRecoleccion\ds_OTRMunicipal.xsc">
+      <DependentUpon>ds_OTRMunicipal.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\OperacionRecoleccion\ds_OTRComercial.xsc">
+      <DependentUpon>ds_OTRComercial.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\OperacionRecoleccion\ds_OTRComercial.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_OTRComercial.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\OperacionRecoleccion\ds_OTRComercial.xss">
+      <DependentUpon>ds_OTRComercial.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\OperacionRecoleccion\ds_OTRMunicipal.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_OTRMunicipal.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\OperacionRecoleccion\ds_OTRMunicipal.xss">
+      <DependentUpon>ds_OTRMunicipal.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\OperacionRecoleccion\ds_OTRRollOff.xsc">
+      <DependentUpon>ds_OTRRollOff.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\OperacionRecoleccion\ds_OTRRollOff.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_OTRRollOff.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\OperacionRecoleccion\ds_OTRRollOff.xss">
+      <DependentUpon>ds_OTRRollOff.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\OperacionRecoleccion\ds_RutaRecoleccion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_RutaRecoleccion.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\OperacionRecoleccion\ds_RutaRecoleccion.xss">
+      <DependentUpon>ds_RutaRecoleccion.xsd</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Icon.png" />
+    <Content Include="Images\AccesoDenegado.png" />
+    <Content Include="Images\Anuncios\img.png" />
+    <Content Include="Images\Anuncios\Img201601181402053464.png" />
+    <Content Include="Images\BANNER WPP.jpg" />
+    <Content Include="Images\fabicon.jpg" />
+    <Content Include="Images\loader.gif" />
+    <Content Include="Images\Logo.png" />
+    <Content Include="Images\WPP-Home1.jpg" />
+    <Content Include="Images\WPP-Home2.png" />
+    <Content Include="Images\WPP-Home3.jpg" />
+    <Content Include="Images\WPP-Logo.png" />
+    <Content Include="Scripts\jasny-bootstrap.js" />
+    <Content Include="Scripts\jasny-bootstrap.min.js" />
+    <Content Include="Scripts\jqPlot\changes.txt" />
+    <Content Include="Scripts\jqPlot\copyright.txt" />
+    <Content Include="Scripts\jqPlot\excanvas.js" />
+    <Content Include="Scripts\jqPlot\excanvas.min.js" />
+    <Content Include="Scripts\jqPlot\gpl-2.0.txt" />
+    <Content Include="Scripts\jqPlot\jqPlotCssStyling.txt" />
+    <Content Include="Scripts\jqPlot\jqPlotOptions.txt" />
+    <Content Include="Scripts\jqPlot\jquery.jqplot.css" />
+    <Content Include="Scripts\jqPlot\jquery.jqplot.js" />
+    <Content Include="Scripts\jqPlot\jquery.jqplot.min.css" />
+    <Content Include="Scripts\jqPlot\jquery.jqplot.min.js" />
+    <Content Include="Scripts\jqPlot\jquery.js" />
+    <Content Include="Scripts\jqPlot\jquery.min.js" />
+    <Content Include="Scripts\jqPlot\MIT-LICENSE.txt" />
+    <Content Include="Scripts\jqPlot\optionsTutorial.txt" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.barRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.barRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.BezierCurveRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.BezierCurveRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.blockRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.blockRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.bubbleRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.bubbleRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.canvasAxisLabelRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.canvasAxisLabelRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.canvasAxisTickRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.canvasAxisTickRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.canvasOverlay.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.canvasOverlay.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.canvasTextRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.canvasTextRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.categoryAxisRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.categoryAxisRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.ciParser.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.ciParser.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.cursor.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.cursor.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.dateAxisRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.dateAxisRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.donutRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.donutRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.dragable.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.dragable.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.enhancedLegendRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.enhancedLegendRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.funnelRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.funnelRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.highlighter.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.highlighter.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.json2.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.json2.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.logAxisRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.logAxisRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.mekkoAxisRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.mekkoAxisRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.mekkoRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.mekkoRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.meterGaugeRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.meterGaugeRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.mobile.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.mobile.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.ohlcRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.ohlcRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.pieRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.pieRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.pointLabels.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.pointLabels.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.pyramidAxisRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.pyramidAxisRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.pyramidGridRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.pyramidGridRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.pyramidRenderer.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.pyramidRenderer.min.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.trendline.js" />
+    <Content Include="Scripts\jqPlot\plugins\jqplot.trendline.min.js" />
+    <Content Include="Scripts\jqPlot\README.txt" />
+    <Content Include="Scripts\jqPlot\usage.txt" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.autocomplete.js" />
+    <Content Include="Scripts\app\regiones.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.11.3.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\site.js" />
+    <Content Include="Scripts\sweetalert-dev.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Views\Usuario\Login.cshtml" />
+    <Content Include="Views\Shared\_LogInLayout.cshtml" />
+    <Content Include="Views\Shared\AccessDenied.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Crear.cshtml" />
+    <Content Include="Views\Usuario\Editar.cshtml" />
+    <Content Include="Views\Usuario\Eliminar.cshtml" />
+    <Content Include="Views\Compania\Index.cshtml" />
+    <Content Include="Views\Compania\Crear.cshtml" />
+    <Content Include="Views\Compania\Editar.cshtml" />
+    <Content Include="Views\Compania\Eliminar.cshtml" />
+    <Content Include="Views\Usuario\Visualizar.cshtml" />
+    <Content Include="Views\Cliente\Crear.cshtml" />
+    <Content Include="Views\Cliente\Editar.cshtml" />
+    <Content Include="Views\Cliente\Eliminar.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Cliente\Detalles.cshtml" />
+    <Content Include="Views\Compania\Visualizar.cshtml" />
+    <Content Include="Views\Cliente\CrearContacto.cshtml" />
+    <Content Include="Views\Cliente\VisualizarCliente.cshtml" />
+    <Content Include="Views\Cliente\EditarContacto.cshtml" />
+    <Content Include="Views\Cliente\EliminarContacto.cshtml" />
+    <Content Include="Views\Usuario\Compania.cshtml" />
+    <Content Include="Views\Producto\Index.cshtml" />
+    <Content Include="Views\Producto\Crear.cshtml" />
+    <Content Include="Views\Producto\Editar.cshtml" />
+    <Content Include="Views\Producto\Eliminar.cshtml" />
+    <Content Include="Views\Producto\Detalles.cshtml" />
+    <Content Include="Views\Contrato\Crear.cshtml" />
+    <Content Include="Views\Contrato\Index.cshtml" />
+    <Content Include="Views\Contrato\Editar.cshtml" />
+    <Content Include="Views\Contrato\Eliminar.cshtml" />
+    <Content Include="Views\Contrato\Detalles.cshtml" />
+    <Content Include="Views\PuntoFacturacion\Crear.cshtml" />
+    <Content Include="Views\PuntoFacturacion\Editar.cshtml" />
+    <Content Include="Views\PuntoFacturacion\Eliminar.cshtml" />
+    <Content Include="Views\PuntoFacturacion\Index.cshtml" />
+    <Content Include="Views\PuntoFacturacion\Visualizar.cshtml" />
+    <Content Include="Views\CategoriaProducto\Index.cshtml" />
+    <Content Include="Views\CategoriaProducto\Crear.cshtml" />
+    <Content Include="Views\CategoriaProducto\Editar.cshtml" />
+    <Content Include="Views\CategoriaProducto\Eliminar.cshtml" />
+    <Content Include="Views\CategoriaProducto\Detalles.cshtml" />
+    <Content Include="Views\Cliente\CrearUbicacion.cshtml" />
+    <Content Include="Views\Cliente\EditarUbicacion.cshtml" />
+    <Content Include="Views\Cliente\EliminarUbicacion.cshtml" />
+    <Content Include="Views\Contrato\CrearProductoContrato.cshtml" />
+    <Content Include="Views\Contrato\EditarProductoContrato.cshtml" />
+    <Content Include="Views\Contrato\EliminarProductoContrato.cshtml" />
+    <Content Include="Views\Servicio\Index.cshtml" />
+    <Content Include="Views\Servicio\Crear.cshtml" />
+    <Content Include="Views\RutaRecoleccion\Index.cshtml" />
+    <Content Include="Views\RutaRecoleccion\Crear.cshtml" />
+    <Content Include="Views\RutaRecoleccion\Editar.cshtml" />
+    <Content Include="Views\RutaRecoleccion\Eliminar.cshtml" />
+    <Content Include="Views\RutaRecoleccion\Detalles.cshtml" />
+    <Content Include="Views\Servicio\Detalles.cshtml" />
+    <Content Include="Views\Servicio\Editar.cshtml" />
+    <Content Include="Views\Servicio\Eliminar.cshtml" />
+    <Content Include="Views\Bascula\BoletaSinOTR.cshtml" />
+    <Content Include="Views\Usuario\SolicitarContrasena.cshtml" />
+    <Content Include="Views\Usuario\RecuperarContrasenia.cshtml" />
+    <Content Include="Views\Bascula\Index.cshtml" />
+    <Content Include="Views\Equipo\Crear.cshtml" />
+    <Content Include="Views\Equipo\Detalles.cshtml" />
+    <Content Include="Views\Equipo\Editar.cshtml" />
+    <Content Include="Views\Equipo\Eliminar.cshtml" />
+    <Content Include="Views\Equipo\Index.cshtml" />
+    <Content Include="Views\Bascula\RepesarBoletaSinOTR.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Bascula\DetallesBoletaSinOTR.cshtml" />
+    <Content Include="Views\Bascula\RecaudacionCaja.cshtml" />
+    <Content Include="Views\Bascula\EliminarBoletaSinOTR.cshtml" />
+    <Content Include="Views\Bascula\EditarBoletaSinOTR.cshtml" />
+    <Content Include="Views\TipoCambio\Index.cshtml" />
+    <Content Include="Views\ConsecutivoBascula\Index.cshtml" />
+    <Content Include="Views\Contenedor\Index.cshtml" />
+    <Content Include="Views\Contenedor\Crear.cshtml" />
+    <Content Include="Views\Contenedor\Detalles.cshtml" />
+    <Content Include="Views\Contenedor\Editar.cshtml" />
+    <Content Include="Views\Contenedor\Eliminar.cshtml" />
+    <Content Include="Views\RellenoSanitario\Index.cshtml" />
+    <Content Include="Views\RellenoSanitario\Crear.cshtml" />
+    <Content Include="Views\RellenoSanitario\Editar.cshtml" />
+    <Content Include="Views\RellenoSanitario\Eliminar.cshtml" />
+    <Content Include="Views\RellenoSanitario\Detalles.cshtml" />
+    <Content Include="Views\OTR\Index.cshtml" />
+    <Content Include="Views\OTR\CrearOTR.cshtml" />
+    <Content Include="Views\OTR\EditarOTR.cshtml" />
+    <Content Include="Views\OTR\EliminarOTR.cshtml" />
+    <Content Include="Views\OTR\DetallesOTR.cshtml" />
+    <Content Include="Views\OTR\CrearOTRRollOff.cshtml" />
+    <Content Include="Views\OTR\EditarOTRRollOff.cshtml" />
+    <Content Include="Views\OTR\EliminarOTRRollOff.cshtml" />
+    <Content Include="Views\OTR\DetallesOTRRollOff.cshtml" />
+    <Content Include="Views\OTR\EstadisticasOTR.cshtml" />
+    <Content Include="Views\Cuadrilla\Index.cshtml" />
+    <Content Include="Views\Cuadrilla\Crear.cshtml" />
+    <Content Include="Views\Cuadrilla\Editar.cshtml" />
+    <Content Include="Views\Cuadrilla\Detalles.cshtml" />
+    <Content Include="Views\Cuadrilla\Eliminar.cshtml" />
+    <Content Include="Views\Bascula\BoletaConOTR.cshtml" />
+    <Content Include="Views\Bascula\RepesarBoletaConOTR.cshtml" />
+    <Content Include="Views\Bascula\EliminarBoletaConOTR.cshtml" />
+    <Content Include="Views\Bascula\EditarBoletaConOTR.cshtml" />
+    <Content Include="Views\Bascula\DetallesBoletaConOTR.cshtml" />
+    <Content Include="Views\RutaRecoleccion\Prueba.cshtml" />
+    <Content Include="Views\OTR\CerrarOTR.cshtml" />
+    <Content Include="Views\OTR\CerrarOTRRollOff.cshtml" />
+    <Content Include="Views\Contenedor\HistorialUbicacion.cshtml" />
+    <Content Include="Views\CierreCaja\CierreCaja.cshtml" />
+    <Content Include="Views\CierreCaja\Reimpresion.cshtml" />
+    <Content Include="Views\Sweet\Alert.cshtml" />
+    <Content Include="Views\Facturacion\Index.cshtml" />
+    <Content Include="Views\ConsecutivoFacturacion\Index.cshtml" />
+    <Content Include="Views\Facturacion\ConsultaFactura.cshtml" />
+    <Content Include="Views\Facturacion\Documentos.cshtml" />
+    <Content Include="Views\Facturacion\Control.cshtml" />
+    <Content Include="Views\Facturacion\Excluir.cshtml" />
+    <Content Include="Views\Facturacion\PreFacturacion.cshtml" />
+    <Content Include="Views\Facturacion\Facturacion.cshtml" />
+    <Content Include="Views\BoletaManual\Index.cshtml" />
+    <Content Include="Views\BoletaManual\Crear.cshtml" />
+    <Content Include="Views\BoletaManual\Editar.cshtml" />
+    <Content Include="Views\BoletaManual\Eliminar.cshtml" />
+    <Content Include="Views\BoletaManual\Detalles.cshtml" />
+    <Content Include="Views\ControlOperaciones\Facturacion.cshtml" />
+    <Content Include="Views\ControlOperaciones\CierreCaja.cshtml" />
+    <Content Include="Views\ControlOperaciones\ControlRecoleccionDiario.cshtml" />
+    <Content Include="Views\ControlOperaciones\OTR.cshtml" />
+    <Content Include="Views\ControlOperaciones\Cuadrilla.cshtml" />
+    <Content Include="Views\ControlOperaciones\Usuarios.cshtml" />
+    <Content Include="Views\ControlOperaciones\ToneladasXCuadrilla.cshtml" />
+    <Content Include="Views\ControlOperaciones\ToneladasXBoleta.cshtml" />
+    <Content Include="Views\ControlOperaciones\Equipos.cshtml" />
+    <Content Include="Views\ControlOperaciones\Contenedor.cshtml" />
+    <Content Include="Views\ControlOperaciones\Cliente.cshtml" />
+    <Content Include="Views\ControlOperaciones\Contrato.cshtml" />
+    <Content Include="Views\ControlOperaciones\Compania.cshtml" />
+    <Content Include="Views\ControlOperaciones\ContratoDetalle.cshtml" />
+    <Content Include="Views\ControlOperaciones\RutaRecoleccion.cshtml" />
+    <Content Include="Views\ControlOperaciones\CategoriaProductos.cshtml" />
+    <Content Include="Views\ControlOperaciones\Productos.cshtml" />
+    <Content Include="Views\Usuario\Home.cshtml" />
+    <Content Include="Views\ControlOperaciones\ListaFacturas.cshtml" />
+    <Content Include="Views\ControlOperaciones\ToneladasXCompania.cshtml" />
+    <Content Include="Views\Combustible\Index.cshtml" />
+    <Content Include="Views\Combustible\Crear.cshtml" />
+    <Content Include="Views\Combustible\Editar.cshtml" />
+    <Content Include="Views\CostoCamion\Index.cshtml" />
+    <Content Include="Views\CostoCamion\Crear.cshtml" />
+    <Content Include="Views\CostoCamion\Editar.cshtml" />
+    <Content Include="Views\ControlOperaciones\ComparativoHoras.cshtml" />
+    <Content Include="Views\ControlOperaciones\DieselConsumido.cshtml" />
+    <Content Include="Views\ControlOperaciones\HorasEfectivas.cshtml" />
+    <Content Include="Views\ControlOperaciones\Promedios.cshtml" />
+    <Content Include="Views\ControlOperaciones\Resumen.cshtml" />
+    <Content Include="Views\ControlOperaciones\TotalDiesel.cshtml" />
+    <Content Include="Views\ControlOperaciones\TotalToneladas.cshtml" />
+    <Content Include="Views\ControlOperaciones\TotalViajes.cshtml" />
+    <Content Include="Views\Anuncios\Index.cshtml" />
+    <Content Include="Views\ControlOperaciones\CierreCajaGeneral.cshtml" />
+    <Content Include="Views\CierreCaja\CierreCajaGeneral.cshtml" />
+    <Content Include="Views\CostoRutaRecoleccion\Index.cshtml" />
+    <Content Include="Views\CostoRutaRecoleccion\RegistrarCosto.cshtml" />
+    <Content Include="Views\CostoRutaRecoleccion\Detalles.cshtml" />
+    <Content Include="Views\Nomina\Cargar.cshtml" />
+    <Content Include="Views\DiasFestivos\Index.cshtml" />
+    <Content Include="Views\DiasFestivos\Crear.cshtml" />
+    <Content Include="Views\DiasFestivos\Editar.cshtml" />
+    <Content Include="Views\DiasFestivos\Eliminar.cshtml" />
+    <Content Include="Views\DiasFestivos\Detalles.cshtml" />
+    <Content Include="Views\ControlOperaciones\ContratoXEjecutivo.cshtml" />
+    <Content Include="Views\ControlOperaciones\ClienteBitacora.cshtml" />
+    <Content Include="Views\ControlOperaciones\ContratoBitacora.cshtml" />
+    <Content Include="Views\ConfiguracionPuerto\Configuracion.cshtml" />
+    <Content Include="Views\CostoHora\Crear.cshtml" />
+    <Content Include="Views\CostoHora\Editar.cshtml" />
+    <Content Include="Views\CostoHora\Index.cshtml" />
+    <Content Include="Views\Jornada\Index.cshtml" />
+    <Content Include="Views\Jornada\Editar.cshtml" />
+    <Content Include="Views\Jornada\Detalles.cshtml" />
+    <Content Include="Views\Empleado\Index.cshtml" />
+    <Content Include="Views\Empleado\Detalles.cshtml" />
+    <Content Include="Views\Empleado\Editar.cshtml" />
+    <Content Include="Views\Empleado\Eliminar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Datos\Nomina\" />
+    <Folder Include="logs\" />
+    <Folder Include="Models\ModuloContratos\" />
+    <Folder Include="NominaDocs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WPP.Entities\WPP.Entities.csproj">
+      <Project>{b4f21b53-c0c2-4010-be42-faf1ae07272b}</Project>
+      <Name>WPP.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPP.Mapper\WPP.Mapper.csproj">
+      <Project>{3771dd9e-3c36-443e-89af-8db7e2c150a6}</Project>
+      <Name>WPP.Mapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPP.Model\WPP.Model.csproj">
+      <Project>{952d5a34-ee58-426a-9487-d23e9673d146}</Project>
+      <Name>WPP.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPP.Persistance\WPP.Persistance.csproj">
+      <Project>{45e21f55-d53e-44f1-ab6c-6613bcc5d943}</Project>
+      <Name>WPP.Persistance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPP.Service\WPP.Service.csproj">
+      <Project>{b414a3f5-2d64-4843-8cea-4251aa2e87cb}</Project>
+      <Name>WPP.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reportes\Administracion\rpt_ClienteBitacora.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ClienteBitacora.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Administracion\rpt_ClienteDetalle.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ClienteDetalle.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Administracion\rpt_ClienteGeneral.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ClienteGeneral.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Administracion\rpt_CompaniaDetalle.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_CompaniaDetalle.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Administracion\rpt_CompaniaGeneral.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_CompaniaGeneral.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Administracion\rpt_Contactos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_Contactos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Administracion\rpt_Ubicacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_Ubicacion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Administracion\rpt_Usuarios.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_Usuarios.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\rpt_ContenedorDetalle.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ContenedorDetalle.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\rpt_ContenedorGeneral.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ContenedorGeneral.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\rpt_Equipo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_Equipo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\rpt_ToneladasXBoleta.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ToneladasXBoleta.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CierreCaja\rpt_CierreCaja.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_CierreCaja.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CierreCaja\rpt_CierreCajaGeneral.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_CierreCajaGeneral.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CierreCaja\rpt_PagosTarjeta.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_PagosTarjeta.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contratos\rpt_CategoriaProductos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_CategoriaProductos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contratos\rpt_ContratoBitacora.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ContratoBitacora.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contratos\rpt_Contratos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_Contratos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contratos\rpt_ContratosDetalle.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ContratosDetalle.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contratos\rpt_ContratosXCliente.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ContratosXCliente.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contratos\rpt_ContratosXEjecutivo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ContratosXEjecutivo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contratos\rpt_Productos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_Productos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contratos\rpt_ProductosContrato.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ProductosContrato.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contratos\rpt_ProductosXCategoria.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ProductosXCategoria.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_CierreCaja.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_CierreCaja.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_CierreCajaAgrupado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_CierreCajaAgrupado.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_ComparativoHorasControlDiario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ComparativoHorasControlDiario.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_ControlOperacionDiario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ControlOperacionDiario1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_DieselConsumidoControlDiario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_DieselConsumidoControlDiario.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_FacturacionDetallado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_FacturacionDetallado.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_FacturacionDetalladoAgrupado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_FacturacionDetalladoAgrupado.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_FacturacionGeneral.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_FacturacionGeneral.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_FacturacionGeneralAgrupado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_FacturacionGeneralAgrupado1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_HorasEfectivasControlDiario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_HorasEfectivasControlDiario.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_OTR.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_OTR.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_PromediosControlDiario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_PromediosControlDiario.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_ResumenControlDiario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ResumenControlDiario.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_ToneladasXCompania.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ToneladasXCompania.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_TotalDieselControlDiario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_TotalDieselControlDiario.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_TotalToneladasControlDiario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_TotalToneladasControlDiario.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ControlOperaciones\rpt_TotalViajesControlDiario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_TotalViajesControlDiario.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\rpt_DetalleFactura.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_DetalleFactura.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\rpt_Facturacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_Facturacion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\rpt_ListaFacturas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ListaFacturas.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\rpt_Prefacturacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_Prefacturacion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\rpt_RecibosxServicio.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_RecibosxServicio.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\rpt_Reversion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_Reversion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\rpt_TotalUnidadesFacturacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_TotalUnidadesFacturacion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Recoleccion\rpt_Cuadrilla.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_Cuadrilla.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Recoleccion\rpt_CuadrillaXTonelada.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_CuadrillaXTonelada.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Recoleccion\rpt_OTRMunicipal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_OTRMunicipal.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Recoleccion\rpt_OTRComercial.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_OTRComercial.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Recoleccion\rpt_OTRRollOff.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_OTRRollOff.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Recoleccion\rpt_RutaRecoleccionDetalle.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_RutaRecoleccionDetalle.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Recoleccion\rpt_RutaRecoleccionXTipo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_RutaRecoleccionXTipo.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6609</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:6609/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

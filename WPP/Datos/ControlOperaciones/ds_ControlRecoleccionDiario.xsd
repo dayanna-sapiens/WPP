@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ds_ControlRecoleccionDiario" targetNamespace="http://tempuri.org/ds_ControlRecoleccionDiario.xsd" xmlns:mstns="http://tempuri.org/ds_ControlRecoleccionDiario.xsd" xmlns="http://tempuri.org/ds_ControlRecoleccionDiario.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ds_ControlRecoleccionDiario" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ds_ControlRecoleccionDiario" msprop:Generator_UserDSName="ds_ControlRecoleccionDiario">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Reporte" msprop:Generator_TableClassName="ReporteDataTable" msprop:Generator_TableVarName="tableReporte" msprop:Generator_RowChangedName="ReporteRowChanged" msprop:Generator_TablePropName="Reporte" msprop:Generator_RowDeletingName="ReporteRowDeleting" msprop:Generator_RowChangingName="ReporteRowChanging" msprop:Generator_RowEvHandlerName="ReporteRowChangeEventHandler" msprop:Generator_RowDeletedName="ReporteRowDeleted" msprop:Generator_RowClassName="ReporteRow" msprop:Generator_UserTableName="Reporte" msprop:Generator_RowEvArgName="ReporteRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FechaActual" msprop:Generator_ColumnVarNameInTable="columnFechaActual" msprop:Generator_ColumnPropNameInRow="FechaActual" msprop:Generator_ColumnPropNameInTable="FechaActualColumn" msprop:Generator_UserColumnName="FechaActual" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Compania" msprop:Generator_ColumnVarNameInTable="columnCompania" msprop:Generator_ColumnPropNameInRow="Compania" msprop:Generator_ColumnPropNameInTable="CompaniaColumn" msprop:Generator_UserColumnName="Compania" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Datos" msprop:Generator_TableClassName="DatosDataTable" msprop:Generator_TableVarName="tableDatos" msprop:Generator_RowChangedName="DatosRowChanged" msprop:Generator_TablePropName="Datos" msprop:Generator_RowDeletingName="DatosRowDeleting" msprop:Generator_RowChangingName="DatosRowChanging" msprop:Generator_RowEvHandlerName="DatosRowChangeEventHandler" msprop:Generator_RowDeletedName="DatosRowDeleted" msprop:Generator_RowClassName="DatosRow" msprop:Generator_UserTableName="Datos" msprop:Generator_RowEvArgName="DatosRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FechaBoleta" msprop:Generator_ColumnVarNameInTable="columnFechaBoleta" msprop:Generator_ColumnPropNameInRow="FechaBoleta" msprop:Generator_ColumnPropNameInTable="FechaBoletaColumn" msprop:Generator_UserColumnName="FechaBoleta" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Boleta" msprop:Generator_ColumnVarNameInTable="columnBoleta" msprop:Generator_ColumnPropNameInRow="Boleta" msprop:Generator_ColumnPropNameInTable="BoletaColumn" msprop:Generator_UserColumnName="Boleta" type="xs:string" minOccurs="0" />
+              <xs:element name="Placa" msprop:Generator_ColumnVarNameInTable="columnPlaca" msprop:Generator_ColumnPropNameInRow="Placa" msprop:Generator_ColumnPropNameInTable="PlacaColumn" msprop:Generator_UserColumnName="Placa" type="xs:string" minOccurs="0" />
+              <xs:element name="Chofer" msprop:Generator_ColumnVarNameInTable="columnChofer" msprop:Generator_ColumnPropNameInRow="Chofer" msprop:Generator_ColumnPropNameInTable="ChoferColumn" msprop:Generator_UserColumnName="Chofer" type="xs:string" minOccurs="0" />
+              <xs:element name="Neto" msprop:Generator_ColumnVarNameInTable="columnNeto" msprop:Generator_ColumnPropNameInRow="Neto" msprop:Generator_ColumnPropNameInTable="NetoColumn" msprop:Generator_UserColumnName="Neto" type="xs:double" minOccurs="0" />
+              <xs:element name="Cliente" msprop:Generator_ColumnVarNameInTable="columnCliente" msprop:Generator_ColumnPropNameInRow="Cliente" msprop:Generator_ColumnPropNameInTable="ClienteColumn" msprop:Generator_UserColumnName="Cliente" type="xs:string" minOccurs="0" />
+              <xs:element name="OTR" msprop:Generator_ColumnVarNameInTable="columnOTR" msprop:Generator_ColumnPropNameInRow="OTR" msprop:Generator_ColumnPropNameInTable="OTRColumn" msprop:Generator_UserColumnName="OTR" type="xs:string" minOccurs="0" />
+              <xs:element name="HorimetroInicio" msprop:Generator_ColumnVarNameInTable="columnHorimetroInicio" msprop:Generator_ColumnPropNameInRow="HorimetroInicio" msprop:Generator_ColumnPropNameInTable="HorimetroInicioColumn" msprop:Generator_UserColumnName="HorimetroInicio" type="xs:double" minOccurs="0" />
+              <xs:element name="HorimetroFin" msprop:Generator_ColumnVarNameInTable="columnHorimetroFin" msprop:Generator_ColumnPropNameInRow="HorimetroFin" msprop:Generator_ColumnPropNameInTable="HorimetroFinColumn" msprop:Generator_UserColumnName="HorimetroFin" type="xs:double" minOccurs="0" />
+              <xs:element name="KilometrajeInicio" msprop:Generator_ColumnVarNameInTable="columnKilometrajeInicio" msprop:Generator_ColumnPropNameInRow="KilometrajeInicio" msprop:Generator_ColumnPropNameInTable="KilometrajeInicioColumn" msprop:Generator_UserColumnName="KilometrajeInicio" type="xs:double" minOccurs="0" />
+              <xs:element name="KilometrajeFin" msprop:Generator_ColumnVarNameInTable="columnKilometrajeFin" msprop:Generator_ColumnPropNameInRow="KilometrajeFin" msprop:Generator_ColumnPropNameInTable="KilometrajeFinColumn" msprop:Generator_UserColumnName="KilometrajeFin" type="xs:double" minOccurs="0" />
+              <xs:element name="Combustible" msprop:Generator_ColumnVarNameInTable="columnCombustible" msprop:Generator_ColumnPropNameInRow="Combustible" msprop:Generator_ColumnPropNameInTable="CombustibleColumn" msprop:Generator_UserColumnName="Combustible" type="xs:double" minOccurs="0" />
+              <xs:element name="TipoOTR" msprop:Generator_ColumnVarNameInTable="columnTipoOTR" msprop:Generator_ColumnPropNameInRow="TipoOTR" msprop:Generator_ColumnPropNameInTable="TipoOTRColumn" msprop:Generator_UserColumnName="TipoOTR" type="xs:string" minOccurs="0" />
+              <xs:element name="Compania" msprop:Generator_ColumnVarNameInTable="columnCompania" msprop:Generator_ColumnPropNameInRow="Compania" msprop:Generator_ColumnPropNameInTable="CompaniaColumn" msprop:Generator_UserColumnName="Compania" type="xs:string" minOccurs="0" />
+              <xs:element name="Gasolina" msprop:Generator_ColumnVarNameInTable="columnGasolina" msprop:Generator_ColumnPropNameInRow="Gasolina" msprop:Generator_ColumnPropNameInTable="GasolinaColumn" msprop:Generator_UserColumnName="Gasolina" type="xs:double" minOccurs="0" />
+              <xs:element name="Diesel" msprop:Generator_ColumnVarNameInTable="columnDiesel" msprop:Generator_ColumnPropNameInRow="Diesel" msprop:Generator_ColumnPropNameInTable="DieselColumn" msprop:Generator_UserColumnName="Diesel" type="xs:double" minOccurs="0" />
+              <xs:element name="CostoTrabajo" msprop:Generator_ColumnVarNameInTable="columnCostoTrabajo" msprop:Generator_ColumnPropNameInRow="CostoTrabajo" msprop:Generator_ColumnPropNameInTable="CostoTrabajoColumn" msprop:Generator_UserColumnName="CostoTrabajo" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

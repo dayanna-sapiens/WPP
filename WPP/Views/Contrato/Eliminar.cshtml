@@ -1,0 +1,126 @@
+﻿@model WPP.Model.ModuloContratos.ContratoModel
+
+@{
+    ViewBag.Title = "Eliminar Contrato";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Eliminar Contrato</h2>
+
+        @using (Html.BeginForm("Eliminar", "Contrato", FormMethod.Post, new { id = "frmEliminarContrato", @Class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                <label for="Numero">Número:</label>
+                @Html.DisplayFor(m => m.Numero, new { @Class = "form-control", id = "Numero" })
+            </div>
+            <div class="form-group">
+                <label for="DescripcionCliente">Cliente:</label>
+                @Html.DisplayFor(m => m.NumeroCliente, new { @Class = "form-control", id = "NumeroCliente" })  -  @Html.DisplayFor(m => m.DescripcionCliente, new { @Class = "form-control", id = "DescripcionCliente" })
+            </div>
+            <div class="form-group">
+                <label for="DescripcionContrato">Descripción del contrato:</label>
+                @Html.DisplayFor(m => m.DescripcionContrato, new { @Class = "form-control", id = "DescripcionContrato" })
+            </div>
+            <div class="form-group">
+                <label for="FechaInicio">Fecha Inicio:</label>
+                @Html.DisplayFor(m => m.FechaInicio, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "FechaInicio" })
+            </div>
+            <div class="form-group">
+                <label for="Estado">Estado:</label>
+                @Html.DisplayFor(m => m.Estado, new { @Class = "form-control", id = "Estado" })
+            </div>
+            <div class="form-group">
+                <label for="ModoFacturacionDescripcion">Modo Facturación:</label>
+                @Html.DisplayFor(m => m.ModoFacturacion, new { @Class = "form-control", id = "ModoFacturacion" })
+            </div>
+            if (Model.ModoFacturacion == "Día específico del mes")
+            {
+                <div class="form-group">
+                    <label for="DiaCorteMes">Día Corte:</label>
+                    @Html.DisplayFor(m => m.DiaCorteMes, new { @Class = "form-control", id = "DiaCorteMes" })
+                </div>
+            }
+            if (Model.ModoFacturacion == "Día específico de la semana")
+            {
+                <div class="form-group">
+                    <label for="DiaCorteSemanaDescripcion">Día Corte:</label>
+                    @Html.DisplayFor(m => m.DiaCorteSemanaDescripcion, new { @Class = "form-control", id = "DiaCorteSemanaDescripcion" })
+                </div>
+            }
+            <div class="form-group">
+                <label for="Moneda">Moneda:</label>
+                @Html.DisplayFor(m => m.Moneda, new { @Class = "form-control", id = "Moneda" })
+            </div>
+            if (Model.Moneda == "Dolares")
+            {
+                if (Model.FacturarColones != null)
+                {
+                    <div class="form-group">
+                        <label for="FacturarColones">Facturar en Colones:</label>
+                        @if ((bool)Model.FacturarColones)
+                        {
+                            @Html.Raw("Si")
+                        }
+                        else
+                        {
+                            @Html.Raw("No")
+                        }
+                    </div>
+                }
+            }
+            <div class="form-group">
+                <label for="PuntoFacturacionDescripcion">Punto de Facturación:</label>
+                @Html.DisplayFor(m => m.PuntoFacturacionDescripcion, new { @Class = "form-control", id = "PuntoFacturacionDescripcion" })
+            </div>
+            <div class="form-group">
+                <label for="PagoContado">Pago de Contado:</label>
+                @if ((bool)Model.PagoContado)
+                {
+                    @Html.Raw("Si")
+                }
+                else
+                {
+                    @Html.Raw("No")
+                }
+            </div>
+            <div class="form-group">
+                <label for="DiasAvisoPrevioVencimiento">Días avisa previo vencimiento:</label>
+                @Html.DisplayFor(m => m.DiasAvisoPrevioVencimiento, new { @Class = "form-control", id = "DiasAvisoPrevioVencimiento" })
+            </div>
+            <div class="form-group">
+                <label for="RepesajeDescripcion">Repesaje:</label>
+                @Html.DisplayFor(m => m.RepesajeDescripcion, new { @Class = "form-control", id = "RepesajeDescripcion" })
+            </div>
+            <div class="form-group">
+                <label for="NumeroFormulario">Número Formulario:</label>
+                @Html.DisplayFor(m => m.NumeroFormulario, new { @Class = "form-control", id = "NumeroFormulario" })
+            </div>
+            <div class="form-group">
+                <label for="Ejecutivo">Ejecutivo:</label>
+                @Html.DisplayFor(m => m.EjecutivoNombre, new { @Class = "form-control", id = "EjecutivoNombre" })
+            </div>
+            <div class="form-group">
+                <label for="Observaciones">Observaciones:</label>
+                @Html.DisplayFor(m => m.Observaciones, new { @Class = "form-control", id = "Observaciones" })
+            </div>
+            <div class="form-group">
+                <label for="ObservacionesFactura">Observaciones Factura:</label>
+                @Html.DisplayFor(m => m.ObservacionesFactura, new { @Class = "form-control", id = "ObservacionesFactura" })
+            </div>
+            <button type="submit" class="btn btn-primary">Ok</button>
+            @Html.ActionLink("Cancelar", "Index", "Contrato", null, new { @Class = "btn btn-primary" })
+
+        }
+
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+

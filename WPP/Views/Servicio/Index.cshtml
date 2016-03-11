@@ -1,0 +1,161 @@
+﻿@model PagedList.IPagedList<WPP.Entities.Objects.ModuloContratos.Servicio>
+@using WPP.Model;
+@using PagedList.Mvc;
+@using PagedList;
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Servicio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:5%;">
+        <h2>Filtrar por: </h2>
+
+        @using (Html.BeginForm(Html.BeginForm("Buscar", "Servicio", FormMethod.Get)))
+        {
+            <div class="form-group">
+                <label>Nombre:</label> @Html.TextBox("searchStringNombre", ViewBag.CurrentNombre as string, new { @class = "form-control col-lg-3" })
+            </div>  
+            <div class="radio"> 
+                <label style="font-weight:bold; padding-left:0px">Estado:</label>            
+               <br />
+                @{string valorActivo = ViewBag.CurrentActivo;}
+
+                <label> @Html.RadioButton("searchActivo", "Todos", valorActivo == "Todos" || valorActivo == null?true:false) 
+
+                Todos </label>
+                <br/>
+                <label>
+                    @Html.RadioButton("searchActivo", "Activo", valorActivo == "Activo" ? true : false)  Activos
+                </label>
+                <br />
+                <label> @Html.RadioButton("searchActivo", "Inactivo", valorActivo == "Inactivo" ? true : false)  Inactivos</label>
+            </div>
+            <div class="form-group">
+                <label>Filas:</label> @Html.DropDownList("searchStringFilas", new List<SelectListItem>{
+                    new SelectListItem() {Text = "10", Value="10"},
+                    new SelectListItem() {Text = "25", Value="25"},
+                    new SelectListItem() {Text = "50", Value="50"},
+                    new SelectListItem() {Text = "100", Value="100"}
+                 }, ViewBag.currentFilterFilas as string, new { @Class = "form-control", id = "searchStringFilas" })
+            </div>
+            <p>
+                <button type="submit" value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </p>
+        }
+    </div>
+
+
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>Servicios</h2>
+
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+
+        <br /><br />
+        
+        @if (Session["Roles"].ToString().Contains("Administrador de Servicios") || Session["Roles"].ToString().Contains("Editor de Servicios"))
+        {
+            @Html.ActionLink("Crear Servicio", "Crear", "Servicio", new { @class = "btn btn-primary" })
+            <br /><br />
+        }
+
+        <div class="table-responsive" style="height:300px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-producto">
+                <tr>
+                    <th>
+                        @Html.ActionLink("Nombre", "Buscar", "Servicio", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentNombre = ViewBag.CurrentNombre,
+                   currentActivo = ViewBag.CurrentActivo
+               }, null)
+                    </th>
+                    <th>
+                        Activo
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Activo)</td>
+                            @if (Session["Roles"].ToString().Contains("Administrador de Servicios") || Session["Roles"].ToString().Contains("Editor de Servicios") || Session["Roles"].ToString().Contains("Consultor de Servicios"))
+                            {   
+                                <th>
+                                    <a href="@Url.Action("Detalles", "Servicio", new { id = item.Id })" data-toggle="tooltip" title="Detalles">
+                                        <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de Servicios") || Session["Roles"].ToString().Contains("Editor de Servicios"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Editar", "Servicio", new { id = item.Id })" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de Servicios"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Eliminar", "Servicio", new { id = item.Id })" data-toggle="tooltip" title="Eliminar">
+                                        <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            }
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+        <div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Buscar", "Servicio",
+                                new
+                                {
+                                    page,
+                                    sortOrder = ViewBag.NombreSortParam,
+                                    currentNombre = ViewBag.CurrentNombre,
+                                    currentActivo = ViewBag.CurrentActivo
+                                }))
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).load(function () {
+        // document.getElementById("btnBuscar").click();
+    })
+
+    $(document).ready(function () {
+        function editarProducto(IdProducto) {
+        }
+    });// end document ready
+
+</script>

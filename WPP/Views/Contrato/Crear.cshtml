@@ -1,0 +1,253 @@
+﻿@model WPP.Model.ModuloContratos.ContratoModel
+@{
+    ViewBag.Title = "Crear Contrato";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Crear Contrato</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Crear", "Contrato", FormMethod.Post, new { id = "frmCrearContrato", @class = "form-horizontal" }))
+            {
+
+                @Html.ValidationSummary(true)
+            
+
+                <div class="form-group">
+                    <label for="descripcion">Número</label>  
+                    @Html.TextBoxFor(m => m.Numero, new { @Class = "form-control", id = "Numero", @readonly="readonly" })
+                    @Html.ValidationMessageFor(m => m.Numero)
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Cliente</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.DescripcionCliente, new { @Class = "form-control", id = "DescripcionCliente"})
+                  @*  @Html.DropDownListFor(m => m.NumeroCliente, new SelectList(ViewBag.ListaCliente, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "NumeroCliente" })*@
+                    @Html.ValidationMessageFor(m => m.DescripcionCliente)
+                    @Html.HiddenFor(m => m.NumeroCliente)
+                </div>
+                <div class="form-group">
+                    <label for="NumeroCliente">Descripción del contrato</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.DescripcionContrato, new { @Class = "form-control", id = "DescripcionContrato" })
+                    @Html.ValidationMessageFor(m => m.DescripcionContrato)
+                </div>
+                <div class="form-group">   
+                    <label for="FechaInicio">Fecha de Inicio</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.FechaInicio, "{0:dd-MM-yyyy}", new { @Class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.FechaInicio)
+                </div>
+                <div class="form-group">
+                    <label for="Estado">Estado</label>    <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Estado, new List<SelectListItem>{
+                    new SelectListItem() {Text = "Activo", Value="Activo"},
+                    new SelectListItem() {Text = "Pendiente", Value="Pendiente"},
+                    new SelectListItem() {Text = "Inactivo", Value="Inactivo"},
+                    new SelectListItem() {Text = "Vencido", Value="Vencido"}
+                 }, String.Empty, new { @class = "form-control", id = "Estado" })
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+                <div class="form-group">
+                    <label for="ModoFacturacion">Modo Facturación</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.ModoFacturacion, new List<SelectListItem>{
+                    new SelectListItem() {Text = "Cada fin de mes", Value="Cada fin de mes"},
+                    new SelectListItem() {Text = "Cada fin de quincena", Value="Cada fin de quincena"},
+                    new SelectListItem() {Text = "Día específico de la semana", Value="Día específico de la semana"},
+                    new SelectListItem() {Text = "Día específico del mes", Value="Día específico del mes"}
+                 }, String.Empty, new { @class = "form-control", id = "ModoFacturacion" })
+                    @Html.ValidationMessageFor(m => m.ModoFacturacion)
+                </div>
+                <div class="form-group" style="display:none;" id="divCorteMes">
+                    <label for="DiaCorte">Día Corte Mes</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.DiaCorteMes, String.Empty, new { @class = "form-control", id = "DiaCorteMes", @type = "number", @min = "1", @max = "31" })
+                    @Html.ValidationMessageFor(m => m.DiaCorteMes)
+                </div>
+                <div class="form-group" style="display:none;" id="divCorteSemana">
+                    <label for="DiaCorteSemana">Día de Corte Semana</label>    <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.DiaCorteSemana, new SelectList(ViewBag.ListaCorteSemana, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "DiaCorteSemana" })
+                    @Html.ValidationMessageFor(m => m.DiaCorteSemana)
+                </div>
+                <div class="form-group">
+                    <label for="Moneda">Moneda</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                   @Html.DropDownListFor(m => m.Moneda, new List<SelectListItem>{
+                    new SelectListItem() {Text = "Colones", Value="Colones"},
+                    new SelectListItem() {Text = "Dólares", Value="Dolares"}
+                    }, String.Empty, new { @class = "form-control", id = "Moneda" })
+                    @Html.ValidationMessageFor(m => m.Moneda)
+                </div>
+                <div class="form-group" id="divFacturarColones" style="display:none;">
+                    <label for="FacturarColones">Facturar en Colones</label>   
+                    <input type="checkbox" id="ckbFacturarColones" name="ckbFacturarColones" />
+                    @Html.HiddenFor(m => m.FacturarColones)
+                    @Html.ValidationMessageFor(m => m.FacturarColones)
+                </div>
+                <div class="form-group">
+                    <label for="PuntoFacturacion">Punto de Facturación</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.PuntoFacturacion, new SelectList(ViewBag.ListaPuntoFacturacion, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "PuntoFacturacion" })
+                    @Html.ValidationMessageFor(m => m.PuntoFacturacion)
+                </div>
+                <div class="form-group" id="divClientesContado" >
+                    <label for="PagoContado">Pago de Contado</label>
+                    <input type="checkbox" id="ckbClienteContado" name="ckbClienteContado" />
+                    @Html.HiddenFor(m => m.PagoContado)
+                    @Html.ValidationMessageFor(m => m.PagoContado)
+                </div>
+                <div class="form-group">
+                    <label for="DiasAvisoPrevioVencimiento">Días aviso previo vencimiento</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.DiasAvisoPrevioVencimiento, new { @Class = "form-control", id = "DiasAvisoPrevioVencimiento", @type = "number", @min = "1", @max = "31" })
+                    @Html.ValidationMessageFor(m => m.DiasAvisoPrevioVencimiento)
+                </div>
+                <div class="form-group">
+                    <label for="Repesaje">Repesaje</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Repesaje, new SelectList(ViewBag.ListaRepesaje, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Repesaje" })
+                    @Html.ValidationMessageFor(m => m.Repesaje)
+                </div>
+                <div class="form-group">
+                    <label for="NumeroFormulario">Número Formulario</label>  
+                    @Html.TextBoxFor(m => m.NumeroFormulario, new { @Class = "form-control", id = "NumeroFormulario" })
+                    @Html.ValidationMessageFor(m => m.NumeroFormulario)
+                </div>
+                <div class="form-group">
+                    <label for="Ejecutivo">Ejecutivo</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Ejecutivo, new SelectList(ViewBag.ListaEjecutivos, "Id", "NombreCompleto"), String.Empty, new { @class = "form-control", id = "Ejecutivo" })
+                    @Html.ValidationMessageFor(m => m.Ejecutivo)
+                </div>
+                <div class="form-group">
+                    <label for="Observaciones">Observaciones</label>
+                    @Html.TextAreaFor(m => m.Observaciones, new { @Class = "form-control", id = "Observaciones" })
+                    @Html.ValidationMessageFor(m => m.Observaciones)
+                </div>                
+                <div class="form-group">
+                    <label for="ObservacionesFactura">Observaciones Factura</label>
+                    @Html.TextAreaFor(m => m.ObservacionesFactura, new { @Class = "form-control", id = "ObservacionesFactura" })
+                    @Html.ValidationMessageFor(m => m.ObservacionesFactura)
+                </div>
+                <button type="submit" class="btn btn-primary">Crear</button>
+                @Html.ActionLink("Cancelar", "Index", "Contrato", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        var today = new Date();
+        $('#FechaInicio').datepicker({
+            format: 'dd-mm-yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        $("#ModoFacturacion").change(function () {
+            var opcion = $("#ModoFacturacion option:selected").val();
+            switch (opcion) {
+                case "Cada fin de mes":
+                    $("#divCorteMes").css("display", "none");
+                    $("#divCorteSemana").css("display", "none");
+                    break;
+                case "Cada fin de quincena":
+                    $("#divCorteMes").css("display", "none");
+                    $("#divCorteSemana").css("display", "none");
+                    break;
+                case "Día específico de la semana":
+                    $("#divCorteMes").css("display", "none");
+                    $("#divCorteSemana").css("display", "block");
+                    break;
+                case "Día específico del mes":
+                    $("#divCorteMes").css("display", "block");
+                    $("#divCorteSemana").css("display", "none");
+                    break;
+                default:
+                    $("#divCorteMes").css("display", "none");
+                    $("#divCorteSemana").css("display", "none");
+                    break;
+            }
+        });
+
+
+       
+        $("#DescripcionCliente").autocomplete({
+            source: "../Contrato/AutoCompleteCliente",
+            minLength: 1,
+            select: function (event, ui) {
+                console.log(JSON.stringify(ui));
+                $("#NumeroCliente").val(ui.item.id);
+            }
+        });
+
+
+        $("#Moneda").change(function () {
+            var opcion = $("#Moneda option:selected").val();
+            switch (opcion) {
+                case "Colones":
+                    $("#divFacturarColones").css("display", "none");
+                    break;
+                case "Dolares":
+                    $("#divFacturarColones").css("display", "block");
+
+                    break;
+                default:
+                    $("#divFacturarColones").css("display", "none");
+                    break;
+            }
+            $('#FacturarColones').val(false);
+            $('#ckbFacturarColones').prop('checked', false);
+        });
+
+
+        $("input:checkbox[name='ckbFacturarColones']").change(function () {
+            if ($(this).is(":checked")) {
+                $('#FacturarColones').val(true);
+            }
+            else {
+                $('#FacturarColones').val(false);
+            }
+        });
+
+
+        $('#PagoContado').val(false);
+        $('#ckbClienteContado').prop('checked', false);
+
+        $("input:checkbox[name='ckbClienteContado']").change(function () {
+            if ($(this).is(":checked")) {
+                $('#PagoContado').val(true);
+            }
+            else {
+                $('#PagoContado').val(false);
+            }
+        });
+
+    });// end document ready
+
+
+  
+
+
+</script>

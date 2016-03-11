@@ -1,0 +1,132 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.OTRModel
+
+@{
+    ViewBag.Title = "Eliminar OTR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Eliminar OTR</h2>
+        @using (Html.BeginForm("EliminarOTR", "OTR", FormMethod.Post, new { id = "frmEliminarOTR", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                <label for="Consecutivo">OTR:</label>
+                @Html.DisplayFor(m => m.Consecutivo, new { @Class = "form-control", id = "Consecutivo" })
+            </div>
+            <div class="form-group">
+                <label for="Fecha">Fecha:</label>
+                @Html.DisplayFor(m => m.Fecha, new { @Class = "form-control", id = "Fecha" })
+            </div>
+            <div class="form-group">
+                <label for="Estado">Estado:</label>
+                @Html.DisplayFor(m => m.Estado, new { @Class = "form-control", id = "Estado" })
+            </div>
+            <div class="form-group">
+                <label for="Tipo">Tipo:</label>
+                @Html.DisplayFor(m => m.Tipo, new { @Class = "form-control", id = "Tipo" })
+            </div>
+            <div class="form-group">
+                <label for="Equipo">Equipo:</label>
+                @Html.DisplayFor(m => m.NombreEquipo, new { @Class = "form-control", id = "NombreEquipo" })
+            </div>
+            <div class="form-group">
+                <label for="OrigenDescripcion">Origen:</label>
+                @Html.DisplayFor(m => m.OrigenDescripcion, new { @Class = "form-control", id = "OrigenDescripcion" })
+            </div>
+            <div class="form-group">
+                <label for="DestinoDescripcion">Destino:</label>
+                @Html.DisplayFor(m => m.DestinoDescripcion, new { @Class = "form-control", id = "DestinoDescripcion" })
+            </div>
+            <div class="form-group">
+                <label for="RellenoDescripcion">Relleno:</label>
+                @Html.DisplayFor(m => m.RellenoDescripcion, new { @Class = "form-control", id = "RellenoDescripcion" })
+            </div>
+            <div class="form-group">
+                <label for="Cliente">Cliente:</label>
+                @Html.DisplayFor(m => m.DescripcionCliente, new { @Class = "form-control", id = "DescripcionCliente" })
+            </div>
+            //if (!Model.OTRMadre)
+            //{
+                <div class="form-group">
+                    <label for="RutaDescripcion">Ruta de Recolección:</label>
+                    @Html.DisplayFor(m => m.RutaRecoleccionDescripcion, new { @Class = "form-control", id = "RutaRecoleccionDescripcion" })
+                </div>
+            //}
+            <div class="form-group">
+                <label for="CuadrillaDescripcion">Cuadrilla:</label>
+                @Html.DisplayFor(m => m.CuadrillaDescripcion, new { @Class = "form-control", id = "CuadrillaDescripcion" })
+            </div>
+            <div class="form-group">
+                <label for="Observaciones">Observaciones:</label>
+                @Html.DisplayFor(m => m.Observaciones, new { @Class = "form-control", id = "Observaciones" })
+            </div>
+            @*if (Model.OTRMadre)
+            {
+                <div class="form-group">
+                    <label for="Observaciones">OTRs que la conforman:</label>
+                </div>
+                <table class="table table-hover" id="tabla-otr">
+                    <thead>
+                        <tr>
+                            <th>
+                                OTR
+                            </th>
+                            <th>
+                                Fecha
+                            </th>
+                            <th>
+                                Equipo
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblOTR">
+                        @if (ViewBag.ListaHijas != null)
+                        {
+                            foreach (var item in ViewBag.ListaHijas)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Consecutivo
+                                    </td>
+                                    <td>
+                                        @item.Fecha.ToString("dd/MM/yyyy")
+                                    </td>
+                                    <td>
+                                        @item.Equipo.Nombre
+                                    </td>
+                                </tr>
+                            }
+                        }
+                            
+                    </tbody>
+                </table>
+            }*@
+
+            <button type="submit" class="btn btn-primary">Ok</button>
+            @Html.ActionLink("Cancelar", "Index", "OTR", null, new { @Class = "btn btn-primary" })
+
+        }
+
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        // Fomrato para los valores numericos
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+
+    });// end document ready
+
+</script>

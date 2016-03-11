@@ -1,0 +1,261 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.OTRModel
+@{
+    //string tipoOTR = ViewBag.TipoOTR;
+    ViewBag.Title = "OTR" + Model.Tipo;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    String Cliente = "", Contrato = "";
+    if (ViewBag.RutaProducto != null)
+    {
+        Cliente = ViewBag.RutaProducto.Contrato.Cliente.Numero + " - " + ViewBag.RutaProducto.Contrato.Cliente.Nombre;
+        Contrato = ViewBag.RutaProducto.Contrato.Numero + " - " + ViewBag.RutaProducto.Contrato.DescripcionContrato;
+    }
+
+    long Boleta = 0;
+    double Toneladas = 0;
+    String FechaBoleta = "";
+    if (ViewBag.Bascula != null)
+    {
+        Boleta = ViewBag.Bascula.Boleta;
+        FechaBoleta = ViewBag.Bascula.Fecha.ToString("dd/MM/yyyy");
+        Toneladas = ViewBag.Bascula.PesoNeto;
+    }
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <br />
+    <h3>Estadísticas OTR @Model.Tipo</h3>
+    <br />
+    <div class="col-md-12">
+        @using (Html.BeginForm("EstadisticasOTR", "OTR", FormMethod.Post, new { id = "frmCerrar", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="form-group">
+                <label class="col-md-1">Número OTR </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Consecutivo, new { @Class = "form-control", id = "Consecutivo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Consecutivo)
+                </div>
+                <label class="col-md-1">Fecha</label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Fecha, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "Fecha", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Fecha)
+                </div>
+                <label class="col-md-1">Estado </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Estado, new { @Class = "form-control", id = "Estado", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+                <label class="col-md-1">Equipo </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.NombreEquipo, new { @Class = "form-control", id = "NombreEquipo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.NombreEquipo)
+                    @Html.HiddenFor(m => m.Equipo)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1">Tipo </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Tipo, new { @Class = "form-control", id = "Tipo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Tipo)
+                </div>
+           
+                <label class="col-md-1" style="padding-right:0px;">Cuadrilla </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.CuadrillaDescripcion, new { @Class = "form-control", id = "CuadrillaDescripcion", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.CuadrillaDescripcion)
+                </div>     
+                <label class="col-md-1" style="padding-right:0px;">Ruta de Recolección</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.RutaRecoleccionDescripcion, new { @Class = "form-control", id = "RutaRecoleccionDescripcion", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.RutaRecoleccionDescripcion)
+                </div>        
+            </div>           
+            <div class="form-group">
+                <label class="col-sm-2">Salida de Relleno  <span title="Formato requerido HH:MM" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.SalidaRelleno, new { @Class = "form-control", id = "SalidaRelleno", @placeholder = "00:00", @pattern = "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" })
+                     @Html.ValidationMessageFor(m => m.SalidaRelleno)
+                </div>
+                <label class="col-sm-2">Finaliza OTR  <span title="Formato requerido HH:MM" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.FinalizaOTR, new { @Class = "form-control", id = "FinalizaOTR", @placeholder = "00:00" })
+                    @Html.ValidationMessageFor(m => m.FinalizaOTR)
+                </div>
+                <label class="col-sm-2">Diferencia </label>
+                <div class="col-md-2">
+                    @Html.TextBox("DiferenciaSalida", "", new { @Class = "form-control", id = "DiferenciaSalida", @readonly = "readonly", @placeholder = "00:00" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Inicia Recolección  <span title="Formato requerido HH:MM" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.IniciaRecoleccion, new { @Class = "form-control", id = "IniciaRecoleccion", @placeholder = "00:00" })
+                    @Html.ValidationMessageFor(m => m.IniciaRecoleccion)
+                </div>
+                <label class="col-sm-2">Finaliza Recolección   <span title="Formato requerido HH:MM" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.FinalizaRecoleccion, new { @Class = "form-control", id = "FinalizaRecoleccion", @placeholder = "00:00" })
+                    @Html.ValidationMessageFor(m => m.FinalizaRecoleccion)
+                 </div>
+                <label class="col-sm-2">Diferencia </label>
+                <div class="col-md-2">
+                    @Html.TextBox("DiferenciaRecoleccion", "", new { @Class = "form-control", id = "DiferenciaRecoleccion", @readonly = "readonly", @placeholder = "00:00" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Inicia Demora  <span title="Formato requerido HH:MM" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.InicioDemora, new { @Class = "form-control", id = "InicioDemora", @placeholder = "00:00" })
+                    @Html.ValidationMessageFor(m => m.InicioDemora)
+                </div>
+                <label class="col-sm-2">Finaliza Demora  <span title="Formato requerido HH:MM" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.FinalizaDemora, new { @Class = "form-control", id = "FinalizaDemora", @placeholder = "00:00" })
+                    @Html.ValidationMessageFor(m => m.InicioDemora)
+                </div>
+                <label class="col-sm-2">Diferencia </label>
+                <div class="col-md-2">
+                    @Html.TextBox("DiferenciaDemora", "", new { @Class = "form-control", id = "DiferenciaDemora", @readonly = "readonly", @placeholder = "00:00" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Ingreso a relleno  <span title="Formato requerido HH:MM" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.IngresoRelleno, new { @Class = "form-control", id = "IngresoRelleno", @placeholder = "00:00" })
+                    @Html.ValidationMessageFor(m => m.IngresoRelleno)
+                 </div>
+                <label class="col-sm-2">Desechos Recibidos  </label>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.DesechosRecibidos, new { @Class = "form-control", id = "DesechosRecibidos" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Kilometraje Inicio  </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.KilometrajeInicio, new { @Class = "form-control", id = "KilometrajeInicio", @type = "number", @min = "0", @max = "100000000000" })
+                    @Html.ValidationMessageFor(m => m.KilometrajeInicio)
+                </div>
+                <label class="col-sm-2">Kilometraje Fin </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.KilometrajeFin, new { @Class = "form-control", id = "KilometrajeFin", @type = "number", @min = "0", @max = "100000000000" })
+                    @Html.ValidationMessageFor(m => m.KilometrajeFin)
+                </div>
+                <label class="col-sm-2">Combustible </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Combustible, new { @Class = "form-control", id = "Combustible", @type = "number", @min = "0", @max = "100000000000" })
+                    @Html.ValidationMessageFor(m => m.Combustible)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Horímetro Inicio  </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.HorimetroInicio, new { @Class = "form-control", id = "HorimetroInicio", @type = "number", @min = "0", @max = "100000000000" })
+                    @Html.ValidationMessageFor(m => m.HorimetroInicio)
+                </div>
+                <label class="col-sm-2">Horímetro Fin </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.HorimetroFin, new { @Class = "form-control", id = "HorimetroFin", @type = "number", @min = "0", @max = "100000000000" })
+                    @Html.ValidationMessageFor(m => m.HorimetroFin)
+                </div>     
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Observaciones de Trabajo </label>
+                <div class="col-md-4">
+                    @Html.TextAreaFor(m => m.ObservacionesTrabajo, new { @Class = "form-control", id = "ObservacionesTrabajo" })
+                </div>
+                <label class="col-sm-2">Observaciones Mecánicas </label>
+                <div class="col-md-4">
+                    @Html.TextAreaFor(m => m.ObservacionesMecanicas, new { @Class = "form-control", id = "ObservacionesMecanicas" })
+                </div>
+            </div>
+            <button id="btnCerrar" type="submit" class="btn btn-primary" >Guardar Estadísticas OTR </button>
+            @*<a id="btnCerrar" class="btn btn-primary">Cerrar OTR</a>*@
+            @Html.ActionLink("Cancelar", "Index", "OTR", null, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        // Fomrato para los valores numericos
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+        // Se inicializan algunos controles
+        var id = $("#Consecutivo").val();
+        if (id == "0")
+        {
+            $("#btnCerrar").hide();
+        }
+
+        $("#SalidaRelleno").val("");
+        $("#FinalizaOTR").val("");
+        $("#IniciaRecoleccion").val("");
+        $("#FinalizaRecoleccion").val("");
+        $("#InicioDemora").val("");
+        $("#FinalizaDemora").val("");
+        $("#IngresoRelleno").val("");
+
+        // Se asigna el evento change a los controles de tiempos, para que pueda obtener la diferencia segun la hora inicio y fin
+        $("#SalidaRelleno").change(function () {
+            CalcularDiferencia("SalidaRelleno", "FinalizaOTR", "DiferenciaSalida");
+        });
+
+        $("#FinalizaOTR").change(function () {
+            CalcularDiferencia("SalidaRelleno", "FinalizaOTR", "DiferenciaSalida");
+        });
+
+        $("#IniciaRecoleccion").change(function () {
+            CalcularDiferencia("IniciaRecoleccion", "FinalizaRecoleccion", "DiferenciaRecoleccion");
+        });
+
+        $("#FinalizaRecoleccion").change(function () {
+            CalcularDiferencia("IniciaRecoleccion", "FinalizaRecoleccion", "DiferenciaRecoleccion");
+        });
+
+        $("#InicioDemora").change(function () {
+            CalcularDiferencia("InicioDemora", "FinalizaDemora", "DiferenciaDemora");
+        });
+
+        $("#FinalizaDemora").change(function () {
+            CalcularDiferencia("InicioDemora", "FinalizaDemora", "DiferenciaDemora");
+        });
+
+ 
+    });// end document ready
+
+    //Esta funcion se encarga de calcula la diferencia de los tiempos entre la hora inicio y la hora fin
+    //controlInicio: Nombre del control de donde se toma la hora inicial
+    //controlFin: Nombre del control de donde se toma la hora final
+    //diferencia: Nombre del control al cual se le asignara el resultado de la diferencia
+    function CalcularDiferencia(controlInicio, controlFin, diferencia)
+    {
+        var inicio = $("#" + controlInicio).val();
+        var fin = $("#" + controlFin).val();
+
+        if (inicio != "" && fin != "") {
+            var arrInicio = inicio.split(':');
+            var arrFin = fin.split(':');
+
+            var min = arrFin[1] - arrInicio[1];
+            var hour_carry = 0;
+            if (min < 0) {
+                min += 60;
+                hour_carry += 1;
+            }
+            var hour = arrFin[0] - arrInicio[0] - hour_carry;
+            var diff = hour + ":" + min;
+
+            $("#" + diferencia).val(diff);
+        }
+    }
+</script>

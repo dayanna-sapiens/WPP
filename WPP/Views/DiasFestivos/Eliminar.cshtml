@@ -1,0 +1,55 @@
+﻿@model WPP.Model.ModuloNomina.DiasFestivosModel
+
+@{
+    ViewBag.Title = "Días Festivos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    String Mes = String.Empty;
+    switch (Model.Mes)
+    {
+        case 1: Mes = "Enero"; break;
+        case 2: Mes = "Febrero"; break;
+        case 3: Mes = "Marzo"; break;
+        case 4: Mes = "Abril"; break;
+        case 5: Mes = "Mayo"; break;
+        case 6: Mes = "Junio"; break;
+        case 7: Mes = "Julio"; break;
+        case 8: Mes = "Agosto"; break;
+        case 9: Mes = "Septiembre"; break;
+        case 10: Mes = "Octubre"; break;
+        case 11: Mes = "Noviembre"; break;
+        case 12: Mes = "Diciembre"; break; 
+    }
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Eliminar Días Festivos</h2>
+        @using (Html.BeginForm("Eliminar", "DiasFestivos", FormMethod.Post, new { id = "frmEliminarDiasFestivos", @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="form-group">
+                <label for="Descripcion">Descripción</label>   
+                @Html.DisplayFor(m => m.Descripcion, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Dia">Día</label>
+                @Html.DisplayFor(m => m.Dia, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Mes">Mes</label>
+              
+                
+                @Html.Raw(Mes)
+            </div>
+            
+
+            <button type="submit" class="btn btn-primary">Ok</button>
+            @Html.ActionLink("Cancelar", "Index", "DiasFestivos", null, new { @Class = "btn btn-primary" })
+
+        }
+
+    </div>
+    <div class="col-md-3"></div>
+</div>

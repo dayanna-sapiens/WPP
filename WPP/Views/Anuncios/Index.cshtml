@@ -1,0 +1,143 @@
+﻿@model WPP.Model.General.AnuncioModel
+@{
+    
+    ViewBag.Title = "Anuncios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row" style="margin-top:20px; ">
+
+    <div class="col-md-1"></div>
+    <div class="col-md-10" style="padding-right:30px;">
+        <br />
+        <h3>Anuncios </h3>
+        <br />
+        <h4>Seleccione las imagenes que desea mostrar en la página de inicio:</h4>
+        <br />
+        @using (Html.BeginForm("GuardarImagen", "Anuncios", FormMethod.Post, new { id = "frmCrearUsuario", @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(m=> m.Id)
+            @Html.HiddenFor(m => m.Imagen1)
+            @Html.HiddenFor(m => m.Imagen2)
+            @Html.HiddenFor(m => m.Imagen3)
+            @Html.HiddenFor(m => m.Imagen4)
+            
+            <div class="row">
+                <div class="col-md-3">
+                    Imagen 1
+                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                        <div id="Img1" class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                            <img id="imgHome1" src="~/Images/Anuncios/">
+                        </div>
+                        <div>
+                            <span class="btn btn-default btn-file btn-primary">
+                                <span class="fileinput-exists">Seleccionar Imagen</span>
+                                <span class="fileinput-new">Cambiar</span><input type="file" name="...">
+                            </span>
+                            <a href="#" class="btn btn-default fileinput-new btn-primary" data-dismiss="fileinput">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    Imagen 2
+                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                        <div id="Img2" class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                            <img id="imgHome2" src="~/Images/Anuncios/">
+                        </div>
+                        <div>
+                            <span class="btn btn-default btn-file btn-primary">
+                                <span class="fileinput-exists">Seleccionar Imagen</span>
+                                <span class="fileinput-new">Cambiar</span><input type="file" name="...">
+                            </span>
+                            <a href="#" class="btn btn-default fileinput-new btn-primary" data-dismiss="fileinput">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    Imagen 3
+                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                        <div id="Img3" class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                            <img id="imgHome3" src="~/Images/Anuncios/">
+                        </div>
+                        <div>
+                            <span class="btn btn-default btn-file btn-primary">
+                                <span class="fileinput-exists">Seleccionar Imagen</span>
+                                <span class="fileinput-new">Cambiar</span><input type="file" name="...">
+                            </span>
+                            <a href="#" class="btn btn-default fileinput-new btn-primary" data-dismiss="fileinput">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    Imagen 4
+                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                        <div id="Img4" class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                            <img id="imgHome4" src="~/Images/Anuncios/">
+                        </div>
+                        <div>
+                            <span class="btn btn-default btn-file btn-primary">
+                                <span class="fileinput-exists">Seleccionar Imagen</span>
+                                <span class="fileinput-new">Cambiar</span><input type="file" name="...">
+                            </span>
+                            <a href="#" class="btn btn-default fileinput-new btn-primary" data-dismiss="fileinput">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <br />
+            <br />
+            <br />
+            <br />
+            <a id="btnGuardar" class="btn btn-primary">Guardar</a>
+             @*<button type="submit" class="btn btn-primary" id="btnSubmit" hidden>Crear</button>*@
+             @Html.ActionLink("Cancelar", "Index", "Anuncios", null, new { @Class = "btn btn-primary" })
+        }
+    </div>
+
+    <div class="col-md-1"></div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#imgHome1').attr("src", document.getElementById("imgHome1").src + $("#Imagen1").val());
+        $('#imgHome2').attr("src", document.getElementById("imgHome2").src + $("#Imagen2").val());
+        $('#imgHome3').attr("src", document.getElementById("imgHome3").src + $("#Imagen3").val());
+        $('#imgHome4').attr("src", document.getElementById("imgHome4").src + $("#Imagen4").val());
+
+    });
+
+    $("#btnGuardar").click(function () { ExportData(); });
+
+    function ExportData() {
+        var id = $("#Id").val();
+        var img1 = $('#Img1 > img')[0].src;
+        var img2 = $('#Img2 > img')[0].src;
+        var img3 = $('#Img3 > img')[0].src;
+        var img4 = $('#Img4 > img')[0].src;
+
+        $.ajax({
+            type: 'POST',
+            url: '/Anuncios/GuardarImagen',
+            async: false,
+            data: { id: id, img1: img1, img2: img2, img3:img3, img4:img4 },
+            success: function (data) {
+                if(data == true)
+                {
+                    swal("Información Actualizada", "Los nuevos anuncios han sido guardados de manera exitosa", "success");
+                }
+                else {
+                    swal("Error", "Hubo un error a la hora de actualizar la información", "error");
+                }
+            }
+        });
+    }
+
+
+</script>
+
+

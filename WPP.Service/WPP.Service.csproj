@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B414A3F5-2D64-4843-8CEA-4251AA2E87CB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WPP.Service</RootNamespace>
+    <AssemblyName>WPP.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseServiceClasses\AutomappingConfiguration.cs" />
+    <Compile Include="BaseServiceClasses\IService.cs" />
+    <Compile Include="BaseServiceClasses\Service.cs" />
+    <Compile Include="Generales\AnuncioService.cs" />
+    <Compile Include="Generales\CatalogoService.cs" />
+    <Compile Include="Generales\CombustibleService.cs" />
+    <Compile Include="Generales\CostoCamionService.cs" />
+    <Compile Include="Generales\CostoHoraService.cs" />
+    <Compile Include="Generales\IAnuncioService.cs" />
+    <Compile Include="Generales\ICombustibleService.cs" />
+    <Compile Include="Generales\IContactoCompaniaService.cs" />
+    <Compile Include="Generales\ICostoCamionService.cs" />
+    <Compile Include="Generales\ICostoHoraService.cs" />
+    <Compile Include="Generales\IPuntoFacturacionService.cs" />
+    <Compile Include="Generales\IRecoveryPasswordService.cs" />
+    <Compile Include="Generales\ITipoCambioService.cs" />
+    <Compile Include="Generales\PuntoFacturacionService.cs" />
+    <Compile Include="Generales\TipoCambioService.cs" />
+    <Compile Include="ModuloBascula\BasculaService.cs" />
+    <Compile Include="ModuloBascula\BoletaManualService.cs" />
+    <Compile Include="ModuloBascula\ConfiguracionPuertoService.cs" />
+    <Compile Include="ModuloBascula\ConsecutivoBoletaService.cs" />
+    <Compile Include="ModuloBascula\ConsecutivoReciboPagoService.cs" />
+    <Compile Include="ModuloBascula\ContenedorService.cs" />
+    <Compile Include="ModuloBascula\IBasculaService.cs" />
+    <Compile Include="Generales\RecoveryPasswordService.cs" />
+    <Compile Include="ModuloBascula\IBoletaManualService.cs" />
+    <Compile Include="ModuloBascula\IConfiguracionPuertoService.cs" />
+    <Compile Include="ModuloBascula\IConsecutivoBoletaService.cs" />
+    <Compile Include="ModuloBascula\EquipoService.cs" />
+    <Compile Include="ModuloBascula\IConsecutivoReciboPagoService.cs" />
+    <Compile Include="ModuloBascula\IContenedorService.cs" />
+    <Compile Include="ModuloBascula\IEquipoService.cs" />
+    <Compile Include="ModuloBascula\IPagoBasculaService.cs" />
+    <Compile Include="ModuloBascula\PagoBasculaService.cs" />
+    <Compile Include="ModuloCierreCaja\CierreCajaService.cs" />
+    <Compile Include="ModuloCierreCaja\ConsecutivoCierreCajaService.cs" />
+    <Compile Include="ModuloCierreCaja\EfectivoCierreCaja.cs" />
+    <Compile Include="ModuloCierreCaja\ICierreCajaService.cs" />
+    <Compile Include="ModuloCierreCaja\IConsecutivoCierreCajaService.cs" />
+    <Compile Include="ModuloCierreCaja\IEfectivoCierreCajaService.cs" />
+    <Compile Include="ModuloContratos\CategoriaProductoService.cs" />
+    <Compile Include="ModuloContratos\ClienteBitacoraService.cs" />
+    <Compile Include="ModuloContratos\ClienteService.cs" />
+    <Compile Include="Generales\IRegionService.cs" />
+    <Compile Include="Generales\RegionService.cs" />
+    <Compile Include="Generales\CompaniaService.cs" />
+    <Compile Include="Generales\ICatalogoService.cs" />
+    <Compile Include="ModuloContratos\ConsecutivoClienteService.cs" />
+    <Compile Include="ModuloContratos\ConsecutivoContratoService.cs" />
+    <Compile Include="ModuloContratos\ContactoClienteService.cs" />
+    <Compile Include="ModuloContratos\ContratoBitacoraService.cs" />
+    <Compile Include="ModuloContratos\ContratoService.cs" />
+    <Compile Include="ModuloContratos\ICategoriaProductoService.cs" />
+    <Compile Include="ModuloContratos\IClienteBitacoraService.cs" />
+    <Compile Include="ModuloContratos\IClienteService.cs" />
+    <Compile Include="Generales\ICompaniaService.cs" />
+    <Compile Include="ModuloContratos\IConsecutivoClienteService.cs" />
+    <Compile Include="ModuloContratos\IConsecutivoContratoService.cs" />
+    <Compile Include="ModuloContratos\IContactoClienteService.cs" />
+    <Compile Include="ModuloContratos\IContratoBitacoraService.cs" />
+    <Compile Include="ModuloContratos\IContratoService.cs" />
+    <Compile Include="ModuloContratos\IProductoContratoService.cs" />
+    <Compile Include="ModuloFacturacion\ConsecutivoFacturacionService.cs" />
+    <Compile Include="ModuloFacturacion\FacturacionService.cs" />
+    <Compile Include="ModuloFacturacion\IConsecutivoFacturacionService.cs" />
+    <Compile Include="ModuloFacturacion\DetalleFacturacionService.cs" />
+    <Compile Include="ModuloFacturacion\IDetalleFacturacionService.cs" />
+    <Compile Include="ModuloFacturacion\IFacturacionService.cs" />
+    <Compile Include="ModuloFacturacion\IReversionService.cs" />
+    <Compile Include="ModuloFacturacion\ReversionService.cs" />
+    <Compile Include="ModuloNomina\ConsecutivoNominaService.cs" />
+    <Compile Include="ModuloNomina\CostoRutaRecoleccionService.cs" />
+    <Compile Include="ModuloNomina\DiasFestivosService.cs" />
+    <Compile Include="ModuloNomina\IConsecutivoNominaService.cs" />
+    <Compile Include="ModuloNomina\ICostoRutaRecoleccionService.cs" />
+    <Compile Include="ModuloNomina\IDiasFestivosService.cs" />
+    <Compile Include="ModuloNomina\IItemNominaService.cs" />
+    <Compile Include="ModuloNomina\IJornadaService.cs" />
+    <Compile Include="ModuloNomina\IPlanillaService.cs" />
+    <Compile Include="ModuloNomina\ItemNominaService.cs" />
+    <Compile Include="ModuloNomina\JornadaService.cs" />
+    <Compile Include="ModuloNomina\PlanillaService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\ContenedorHistorialService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\IContenedorHistorialService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\IRutaRecoleccionService.cs" />
+    <Compile Include="ModuloContratos\IServicioService.cs" />
+    <Compile Include="ModuloContratos\IProductoService.cs" />
+    <Compile Include="Generales\IUsuarioService.cs" />
+    <Compile Include="ModuloContratos\IUbicacionClienteService.cs" />
+    <Compile Include="ModuloContratos\ProductoContratoService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\RutaRecoleccionService.cs" />
+    <Compile Include="ModuloContratos\ServicioService.cs" />
+    <Compile Include="ModuloContratos\ProductoService.cs" />
+    <Compile Include="Generales\UsuarioService.cs" />
+    <Compile Include="ModuloContratos\UbicacionClienteService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\ConsecutivoOTRService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\CuadrillaService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\EmpleadoRecoleccionService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\IConsecutivoOTRService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\ICuadrillaService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\IEmpleadoRecoleccionService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\IOTRService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\IRellenoSanitarioService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\IViajeOTRService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\OTRService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\RellenoSanitarioService.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\ViajeOTRService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WPP.Entities\WPP.Entities.csproj">
+      <Project>{b4f21b53-c0c2-4010-be42-faf1ae07272b}</Project>
+      <Name>WPP.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPP.Persistance\WPP.Persistance.csproj">
+      <Project>{45e21f55-d53e-44f1-ab6c-6613bcc5d943}</Project>
+      <Name>WPP.Persistance</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

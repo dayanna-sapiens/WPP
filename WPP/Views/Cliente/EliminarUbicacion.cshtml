@@ -1,0 +1,69 @@
+﻿@model WPP.Model.ModuloContratos.UbicacionClienteModel
+@{
+    ViewBag.Title = "Eliminar Ubicación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<h2>Eliminar Ubicación de @ViewBag.Cliente</h2>
+
+<div class="row" style="padding-top:2%">
+    <div class="col-md-12">
+        @using (Html.BeginForm("EliminarUbicacion", "Cliente", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="form-group">
+                <label class="col-sm-2">Descripción</label>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(m => m.Descripción, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Descripción)
+                </div>
+
+                <label class="col-md-2">Dirección</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.Direccion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Direccion)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Contacto</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.Contacto, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Contacto)
+                </div>
+
+                <label class="col-md-2">Email</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+
+            </div>
+            <div class="form-group">
+               
+                <label class="col-md-2">Teléfono</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.Telefono, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Telefono)
+                </div>
+
+
+                <label class="col-md-2">Estado</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.DescripcionEstado, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="nombre">¿Está seguro que desea eliminar esta ubicación?</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Eliminar</button>
+            @Html.ActionLink("Regresar", "Detalles", "Cliente", new { idCliente = Model.Cliente }, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+</div>

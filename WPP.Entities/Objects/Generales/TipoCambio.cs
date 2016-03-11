@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WPP.Entities.Objects.Base;
+
+namespace WPP.Entities.Objects.Generales
+{
+    public class TipoCambio : Entity
+    {
+        public virtual Double Valor { get; set; }
+        public virtual String Tipo { get; set; }
+        public virtual String Fecha { get; set; }        
+    }
+}

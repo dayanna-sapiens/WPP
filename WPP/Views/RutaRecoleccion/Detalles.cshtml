@@ -1,0 +1,86 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.RutaRecoleccionModel
+
+@{
+    ViewBag.Title = "Detalles de la Ruta de Recolección";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Detalles de la Ruta de Recolección</h2>
+
+        @using (Html.BeginForm("Detalles", "RutaRecoleccion", FormMethod.Post, new { id = "frmDetallesRutaRecoleccion", @Class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                <label for="Descripcion">Descripción:</label>
+                @Html.DisplayFor(m => m.Descripcion, new { @Class = "form-control", id = "Descripcion" })
+            </div>
+            <div class="form-group">
+                <label for="Estado">Estado:</label>
+                @Html.DisplayFor(m=>m.Estado)
+            </div>
+            <div class="form-group">
+                <label for="Tipo">Tipo:</label>
+                @Html.DisplayFor(m => m.Tipo)
+            </div>
+            <div class="form-group">
+                <label for="nombre">Viaje:</label>
+                <br />
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tabla-rutas">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Cliente
+                                </th>
+                                <th>
+                                    Contrato
+                                </th>
+                                <th>
+                                    Producto
+                                </th>
+                                <th>
+                                    Ubicación
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tblRutas">
+                            @if (ViewBag.Viajes != null)
+                            {
+                                foreach (var item in ViewBag.Viajes)
+                                {
+                                    <tr>
+                                        <td> @Html.Raw(item.Contrato.Cliente.Nombre)</td>
+                                        <td> @Html.Raw(item.Contrato.DescripcionContrato)</td>
+                                        <td> @Html.Raw(item.Descripcion)</td>
+                                        @if (item.Ubicacion == null)
+                                        {
+                                            <td> </td>
+                                        }
+                                        else
+                                        {
+                                            <td> @Html.Raw(item.Ubicacion.Descripcion)</td>
+                                        }                                            
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>               
+            </div>
+            @Html.ActionLink("Regresar", "Index", "RutaRecoleccion", null, new { @Class = "btn btn-primary" })
+
+        }
+
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+

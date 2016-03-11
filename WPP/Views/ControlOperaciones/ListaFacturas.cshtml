@@ -1,0 +1,300 @@
+﻿@{
+    ViewBag.Title = "Control de Operaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+<div class="row" style="margin-top:20px; ">
+
+    <div class="col-md-3"></div>
+    <div class="col-md-6" style="padding-right:30px;">
+        <br />
+        <h3>Facturación</h3>
+        <br />
+        @using (Html.BeginForm("ListaFacturas", "ControlOperaciones", FormMethod.Post, new { id = "frmFacturar", @class = "form-horizontal" }))
+        {
+
+            @Html.ValidationSummary(true)
+            @Html.Hidden("Contrato")
+
+
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Desde </label>
+                <div class="col-md-4">
+                    @Html.TextBox("Desde", "", new { @class = "form-control", id = "Desde", @readonly = "readonly" })
+                </div>
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Hasta </label>
+                <div class="col-md-4">
+                    @Html.TextBox("Hasta", "", new { @class = "form-control", id = "Hasta", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Moneda</label>
+                <div class="col-md-4">
+                    @Html.DropDownList("ddlMoneda", new List<SelectListItem>{
+                    new SelectListItem() {Text = "Colones", Value="Colones"},
+                    new SelectListItem() {Text = "Dólares", Value="Dolares"},
+                    }, new { @class = "form-control", id = "ddlMoneda" })
+                </div>
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Estado</label>
+                <div class="col-md-4">
+                    @Html.DropDownList("ddlEstado", new List<SelectListItem>{
+                    new SelectListItem() {Text = "Todos", Value="Todos"},
+                    new SelectListItem() {Text = "Facturación", Value="Facturación"},
+                    new SelectListItem() {Text = "Anulada", Value="Anulada"},
+                    }, new { @class = "form-control", id = "ddlEstado" })
+                </div>
+            </div>
+            if (Session["Roles"].ToString().Contains("Reportes Gerencia"))
+            {
+                <div class="form-group">
+                    <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Compañía </label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("Compania", new SelectList(ViewBag.ListaCompania, "Id", "Nombre"), "Todos", new { @class = "form-control", id = "Compania" })
+                    </div>
+
+                </div>
+            }
+            <div class="row">
+                <div class="col-12-md">
+                    <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Contratos </label>
+                    <br />
+                    <br />
+
+                    <div class="col-md-10">
+                        @Html.TextBox("txtBuscar", "", new { @Class = "form-control", id = "txtBuscar", @placeholder = "Buscar" })
+                    </div>
+                    <div class="col-md-2">
+                        <a id="btnBuscar" class="btn btn-primary">Buscar  <span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                    </div>
+                </div>
+                <br />
+                <div class="col-12-md">
+
+                    <br />
+                    <div class="table-responsive" style="height:220px; overflow:auto">
+                        <table class="table table-hover" id="tabla-contratos">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Cliente
+                                    </th>
+                                    <th>
+                                        Contrato
+                                    </th>
+                                    <th>
+                                        Desde
+                                    </th>
+                                    @*<th>
+                                            Estado
+                                        </th>*@
+                                </tr>
+                            </thead>
+                            <tbody id="tblContratos"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <br />
+                <div class="col-12-md" style="float:right">
+                    @*   <a id="btnReporteRecibos" class="btn btn-primary" disabled>Reporte de Recibos   <i class="fa fa-copy"></i></a>*@
+                    <a id="btnReporte" class="btn btn-primary">Reporte   <i class="fa fa-file-o"></i></a>
+                    <a id="btnExcel" class="btn btn-primary">Excel   <i class="fa fa-file-excel-o"></i></a>
+                    <button id="btnSubmit" type="submit" style="display:none;" class="btn btn-primary"></button>
+                    @Html.ActionLink("Cancelar", "ListaFacturas", "ControlOperaciones", null, new { @Class = "btn btn-primary" })
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-3"></div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+
+
+
+        // Se inicializan los datos y controles necesario
+
+        var today = new Date();
+        $('#Desde').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        $('#Hasta').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+    });// end document ready
+
+
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnBuscar").click(function () {
+
+        var busqueda = $("#txtBuscar").val();
+
+
+        var path = "/Contrato/BusquedaContratos?busqueda=" + busqueda;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                if (data != null) {
+                    CargarContratos(data);
+                }
+                else {
+                    $("#tblContratos tr").remove();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#tblContratos tr").remove();
+            },
+            traditional: true
+
+        });
+
+    });
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnReporte").click(function () {
+
+        var desde = $("#Desde").val();
+        var hasta = $("#Hasta").val();
+        var contrato = $("#Contrato").val();
+        var moneda = $("#ddlMoneda").val();
+        var estado = $("#ddlEstado").val();
+        var compania = "";
+        if ($("#Compania").val() != undefined) {
+            compania = $("#Compania").val() == "" ? "Todos" : $("#Compania").val();
+        }
+
+
+        if (desde != "" && hasta != "") {
+            var formato = "pdf";
+            window.open("/ControlOperaciones/ReporteListaFacturas?desde=" + desde + "&hasta=" + hasta + "&contrato=" + contrato + "&moneda=" + moneda + "&estado=" + estado + "&formato=" + formato + "&compania=" + compania, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+        }
+        else {
+            swal("Datos incompletos", "Debe seleccionar un contrato para proceder con la consulta", "error");
+        }
+    });
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnExcel").click(function () {
+
+        var desde = $("#Desde").val();
+        var hasta = $("#Hasta").val();
+        var contrato = $("#Contrato").val();
+        var moneda = $("#ddlMoneda").val();
+        var estado = $("#ddlEstado").val();
+        var compania = "";
+        if ($("#Compania").val() != undefined) {
+            compania = $("#Compania").val() == "" ? "Todos" : $("#Compania").val();
+        }
+
+
+        if (desde != "" && hasta != "") {
+            var formato = "excel";
+            window.location.assign("/ControlOperaciones/ReporteListaFacturas?desde=" + desde + "&hasta=" + hasta + "&contrato=" + contrato + "&moneda=" + moneda + "&estado=" + estado + "&formato=" + formato + "&compania=" + compania);
+
+        }
+        else {
+            swal("Datos incompletos", "Debe seleccionar un contrato para proceder con la consulta", "error");
+        }
+    });
+
+    // Lista los contratos encontrados que hayan coincidido con la informacion ingresada
+    function CargarContratos(data) {
+        $("#tblContratos tr").remove();
+
+        var tabla = $("#tblContratos")[0];
+
+        for (var i = 0; i < data.length; i++) {
+
+            var row = document.createElement("tr");
+            row.id = "Contrato" + data[i].Id;
+
+            // ID del contrato
+            var id = document.createElement("td");
+            id.innerText = data[i].Id;
+            id.innerHTML = data[i].Id;
+            id.style.display = "none";
+            row.appendChild(id);
+
+            // Nombre del cliente
+            var cliente = document.createElement("td");
+            cliente.innerText = data[i].DescripcionCliente;
+            cliente.innerHTML = data[i].DescripcionCliente;
+            row.appendChild(cliente);
+
+            // Descripcion del contrato
+            var contrato = document.createElement("td");
+            contrato.innerText = data[i].DescripcionContrato;
+            contrato.innerHTML = data[i].DescripcionContrato;
+            row.appendChild(contrato);
+
+            // Desde
+            var stringFecha = data[i].FechaInicio;
+            stringFecha = stringFecha.substring(6, 19);
+            var date = new Date(Number(stringFecha));
+            var desde = document.createElement("td");
+            desde.innerText = convertDate(date);
+            desde.innerHTML = convertDate(date);
+            row.appendChild(desde);
+
+            // Estado
+            //var estado = document.createElement("td");
+            //estado.innerText = data[i].EstadoDescripcion;
+            //estado.innerHTML = data[i].EstadoDescripcion;
+            //row.appendChild(estado);
+
+            tabla.appendChild(row);
+
+            $('#Contrato' + data[i].Id).attr("onClick", "javascript:SelectRow('" + data[i].Id + "'); return false;");
+        }
+
+    }
+
+
+    // función para obtener la información del contrato seleccionado
+    function SelectRow(id) {
+        //var equipo = id;
+        $("#tblContratos tr").css("background-color", "#FFF");
+        var row = $('#Contrato' + id).css("background-color", "#D0EA93");
+        $("#Contrato").val(id);
+    }
+
+
+    // Este metodo se encarga de dar formato a la fecha para que se muestre en el listado
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+
+
+
+</script>

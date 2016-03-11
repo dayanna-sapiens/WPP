@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "Control de Operaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+<div class="row" style="margin-top:20px; ">
+
+    <div class="col-md-3"></div>
+    <div class="col-md-6" style="padding-right:30px;">
+        <br />
+        <h3>Usuarios</h3>
+        <br />
+        @using (Html.BeginForm("Usuarios", "ControlOperaciones", FormMethod.Post, new { id = "frmUsuario", @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Usuario</label>
+                <div class="col-md-10">
+                    @Html.TextBox("Email", "", new { @class="form-control", id="Email" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Roles</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("ddlRoles", new List<SelectListItem>{
+                    new SelectListItem() {Text = "Todos", Value="Todos"},
+                    new SelectListItem() {Text = "Administrador", Value="Administrador"},
+                    new SelectListItem() {Text = "Administrador de Contratos", Value="Administrador de Contratos"},
+                    new SelectListItem() {Text = "Consultor de Contratos", Value="Consultor de Contratos"},
+                    new SelectListItem() {Text = "Editor de Contratos", Value="Editor de Contratos"},
+                    new SelectListItem() {Text = "Administrador de Usuarios", Value="Administrador de Usuarios"},
+                    new SelectListItem() {Text = "Editor de Usuarios", Value="Editor de Usuarios"},
+                    new SelectListItem() {Text = "Consultor de Usuarios", Value="Consultor de Usuarios"},
+                    new SelectListItem() {Text = "Administrador de Clientes", Value="Administrador de Clientes"},
+                    new SelectListItem() {Text = "Editor de Clientes", Value="Editor de Clientes"},
+                    new SelectListItem() {Text = "Consultor de Clientes", Value="Consultor de Clientes"},
+                    new SelectListItem() {Text = "Administrador de Compañías", Value="Administrador de Compañías"},
+                    new SelectListItem() {Text = "Consultor de Compañías", Value="Consultor de Compañías"},                    
+                    new SelectListItem() {Text = "Editor de Compañías", Value="Editor de Compañías"},
+                    new SelectListItem() {Text = "Administrador de Puntos de Facturación", Value="Administrador de Puntos de Facturación"},
+                    new SelectListItem() {Text = "Consultor de Puntos de Facturación", Value="Consultor de Puntos de Facturación"},
+                    new SelectListItem() {Text = "Editor de Puntos de Facturación", Value="Editor de Puntos de Facturación"},
+                    new SelectListItem() {Text = "Consultor de Categoría de Productos", Value="Consultor de Categoría de Productos"},
+                    new SelectListItem() {Text = "Administrador de Categoría de Productos", Value="Administrador de Categoría de Productos"},                    
+                    new SelectListItem() {Text = "Editor de Categoría de Productos", Value="Editor de Categoría de Productos"},
+                    new SelectListItem() {Text = "Consultor de Productos", Value="Consultor de Productos"},
+                    new SelectListItem() {Text = "Administrador de Productos", Value="Administrador de Productos"},
+                    new SelectListItem() {Text = "Editor de Productos", Value="Editor de Productos"},
+                    new SelectListItem() {Text = "Consultor de Servicios", Value="Consultor de Servicios"},
+                    new SelectListItem() {Text = "Administrador de Servicios", Value="Administrador de Servicios"},
+                    new SelectListItem() {Text = "Editor de Servicios", Value="Editor de Servicios"},
+                    new SelectListItem() {Text = "Consultor de Boletas de Báscula", Value="Consultor de Boletas de Báscula"},
+                    new SelectListItem() {Text = "Administrador de Boletas de Báscula", Value="Administrador de Boletas de Báscula"},
+                    new SelectListItem() {Text = "Editor de Boletas de Báscula", Value="Editor de Boletas de Báscula"},
+                    new SelectListItem() {Text = "Consultor de Boletas Manuales (Báscula)", Value="Consultor de Boletas Manuales (Báscula)"},
+                    new SelectListItem() {Text = "Administrador de Boletas Manuales (Báscula)", Value="Administrador de Boletas Manuales (Báscula)"},
+                    new SelectListItem() {Text = "Editor de Boletas Manuales (Báscula)", Value="Editor de Boletas Manuales (Báscula)"},
+                    new SelectListItem() {Text = "Consultor de Contenedores", Value="Consultor de Contenedores"},
+                    new SelectListItem() {Text = "Administrador de Contenedores", Value="Administrador de Contenedores"},
+                    new SelectListItem() {Text = "Editor de Contenedores", Value="Editor de Contenedores"},
+                    new SelectListItem() {Text = "Consultor de Equipos", Value="Consultor de Equipos"},
+                    new SelectListItem() {Text = "Administrador de Equipos", Value="Administrador de Equipos"},
+                    new SelectListItem() {Text = "Editor de Equipos", Value="Editor de Equipos"},
+                    new SelectListItem() {Text = "Administrador de Consecutivo de Boletas (Báscula)", Value="Administrador de Consecutivo de Boletas (Báscula)"},
+                    new SelectListItem() {Text = "Consultor de Cuadrilla", Value="Consultor de Cuadrilla"},
+                    new SelectListItem() {Text = "Administrador de Cuadrilla", Value="Administrador de Cuadrilla"},
+                    new SelectListItem() {Text = "Editor de Cuadrilla", Value="Editor de Cuadrilla"},
+                    new SelectListItem() {Text = "Consultor de Rellenos Sanitarios", Value="Consultor de Rellenos Sanitarios"},
+                    new SelectListItem() {Text = "Administrador de Rellenos Sanitarios", Value="Administrador de Rellenos Sanitarios"},
+                    new SelectListItem() {Text = "Editor de Rellenos Sanitarios", Value="Editor de Rellenos Sanitarios"},
+                    new SelectListItem() {Text = "Consultor de Rutas Recolección", Value="Consultor de Rutas Recolección"},
+                    new SelectListItem() {Text = "Administrador de Rutas Recolección", Value="Administrador de Rutas Recolección"},
+                    new SelectListItem() {Text = "Editor de Rutas Recolección", Value="Editor de Rutas Recolección"},
+                    new SelectListItem() {Text = "Consultor de OTR", Value="Consultor de OTR"},
+                    new SelectListItem() {Text = "Administrador de OTR", Value="Administrador de OTR"},
+                    new SelectListItem() {Text = "Editor de OTR", Value="Editor de OTR"},
+                    new SelectListItem() {Text = "Administrador de Cierre de Caja", Value="Administrador de Cierre de Caja"},
+                    new SelectListItem() {Text = "Administrador de Reimpresión Cierre de Caja", Value="Administrador de Reimpresión Cierre de Caja"},
+                    new SelectListItem() {Text = "Administrador de Consecutivo de Facturación", Value="Administrador de Consecutivo de Facturación"},
+                    new SelectListItem() {Text = "Administrador de Consulta de Facturación", Value="Administrador de Consulta de Facturación"},
+                    new SelectListItem() {Text = "Administrador de Facturación", Value="Administrador de Facturación"},
+                    new SelectListItem() {Text = "Administrador de Prefacturación", Value="Administrador de Prefacturación"},
+                    new SelectListItem() {Text = "Administrador de Tipo de Cambio", Value="Administrador de Tipo de Cambio"},
+                    }, new { @class = "form-control", id = "ddlRoles" })
+                </div>
+                @*<label class="col-md-2" style="padding-left:0px; padding-right:0px;">Compañía</label>
+                <div class="col-md-4">
+                    @Html.DropDownList("ddlCompania", new SelectList(ViewBag.ListaCompania, "Id", "Nombre"), "Todos", new { @class = "form-control", id = "ddlCompania" })
+                </div>*@
+            </div>
+            <div class="col-12-md" style="float:right; padding-top:100px;">
+                @*   <a id="btnReporteRecibos" class="btn btn-primary" disabled>Reporte de Recibos   <i class="fa fa-copy"></i></a>*@
+                <a id="btnReporte" class="btn btn-primary">Reporte   <i class="fa fa-file-o"></i></a>
+                <a id="btnExcel" class="btn btn-primary">Excel   <i class="fa fa-file-excel-o"></i></a>
+                <button id="btnSubmit" type="submit" style="display:none;" class="btn btn-primary"></button>
+                @Html.ActionLink("Cancelar", "Usuarios", "ControlOperaciones", null, new { @Class = "btn btn-primary" })
+            </div>
+        }
+    </div>
+
+    <div class="col-md-3"></div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+
+    });// end document ready
+
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnReporte").click(function () {
+
+        var email = $("#Email").val();
+        var roles = $("#ddlRoles").val();
+
+        var formato = "pdf";
+        window.open("/ControlOperaciones/ReporteUsuarios?email=" + email + "&roles=" + roles + "&formato=" + formato, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+    });
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnExcel").click(function () {
+
+        var email = $("#Email").val();
+        var roles = $("#ddlRoles").val();
+
+        var formato = "excel";
+        window.location.assign("/ControlOperaciones/ReporteUsuarios?email=" + email + "&roles=" + roles + "&formato=" + formato);
+    });
+
+
+
+    // Este metodo se encarga de dar formato a la fecha para que se muestre en el listado
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+
+
+
+</script>
+
+

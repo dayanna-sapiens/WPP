@@ -1,0 +1,588 @@
+﻿@model WPP.Model.ModuloBascula.BasculaModel
+@{
+    ViewBag.Title = "Boletas sin OTR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    double precioProducto = ViewBag.PrecioProducto;
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <br />
+    <h3>Recibir desechos sin OTR</h3>
+    <br />
+    <div class="col-md-6" style="padding-right:30px;">
+        <div class="row">
+            <div class="col-12-md">
+                <label class="col-md-2">Productos </label>
+                <br />
+                <br />
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tabla-productos">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Descripción
+                                </th>
+                                <th>
+                                    Precio por tonelada
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblProductos">
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("EditarBoletaSinOTR", "Bascula", FormMethod.Post, new { id = "frmEditar", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Estado)
+            @Html.HiddenFor(m => m.Producto)
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Moneda)
+            @Html.HiddenFor(m => m.ListaProductos)
+            @Html.HiddenFor(m => m.ListaPagos)
+            @Html.Hidden("PrecioProducto", @precioProducto)
+            @Html.Hidden("Fosa")
+            @Html.Hidden("PrecioFosa")
+            @Html.Hidden("TipoCliente")
+            @Html.Hidden("TipoPago")
+
+            <div class="form-group">
+                <label class="col-md-2">Boleta </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.SecuenciaBoleta, new { @Class = "form-control", id = "SecuenciaBoleta", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.SecuenciaBoleta)
+                    @Html.HiddenFor(m => m.Boleta)
+                </div>
+                <label class="col-md-2">Fecha  </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Fecha, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "Fecha", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Fecha)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2">Equipo <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.PlacaEquipo, new { @Class = "form-control", id = "PlacaEquipo" })
+                    @Html.ValidationMessageFor(m => m.PlacaEquipo)
+                    @Html.HiddenFor(m => m.Equipo)
+                </div>
+                <label class="col-md-2">Tipo Equipo <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    <input id="Externo" type="radio" name="tipoEquipo" value="1">Externo
+                    <input id="Wpp" type="radio" name="tipoEquipo" value="0" checked="checked">WPP
+                    @Html.HiddenFor(m => m.EquipoWPP)
+                    @Html.ValidationMessageFor(m => m.EquipoWPP)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Cliente <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Cliente, new { @Class = "form-control", id = "Cliente" })
+                    @Html.HiddenFor(m => m.NumeroCliente)
+                     @Html.ValidationMessageFor(m => m.Cliente)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2" style="padding-right:8px;">Contrato <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Contrato, new SelectList(ViewBag.ListaContrato, "Id", "DescripcionContrato"), String.Empty, new { @class = "form-control", id = "Contrato" })
+                    @Html.ValidationMessageFor(m => m.Contrato)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Nombre Cliente</label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.NombreCliente, new { @Class = "form-control", id = "NombreCliente" })
+                    @Html.ValidationMessageFor(m => m.NombreCliente)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <a id="btnPesajeManual" class="btn btn-primary">Pesaje Manual</a>
+                </div>
+                <div class="col-md-3">
+                    <a id="btnPesajeAutomatico" class="btn btn-primary">Pesaje Automático</a>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a id="lnkEje1" data-toggle="tooltip" class="col-sm-1" style="cursor: pointer; font-weight: bold; text-decoration: underline;color: #2F4A71; padding-right:0px;" title="Pesar Eje 1">
+                    Eje 1
+                </a>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m=>m.Eje1, new { @Class = "form-control", id = "Eje1", @readonly = "readonly", @type = "number", @min = "0", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Eje1)
+                </div>
+
+                <a id="lnkEje2" data-toggle="tooltip" class="col-sm-1" style="cursor: pointer; font-weight: bold; text-decoration: underline;color: #2F4A71; padding-right:0px;" title="Pesar Eje 2">
+                    Eje 2
+                </a>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m=>m.Eje2, new { @Class = "form-control", id = "Eje2", @readonly = "readonly", @type = "number", @min = "0", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Eje2)
+                </div>
+
+                <a id="lnkEje3" data-toggle="tooltip" class="col-sm-1" style="cursor: pointer; font-weight: bold; text-decoration: underline;color: #2F4A71; padding-right:0px;" title="Pesar Eje 3">
+                    Eje 3
+                </a>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.Eje3, new { @Class = "form-control", id = "Eje3", @readonly = "readonly", @type = "number", @min = "0", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Eje3)
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-md-1" style="padding-right:0px;">Peso Bruto</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.PesoBruto, new { @Class = "form-control", id = "PesoBruto", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.PesoBruto)
+                </div>
+
+                <label class="col-md-1" style="padding-right:0px;">Peso Tara</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.PesoTara, new { @Class = "form-control", id = "PesoTara", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.PesoTara)
+                </div>
+
+
+                <label class="col-md-1" style="padding-right:0px;">Peso Neto</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.PesoNeto, new { @Class = "form-control", id = "PesoNeto", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.PesoNeto)
+                </div>
+            </div>
+            <div class="form-group">
+
+                <label class="col-md-2">Total </label>
+                <div class="col-md-10">
+                    @Html.TextBox("nTotal", "", new { @Class = "form-control", id = "nTotal", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Total)
+                    @Html.HiddenFor(m => m.Total)
+                </div>
+            </div>
+            <a id="btnCobrar" class="btn btn-primary">Cobrar</a>
+            <button id="btnSubmit" type="submit" class="btn btn-primary" style="display:none"></button>
+            @Html.ActionLink("Cancelar", "Index", "Bascula", null, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+
+</div>
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        // Fomrato para los valores numericos
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+        // Se carga la lista de productos
+        var data = JSON.parse($("#ListaProductos").val());
+        populateProducto(data);
+
+        // Se cargan valores iniciales de algunos campos
+
+        var d = new Date();
+        var date = (d.getUTCDate()) + '/' + (d.getUTCMonth() + 1) + '/' + (d.getUTCFullYear());
+        $("#Fecha").val(date);
+                
+        var ntotal = $("#Total").val();
+        ntotal = ($("#Moneda").val() == "Colones" ? "₡" : "$") + Number(ntotal).format(2);
+        $("#nTotal").val(ntotal);
+
+        var EquipoWPP = $("#EquipoWPP").val();
+        if (EquipoWPP == "true" || EquipoWPP == "True")
+        {
+            $("#Wpp").prop("checked", true);
+        }
+        else
+        {
+            $("#Externo").prop("checked", true);
+        }
+
+        $("#Estado").val("Pendiente");
+
+        // Se asignan eventos a algunos campos
+        $("input:radio[name='tipoEquipo']").change(function () {
+            actual = $("#EquipoWPP").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {
+                actual = append;
+                var resultado = actual == "Externo" ? false : true;
+                $("#EquipoWPP").val(resultado);
+
+            } else {
+                $("#EquipoWPP").val(false);
+            }
+        });
+
+        $("#Eje1").change(function () {
+            CalcularPesoBruto();
+        });
+
+        $("#Eje2").change(function () {
+            CalcularPesoBruto();
+        });
+
+        $("#Eje3").change(function () {
+            CalcularPesoBruto();
+        });
+
+        $("#Cliente").autocomplete({
+            source: "../Contrato/AutoCompleteCliente",
+            minLength: 1,
+            select: function (event, ui) {
+                console.log(JSON.stringify(ui));
+                $("#NumeroCliente").val(ui.item.id);
+                $("#NombreCliente").val(ui.item.value);
+                CargarContratos();
+            }
+        });
+
+        $("#PlacaEquipo").change(function () {
+            CargarEquipo();
+        });
+
+        $("#Contrato").change(function () {
+            CargarProductosContrato();
+        });
+
+    });// end document ready
+
+    function CargarContratos() {
+        var cliente = $("#NumeroCliente").val();
+        var equipo = $("#PlacaEquipo").val();
+        var path = "/Contrato/CargarContratosProyecto?idCliente=" + cliente;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                populateDD('Contrato', data, "Contrato");
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#Contrato").empty();
+            },
+            traditional: true
+
+        });
+    }
+
+    function CargarProductosContrato() {
+        var contrato = $("#Contrato").val();
+        var path = "/Contrato/CargarProductoContratos?idContrato=" + contrato;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                populateProducto(data[0]);
+                var pago = (data[1].PagoContado == "True" || data[1].PagoContado == "true") ? "Contado" : "Crédito";
+                $("#TipoPago").val(pago);
+                $("#TipoCliente").val(data[1].DescripcionCliente);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#Producto").empty();
+                $("#Fosa").val(false);
+                $("#PrecioFosa").empty();
+            },
+            traditional: true
+
+        });
+    }
+
+    function populateDD(_idPopulate, data, tipo) {
+        var dd = $("#" + _idPopulate);
+        dd.empty();
+        dd.append($('<option></option>').val("").html(""));
+        for (var i = 0; i < data.length; i++) {
+
+            dd.append($('<option></option>').val(data[i].Id).html(data[i].DescripcionContrato));
+
+        }
+    }
+
+    function CargarEquipo() {
+        var equipo = $("#PlacaEquipo").val();
+        var path = "/Equipo/CargarEquipo?idEquipo=" + equipo;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                $("#PesoTara").val(data.Peso);
+                $("#Equipo").val(data.Id);
+                CalcularPesoNeto();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#PlacaEquipo").empty();
+                $("#PesoTara").empty();
+                $("#Equipo").empty();
+                CalcularPesoNeto();
+                swal("Este equipo no se encuentra registrado", "Por favor ingrese la información del mismo antes de proceder con esta boleta", "error");
+               // alert("Este equipo no se encuentra registrado. Por favor ingrese la información del mismo antes de proceder con esta boleta.");
+            },
+            traditional: true
+
+        });
+    }
+
+    // Funcion para cargar la lista de productos asociados al contrato
+    function populateProducto(data) {
+
+        $("#tblProductos tr").remove();
+
+        var tabla = $("#tblProductos")[0];
+
+        for (var i = 0; i < data.length; i++) {
+            var row = document.createElement("tr");
+            row.id = data[i].Id;
+
+            if (data[i].Id == $("#Producto").val())
+            {
+                row.style.backgroundColor= "#D0EA93";
+            }
+
+            // Nombre del producto
+            var nombre = document.createElement("td");
+            nombre.innerText = data[i].Descripcion;
+            nombre.innerHTML = data[i].Descripcion;
+            row.appendChild(nombre);
+
+            // Total del producto
+            var total = document.createElement("td");
+            total.innerText = (data[i].Moneda == "Colones" ? "₡" : "$") + Number(data[i].Total).format(2);
+            total.innerHTML = (data[i].Moneda == "Colones" ? "₡" : "$") + Number(data[i].Total).format(2);
+            row.appendChild(total);
+
+            // Total del producto
+            var total = document.createElement("td");
+            total.innerText = data[i].Total;
+            total.innerHTML = data[i].Total;
+            total.style.display = "none";
+            row.appendChild(total);
+
+            tabla.appendChild(row);
+
+            $('#' + data[i].Id).attr("onClick", "javascript:SelectRow('" + data[i].Id + "','" + data[i].Total + "','" + data[i].TipoEquipo + "'); return false;");
+        }
+    }
+
+    // Calcula el peso Tara segun la suma del peso de sus ejes
+    function CalcularPesoBruto() {
+        var eje1 = $("#Eje1").val();
+        var eje2 = $("#Eje2").val();
+        var eje3 = $("#Eje3").val();
+
+        var suma = Number(eje1) + Number(eje2) + Number(eje3);
+        $("#PesoBruto").val(suma);
+        CalcularPesoNeto();
+    }
+
+    // Calcula el peso Neto, diferencia entre peso bruto y peso tara
+    // y calcula el total con el precio por tonelada del producto seleccionado por el peso neto
+    function CalcularPesoNeto() {
+        var pesoBruto = $("#PesoBruto").val();
+        var pesoTara = $("#PesoTara").val();
+
+        // Se saca la diferencia entre el peso bruto y el peso tara para obtener el peso neto en kilos
+        var suma = Number(pesoBruto) - Number(pesoTara);
+        $("#PesoNeto").val(suma);
+
+        // Se convierte de kilos a toneladas y la cantidad de peso min a cobrar es 1 tonelada
+        suma = suma / 1000;
+        suma = suma < 1 ? 1 : suma;
+
+        var total = Number($("#PrecioProducto").val() * suma);
+
+        // Si el producto seleccionado es una fosa, se debe cobrar el peso de tonelaje +
+        // el precio por fosa, se cobra 1 fosa por cada 3 toneladas
+        var Fosa = $("#Fosa").val();
+        if (Fosa == "true" || Fosa == "True") {
+            var precioFosa = $("#PrecioFosa").val();
+            var totalfosa = Math.ceil((suma / 3)) * precioFosa;
+            total += totalfosa;
+        }
+
+        $("#Total").val(total);
+
+        var ntotal = ($("#Moneda").val() == "Colones" ? "₡" : "$") + Number(total).format(2);
+        $("#nTotal").val(ntotal);
+    }
+
+
+    function SelectRow(id, precio, tipo) {
+  
+        $("#tblProductos tr").css("background-color", "#FFF");
+        var row = $('#' + id).css("background-color", "#D0EA93");
+        $("#Producto").val(id);
+        $("#PrecioProducto").val(precio);
+
+        // Se convierte de kilos a toneladas y la cantidad de peso min a cobrar es 1 tonelada
+        var precioNeto = (Number($("#PesoNeto").val()) / 1000);
+        precioNeto = precioNeto < 1 ? 1 : precioNeto;
+        var total = Number(precio) * Number(precioNeto);
+
+        // Si el producto seleccionado es una fosa, se debe cobrar el peso de tonelaje +
+        // el precio por fosa, se cobra 1 fosa por cada 3 toneladas
+        if (tipo == "Fosas") {
+            var totalfosa = Math.ceil((precioNeto / 3)) * precioFosa;
+            total += totalfosa;
+            $("#Fosa").val(true);
+            $("#PrecioFosa").val(precioFosa);
+        }
+
+        // Se calcula el total
+        $("#Total").val(total);
+
+        var ntotal = ($("#Moneda").val() == "Colones" ? "₡" : "$") + Number(total).format(2);
+        $("#nTotal").val(ntotal);
+    }
+
+
+    // habilita el pesaje manual
+    $("#btnPesajeManual").click(function () {
+        $("#Eje1").prop('readonly', false);
+        $("#Eje2").prop('readonly', false);
+        $("#Eje3").prop('readonly', false);
+    });
+
+    // habilita el pesaje automatico
+    $("#btnPesajeAutomatico").click(function () {
+        $("#Eje1").prop('readonly', true);
+        $("#Eje2").prop('readonly', true);
+        $("#Eje3").prop('readonly', true);
+    });
+
+    // Eventos para obtener el peso automótico (peso desde la báscula)
+    // para cada uno de sus ejes
+    $("#lnkEje1").bind('click', function () {
+
+        var path = "/Bascula/ObtenerPeso";
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+
+                if (data == null) {
+                    swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+                }
+                else {
+                    var peso = Number(data);
+                    $("#Eje1").val(peso.format(2));
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+            },
+            traditional: true
+
+        });
+    });
+
+    $("#lnkEje2").bind('click', function () {
+        var path = "/Bascula/ObtenerPeso";
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+
+                if (data == null) {
+                    swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+                }
+                else {
+                    var peso = Number(data);
+                    $("#Eje2").val(peso.format(2));
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+            },
+            traditional: true
+
+        });
+    });
+
+    $("#lnkEje3").bind('click', function () {
+        var path = "/Bascula/ObtenerPeso";
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+
+                if (data == null) {
+                    swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+                }
+                else {
+                    var peso = Number(data);
+                    $("#Eje3").val(peso.format(2));
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+            },
+            traditional: true
+
+        });
+    });
+
+
+    // Cambia el estado de la boleta,
+    // indicando que esta boleta debe terminarse ya que el equipo necesita repesaje
+    $("#btnRepesaje").click(function () {
+        $("#Estado").val("Repesaje");
+        document.getElementById("btnSubmit").click();
+    });
+
+    $("#btnCobrar").click(function () {
+
+        document.getElementById("btnSubmit").click();
+
+        var f = new Date();
+      
+        var boleta = "<div id='divImpresion' style='margin-top:55px'> "
+                        + " <div style='float:left'> No: " + $("#SecuenciaBoleta").val() + "</div> "
+                        + " <div style='float:right'>" + $("#Fecha").val() + " </br> " + f.getHours() + ":" + f.getMinutes() + ":" + f.getSeconds() + " </div>"
+                    + " </div>"
+                    + " </br> </br> </br> </br> </br>"
+                    + "<div> "
+                        + " <div style='float:left; margin-left:10%'>" + $("#PlacaEquipo").val() + " </br> " + $("#NombreCliente").val()
+                        + " </br> </br> </br> </br> " + $("#TipoCliente").val() + " </br> </br>" + $("#PesoBruto").val() + " </br> " + $("#PesoTara").val() + " </br> " + $("#PesoNeto").val()
+                        + " </div> "
+                        + " <div style='float:right; margin-right:5%'> " + $("#TipoPago").val() + " "
+                        + " </br> </br> </br> </br> </br> </br> </br> </br> " + $("#nTotal").val()
+                        + " </br> Moneda: " + $("#Moneda").val()
+                        + " </div>"
+                    + " </div></br> ";
+
+        var mywindow = window.open('', 'my div', 'height=400,width=600');
+        mywindow.document.write('<html><head><title></title>');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(boleta);
+        mywindow.document.write('</body></html>');
+
+        mywindow.print();
+        mywindow.close();
+
+        return true;
+    });
+
+
+</script>

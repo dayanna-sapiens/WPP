@@ -1,0 +1,65 @@
+﻿@model WPP.Model.ModuloBascula.ContenedorModel
+
+@{
+    ViewBag.Title = "Historial de Ubicación del Contenedor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h3>Historial de Ubicación del Contenedor: @Model.Codigo - @Model.Descripcion</h3>
+        <br />
+        <br />
+        <table class="table table-hover" id="tabla-contenedor">
+            <thead>
+                <tr>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        OTR
+                    </th>
+                    <th>
+                        Ubicación
+                    </th>
+                    <th>
+                        Cliente
+                    </th>                   
+                </tr>
+            </thead>
+            <tbody id="tblOTR">
+                @if (ViewBag.ListaUbicaciones != null)
+                {
+                    foreach (var item in ViewBag.ListaUbicaciones)
+                    {
+                        <tr>
+                            <td>
+                                @item.Fecha.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @item.Consecutivo
+                            </td>
+                            <td>
+                                @item.DescripcionCliente
+                            </td>
+                            <td>
+                                @item.RutaRecoleccionDescripcion
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+
+        </table>
+        <div class="form-group">
+            @Html.ActionLink("Regresar", "Index", "Contenedor", null, new { @Class = "btn btn-primary" })
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+
+

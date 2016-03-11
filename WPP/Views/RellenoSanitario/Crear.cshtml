@@ -1,0 +1,73 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.RellenoSanitarioModel
+           
+@{
+    ViewBag.Title = "Crear Relleno Sanitario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Crear Relleno Sanitario</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Crear", "RellenoSanitario", FormMethod.Post, new { id = "frmCrearRellenoSanitario", @class = "form-horizontal" }))
+            {
+
+                @Html.ValidationSummary(true)
+
+
+                <div class="form-group">
+                    <label for="Nombre">Nombre</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Nombre, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Nombre)
+                </div>
+               
+         
+                <div class="form-group">
+                    <label for="rdbEstado">Estado</label>
+                    <br />
+                    <input id="Activo" type="radio" name="rdbEstado" value="1" checked="checked">Activo
+                    <input id="Inactivo" type="radio" name="rdbEstado" value="0" >Inactivo                       
+                    @Html.HiddenFor(m => m.Estado)
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Crear</button>
+                @Html.ActionLink("Cancelar", "Index", "RellenoSanitario", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#Estado").val(true);
+
+        $("input:radio[name='rdbEstado']").change(function () {
+            actual = $("#Estado").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {
+                actual = append;
+                $("#Estado").val(actual == "0" ? false : true);
+
+            } else {
+                $("#Estado").val(true);
+            }
+        });
+
+    });// end document ready
+
+   
+</script>

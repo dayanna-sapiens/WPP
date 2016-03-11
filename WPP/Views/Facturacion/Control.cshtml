@@ -1,0 +1,252 @@
+﻿@{
+    ViewBag.Title = "Facturación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (null != TempData["alertMessage"])
+    {
+        <script type="text/javascript">
+
+            swal("", "@TempData["alertMessage"]", "error");
+            /// ("@TempData["alertMessage"]");
+        </script>
+    }
+}
+
+
+<div class="row" style="margin-top:20px; ">
+
+    <div class="col-md-3"></div>
+    <div class="col-md-6" style="padding-right:30px;">
+        <br />
+        <h3>Control de Prefacturación</h3>
+        <br />
+        @using (Html.BeginForm("Control", "Facturacion", FormMethod.Post, new { id = "frmControl", @class = "form-horizontal" }))
+        {
+
+            @Html.ValidationSummary(true)
+            @Html.Hidden("Cliente")
+            @Html.Hidden("Prefactura")
+
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Cliente </label>
+                <div class="col-md-10">
+                    @Html.TextBox("DescripcionCliente", "", new { @class = "form-control", id = "DescripcionCliente"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Prefactura </label>
+                <div class="col-md-10">
+                    @Html.DropDownList("Prefacturas", new SelectList(ViewBag.ListaPrefacturas, "Id", "Descripcion"), String.Empty, new { @class = "form-control", id = "Prefacturas" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12-md">
+                    <label class="col-md-4" style="padding-left:0px; padding-right:0px;">Cobros prefacturados </label>
+                </div>
+                <br />
+                <div class="col-12-md">
+                    <div class="table-responsive" style="height:220px; overflow:auto; width:100%">
+                        <table class="table table-hover" id="tabla-cobros">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Contrato
+                                    </th>
+                                    <th>
+                                        Fecha
+                                    </th>
+                                    <th>
+                                        Producto
+                                    </th>
+                                    <th>
+                                        Cantidad
+                                    </th>
+                                    <th>
+                                        Unidad
+                                    </th>
+                                    <th>
+                                        Precio unitario
+                                    </th>
+                                    <th>
+                                        Monto
+                                    </th>
+                                    <th>
+                                        Moneda
+                                    </th>
+                                    <th>
+                                        Boleta
+                                    </th>
+                                    <th>
+                                        Periodo
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblCobros"></tbody>
+                        </table>
+                    </div>
+                    <div class="form-group" style="float:right;">
+                        <label for="Total">Total de la prefactura:</label>
+                        <label id="TotalPrefactura">0.00</label>
+                    </div>
+                </div>
+                <br />
+                <div class="col-12-md" style="float:right">
+                    <a id="btnPrefactura" class="btn btn-primary">Ver Prefactura  </a>       
+                    <a id="btnNuevo" class="btn btn-primary" href="/Facturacion/Control">Nuevo  </a>      
+                    <a id="btnModificar" class="btn btn-primary">Modificar  </a>
+                    <a id="btnExcluir" class="btn btn-primary">Excluir de prefacturación  </a>
+                    <button id="btnSubmit" type="submit" class="btn btn-primary" style="display:none;"></button>
+                    <a id="btnCancelar" class="btn btn-primary" href="/Facturacion/Control">Cancelar  </a>   
+                </div>
+            </div>
+        }
+    </div>
+
+    @*<div class="col-md-6" class="form-horizontal">
+        <br />
+        <h3>Datos del cobro</h3>
+        <br />
+        <div class="form-group">
+            <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Descripción </label>
+            <div class="col-md-10">
+                @Html.TextBox("Descripcion", "", new { @class = "form-control", id = "Descripcion" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3" style="padding-left:0px; padding-right:0px;">Cuenta Contable Crédito </label>
+            <div class="col-md-9">
+                @Html.DropDownList("CuentasContables", new List<SelectListItem>{
+                    new SelectListItem() {Text = "4-01-01-00-00: IO clientes Municipales", Value="4-01-01-00-00: IO clientes Municipales"},
+                    new SelectListItem() {Text = "5-01-01-00-00: IO clientes Comerciales", Value="5-01-01-00-00: IO clientes Comerciales"}
+                 }, String.Empty, new { @class = "form-control", id = "CuentasContables" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12-md">
+                <label class="col-md-4" style="padding-left:0px; padding-right:0px;">Cobros prefacturados </label>
+            </div>
+            <br />
+            <div class="col-12-md">
+                <div class="table-responsive" style="height:220px; overflow:auto; width:100%">
+                    <table class="table table-hover" id="tabla-cobros">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Proyecto
+                                </th>
+                                <th>
+                                    Descuento
+                                </th>
+                                <th>
+                                    Precio proyecto
+                                </th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody id="tblCobros"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>*@
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        $("#DescripcionCliente").autocomplete({
+            source: "../Contrato/AutoCompleteCliente",
+            minLength: 1,
+            select: function (event, ui) {
+                console.log(JSON.stringify(ui));
+                $("#Cliente").val(ui.item.id);
+                CargarPrefacturas();
+            }
+        });
+
+        $("#Prefacturas").change(function () {
+            CargarDetallePrefacturacion();
+        });
+
+    });// end document ready
+
+    function CargarPrefacturas() {
+        var cliente = $("#Cliente").val()
+        var path = "/Facturacion/CargarPrefacturas?cliente=" + cliente;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                if (data != null) {
+                    CargarDropDownPrefacturas(data);
+                }
+                else {
+                    $("#Prefacturas").emty();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#Prefacturas").emty();
+            },
+            traditional: true
+
+        });
+    }
+
+    // Funcion para llenar de manera dinámica el dropdown de prefacturas
+    function CargarDropDownPrefacturas(datos) {
+        var dd = $("#Prefacturas");
+        dd.empty();
+        dd.append($('<option></option>').val("").html(""));
+        for (var i = 0; i < datos.length; i++) {
+
+            dd.append($('<option></option>').val(datos[i].Id).html(datos[i].Descripcion));
+
+        }
+    }
+
+    function CargarDetallePrefacturacion() {
+        var prefacturafactura = $("#Prefacturas").val();
+        var path = "/Facturacion/CargarPrefacturas?cliente=" + cliente;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                if (data != null) {
+                    CargarTablaPrefacturas(data);
+                }
+                else {
+                    $("#tblCobros tr").remove();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#tblCobros tr").remove();
+            },
+            traditional: true
+
+        });
+    }
+
+    function CargarDetallePrefacturacion(data) {
+
+    }
+</script>

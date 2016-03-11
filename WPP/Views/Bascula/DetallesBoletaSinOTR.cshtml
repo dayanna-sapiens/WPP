@@ -1,0 +1,232 @@
+﻿@model WPP.Model.ModuloBascula.BasculaModel
+
+@{
+    ViewBag.Title = "Detalles de Boletas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    String  tipoPago = ViewBag.TipoPago;
+    String tipoCliente = ViewBag.TipoCliente;
+    
+    
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Detalles de Boletas</h2>
+
+            @using (Html.BeginForm("DetallesBoletaSinOTR", "Bascula", FormMethod.Post, new { id = "frmDetallesBoletaSinOTR", @Class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.Boleta)
+                @Html.HiddenFor(m => m.PesoBruto)
+                @Html.HiddenFor(m => m.PesoNeto)
+                @Html.HiddenFor(m => m.PesoTara)
+                @Html.HiddenFor(m => m.PlacaEquipo)
+                @Html.HiddenFor(m => m.Total)
+                @Html.HiddenFor(m => m.Moneda)
+                @Html.HiddenFor(m => m.NombreCliente)
+                @Html.HiddenFor(m => m.Fecha)
+                @Html.Hidden("TipoPago", @tipoPago)
+                @Html.Hidden("TipoCliente", @tipoCliente)
+
+                <div class="form-group">
+                    <label for="Boleta">Boleta:</label>
+                    @Html.DisplayFor(m => m.Boleta, new { @Class = "form-control"})
+                </div>
+                <div class="form-group">
+                    <label for="Fecha">Fecha:</label>
+                    @Html.DisplayFor(m => m.Fecha, new { @Class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="EquipoWPP">Tipo Equipo:</label>
+                    @if (Model.EquipoWPP)
+                    {
+                        @Html.Raw("Equipo WPP")
+                    }
+                    else
+                    {
+                        @Html.Raw("Equipo Externo")
+                    }
+                </div>
+                <div class="form-group">
+                    <label for="Estado">Estado:</label>
+                    @Html.DisplayFor(m => m.Estado, new { @Class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="PlacaEquipo">Placa del Equipo:</label>
+                    @Html.DisplayFor(m => m.PlacaEquipo, new { @Class = "form-control"})
+                </div>
+                <div class="form-group">
+                    <label for="Cliente">Cliente:</label>
+                    @Html.DisplayFor(m => m.Cliente, new { @Class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="ContratoDescripcion">Contrato:</label>
+                    @Html.DisplayFor(m => m.ContratoDescripcion, new { @Class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="NombreCliente">Nombre Cliente:</label>
+                    @Html.DisplayFor(m => m.NombreCliente, new { @Class = "form-control"})
+                </div>
+                <div class="form-group">
+                    <label for="Eje1">Eje 1:</label>
+                    @Html.DisplayFor(m => m.Eje1, new { @Class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="Eje2">Eje 2:</label>
+                    @Html.DisplayFor(m => m.Eje2, new { @Class = "form-control"})
+                </div>
+                <div class="form-group">
+                    <label for="Eje3">Eje 3:</label>
+                    @Html.DisplayFor(m => m.Eje3, new { @Class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="PesoBruto">Peso Bruto:</label>
+                    @Html.DisplayFor(m => m.PesoBruto, new { @Class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="PesoTara">Peso Tara:</label>
+                    @Html.DisplayFor(m => m.PesoTara, new { @Class = "form-control"})
+                </div>
+                <div class="form-group">
+                    <label for="PesoNeto">Peso Neto:</label>
+                    @Html.DisplayFor(m => m.PesoNeto, new { @Class = "form-control"})
+                </div>
+                <div class="form-group">
+                    <label for="DescripcionProducto">Producto:</label>
+                    @Html.DisplayFor(m => m.DescripcionProducto, new { @Class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="Total">Total:</label>
+                    <label for="Total" id="nTotal"></label>
+                    @Html.Hidden("TotalBoleta")
+                    @Html.HiddenFor(m => m.Total, new { @Class = "form-control" })
+                </div>
+                <a id="btnReimprmirBoleta" class="btn btn-primary">Reimprimir </a>
+                <a id="btnAnularBoleta" class="btn btn-primary">Anular</a>           
+                @Html.ActionLink("Regresar", "Index", "Bascula", null, new { @Class = "btn btn-primary" })
+                @Html.ActionLink("Index", "Index", "Bascula", null, new { @Class = "btn btn-primary", id = "btnIndex", @hidden = "hidden", @style = "display:none;" })
+                @Html.ActionLink("Editar", "EditarBoletaSinOTR", "Bascula", null, new { @Class = "btn btn-primary", id = "btnEditar", @hidden = "hidden", @style = "display:none;" })
+
+            }
+
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        // Fomrato para los valores numericos
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+        var total = $("#Total").val();
+        total = Number(total).format(2);
+        total = ($("#Moneda").val() == "Colones" ? "₡" : "$") + total;
+        document.getElementById("nTotal").innerHTML = total;
+        $("#TotalBoleta").val(total);
+    });// end document ready
+
+   
+
+    $("#btnAnularBoleta").click(function () {
+
+        var d = new Date();
+        var month = (d.getUTCMonth() + 1) < 10 ? ("0" + (d.getUTCMonth() + 1)) : (d.getUTCMonth() + 1);
+        var day = (d.getUTCDate()) < 10 ? ("0" + (d.getUTCDate())) : (d.getUTCDate());
+        var date = (day + '/' + month + '/' + (d.getUTCFullYear()));
+        var fecha = ($("#Fecha").val()).substring(0, 10);
+
+        if (fecha != date && $("#TipoPago").val() == "Contado") {
+            swal("Esta boleta no puede ser reimpresa", "", "error");
+          //  alert("Esta boleta no puede ser reimpresa");
+        }
+        else {
+            var boleta = $("#Id").val();
+
+            $.ajax({
+                url: '/Bascula/AnulaBoletaSinOTR?idBoleta=' + boleta,
+                type: 'POST',
+                success: function (data) {
+
+                    var link = document.getElementById("btnEditar").href;
+                    link += "?idBoleta=" + data;
+                    $("#btnEditar").attr("href", link);
+                    document.getElementById("btnEditar").click();
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                },
+                traditional: true
+            })
+        }
+    });
+
+    $("#btnReimprmirBoleta").click(function () {
+
+        var d = new Date();
+        var month = (d.getUTCMonth() + 1) < 10 ? ("0" + (d.getUTCMonth() + 1)) : (d.getUTCMonth() + 1);
+        var day = (d.getUTCDate()) < 10 ? ("0" + (d.getUTCDate())) : (d.getUTCDate());
+        var date = (day + '/' + month  + '/' + (d.getUTCFullYear()));
+        var fecha = ($("#Fecha").val()).substring(0, 10);
+
+        if (fecha != date && $("#TipoPago").val() == "Contado") {
+
+            swal("Esta boleta no puede ser reimpresa", "", "error");
+           // alert("Esta boleta no puede ser reimpresa");
+        }
+        else
+        {
+            var boleta = $("#Id").val();
+
+            $.ajax({
+                url: '/Bascula/ReimprimirBoletaSinOTR?idBoleta=' + boleta,
+                type: 'POST',
+                success: function (data) {
+                    if (data == true) {
+
+                        var boleta = "<div id='divImpresion' style='margin-top:55px'> "
+                                        + " <div style='float:left'> No: " + $("#Boleta").val() + "</div> "
+                                        + " <div style='float:right'>" + $("#Fecha").val() + "  </div>"
+                                    + " </div>"
+                                    + "  </br> </br> </br> </br> </br>"
+                                    + "<div> "
+                                        + " <div style='float:left; margin-left:10%'>" + $("#PlacaEquipo").val() + " </br> " + $("#NombreCliente").val()
+                                        + " </br> </br> </br> </br> " + $("#TipoCliente").val() + "</br> </br>" + $("#PesoBruto").val() + " </br> " + $("#PesoTara").val() + " </br> " + $("#PesoNeto").val()
+                                        + " </div> "
+                                        + " <div style='float:right; margin-right:5%'> " + $("#TipoPago").val() + ""
+                                        + " </br> </br> </br> </br> </br> </br> </br> </br> " + $("#TotalBoleta").val()
+                                        + " </br> Moneda: " + $("#Moneda").val()
+                                        + " </div>"
+                                    + " </div></br> ";
+
+                        var mywindow = window.open('', 'my div', 'height=400,width=600');
+                        mywindow.document.write('<html><head><title></title>');
+                        mywindow.document.write('</head><body >');
+                        mywindow.document.write(boleta);
+                        mywindow.document.write('</body></html>');
+
+                        mywindow.print();
+                        mywindow.close();
+
+                        document.getElementById("btnIndex").click();
+
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                },
+                traditional: true
+            })
+        }
+        
+        
+    });
+</script>

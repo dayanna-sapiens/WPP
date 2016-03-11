@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F1B0EC03-CA4C-4644-9D83-6436EC804B65}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WPP.Model</RootNamespace>
+    <AssemblyName>WPP.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomValidations\RequiredIfAttributeNotNull.cs" />
+    <Compile Include="CustomValidations\RequiredIfAttributeValue.cs" />
+    <Compile Include="General\AnuncioModel.cs" />
+    <Compile Include="General\CatalogoModel.cs" />
+    <Compile Include="General\CostoHoraModel.cs" />
+    <Compile Include="General\CombustibleModel.cs" />
+    <Compile Include="General\CompaniaModel.cs" />
+    <Compile Include="General\ContactoModel.cs" />
+    <Compile Include="General\CostoCamionModel.cs" />
+    <Compile Include="General\LoginModel.cs" />
+    <Compile Include="General\PuntoFacturacionModel.cs" />
+    <Compile Include="General\RegionModel.cs" />
+    <Compile Include="General\SolicitarContrasenaModel.cs" />
+    <Compile Include="General\TipoCambioModel.cs" />
+    <Compile Include="ItemNominaModel.cs" />
+    <Compile Include="ModuloBascula\BasculaModel.cs" />
+    <Compile Include="ModuloBascula\BoletaManualModel.cs" />
+    <Compile Include="ModuloBascula\ConfiguracionPuertoModel.cs" />
+    <Compile Include="ModuloBascula\ConsecutivoModel.cs" />
+    <Compile Include="ModuloBascula\ContenedorModel.cs" />
+    <Compile Include="ModuloBascula\EquipoModel.cs" />
+    <Compile Include="ModuloBascula\PagoBasculaModel.cs" />
+    <Compile Include="ModuloCierreCaja\CierreCajaModel.cs" />
+    <Compile Include="ModuloCierreCaja\EfectivoCierreCajaModel.cs" />
+    <Compile Include="ModuloContratos\CategoriaProductoModel.cs" />
+    <Compile Include="ModuloContratos\ClienteModel.cs" />
+    <Compile Include="ModuloContratos\ContratoModel.cs" />
+    <Compile Include="ModuloContratos\ProductoContratoModel.cs" />
+    <Compile Include="ModuloContratos\ProductoModel.cs" />
+    <Compile Include="ModuloFacturacion\ConsecutivoFacturacionModel.cs" />
+    <Compile Include="ModuloFacturacion\DetalleFacturacionModel.cs" />
+    <Compile Include="ModuloFacturacion\FacturacionModel.cs" />
+    <Compile Include="ModuloFacturacion\Prefacturacion.cs" />
+    <Compile Include="ModuloFacturacion\ReversionModel.cs" />
+    <Compile Include="ModuloNomina\ConsecutivoNominaModel.cs" />
+    <Compile Include="ModuloNomina\CostoRutaRecoleccionModel.cs" />
+    <Compile Include="ModuloNomina\DiasFestivosModel.cs" />
+    <Compile Include="ModuloNomina\JornadaModel.cs" />
+    <Compile Include="ModuloNomina\PlanillaModel.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\ContenedorHistorialModel.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\RutaRecoleccionModel.cs" />
+    <Compile Include="ModuloContratos\ServicioModel.cs" />
+    <Compile Include="ModuloContratos\UbicacionClienteModel.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\CuadrillaModel.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\EmpleadoRecoleccionModel.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\OTRModel.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\RellenoSanitanarioModel.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\ViajeOTRModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="General\UsuarioModel.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\WPP.Entities\WPP.Entities.csproj">
+      <Project>{b4f21b53-c0c2-4010-be42-faf1ae07272b}</Project>
+      <Name>WPP.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

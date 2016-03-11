@@ -1,0 +1,212 @@
+﻿@model WPP.Model.UsuarioModel
+
+@{
+    ViewBag.Title = "Crear Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    @*<div class="col-md-3"></div>*@
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Crear Usuario</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Crear", "Usuario", FormMethod.Post, new { id = "frmCrearUsuario", @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+
+                @Html.HiddenFor(m => m.Roles)
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Nombre, new { @Class = "form-control", id = "Nombre" })
+                    @Html.ValidationMessageFor(m => m.Nombre)
+                </div>
+                <div class="form-group">
+                    <label for="Apellido1">Apellido 1</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Apellido1, new { @Class = "form-control", id = "Apellido1" })
+                    @Html.ValidationMessageFor(m => m.Apellido1)
+                </div>
+                <div class="form-group">
+                    <label for="Apellido2">Apellido 2</label>    <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Apellido2, new { @Class = "form-control", id = "Apellido2" })
+                    @Html.ValidationMessageFor(m => m.Apellido2)
+                </div>
+                <div class="form-group">
+                    <label for="Cedula">Cédula</label>    <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Cedula, new { @Class = "form-control", id = "Cedula" })
+                    @Html.ValidationMessageFor(m => m.Cedula)
+                </div>
+                <div class="form-group">
+                    <label for="NumeroEmpleado">Número Empleado</label>    
+                    @Html.TextBoxFor(m => m.NumeroEmpleado, new { @Class = "form-control", id = "NumeroEmpleado" })
+                    @Html.ValidationMessageFor(m => m.NumeroEmpleado)
+                </div>
+                <div class="form-group">
+                    <label for="FechaNac">Fecha de nacimiento</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.FechaNac, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "FechaNac" })
+                    @Html.ValidationMessageFor(m => m.FechaNac)
+                </div>
+                <div class="form-group">
+                    <label for="Telefono">Teléfono</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Telefono, new { @Class = "form-control", id = "Telefono" })
+                    @Html.ValidationMessageFor(m => m.Telefono)
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>    <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>   
+                    @Html.TextBoxFor(m => m.Email, new { @Class = "form-control", id = "Email" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+
+                <div class="form-group">
+                    <label for="Password">Contraseña</label>    <span title="La contraseña debe tener al menos 5 caracteres" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    @Html.PasswordFor(m => m.Password, new { @Class = "form-control", id = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="form-group">
+                    <label for="ConfirmPassword">Confirmar Contraseña</label>
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @Class = "form-control", id = "ConfirmPassword" })                 
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </div>
+               
+                <div class="form-group">
+                    <label for="nombre">Compañías</label>
+
+                    <br />
+                    @Html.HiddenFor(m => m.Companias)
+                    @Html.ValidationMessageFor(m => m.Companias)
+
+                    @if (ViewBag.ListaCompanias != null)
+                    {
+                        foreach (var Companias in ViewBag.ListaCompanias)
+                        {
+                            <input type="checkbox" value='@Companias.Id' name="ckbCompanias" />
+                            @Companias.Nombre
+                            <br />
+
+                        }
+                    }
+                </div>
+                <button type="submit" class="btn btn-primary">Crear</button>
+                @Html.ActionLink("Cancelar", "Index", "Usuario", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-6" style="padding-left:50px; padding-top:30px;">
+        <div class="form-group">
+            <label for="nombre">Roles</label>
+
+            <br />
+            @Html.ValidationMessageFor(m => m.Roles)
+
+            @foreach (var r in ViewBag.Roles)
+            {
+                <input type="checkbox" value='@Html.DisplayFor(s => r)' name="ckbRoles" />
+                @Html.DisplayFor(s => r)
+                <br />
+
+            }
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+
+        $('#FechaNac').datepicker({
+            format: 'dd-mm-yyyy',
+            viewMode: 'years',
+            changeYear: true,
+        });
+
+
+        $("input:checkbox[name='ckbRoles']").change(function () {
+            actual = $("input#Roles").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {
+                if (!actual) {
+                    actual = append;
+                    $("input#Roles").val(actual);
+                } else {
+                    actual = actual + ',' + append;
+                    $("input#Roles").val(actual);
+                }
+            } else {
+                if (actual) {
+                    if (actual.indexOf(append) == 0) {
+                        if (actual == append) {
+                            actual = '';
+                        } else {
+                            actual = actual.split(append + ',').pop();
+                        }
+                        $("input#Roles").val(actual);
+                    } else {
+                        preStr = actual.substring(0, actual.indexOf(append) - 1);
+                        postStr = actual.split(append).pop();
+                        actual = preStr + postStr;
+                        $("input#Roles").val(actual);
+                    }
+                }
+            }
+            //alert(actual);
+        });
+
+        $("input:checkbox[name='ckbCompanias']").change(function () {
+            actual = $("input#Companias").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {
+                if (!actual) {
+                    actual = append;
+                    $("input#Companias").val(actual);
+                } else {
+                    actual = actual + ',' + append;
+                    $("input#Companias").val(actual);
+                }
+            } else {
+                if (actual) {
+                    if (actual.indexOf(append) == 0) {
+                        if (actual == append) {
+                            actual = '';
+                        } else {
+                            actual = actual.split(append + ',').pop();
+                        }
+                        $("input#Companias").val(actual);
+                    } else {
+                        preStr = actual.substring(0, actual.indexOf(append) - 1);
+                        postStr = actual.split(append).pop();
+                        actual = preStr + postStr;
+                        $("input#Companias").val(actual);
+                    }
+                }
+            }
+            //alert(actual);
+        });
+
+    });// end document ready
+
+
+
+</script>

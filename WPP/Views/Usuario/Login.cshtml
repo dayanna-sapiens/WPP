@@ -1,0 +1,54 @@
+﻿@model WPP.Model.General.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LogInLayout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="login-div-container">
+            <div style="background-color:#2E4A71; color:white; text-align:center; height:50px; border-top-left-radius:13px; border-top-right-radius:13px;">
+                <h3 style="padding-top:11px;">Iniciar Sesión</h3>
+            </div>
+            <div style="border:1px solid #2E4A71; padding-left:10px; padding-right:10px; padding-bottom:50px;">
+
+                <br />
+                <p>Bienvenido!</p>
+                <p>Ingrese su correo y contraseña</p>
+
+                @using (Html.BeginForm("Login", "Usuario", FormMethod.Post, new { id = "frmLogin" }))
+                {   @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class=" control-label">Email:</label>
+
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control nameInput" })
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class=" control-label">Contraseña:</label>
+
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control nameInput" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                    <div style="float:left">
+                        <button type="submit" class="btn btn-default">Log in</button>
+                        @Html.ActionLink("Olvidé mi contraseña", "SolicitarContrasena", "Usuario")
+                    </div>
+                    <div style="float:right;">
+                        <img src="~/Images/Logo.png" alt="WPP" height="105" width="73" style="margin-top:-28px;">
+                    </div>
+                }
+
+            </div>
+        </div>
+        <br />
+
+    </div>
+
+</div>
+
+
+

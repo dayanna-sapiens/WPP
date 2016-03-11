@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Control de Operaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+<div class="row" style="margin-top:20px; ">
+
+    <div class="col-md-3"></div>
+    <div class="col-md-6" style="padding-right:30px;">
+        <br />
+        <h3>Bitácora de Contratos</h3>
+        <br />
+        @using (Html.BeginForm("ContratoBitacora", "ControlOperaciones", FormMethod.Post, new { id = "frmContrato", @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Moneda</label>
+                <div class="col-md-4">
+                    @Html.DropDownList("ddlMoneda", new List<SelectListItem>{
+                    new SelectListItem() {Text = "Todos", Value="Todos"},
+                    new SelectListItem() {Text = "Colones", Value="Colones"},
+                    new SelectListItem() {Text = "Dólares", Value="Dolares"},
+                    }, new { @class = "form-control", id = "ddlMoneda" })
+                </div>
+
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Estado</label>
+                <div class="col-md-4">
+                    @Html.DropDownList("ddlEstado", new List<SelectListItem>{
+                    new SelectListItem() {Text = "Todos", Value="Todos"},
+                     new SelectListItem() {Text = "Activo", Value="Activo"},
+                    new SelectListItem() {Text = "Inactivo", Value="Inactivo"},
+                    new SelectListItem() {Text = "Vencido", Value="Vencido"}
+                    }, new { @class = "form-control", id = "ddlEstado" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Cliente</label>
+                <div class="col-md-10">
+                    @Html.TextBox("Cliente", "", new { @class = "form-control", id = "Cliente" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">No. Contrato</label>
+                <div class="col-md-2">
+                    @Html.TextBox("Numero", "", new { @class = "form-control", id = "Numero", @type = "number", @min = "0", @max = "100000000000" })
+                </div>
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Contrato</label>
+                <div class="col-md-6">
+                    @Html.TextBox("Contrato", "", new { @class = "form-control", id = "Contrato" })
+                </div>
+            </div>
+            <div class="col-12-md" style="float:right; padding-top:100px;">
+                @*   <a id="btnReporteRecibos" class="btn btn-primary" disabled>Reporte de Recibos   <i class="fa fa-copy"></i></a>*@
+                <a id="btnReporte" class="btn btn-primary">Reporte   <i class="fa fa-file-o"></i></a>
+                <a id="btnExcel" class="btn btn-primary">Excel   <i class="fa fa-file-excel-o"></i></a>
+                <button id="btnSubmit" type="submit" style="display:none;" class="btn btn-primary"></button>
+                @Html.ActionLink("Cancelar", "ContratoBitacora", "ControlOperaciones", null, new { @Class = "btn btn-primary" })
+            </div>
+        }
+    </div>
+
+    <div class="col-md-3"></div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+
+    });// end document ready
+
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnReporte").click(function () {
+
+        var moneda = $("#ddlMoneda").val();
+        var agrupar = $("#AgruparCliente").is(':checked');
+        var estado = $("#ddlEstado").val();
+        var cliente = $("#Cliente").val();
+        var numero = $("#Numero").val();
+        var contrato = $("#Contrato").val();
+
+        var formato = "pdf";
+        window.open("/ControlOperaciones/ReporteContratoBitacora?cliente=" + cliente + "&moneda=" + moneda + "&estado=" + estado + "&numero=" + numero + "&contrato=" + contrato + "&formato=" + formato, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+
+    });
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnExcel").click(function () {
+        var moneda = $("#ddlMoneda").val();
+        var agrupar = $("#AgruparCliente").is(':checked');
+        var estado = $("#ddlEstado").val();
+        var cliente = $("#Cliente").val();
+        var numero = $("#Numero").val();
+        var contrato = $("#Contrato").val();
+
+        var formato = "excel";
+        window.location.assign("/ControlOperaciones/ReporteContratoBitacora?cliente=" + cliente + "&moneda=" + moneda + "&estado=" + estado + "&numero=" + numero + "&contrato=" + contrato + "&formato=" + formato);
+    });
+
+
+</script>
+
+

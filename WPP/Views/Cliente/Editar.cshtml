@@ -1,0 +1,239 @@
+﻿@model WPP.Model.ModuloContratos.ClienteModel
+@{
+    ViewBag.Title = "Editar Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Editar Cliente</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Editar", "Cliente", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+            {
+
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.Id)
+
+                <div class="form-group">
+                    <label for="Grupo">Grupo</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Grupo, new SelectList(ViewBag.ListaGrupos, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Grupo" })
+                    @Html.ValidationMessageFor(m => m.Grupo)
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre">Nombre del Cliente</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Nombre, new { @Class = "form-control", id = "Nombre" })
+                    @Html.ValidationMessageFor(m => m.Nombre)
+                </div>
+                <div class="form-group">
+                    <label for="Cedula">Cédula</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Cedula, new { @Class = "form-control", id = "Cedula" })
+                    @Html.ValidationMessageFor(m => m.Cedula)
+                </div>
+                <div class="form-group">
+                    <label for="Numero">Número</label>
+                    @Html.TextBoxFor(m => m.Numero, new { @Class = "form-control", id = "Numero", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Numero)
+                </div>
+                <div class="form-group">
+                    <label for="Tipo">Tipo</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Tipo, new SelectList(ViewBag.ListaTipoCompania, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Tipo" })
+                    @Html.ValidationMessageFor(m => m.Tipo)
+                </div>
+                <div class="form-group">
+                    <label for="NombreComercial">Nombre Comercial</label>
+                    @Html.TextBoxFor(m => m.NombreComercial, new { @Class = "form-control", id = "NombreComercial" })
+                    @Html.ValidationMessageFor(m => m.NombreComercial)
+                </div>
+                <div class="form-group">
+                    <label for="NombreCorto">Nombre Corto</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.NombreCorto, new { @Class = "form-control", id = "NombreCorto" })
+                    @Html.ValidationMessageFor(m => m.NombreCorto)
+                </div>
+
+                <div class="form-group">
+                    <label for="Email">Email</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Email, new { @Class = "form-control", id = "Email" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+
+                <div class="form-group">
+                    <label for="Telefono1">Teléfono 1</label>    <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Telefono1, new { @Class = "form-control", id = "Telefono1" })
+                    @Html.ValidationMessageFor(m => m.Telefono1)
+                </div>
+
+                <div class="form-group">
+                    <label for="Telefono2">Teléfono 2</label>
+                    @Html.TextBoxFor(m => m.Telefono2, new { @Class = "form-control", id = "Telefono2" })
+                    @Html.ValidationMessageFor(m => m.Telefono2)
+                </div>
+
+                <div class="form-group">
+                    <label for="Fax">Fax</label>
+                    @Html.TextBoxFor(m => m.Fax, new { @Class = "form-control", id = "Fax" })
+                    @Html.ValidationMessageFor(m => m.Fax)
+                </div>
+
+                <div class="form-group">
+                    <label for="FechaDesactivacion">Fecha Desactivación</label>
+                    @if (Model.FechaDesactivacion.HasValue)
+                    {
+                        @Html.TextBox("FechaDesactivacion", Model.FechaDesactivacion.Value.ToShortDateString(), new { @Class = "form-control", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.TextBox("FechaDesactivacion", "", new { @Class = "form-control", @readonly = "readonly" })
+                    }
+                    @Html.ValidationMessageFor(m => m.FechaDesactivacion)
+                </div>
+
+                <div class="form-group">
+                    <label for="RepresentanteLegal">Representante Legal</label>
+                    @Html.TextBoxFor(m => m.RepresentanteLegal, new { @Class = "form-control", id = "RepresentanteLegal" })
+                    @Html.ValidationMessageFor(m => m.RepresentanteLegal)
+                </div>
+
+                <div class="form-group">
+                    <label for="Direccion">Dirección</label>
+                    @Html.TextBoxFor(m => m.Direccion, new { @Class = "form-control", id = "Direccion" })
+                    @Html.ValidationMessageFor(m => m.Direccion)
+                </div>
+
+                <div class="form-group">
+                    <label for="Provicia">Provincia</label>
+                    @if (Model.Provincia != null)
+                    {
+                        @Html.DropDownListFor(m => m.Provincia, new SelectList(ViewBag.ListaProvincias, "Id", "Nombre", Model.Provincia), new { @class = "form-control", id = "Provincia", @onchange = "CargarCantones()" })
+
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(m => m.Provincia, new SelectList(ViewBag.ListaProvincias, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Provincia", @onchange = "CargarCantones()" })
+
+                    }   @Html.ValidationMessageFor(m => m.Provincia)
+                </div>
+                <div class="form-group">
+                    <label for="Canton">Cantón</label>
+                    @if (ViewBag.ListaCantones != null)
+                    {
+                        @Html.DropDownListFor(m => m.Canton, new SelectList(ViewBag.ListaCantones, "Id", "Nombre", Model.Canton), String.Empty, new { @class = "form-control", @onchange = "CargarDistritos()" })
+
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(m => m.Canton, Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @onchange = "CargarDistritos()" })
+
+                    }
+
+                    @Html.ValidationMessageFor(m => m.Canton)
+                </div>
+                <div class="form-group">
+                    <label for="Distrito">Distrito</label>
+                    @if (ViewBag.ListaDistritos != null)
+                    {
+                        @Html.DropDownListFor(m => m.Distrito, new SelectList(ViewBag.ListaDistritos, "Id", "Nombre"), String.Empty, new { @class = "form-control" })
+
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(m => m.Distrito, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+
+                    }
+
+                    @Html.ValidationMessageFor(m => m.Distrito)
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                @Html.ActionLink("Cancelar", "Index", "Cliente", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+
+        $('#FechaDesactivacion').datepicker({
+            format: 'dd-mm-yyyy',
+            viewMode: 'years',
+            changeYear: true,
+        });
+
+
+
+    });// end document ready
+
+    function CargarCantones() {
+        var provincia = $("#Provincia").val();
+        var path = "/Region/CargarCantones?idProvincia=" + provincia;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                populateDD('Canton', data, "Canton");
+                $("#Distrito").empty();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#Canton").empty();
+                $("#Distrito").empty();
+            },
+            traditional: true
+
+        });
+
+    }
+
+    function CargarDistritos() {
+        var canton = $("#Canton").val();
+        //alert(canton)
+        var path = "/Region/CargarDistritos?idCanton=" + canton;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) { populateDD('Distrito', data, "Distrito"); },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#Distrito").empty();
+            },
+            traditional: true
+
+        });
+    }
+
+    function populateDD(_idPopulate, data, tipo) {
+        var dd = $("#" + _idPopulate);
+        dd.empty();
+        dd.append($('<option></option>').val("").html(""));
+        for (var i = 0; i < data.length; i++) {
+
+            dd.append($('<option></option>').val(data[i].Id).html(data[i].Nombre));
+
+        }
+    }
+
+</script>

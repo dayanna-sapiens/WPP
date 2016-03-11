@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Facturación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (null != TempData["alertMessage"])
+    {
+        <script type="text/javascript">
+
+            swal("", "@TempData["alertMessage"]", "error");
+            /// ("@TempData["alertMessage"]");
+        </script>
+    }
+}
+
+<h2>Excluir</h2>

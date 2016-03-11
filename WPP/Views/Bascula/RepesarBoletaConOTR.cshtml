@@ -1,0 +1,417 @@
+﻿@model WPP.Model.ModuloBascula.BasculaModel
+@{
+    ViewBag.Title = "Boletas con OTR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    String tipoCliente = ViewBag.TipoCliente;
+    
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <br />
+    <h3>Recibir desechos con OTR</h3>
+    <br />
+    <div class="col-md-12">
+        @using (Html.BeginForm("GuardarRepesajeBoletaConOTR", "Bascula", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Compania)
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Estado)
+            @*@Html.HiddenFor(m => m.Producto)*@
+            @Html.HiddenFor(m => m.Moneda)
+            @Html.HiddenFor(m => m.ListaProductos)
+            @Html.HiddenFor(m => m.Contrato)
+            @Html.Hidden("TipoCliente")
+          //  @Html.Hidden("NombreCliente")
+
+            <div class="form-group">
+                <label class="col-md-1">Boleta </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.SecuenciaBoleta, new { @Class = "form-control", id = "SecuenciaBoleta", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.SecuenciaBoleta)
+                    @Html.HiddenFor(m => m.Boleta)
+                </div>
+                <label class="col-md-1">Fecha  </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Fecha, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "Fecha", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Fecha)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-1">OTR  </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.ConsecutivoOTR, new { @Class = "form-control", id = "ConsecutivoOTR", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.ConsecutivoOTR)
+                    @Html.HiddenFor(m => m.OTR)
+                </div>
+                <label class="col-md-1">Tipo OTR</label>
+                <div class="col-md-2">
+                    @Html.TextBox("TipoOTR", "", new { @Class = "form-control", id = "TipoOTR", @readonly = "readonly" })
+                </div>
+                <label class="col-md-1">Equipo </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.PlacaEquipo, new { @Class = "form-control", id = "PlacaEquipo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.PlacaEquipo)
+                    @Html.HiddenFor(m => m.Equipo)
+                </div>
+                <label class="col-md-1">Tipo Equipo</label>
+                <div class="col-md-2">
+                    <input id="Externo" type="radio" name="tipoEquipo" value="1" disabled="disabled">Externo
+                    <input id="Wpp" type="radio" name="tipoEquipo" value="0" checked="checked" disabled="disabled">WPP
+                    @Html.HiddenFor(m => m.EquipoWPP)
+                    @Html.ValidationMessageFor(m => m.EquipoWPP)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1">Cliente</label>
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.NombreCliente, new { @Class = "form-control", id = "NombreCliente", @readonly = "readonly" })
+                    @Html.HiddenFor(m => m.Cliente)
+                    @Html.ValidationMessageFor(m => m.NombreCliente)
+                </div>
+                <label class="col-md-1" style="padding-right:8px;">Contrato </label>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.ContratoDescripcion, new { @Class = "form-control", id = "ContratoDescripcion", @readonly = "readonly" })
+                    @Html.HiddenFor(m => m.Contrato)
+                    @Html.ValidationMessageFor(m => m.ContratoDescripcion)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <a id="btnPesajeManual" class="btn btn-primary">Pesaje Manual</a>
+                </div>
+                <div class="col-md-3">
+                    <a id="btnPesajeAutomatico" class="btn btn-primary">Pesaje Automático</a>
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a id="lnkEje1" data-toggle="tooltip" class="col-sm-1" style="cursor: pointer; font-weight: bold; text-decoration: underline;color: #2F4A71; padding-right:0px;" title="Pesar Eje 1">
+                    Eje 1
+                </a>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.Eje1Tara, new { @Class = "form-control", id = "Eje1Tara", @readonly = "readonly", @type = "number", @min = "1", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Eje1)
+                    @Html.HiddenFor(m => m.Eje1)
+                </div>
+
+                <a id="lnkEje2" data-toggle="tooltip" class="col-sm-1" style="cursor: pointer; font-weight: bold; text-decoration: underline;color: #2F4A71; padding-right:0px;" title="Pesar Eje 2">
+                    Eje 2
+                </a>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.Eje2Tara, new { @Class = "form-control", id = "Eje2Tara", @readonly = "readonly", @type = "number", @min = "1", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Eje2)
+                    @Html.HiddenFor(m => m.Eje2)
+                </div>
+
+                <a id="lnkEje3" data-toggle="tooltip" class="col-sm-1" style="cursor: pointer; font-weight: bold; text-decoration: underline;color: #2F4A71; padding-right:0px;" title="Pesar Eje 3">
+                    Eje 3
+                </a>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.Eje3Tara, new { @Class = "form-control", id = "Eje3Tara", @readonly = "readonly", @type = "number", @min = "1", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Eje3)
+                    @Html.HiddenFor(m => m.Eje3)
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-md-1" style="padding-right:0px;">Peso Bruto</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.PesoBruto, new { @Class = "form-control", id = "PesoBruto", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.PesoBruto)
+                </div>
+
+                <label class="col-md-1" style="padding-right:0px;">Peso Tara</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.PesoTara, new { @Class = "form-control", id = "PesoTara", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.PesoTara)
+                </div>
+
+
+                <label class="col-md-1" style="padding-right:0px;">Peso Neto</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.PesoNeto, new { @Class = "form-control", id = "PesoNeto", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.PesoNeto)
+                </div>
+            </div>
+            <a id="btnCobrar" class="btn btn-primary">Cobrar</a>
+            <button id="btnSubmit" type="submit" class="btn btn-primary" style="display:none;"></button>
+            @Html.ActionLink("Cancelar", "Index", "Bascula", null, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        // Función para dar formato numérico
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+
+        // Se incializa el valor de algunas variables;
+
+        var d = new Date();
+        var date = (d.getUTCDate()) + '/' + (d.getUTCMonth() + 1) + '/' + (d.getUTCFullYear());
+        $("#Fecha").val(date);
+
+
+        $("#Estado").val("Activo");
+
+        var EquipoWPP = $("#EquipoWPP").val();
+        if (EquipoWPP == "true" || EquipoWPP == "True") {
+            $("#Wpp").prop("checked", true);
+        }
+        else {
+            $("#Externo").prop("checked", true);
+        }
+
+        CargarOTR();
+
+        // Se asocian eventos a los controles
+        $("input:radio[name='tipoEquipo']").change(function () {
+            actual = $("#EquipoWPP").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {
+                actual = append;
+                var resultado = actual == "Externo" ? false : true;
+                $("#EquipoWPP").val(resultado);
+
+            } else {
+                $("#EquipoWPP").val(false);
+            }
+        });
+
+        $("#Eje1Tara").change(function () {
+            CalcularPesoBruto();
+        });
+
+        $("#Eje2Tara").change(function () {
+            CalcularPesoBruto();
+        });
+
+        $("#Eje3Tara").change(function () {
+            CalcularPesoBruto();
+        });
+   
+    });// end document ready
+
+
+    // Calcula el peso bruto, que es la suma de los 3 ejes
+    function CalcularPesoBruto() {
+        var eje1 = $("#Eje1Tara").val();
+        var eje2 = $("#Eje2Tara").val();
+        var eje3 = $("#Eje3Tara").val();
+
+        var suma = Number(eje1) + Number(eje2) + Number(eje3);
+        $("#PesoBruto").val(suma);
+
+        CalcularPesoNeto();
+    }
+
+    // Calcula el peso neto de acuerdo al peso brutoy peso tara
+    function CalcularPesoNeto() {
+        var pesoBruto = $("#PesoBruto").val();
+        var pesoTara = $("#PesoTara").val();
+
+        // Se saca la diferencia entre el peso bruto y el peso tara para obtener el peso neto en kilos
+        var suma = Number(pesoBruto) - Number(pesoTara);
+        $("#PesoNeto").val(suma);
+
+        // Se convierte de kilos a toneladas y la cantidad de peso min a cobrar es 1 tonelada
+        suma = suma / 1000;
+        suma = suma < 1 ? 1 : suma;
+    }
+
+    // Función para habilitar los campos de ejes
+    // en caso que se quiera ingresar la información de manera manual
+    $("#btnPesajeManual").click(function () {
+        $("#Eje1Tara").prop('readonly', false);
+        $("#Eje2Tara").prop('readonly', false);
+        $("#Eje3Tara").prop('readonly', false);
+    });
+
+    // Deshabilita los campos de los ejes,
+    // para que se haga la lectura directamente de la báscula
+    $("#btnPesajeAutomatico").click(function () {
+        $("#Eje1Tara").prop('readonly', true);
+        $("#Eje2Tara").prop('readonly', true);
+        $("#Eje3Tara").prop('readonly', true);
+    });
+
+    $("#lnkEje1").bind('click', function () {
+
+        var path = "/Bascula/ObtenerPeso";
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+
+                if (data == null) {
+                    swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+                }
+                else {
+                    var peso = Number(data);
+                    $("#Eje1Tara").val(peso.format(2));
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+            },
+            traditional: true
+
+        });
+    });
+
+    $("#lnkEje2").bind('click', function () {
+        var path = "/Bascula/ObtenerPeso";
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+
+                if (data == null) {
+                    swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+                }
+                else {
+                    var peso = Number(data);
+                    $("#Eje2Tara").val(peso.format(2));
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+            },
+            traditional: true
+
+        });
+    });
+
+    $("#lnkEje3").bind('click', function () {
+        var path = "/Bascula/ObtenerPeso";
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+
+                if (data == null) {
+                    swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+                }
+                else {
+                    var peso = Number(data);
+                    $("#Eje3Tara").val(peso.format(2));
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+            },
+            traditional: true
+
+        });
+    });
+
+
+    // función para cargar los productos de acuerdo al contrato seleccionado
+    function CargarOTR() {
+        var otr = $("#ConsecutivoOTR").val();
+        var path = "/OTR/CargarOTR?id=" + otr;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                var otr = data[0];
+                var equipo = data[1];
+                var moneda = data[2];
+                var tipoCliente = data[3];
+                var NombreCliente = data[4];
+
+                $("#PlacaEquipo").val(equipo.Nombre);
+                $("#Equipo").val(equipo.Id);
+                $("#OTR").val(otr.Id);
+                $("#Equipo").val(equipo.Id);
+                $("#Moneda").val(moneda);
+                $("#Producto").val(otr.Ruta);
+                $("#NombreCliente").val(otr.DescripcionCliente);
+                $("#ContratoDescripcion").val(otr.DescripcionContrato);
+                $("#Cliente").val(otr.Cliente);
+                $("#Contrato").val(otr.Contrato);
+                $("#PesoTara").val(equipo.Peso);
+                $("#TipoOTR").val(otr.Tipo);
+                $("#TipoCliente").val(tipoCliente);
+
+                if (equipo.Tipo == "WPP") {
+                    $("#Externo").prop("checked", false);
+                }
+                else {
+                    $("#EquipoWPP").val(false);
+                    $("#Externo").prop("checked", true);
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("OTR inválida", "Por favor verifique el número de OTR para continuar con esta boleta", "error");
+               // alert("OTR inválida, por favor verifique el número de OTR para continuar con esta boleta ");
+            },
+            traditional: true
+        });
+    }
+
+
+    $("#btnCobrar").click(function () {
+
+        document.getElementById("btnSubmit").click();
+
+        var f = new Date();
+
+        var boleta = "<div id='divImpresion' style='margin-top:55px'> "
+                        + " <div style='float:left'> "
+                        + "  No: " + $("#SecuenciaBoleta").val()
+                        + "  </br> OTR: " + $("#ConsecutivoOTR").val()
+                        + "</div> "
+                        + " <div style='float:right'>" + $("#Fecha").val() + " </br> " + f.getHours() + ":" + f.getMinutes() + ":" + f.getSeconds() + " </div>"
+                    + " </div>"
+                    + " </br> </br> </br> </br> </br>"
+                    + "<div> "
+                        + " <div style='float:left; margin-left:10%'>" + $("#PlacaEquipo").val() + " </br> " + $("#NombreCliente").val()
+                        + " </br> </br> </br> </br> " + $("#TipoCliente").val() + " </br> </br>" + $("#PesoBruto").val() + " </br> " + $("#PesoTara").val() + " </br> " + $("#PesoNeto").val()
+                        + " </div> "
+                        + " <div style='float:right; margin-right:5%'> Crédito "
+                        + " </div>"
+                    + " </div></br> ";
+
+        var mywindow = window.open('', 'my div', 'height=400,width=600');
+        mywindow.document.write('<html><head><title></title>');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(boleta);
+        mywindow.document.write('</body></html>');
+
+        mywindow.print();
+        mywindow.close();
+
+        return true;
+    });
+
+
+</script>

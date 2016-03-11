@@ -1,0 +1,429 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        <link href='@Url.Content("~/Images/Logo.png")' rel='shortcut icon' type='image/png'> 
+        <link href='@Url.Content("~/Content/sweetalert.css")' rel='stylesheet'/>
+        <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/bootstrap-theme.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/datepicker.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/font-awesome.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/jasny-bootstrap.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/jquery-ui.theme.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+        <script src="@Url.Content("~/Scripts/jquery-1.9.1.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/bootstrap-datepicker.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-ui.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/sweetalert-dev.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jasny-bootstrap.js")" type="text/javascript"></script>
+        <link href="@Url.Content("~/Content/menu.css")" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top banner" >
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="@Url.Action("Home", "Usuario")">
+                        <img src="~/Images/Logo.png" alt="WPP" height="105" width="100" style="margin-top:-19px; margin-bottom:-20px;">
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Administración
+                            </a>
+                            <ul class="dropdown-menu">
+                                @if (Session["Roles"].ToString().Contains("Anuncios"))
+                                {
+                                    <li><a href="@Url.Action("Index", "Anuncios")"> Anuncios</a></li>
+                                }
+                                <li><a href="@Url.Action("Compania", "Usuario")"> Cambiar Compañía</a></li>
+                                @if (Session["Roles"].ToString().Contains("Clientes"))
+                                {
+                                    <li><a href="@Url.Action("Index", "Cliente")"> Clientes</a></li>
+                                }
+                                @if (Session["Roles"].ToString().Contains("Combustible"))
+                                {
+                                    <li><a href="@Url.Action("Index", "Combustible")"> Combustible</a></li>
+                                }
+                                @if (Session["Roles"].ToString().Contains("Compañías"))
+                                {
+                                    <li><a href="@Url.Action("Index", "Compania")"> Compañías</a></li>
+                                }
+                                @if (Session["Roles"].ToString().Contains("Costo por Hora"))
+                                {
+                                    <li><a href="@Url.Action("Index", "CostoCamion")"> Costo Camión</a></li>
+                                    <li><a href="@Url.Action("Index", "CostoHora")"> Costo Hora</a></li>
+                                }
+                                @if (Session["Roles"].ToString().Contains("Puntos de Facturación"))
+                                {
+                                    <li><a href="@Url.Action("Index", "PuntoFacturacion")"> Puntos de Facturación</a></li>
+                                }
+                                @if (Session["Roles"].ToString().Contains("Tipo de Cambio"))
+                                {
+                                    <li><a href="@Url.Action("Index", "TipoCambio")"> Tipo de Cambio</a></li>
+                                }
+                                @if (Session["Roles"].ToString().Contains("Usuarios"))
+                                {
+                                    <li><a href="@Url.Action("Index", "Usuario")"> Usuarios</a></li>
+                                }
+                            </ul>
+
+                        </li>
+                        @if (Session["Roles"].ToString().Contains("Categoría de Productos") || Session["Roles"].ToString().Contains("Contratos")
+                            || Session["Roles"].ToString().Contains("Productos") || Session["Roles"].ToString().Contains("Servicios"))
+                        {
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding-left: 10px;padding-right: 10px;">
+                                    Contratos
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (Session["Roles"].ToString().Contains("Categoría de Productos"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "CategoriaProducto")"> Categorías de Productos</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Contratos"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Contrato")"> Contratos</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("or de Productos"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Producto")"> Productos</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Servicios"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Servicio")"> Servicios</a></li>
+                                    }
+                                </ul>
+
+                            </li>
+                        }
+                        @if (Session["Roles"].ToString().Contains("Boletas de Báscula") || Session["Roles"].ToString().Contains("Boletas Manuales")
+                            || Session["Roles"].ToString().Contains("Equipos") || Session["Roles"].ToString().Contains("Consecutivo de Boletas")
+                            || Session["Roles"].ToString().Contains("Contenedores"))
+                        {
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding-left: 10px;padding-right: 10px;">
+                                    Báscula
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (Session["Roles"].ToString().Contains("Boletas de Báscula"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Bascula")"> Boletas</a></li>
+                                    <li><a href="@Url.Action("Configuracion", "ConfiguracionPuerto")">Configuración Báscula</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Boletas Manuales"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "BoletaManual")"> Boletas Manuales</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Consecutivo de Boletas"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "ConsecutivoBascula")"> Consecutivo</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Contenedores"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Contenedor")"> Contenedores</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Equipos"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Equipo")"> Equipos</a></li>
+                                    }
+
+                                </ul>
+
+                            </li>
+                        }
+                        @if (Session["Roles"].ToString().Contains("Cuadrilla") || Session["Roles"].ToString().Contains("OTR") ||
+                            Session["Roles"].ToString().Contains("Rellenos Sanitarios") || Session["Roles"].ToString().Contains("Rutas Recolección"))
+                        {
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding-left: 10px;padding-right: 10px;">
+                                    Recolección
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (Session["Roles"].ToString().Contains("Cuadrilla"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Cuadrilla")"> Cuadrillas</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("OTR"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "OTR")"> OTR</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Rellenos Sanitarios"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "RellenoSanitario")"> Rellenos Sanitarios</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Rutas Recolección"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "RutaRecoleccion")"> Rutas de Recolección</a></li>
+                                    }
+                                </ul>
+
+                            </li>
+                        }
+                        @if (Session["Roles"].ToString().Contains("Administrador de Cierre de Caja") || Session["Roles"].ToString().Contains("Reimpresión Cierre de Caja")
+                            || Session["Roles"].ToString().Contains("Cierre Caja Crédito/Contado") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                        {
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding-left: 10px;padding-right: 10px;">
+                                    Cierre Caja
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (Session["Roles"].ToString().Contains("Administrador de Cierre de Caja"))
+                                    {
+                                        <li><a href="@Url.Action("CierreCaja", "CierreCaja")"> Cierre Caja</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Reimpresión Cierre de Caja"))
+                                    {
+                                        <li><a href="@Url.Action("Reimpresion", "CierreCaja")"> Reimpresión de recibos</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Cierre Caja Crédito/Contado") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("CierreCajaGeneral", "ControlOperaciones")">Cierre Caja Credito / Contado</a></li>
+                                    }
+                                </ul>
+
+                            </li>
+                        }
+                        @if (Session["Roles"].ToString().Contains("Consecutivo de Facturación")
+                            || Session["Roles"].ToString().Contains("Facturación") || Session["Roles"].ToString().Contains("Prefacturación"))
+                        {
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding-left: 10px;padding-right: 10px;">
+                                    Facturación
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (Session["Roles"].ToString().Contains("Consecutivo de Facturación"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "ConsecutivoFacturacion")"> Consecutivo</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Consulta de Facturación") || Session["Roles"].ToString().Contains("Reversión de Facturación"))
+                                    {
+                                        <li><a href="@Url.Action("ConsultaFactura", "Facturacion")"> Consulta</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Administrador de Facturación"))
+                                    {
+                                        <li><a href="@Url.Action("Facturacion", "Facturacion")"> Facturar</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Administrador de Prefacturación"))
+                                    {
+                                        <li><a href="@Url.Action("PreFacturacion", "Facturacion")"> PreFacturar</a></li>
+                                    }
+                                </ul>
+
+                            </li>
+                        }
+                        @if (Session["Roles"].ToString().Contains("Costos Rutas") || Session["Roles"].ToString().Contains("Días Festivos") || Session["Roles"].ToString().Contains("Nómina")
+                            || Session["Roles"].ToString().Contains("Jornada") || Session["Roles"].ToString().Contains("Empleado"))
+                        {
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding-left: 10px;padding-right: 10px;">
+                                    Nómina
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (Session["Roles"].ToString().Contains("Costos Rutas de Recolección"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "CostoRutaRecoleccion")"> Costos Rutas de Recolección</a></li>
+                                    } 
+                                    @if (Session["Roles"].ToString().Contains("Días Festivos"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "DiasFestivos")"> Días Festivos</a></li>
+                                    }   
+                                    @if (Session["Roles"].ToString().Contains("Empleado"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Empleado")"> Empleados</a></li>
+                                    }    
+                                    @if (Session["Roles"].ToString().Contains("Jornada Laboral"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Jornada")"> Jornada Laboral</a></li>
+                                    }    
+                                    @if (Session["Roles"].ToString().Contains("Nómina"))
+                                    {
+                                        <li><a href="@Url.Action("Cargar", "Nomina")"> Cargar Nómina</a></li>
+                                    }                               
+                                </ul>
+
+                            </li>
+                        }
+                        @if (Session["Roles"].ToString().Contains("Control de Operaciones") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                        {
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding-left: 10px;padding-right: 10px;">
+                                    Control Operaciones
+                                </a>
+                            <ul class="dropdown-menu multi-level">
+                               @if (Session["Roles"].ToString().Contains("Control de Operaciones: Clientes") || Session["Roles"].ToString().Contains("Control de Operaciones: Compañías")
+                                   || Session["Roles"].ToString().Contains("Control de Operaciones: Usuarios") || Session["Roles"].ToString().Contains("Reportes Gerencia")
+                                   || Session["Roles"].ToString().Contains("Control de Operaciones: Bitácora de Clientes"))
+                               {
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1"> Administración</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Usuarios") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("Usuarios", "ControlOperaciones")">Usuarios</a></li>
+                                    }                                    
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Clientes") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("Cliente", "ControlOperaciones")">Clientes</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Bitácora de Clientes") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("ClienteBitacora", "ControlOperaciones")">Bitácora de Clientes</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Compañías") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("Compania", "ControlOperaciones")">Compañías</a></li>
+                                    }
+                                    </ul>
+                                </li>
+                               }
+                               @if (Session["Roles"].ToString().Contains("Control de Operaciones: Contrato") || Session["Roles"].ToString().Contains("Control de Operaciones: Productos")
+                                   || Session["Roles"].ToString().Contains("Control de Operaciones: Categoría de Productos") || Session["Roles"].ToString().Contains("Reportes Gerencia")
+                                   || Session["Roles"].ToString().Contains("Control de Operaciones: Bitácora de Contratos"))
+                               {
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1"> Contratos</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Bitácora de Contratos") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("Contrato", "ControlOperaciones")">Contrato</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("ContratoDetalle", "ControlOperaciones")">Detalle Contrato</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("ContratoXEjecutivo", "ControlOperaciones")">Contratos por Ejecutivo</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Contrato") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("ContratoBitacora", "ControlOperaciones")">Bitácora de Contratos</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Categoría de Productos") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("CategoriaProductos", "ControlOperaciones")">Categoría de Productos</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Productos") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("Productos", "ControlOperaciones")">Productos</a></li>
+                                    }
+                                    </ul>
+                                </li>
+                               }
+                               @if (Session["Roles"].ToString().Contains("Control de Operaciones: Cierre de Caja") || Session["Roles"].ToString().Contains("Control de Operaciones: Contenedores")
+                                   || Session["Roles"].ToString().Contains("Control de Operaciones: Equipos") || Session["Roles"].ToString().Contains("Control de Operaciones: Toneladas por Boleta")
+                                   || Session["Roles"].ToString().Contains("Reportes Gerencia") || Session["Roles"].ToString().Contains("Cierre Caja Crédito/Contado"))
+                               {
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1"> Báscula</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                     @if (Session["Roles"].ToString().Contains("Control de Operaciones: Cierre de Caja") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                     {
+                                        <li><a tabindex="0" href="@Url.Action("CierreCaja", "ControlOperaciones")">Cierre Caja</a></li>
+                                     }
+                                    @if (Session["Roles"].ToString().Contains("Cierre Caja Crédito/Contado") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("CierreCajaGeneral", "ControlOperaciones")">Cierre Caja Credito / Contado</a></li>
+                                    }
+                                     @if (Session["Roles"].ToString().Contains("Control de Operaciones: Contenedores") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                     {
+                                        <li><a tabindex="0" href="@Url.Action("Contenedor", "ControlOperaciones")">Contenedor</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Equipos") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("Equipos", "ControlOperaciones")">Equipos</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Toneladas por Boleta") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("ToneladasXBoleta", "ControlOperaciones")">Toneladas por Boleta</a></li>
+                                    }
+                                        <li><a tabindex="0" href="@Url.Action("ToneladasXCompania", "ControlOperaciones")">Toneladas por Compañía</a></li>
+                                    </ul>
+                                </li>
+                               }
+                               @if (Session["Roles"].ToString().Contains("Control de Operaciones: Facturación") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                               {
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1"> Facturación</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a tabindex="0" href="@Url.Action("Facturacion", "ControlOperaciones")">Facturación</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("ListaFacturas", "ControlOperaciones")">Lista Facturas</a></li>
+                                    </ul>
+                                </li>
+                               }
+                               @if (Session["Roles"].ToString().Contains("Control de Operaciones: Control de Operaciones Diario") || Session["Roles"].ToString().Contains("Control de Operaciones: OTR")
+                                   || Session["Roles"].ToString().Contains("Control de Operaciones: Cuadrillas") || Session["Roles"].ToString().Contains("Control de Operaciones: Rutas de Recolección")
+                                   || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                               {
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1"> Operación de Recolección</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Control de Operaciones Diario") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("ControlRecoleccionDiario", "ControlOperaciones")">Control de Operaciones Diario</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("ComparativoHoras", "ControlOperaciones")">Comparativo Horas Chofer / Horímetro</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("DieselConsumido", "ControlOperaciones")">Litro Diesel Consumidos</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("Promedios", "ControlOperaciones")">Promedios Operaciones</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("Resumen", "ControlOperaciones")">Resumen Operaciones</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("TotalDiesel", "ControlOperaciones")">Total Diesel Colones</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("HorasEfectivas", "ControlOperaciones")">Total de Horas Efectivas</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("TotalToneladas", "ControlOperaciones")">Total de Toneladas Transportadas</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("TotalViajes", "ControlOperaciones")">Total de Viajes</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: OTR") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("OTR", "ControlOperaciones")">OTR</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Cuadrillas") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("Cuadrilla", "ControlOperaciones")">Cuadrillas</a></li>
+                                        <li><a tabindex="0" href="@Url.Action("ToneladasXCuadrilla", "ControlOperaciones")">Toneladas por Cuadrilla</a></li>
+                                    }
+                                    @if (Session["Roles"].ToString().Contains("Control de Operaciones: Rutas de Recolección") || Session["Roles"].ToString().Contains("Reportes Gerencia"))
+                                    {
+                                        <li><a tabindex="0" href="@Url.Action("RutaRecoleccion", "ControlOperaciones")">Rutas de Recolección</a></li>
+                                    }
+
+                                    </ul>
+                                </li>
+                               }
+                            </ul>
+
+                        </li>
+                        }
+                    </ul>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li>
+                                <a>@Session["Usuario"]</a>
+                            </li>
+                            <li><a href="@Url.Action("Login", "Usuario")" title="Cerrar Sesión"> <span class="glyphicon glyphicon-off"></span></a></li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div id="divContenido" class="container body-content">
+            @RenderBody()
+            <hr />
+        
+        </div>
+        <footer>
+            <div class="footer-wpp">
+                <p>@DateTime.Now.Year - WPP Coriclean</p>
+            </div>
+       
+        </footer>
+    </body>
+</html>

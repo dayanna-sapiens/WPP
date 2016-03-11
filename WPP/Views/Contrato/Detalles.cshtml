@@ -1,0 +1,226 @@
+﻿@model WPP.Model.ModuloContratos.ContratoModel
+
+@{
+    ViewBag.Title = "Detalles Contrato";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-4 form-horizontal">
+        <h2>Detalles Contrato</h2>
+
+        @using (Html.BeginForm("Detalles", "Contrato", FormMethod.Post, new { id = "frmDetallesContrato", @Class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Estado)
+            <div class="form-group">
+                <label for="Numero">Número:</label>
+                @Html.DisplayFor(m => m.Numero, new { @Class = "form-control", id = "Numero" })
+            </div>
+            <div class="form-group">
+                <label for="DescripcionCliente">Cliente:</label>
+                @Html.DisplayFor(m => m.NumeroCliente, new { @Class = "form-control", id = "NumeroCliente" })  -  @Html.DisplayFor(m => m.DescripcionCliente, new { @Class = "form-control", id = "DescripcionCliente" })
+            </div>
+            <div class="form-group">
+                <label for="DescripcionContrato">Descripción del contrato:</label>
+                @Html.DisplayFor(m => m.DescripcionContrato, new { @Class = "form-control", id = "DescripcionContrato" })
+            </div>
+            <div class="form-group">
+                <label for="FechaInicio">Fecha Inicio:</label>
+                @Html.DisplayFor(m => m.FechaInicio, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "FechaInicio" })
+            </div>
+            <div class="form-group">
+                <label for="Estado">Estado:</label>
+                @Html.DisplayFor(m => m.Estado, new { @Class = "form-control", id = "Estado" })
+            </div>
+            <div class="form-group">
+                <label for="ModoFacturacionDescripcion">Modo Facturación:</label>
+                @Html.DisplayFor(m => m.ModoFacturacion, new { @Class = "form-control", id = "ModoFacturacion" })
+            </div>
+            if (Model.ModoFacturacion == "Día específico del mes")
+            {
+                <div class="form-group">
+                    <label for="DiaCorteMes">Día Corte:</label>
+                    @Html.DisplayFor(m => m.DiaCorteMes, new { @Class = "form-control", id = "DiaCorteMes" })
+                </div>
+            }
+            if (Model.ModoFacturacion == "Día específico de la semana")
+            {
+                <div class="form-group">
+                    <label for="DiaCorteSemanaDescripcion">Día Corte:</label>
+                    @Html.DisplayFor(m => m.DiaCorteSemanaDescripcion, new { @Class = "form-control", id = "DiaCorteSemanaDescripcion" })
+                </div>
+            }
+            <div class="form-group">
+                <label for="Moneda">Moneda:</label>
+                @Html.DisplayFor(m => m.Moneda, new { @Class = "form-control", id = "Moneda" })
+            </div>
+            if (Model.Moneda == "Dolares")
+            {
+                 if (Model.FacturarColones != null)
+                 { 
+                    <div class="form-group">
+                        <label for="FacturarColones">Facturar en Colones:</label>                   
+                        @if((bool)Model.FacturarColones)
+                        { 
+                            @Html.Raw("Si")
+                        }
+                        else
+                        {
+                            @Html.Raw("No")
+                        }
+                     </div>
+                 }
+            }
+            <div class="form-group">
+                <label for="PuntoFacturacionDescripcion">Punto de Facturación:</label>
+                @Html.DisplayFor(m => m.PuntoFacturacionDescripcion, new { @Class = "form-control", id = "PuntoFacturacionDescripcion" })
+            </div>
+            <div class="form-group">
+                <label for="PagoContado">Pago de Contado:</label>
+                @if ((bool)Model.PagoContado)
+                {
+                    @Html.Raw("Si")
+                }
+                else
+                {
+                    @Html.Raw("No")
+                }
+            </div>
+            <div class="form-group">
+                <label for="DiasAvisoPrevioVencimiento">Días avisa previo vencimiento:</label>
+                @Html.DisplayFor(m => m.DiasAvisoPrevioVencimiento, new { @Class = "form-control", id = "DiasAvisoPrevioVencimiento" })
+            </div>
+            <div class="form-group">
+                <label for="RepesajeDescripcion">Repesaje:</label>
+                @Html.DisplayFor(m => m.RepesajeDescripcion, new { @Class = "form-control", id = "RepesajeDescripcion" })
+            </div>
+            <div class="form-group">
+                <label for="NumeroFormulario">Número Formulario:</label>
+                @Html.DisplayFor(m => m.NumeroFormulario, new { @Class = "form-control", id = "NumeroFormulario" })
+            </div>
+            <div class="form-group">
+                <label for="Ejecutivo">Ejecutivo:</label>
+                @Html.DisplayFor(m => m.EjecutivoNombre, new { @Class = "form-control", id = "EjecutivoNombre" })
+            </div>
+            <div class="form-group">
+                <label for="Observaciones">Observaciones:</label>
+                @Html.DisplayFor(m => m.Observaciones, new { @Class = "form-control", id = "Observaciones" })
+            </div>
+            <div class="form-group">
+                <label for="ObservacionesFactura">Observaciones Factura:</label>
+                @Html.DisplayFor(m => m.ObservacionesFactura, new { @Class = "form-control", id = "ObservacionesFactura" })
+            </div>
+
+        }
+
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+
+        <div class="row">         
+            <br />
+            @if (Session["Roles"].ToString().Contains("Editor de Contratos") || Session["Roles"].ToString().Contains("Administrador de Contratos"))
+            {
+                if (Model.Estado != "Inactivo")
+                { 
+                    @Html.ActionLink("Crear Producto", "CrearProductoContrato", "Contrato", new { IdContrato = Model.Id }, new { @Class = "btn btn-primary", @style = "margin-right:5px" })
+                }
+            }
+            @Html.ActionLink("Regresar", "Index", "Contrato", null, new { @Class = "btn btn-primary" })
+
+
+   
+            <div class="col-12-md">
+                <h2>Productos</h2>
+
+                <div class="table-responsive" style="height:400px; overflow-y:auto">
+                    <table class="table table-hover" id="tabla-productos">
+                        <tr>
+                            <th>
+                                Descripción
+                            </th>
+                            <th>
+                                Servicio
+                            </th>
+                            <th>
+                                Producto
+                            </th>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                                Cuenta Contable
+                            </th>
+                            <th>
+                                Cantidad
+                            </th>
+                            <th>
+                                Precio
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+
+                        @if (Model.Productos != null)
+                        {
+                            foreach (var producto in Model.Productos.Where(m => m.IsDeleted == false))
+                            {
+                                <tr>
+                                    <td>@producto.Descripcion</td>
+                                    <td>@producto.Servicio.Nombre</td>
+                                    <td>@producto.Producto.Descripcion</td>
+                                    <td>@producto.Estado</td>
+                                    <td>@producto.CuentaContableCredito</td>
+                                    <td>@producto.Cantidad</td>
+                                    <td>@producto.Total</td>
+                                    @if(Model.Estado != "Inactivo")
+                                    {
+                                        if (Session["Roles"].ToString().Contains("Editor de Contratos") || Session["Roles"].ToString().Contains("Administrador de Contratos"))
+                                        {
+                                            <td>
+                                                <a href="@Url.Action("EditarProductoContrato", "Contrato", new { idProducto = producto.Id })" data-toggle="tooltip" title="Editar">
+                                                    <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                                </a>
+                                            </td>
+                                        }
+                                        if (Session["Roles"].ToString().Contains("Editor de Contratos") || Session["Roles"].ToString().Contains("Administrador de Contratos"))
+                                        {
+                                            <td>
+                                                <a href="@Url.Action("EliminarProductoContrato", "Contrato", new { idProducto = producto.Id })" data-toggle="tooltip" title="Eliminar">
+                                                    <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                                </a>
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        var estado = $("#Estado").val();
+        if (estado == "Vencido")
+        {
+            swal("Contrato Vencido", "Este contrato cuenta con al menos un servicio vencido.", "warning");
+        }
+    });// end document ready
+
+
+
+</script>

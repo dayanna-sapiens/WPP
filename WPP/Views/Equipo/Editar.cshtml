@@ -1,0 +1,217 @@
+﻿@model WPP.Model.ModuloBascula.EquipoModel
+@{
+    ViewBag.Title = "Editar Equipo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Editar Equipo</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Editar", "Equipo", FormMethod.Post, new { id = "frmEdiarEquipo", @class = "form-horizontal" }))
+            {
+
+                @Html.ValidationSummary(true)
+
+
+                <div class="form-group">
+                    <label for="Nombre">Nombre</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Nombre, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Nombre)
+                </div>
+                <div class="form-group">
+                    <label for="Placa">Placa</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Placa, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Placa)
+                </div>
+                <div class="form-group" >
+                    <label for="Marca">Marca</label> <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Marca, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Marca)
+                </div>
+                <div class="form-group">
+                    <label for="TipoCombustible">Tipo Combustible</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.TipoCombustible, new List<SelectListItem>{
+                                    new SelectListItem() {Text = "Diesel", Value="Diesel"},
+                                    new SelectListItem() {Text = "Gasolina", Value="Gasolina"}
+                                }, new { @class = "form-control", id = "TipoCombustible" })
+                    @Html.ValidationMessageFor(m => m.TipoCombustible)
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                        <a id="btnPesajeManual" class="btn btn-primary">Pesaje Manual</a>
+                    </div>
+                    <div class="col-md-3">
+                        <a id="btnPesajeAutomatico" class="btn btn-primary">Pesaje Automático</a>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a id="lnkEje1" data-toggle="tooltip" style="cursor: pointer; font-weight: bold; text-decoration: underline;color: #2F4A71; padding-right:0px;" title="Pesar Eje 1">
+                        Eje 1
+                    </a>
+                    @Html.TextBoxFor(m => m.Eje1, new { @Class = "form-control", @readonly = "readonly", @type = "number", @min = "0", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Eje1)
+                </div>
+                <div class="form-group">
+                    <a id="lnkEje2" data-toggle="tooltip" style="cursor: pointer; font-weight: bold; text-decoration: underline;color: #2F4A71; padding-right:0px;" title="Pesar Eje 2">
+                        Eje 2
+                    </a>
+                    @Html.TextBoxFor(m => m.Eje2, new { @Class = "form-control", @readonly = "readonly", @type = "number", @min = "0", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Eje2)
+                </div>
+
+                <div class="form-group">
+                    <a id="lnkEje3" data-toggle="tooltip" style="cursor: pointer; font-weight: bold; text-decoration: underline;color: #2F4A71; padding-right:0px;" title="Pesar Eje 3">
+                        Eje 3
+                    </a>
+                    @Html.TextBoxFor(m => m.Eje3, new { @Class = "form-control", @readonly = "readonly", @type = "number", @min = "0", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Eje3)
+                </div>
+                <div class="form-group">
+                    <label for="Peso">Peso</label>
+                    @Html.TextBoxFor(m => m.Peso, new { @Class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Peso)
+                </div>
+                <div class="form-group" >
+                    <label for="Peso">Tipo</label> <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    <br />
+                    <label>@Html.RadioButtonFor(m => m.Tipo, "WPP") WPP:</label>
+                    <br />
+                    <label>@Html.RadioButtonFor(m => m.Tipo, "Externo") Externo</label>
+                    <br />
+                    @Html.ValidationMessageFor(m => m.Tipo)
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                @Html.ActionLink("Cancelar", "Index", "Equipo", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#Eje1").change(function () {
+            CalcularPeso();
+        });
+
+        $("#Eje2").change(function () {
+            CalcularPeso();
+        });
+
+        $("#Eje3").change(function () {
+            CalcularPeso();
+        });
+
+    });// end document ready
+
+    function CalcularPeso() {
+        var eje1 = $("#Eje1").val();
+        var eje2 = $("#Eje2").val();
+        var eje3 = $("#Eje3").val();
+
+        var suma = Number(eje1) + Number(eje2) + Number(eje3);
+        $("#Peso").val(suma);
+    }
+
+    $("#lnkEje1").bind('click', function () {
+        var path = "/Equipo/ObtenerPeso";
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+
+                if (data == null) {
+                    swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+                }
+                else {
+                    var peso = Number(data);
+                    $("#Eje1").val(peso.format(2));
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+            },
+            traditional: true
+
+        });
+    });
+
+    $("#lnkEje2").bind('click', function () {
+        var path = "/Equipo/ObtenerPeso";
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+
+                if (data == null) {
+                    swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+                }
+                else {
+                    var peso = Number(data);
+                    $("#Eje2").val(peso.format(2));
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+            },
+            traditional: true
+
+        });
+    });
+
+    $("#lnkEje3").bind('click', function () {
+        var path = "/Equipo/ObtenerPeso";
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+
+                if (data == null) {
+                    swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+                }
+                else {
+                    var peso = Number(data);
+                    $("#Eje3").val(peso.format(2));
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("", "En este momento no esta disponible el pesaje de manera automática.", "error");
+            },
+            traditional: true
+
+        });
+    });
+
+    $("#btnPesajeManual").click(function () {
+        $("#Eje1").prop('readonly', false);
+        $("#Eje2").prop('readonly', false);
+        $("#Eje3").prop('readonly', false);
+    });
+
+    $("#btnPesajeAutomatico").click(function () {
+        $("#Eje1").prop('readonly', true);
+        $("#Eje2").prop('readonly', true);
+        $("#Eje3").prop('readonly', true);
+    });
+
+
+</script>

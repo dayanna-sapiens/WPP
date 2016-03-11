@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "Facturación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (null != TempData["alertMessage"])
+    {
+        <script type="text/javascript">
+
+            swal("", "@TempData["alertMessage"]", "error");
+            /// ("@TempData["alertMessage"]");
+        </script>
+    }
+
+
+    long consecutivo = ViewBag.Consecutivo == null ? 0 : ViewBag.Consecutivo;
+}
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:2%;">
+        <h2>Filtrar por: </h2>
+
+        @using (Html.BeginForm(Html.BeginForm("BuscarDocumentos", "Facturacion", FormMethod.Get)))
+        {
+            @Html.Hidden("Consecutivo", @consecutivo)
+            <p>
+                Último Formulario impreso: @Html.TextBox("ConsecutivoFactura", "", new { @class = "form-control col-lg-3", @readonly = "readonly", id = "ConsecutivoFactura" })
+            </p>
+            <p>
+                Desde: @Html.TextBox("searchStringDesde", "", new { @class = "form-control col-lg-3", @readonly = "readonly", id = "searchStringDesde" })
+            </p>
+            <p>
+                Hasta: @Html.TextBox("searchStringHasta", "", new { @class = "form-control", @readonly = "readonly", id = "searchStringHasta" })
+            </p>
+            <p>
+                Número Cliente: @Html.TextBox("searchStringNumeroCliente", "", new { @class = "form-control" })
+            </p>
+            <p>
+               Cliente: @Html.TextBox("searchStringCliente", "", new { @class = "form-control" })
+            </p>
+            <p>
+                Número Contrato: @Html.TextBox("searchStringNumeroContrato", "", new { @class = "form-control" })
+            </p>
+            <p>
+               Contrato: @Html.TextBox("searchStringContrato", "", new { @class = "form-control" })
+            </p>
+            <p>
+                <button type="submit" value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </p>
+        }
+    </div>
+
+
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>Documentos</h2>
+
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+
+
+
+        <div class="table-responsive" style="height:400px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-documentos">
+                <thead>
+                    <tr>
+                        <th>
+                            Fecha
+                        </th>
+                        <th>
+                            Estado
+                        </th>
+                        <th>
+                            Cliente
+                        </th>
+                        <th>
+                            Contrato
+                        </th>
+                        <th>
+                            Moneda
+                        </th>
+                        <th>
+                            Usuario
+                        </th>
+                        <th>
+                            Formulario
+                        </th>
+                        <th>                            
+                        </th>
+                        <th>                            
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tblDocumentos"></tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+
+        var today = new Date();
+        $('#searchStringHasta').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        $('#searchStringDesde').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+
+        $("#ConsecutivoFactura").val($("#Consecutivo").val());
+    });
+
+</script>

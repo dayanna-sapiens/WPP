@@ -1,0 +1,260 @@
+﻿@model PagedList.IPagedList<WPP.Entities.Objects.ModuloContratos.Contrato>
+@using WPP.Model;
+@using PagedList.Mvc;
+@using PagedList;
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Contratos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:5%;">
+        <h2>Filtrar por: </h2>
+
+        @using (Html.BeginForm(Html.BeginForm("Buscar", "Contrato", FormMethod.Get)))
+        {
+            <p>
+                Número Cliente: @Html.TextBox("searchStringClienteNumero", ViewBag.currentFilterClienteNumero as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Cliente: @Html.TextBox("searchStringClienteDescripcion", ViewBag.CurrentClienteDescripcion as string, new { @class = "form-control col-lg-3" })
+            </p>          
+            <p>
+                Número Contrato: @Html.TextBox("searchStringContrato", ViewBag.currentFilterContrato as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Descripción Contrato: @Html.TextBox("searchStringDescripcionContrato", ViewBag.currentFilterDescripcionContrato as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Punto Facturación: @Html.TextBox("searchStringPuntoFacturacion", ViewBag.currentFilterPuntoFacturacion as string, new { @class = "form-control" })
+            </p>            
+            <p>
+                Estado: @Html.TextBox("searchStringEstado", ViewBag.currentFilterEstado as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Filas: @Html.DropDownList("searchStringFilas", new List<SelectListItem>{
+                    new SelectListItem() {Text = "10", Value="10"},
+                    new SelectListItem() {Text = "25", Value="25"},
+                    new SelectListItem() {Text = "50", Value="50"},
+                    new SelectListItem() {Text = "100", Value="100"}
+                 }, ViewBag.currentFilterFilas as string, new { @Class = "form-control", id = "searchStringFilas" })
+            </p>
+            <p>
+                <button type="submit" value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </p>
+        }
+    </div>
+
+
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>Contratos</h2>
+
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+
+        <br /><br />
+
+        @if (Session["Roles"].ToString().Contains("Editor de Contratos") || Session["Roles"].ToString().Contains("Administrador de Contratos"))
+        {
+            @Html.ActionLink("Crear Contrato", "Crear", "Contrato", new { @class = "btn btn-primary" })
+            <br /><br />
+        }
+
+        <div class="table-responsive" style="height:300px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-producto">
+                <tr>
+                    <th>
+                        @Html.ActionLink("No. Cliente", "Buscar", "Contrato", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterClienteNumero = ViewBag.CurrentClienteNumero,
+                   currentFilterClienteDescripcion = ViewBag.CurrentClienteDescripcion,
+                   currentFilterContrato = ViewBag.CurrentContrato,
+                   currentFilterDescripcionContrato = ViewBag.CurrentDescripcionContrato,
+                   currentFilterPuntoFacturacion = ViewBag.CurrentPuntoFacturacion,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Cliente", "Buscar", "Contrato", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterClienteNumero = ViewBag.CurrentClienteNumero,
+                   currentFilterClienteDescripcion = ViewBag.CurrentClienteDescripcion,
+                   currentFilterContrato = ViewBag.CurrentContrato,
+                   currentFilterDescripcionContrato = ViewBag.CurrentDescripcionContrato,
+                   currentFilterPuntoFacturacion = ViewBag.CurrentPuntoFacturacion,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("No. Contrato", "Buscar", "Contrato", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterClienteNumero = ViewBag.CurrentClienteNumero,
+                   currentFilterClienteDescripcion = ViewBag.CurrentClienteDescripcion,
+                   currentFilterContrato = ViewBag.CurrentContrato,
+                   currentFilterDescripcionContrato = ViewBag.CurrentDescripcionContrato,
+                   currentFilterPuntoFacturacion = ViewBag.CurrentPuntoFacturacion,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Descripción Contrato", "Buscar", "Contrato", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterClienteNumero = ViewBag.CurrentClienteNumero,
+                   currentFilterClienteDescripcion = ViewBag.CurrentClienteDescripcion,
+                   currentFilterContrato = ViewBag.CurrentContrato,
+                   currentFilterDescripcionContrato = ViewBag.CurrentDescripcionContrato,
+                   currentFilterPuntoFacturacion = ViewBag.CurrentPuntoFacturacion,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Punto Facturación", "Buscar", "Contrato", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterClienteNumero = ViewBag.CurrentClienteNumero,
+                   currentFilterClienteDescripcion = ViewBag.CurrentClienteDescripcion,
+                   currentFilterContrato = ViewBag.CurrentContrato,
+                   currentFilterDescripcionContrato = ViewBag.CurrentDescripcionContrato,
+                   currentFilterPuntoFacturacion = ViewBag.CurrentPuntoFacturacion,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Estado", "Buscar", "Contrato", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterClienteNumero = ViewBag.CurrentClienteNumero,
+                   currentFilterClienteDescripcion = ViewBag.CurrentClienteDescripcion,
+                   currentFilterContrato = ViewBag.CurrentContrato,
+                   currentFilterDescripcionContrato = ViewBag.CurrentDescripcionContrato,
+                   currentFilterPuntoFacturacion = ViewBag.CurrentPuntoFacturacion,
+                   currentFilterEstado = ViewBag.CurrentEstado
+               }, null)
+                    </th>
+                    
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Cliente.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Cliente.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Numero)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DescripcionContrato)</td>
+                            <td>@Html.DisplayFor(modelItem => item.PuntoFacturacion.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                            @if(item.Estado != "Inactivo")
+                            {
+                                if (Session["Roles"].ToString().Contains("Editor de Contratos") || Session["Roles"].ToString().Contains("Administrador de Contratos"))
+                                {
+                                    <th>
+                                        <a href="@Url.Action("CrearProductoContrato", "Contrato", new { idContrato = item.Id })" data-toggle="tooltip" title="Agregar Producto">
+                                            <span class="glyphicon glyphicon-plus" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>
+
+                                    </th>
+                                }
+                                if (Session["Roles"].ToString().Contains("Editor de Contratos") || Session["Roles"].ToString().Contains("Administrador de Contratos") || Session["Roles"].ToString().Contains("Editor de Contratos"))
+                                {
+                                    <th>
+                                        <a href="@Url.Action("Detalles", "Contrato", new { IdContrato = item.Id })" data-toggle="tooltip" title="Detalles">
+                                            <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>
+                                    </th>
+                                }
+                                if (Session["Roles"].ToString().Contains("Editor de Contratos") || Session["Roles"].ToString().Contains("Administrador de Contratos"))
+                                {
+                                    <th>
+                                        <a href="@Url.Action("Editar", "Contrato", new { IdContrato = item.Id })" data-toggle="tooltip" title="Editar">
+                                            <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>
+                                    </th>
+                                }
+                                if (Session["Roles"].ToString().Contains("Administrador de Contratos"))
+                                {
+                                    <th>
+                                        <a href="@Url.Action("Eliminar", "Contrato", new { IdContrato = item.Id })" data-toggle="tooltip" title="Eliminar">
+                                            <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>
+                                    </th>
+                                }
+                            }
+                            else
+                            {
+                                <th></th>
+                                if (Session["Roles"].ToString().Contains("Editor de Contratos") || Session["Roles"].ToString().Contains("Administrador de Contratos") || Session["Roles"].ToString().Contains("Editor de Contratos"))
+                                {
+                                    <th>
+                                        <a href="@Url.Action("Detalles", "Contrato", new { IdContrato = item.Id })" data-toggle="tooltip" title="Detalles">
+                                            <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                        </a>
+                                    </th>
+                                }
+                                <th></th>
+                                <th></th>
+                            }
+                            
+                           
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+        <div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Buscar", "Contrato",
+                                new
+                                {
+                                    page,
+                                    sortOrder = ViewBag.CurrentSort,
+                                    currentFilterClienteNumero = ViewBag.CurrentClienteNumero,
+                                    currentFilterClienteDescripcion = ViewBag.CurrentClienteDescripcion,
+                                    currentFilterContrato = ViewBag.CurrentContrato,
+                                    currentFilterDescripcionContrato = ViewBag.CurrentDescripcionContrato,
+                                    currentFilterPuntoFacturacion = ViewBag.CurrentPuntoFacturacion,
+                                    currentFilterEstado = ViewBag.CurrentEstado,
+                                    currentFilterFilas = ViewBag.CurrentFilas
+                                }))
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+        $(document).load(function () {
+            document.getElementById("btnBuscar").click();
+        })
+
+        $(document).ready(function () {
+            function editarContrato(IdContrato) {
+            }
+        });// end document ready
+
+</script>

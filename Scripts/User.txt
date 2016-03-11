@@ -1,0 +1,2 @@
+INSERT INTO wpp.USUARIO VALUES(2,1, '04-08-2015', 'SUPER', '04-08-2015', 'SUPER', NULL, NULL, 0, 'super', 'super', 'super','04-08-2015', '114448875', '88884444', 'super@super.com', 'o569s/zdjjChVBCwi0dvxPPmEbNdO2TCBP6jHEMf0YehPa5S',  'Administrador,Super Usuario');
+--password: 12345

@@ -1,0 +1,341 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.RutaRecoleccionModel
+
+@{
+    ViewBag.Title = "Costos Ruta de Recolección";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    String ListaViajes = ViewBag.Viajes;
+    String ListaCostos = ViewBag.Costos;
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <br />
+    <h3>Costos Ruta de Recolección</h3>
+    <br />
+
+    <div class="col-md-6" style="padding-right:30px;">
+
+        @using (Html.BeginForm("Crear", "CostoRutaRecoleccion", FormMethod.Post, new { id = "frmEditarRellenoSanitario", @class = "form-horizontal" }))
+        {
+
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Compania)
+            @Html.HiddenFor(m => m.Id)
+            @Html.Hidden("ListaViajes", @ListaViajes)
+            @Html.Hidden("ListaCostos", @ListaCostos)
+
+
+            <div class="form-group">
+                <label for="Nombre">Descripción</label>   
+                @Html.TextBoxFor(m => m.Descripcion, new { @Class = "form-control", @readonly = "readonly" })
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Estado </label>
+                <div class="col-md-4">                   
+                     @Html.TextBoxFor(m => m.Estado, new { @Class = "form-control", @readonly = "readonly" })                
+                </div>
+                <label class="col-md-2">Tipo </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Tipo, new { @Class = "form-control", @readonly = "readonly" })                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3" style="font-size:initial;text-decoration:underline">Viajes</label>
+            </div>
+            <div class="form-group">
+                <div class="table-responsive" style="height:200px; overflow-y:auto">
+                    <table class="table table-hover" id="tabla-viajes">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Cliente
+                                </th>
+                                <th>
+                                    Contrato
+                                </th>
+                                <th>
+                                    Producto
+                                </th>
+                                <th>
+                                    Ubicación
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblViajes"></tbody>
+                    </table>
+                </div>
+            </div>
+            <br />
+
+            
+            <button id="btnSubmit" type="submit" class="btn btn-primary" style="display:none;"></button>
+            @Html.ActionLink("Regresar", "Index", "CostoRutaRecoleccion", null, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+    <div class="col-md-6" style="padding-left:30px;">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-2" for="nombre">Fecha Desde  <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label> 
+                <div class="col-md-4">
+                    @Html.TextBox("FechaDesde", "", "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "FechaDesde", @readonly = "readonly" })
+                </div>
+                <label class="col-md-2" for="nombre">Fecha Hasta   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label> 
+                <div class="col-md-4">
+                    @Html.TextBox("FechaHasta", "", "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "FechaHasta", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label class="col-md-2" for="nombre">Costo Tonelada <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.TextBox("Costo", "", new { @Class = "form-control", id = "Costo",  @type = "number", @min = "0", @max = "100000000000" })
+                </div>
+                <div class="col-md-4">
+                    <a id="btnIncluirCosto" class="btn btn-primary">Incluir Costo   <i class="fa fa-dollar"></i></a>
+                </div>
+            </div>
+            <br />
+            </div>
+        <div class="row">
+            <div class="col-12-md">
+
+                <br />
+                <div class="table-responsive" style="height:300px; overflow-y:auto">
+                    <table class="table table-hover" id="tabla-rutas">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Desde
+                                </th>
+                                <th>
+                                    Hasta
+                                </th>
+                                <th>
+                                    Costo
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblCostos"></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        var today = new Date();
+        $('#FechaDesde').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        $('#FechaHasta').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        var data = JSON.parse($("#ListaViajes").val());
+        for (var i = 0; i < data.length; i++) {
+            var elemento = data[i];
+            CargarTablaViajes(elemento.Id, elemento.ContratoDescripcion, elemento.Descripcion, elemento.ProductoDescripcion, elemento.UbicacionDescripcion);
+        }
+
+        var datos = JSON.parse($("#ListaCostos").val());
+        for (var i = 0; i < datos.length; i++) {
+            var elemento = datos[i];
+            var stringFechaDesde = elemento.FechaDesde;
+            stringFechaDesde = stringFechaDesde.substring(6, 19);
+            var dateDesde = new Date(Number(stringFechaDesde));
+            var stringFechaHasta = elemento.FechaHasta;
+            stringFechaHasta = stringFechaHasta.substring(6, 19);
+            var dateHasta = new Date(Number(stringFechaHasta));
+
+            CargarCostos(elemento.Id, elemento.Costo, convertDate(dateDesde), convertDate(dateHasta));
+        }
+    });// end document ready
+
+
+
+    function CargarTablaViajes(id, contrato, cliente, producto, ubicacion) {
+        var tabla = $("#tblViajes")[0];
+
+        var row = document.createElement("tr");
+        row.id = "Viaje" + id;
+
+        // ID del producto del contrato
+        var tdid = document.createElement("td");
+        tdid.innerText = id;
+        tdid.innerHTML = id;
+        tdid.style.display = "none";
+        row.appendChild(tdid);
+
+        // Nombre del cliente
+        var tdcliente = document.createElement("td");
+        tdcliente.innerText = cliente;
+        tdcliente.innerHTML = cliente;
+        row.appendChild(tdcliente);
+
+        // Nombre del contrato
+        var tdcontrato = document.createElement("td");
+        tdcontrato.innerText = contrato;
+        tdcontrato.innerHTML = contrato;
+        row.appendChild(tdcontrato);
+
+        // Producto
+        var tdproducto = document.createElement("td");
+        tdproducto.innerText = producto;
+        tdproducto.innerHTML = producto;
+        row.appendChild(tdproducto);
+
+        // Ubicacion
+        var tdubicacion = document.createElement("td");
+        tdubicacion.innerText = ubicacion;
+        tdubicacion.innerHTML = ubicacion;
+        row.appendChild(tdubicacion);
+
+        tabla.appendChild(row);
+    }
+
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+
+
+
+    function EliminarRow(id) {
+
+        var path = "/CostoRutaRecoleccion/Eliminar?id=" + id; 
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+
+                if (data == true) {
+
+                    $("#Costo" + id).remove();
+                }
+                else {
+                    swal("Error", "Hubo un error a la hora de eliminar el costo de esta ruta", "error");
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("Error", "Hubo un error a la hora de eliminar el costo de esta ruta", "error");
+            },
+            traditional: true
+
+        });
+
+    }
+
+    function CargarCostos(idCosto, costo, desde, hasta) {
+        var tabla = $("#tblCostos")[0];
+
+        var row = document.createElement("tr");
+        row.id = "Costo" + idCosto;
+
+        // ID del costo de la ruta
+        var id = document.createElement("td");
+        id.innerText = idCosto;
+        id.innerHTML = idCosto;
+        id.style.display = "none";
+        row.appendChild(id);
+
+        // FechaDesde
+        var FechaDesde = document.createElement("td");
+        FechaDesde.innerText = desde;
+        FechaDesde.innerHTML = desde;
+        row.appendChild(FechaDesde);
+
+        // FechaHasta
+        var FechaHasta = document.createElement("td");
+        FechaHasta.innerText = hasta;
+        FechaHasta.innerHTML = hasta;
+        row.appendChild(FechaHasta);
+
+        // Costo
+        var TdCosto = document.createElement("td");
+        TdCosto.innerText = costo;
+        TdCosto.innerHTML = costo;
+        row.appendChild(TdCosto);
+
+        // Eliminar
+        var eliminar = document.createElement("td");
+        eliminar.title = "Eliminar";
+        eliminar.id = "tdEliminar" + idCosto;
+        var image = document.createElement("span");
+        image.className = "glyphicon glyphicon-remove";
+        eliminar.appendChild(image);
+        row.appendChild(eliminar);
+
+        tabla.appendChild(row);
+
+        $('#tdEliminar' + idCosto).attr("onClick", "javascript:EliminarRow('" + idCosto + "'); return false;");
+
+        $("#FechaDesde").val("");
+        $("#FechaHasta").val("");
+        $("#Costo").val("");
+    }
+
+    $("#btnIncluirCosto").click(function () {
+        var costo = $("#Costo").val();
+        var desde = $("#FechaDesde").val();
+        var hasta = $("#FechaHasta").val();
+        var rutaId = $("#Id").val();
+
+        if (costo == "" || desde == "" || hasta == "") {
+
+            swal("Datos incompletos", "Debe indicar la fecha de inicio, la fecha final y el costo de esta ruta", "error");
+        }
+        else {
+
+            var path = "/CostoRutaRecoleccion/Crear?idRuta=" + rutaId + "&costo=" + costo + "&desde=" + desde + "&hasta=" + hasta;
+            $.ajax({
+                type: 'POST',
+                url: path,
+                success: function (idCosto) {
+
+                    if (idCosto != null && idCosto != "") {
+                        CargarCostos(idCosto, costo, desde, hasta);
+                    }
+                    else {
+                        swal("Error", "Hubo un error a la hora de registrar el costo de esta ruta", "error");
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    swal("Error", "Hubo un error a la hora de registrar el costo de esta ruta", "error");
+                },
+                traditional: true
+
+            });
+
+        }
+        
+    });
+</script>

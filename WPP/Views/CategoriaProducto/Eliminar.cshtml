@@ -1,0 +1,33 @@
+﻿@model WPP.Model.ModuloContratos.CategoriaProductoModel
+
+@{
+    ViewBag.Title = "Categoría de Productos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Detalles de la Categoría de Productos</h2>
+        @using (Html.BeginForm("Eliminar", "CategoriaProducto", FormMethod.Post, new { id = "frmEliminarCategoriaProducto", @Class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            <br />
+            <div class="form-group">
+                <label for="Descripcion">Nombre:</label>
+                @Html.DisplayFor(m => m.Nombre, new { @Class = "form-control", id = "Descripcion" })
+            </div>
+            <div class="form-group">
+                <label for="Categoria">Tipo:</label>
+                @Html.Raw(ViewBag.TipoDescripcion)
+
+            </div>
+            <button type="submit" class="btn btn-primary">Ok</button>
+            @Html.ActionLink("Cancelar", "Index", "CategoriaProducto", null, new { @Class = "btn btn-primary" })
+        }
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+

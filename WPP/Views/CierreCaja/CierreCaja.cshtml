@@ -1,0 +1,692 @@
+﻿@model WPP.Model.ModuloCierreCaja.CierreCajaModel
+@{    
+    ViewBag.Title = "Cierre de caja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+   
+}
+
+
+<div class="row" style="margin-top:20px; ">
+    <br />
+    <h3>Cierre de caja</h3>
+    <br />
+    <div class="col-md-6">
+        @using (Html.BeginForm("CierreCaja", "CierreCaja", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m=> m.PagosBascula)
+            @Html.HiddenFor(m => m.PagoEfectivo)
+            @Html.HiddenFor(m => m.ListaCreditos)
+            @Html.Hidden("CierreID")
+
+
+            <div class="form-group">
+                <label class="col-md-3">Moneda </label>
+                <div class="col-md-3">               
+                    @Html.DropDownListFor(m => m.Moneda, new List<SelectListItem>{
+                    new SelectListItem() {Text = "Colones", Value="Colones"},
+                    new SelectListItem() {Text = "Dólares", Value="Dolares"}
+                    }, String.Empty, new { @class = "form-control", id = "Moneda" })
+                    @Html.ValidationMessageFor(m => m.Moneda)
+                </div> 
+                <label class="col-md-3">Efectivo en caja </label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.Efectivo, String.Empty, new { @class = "form-control", id = "Efectivo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Efectivo)
+                </div>                
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Balance de Apertura <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.BalanceApertura, String.Empty, new { @class = "form-control", id = "BalanceApertura", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.BalanceApertura)
+                </div> 
+                <label class="col-md-3">Tarjeta de crédito/débito en caja </label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.Tarjetas, String.Empty, new { @class = "form-control", id = "Tarjetas", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Tarjetas)
+                </div>              
+            </div>
+            <div class="form-group">
+                <label class="col-md-3" style="padding-right:0px"></label>
+                <div class="col-md-3">
+                
+                </div> 
+                <label class="col-md-3">Transferencias en caja </label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.Transferencia, String.Empty, new { @class = "form-control", id = "Transferencia", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Transferencia)
+                </div>   
+            </div>          
+            <div class="form-group">
+                <label class="col-md-3">Balance de Cierre</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.BalanceCierre, String.Empty, new { @class = "form-control", id = "BalanceCierre", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.BalanceCierre)
+                </div>
+                <label class="col-md-3">Conteo Total </label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.ConteoTotal, String.Empty, new { @class = "form-control", id = "ConteoTotal", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.ConteoTotal)
+                </div> 
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Ajuste de Caja </label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.AjusteCaja, String.Empty, new { @class = "form-control", id = "AjusteCaja", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.AjusteCaja)
+                </div>
+            </div>
+            <button id="btnSubmit" type="submit" class="btn btn-primary" style="display:none">Submmit</button>
+            <a id="btnGuardar" class="btn btn-primary">Guardar</a>
+            <a id="btnImprimir" class="btn btn-primary" disabled>Imprimir</a>
+            @Html.ActionLink("Cancelar", "Index", "CierreCaja", null, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+
+    <div class="col-md-6" >
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tabbable" id="tabs-779403">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#panel-454895" data-toggle="tab">Efectivo</a>
+                            </li>
+                            <li>
+                                <a href="#panel-696503" data-toggle="tab">Tarjeta</a>
+                            </li>
+                            <li>
+                                <a href="#panel-696502" data-toggle="tab">Transferencias</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active form-horizontal" id="panel-454895">
+                                <br />
+                                <div class="form-group" style="padding-left:20px">
+                                    <label class="col-md-2" style="padding-left:0px;">Denominación </label>
+                                    <div class="col-md-4">
+                                        @Html.DropDownList("Denominacion", new SelectList(string.Empty, "", ""), new { @class = "form-control", id = "Denominacion" })
+                                    </div>
+                                    <label class="col-md-2">Cantidad </label>
+                                    <div class="col-md-4">
+                                        @Html.TextBox("Cantidad", String.Empty, new { @class = "form-control", id = "Cantidad", @type = "number", @min = "0", @max = "100000000000", @step = "1" })
+                                    </div>
+                                </div>
+                                <div class="form-group" style="padding-left:20px">
+                                    <label class="col-md-2" style="padding-left:0px;">Total </label>
+                                    <div class="col-md-4">
+                                        @Html.TextBox("Total", String.Empty, new { @class = "form-control", id = "Total", @readonly = "readonly" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a id="btnAgregarEfectivo" class="btn btn-primary">Agregar</a>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="padding-left:20px">
+                                    <div class="table-responsive" style="height:300px; overflow-y:auto">
+                                        <table class="table table-hover" id="tabla-efectivo">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Denominación
+                                                    </th>
+                                                    <th>
+                                                        Cantidad
+                                                    </th>
+                                                    <th>
+                                                        Total
+                                                    </th>
+                                                    <th>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblEfectivo"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group" style="float:right;">
+                                        <label for="Total">Total:</label>
+                                        <label id="TotalEfectivo">0.00</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane form-horizontal" id="panel-696503">
+                                <div class="form-group" style="padding-left:20px">
+                                    <div class="table-responsive" style="height:400px; overflow-y:auto">
+                                        <table class="table table-hover" id="tabla-tarjeta">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        No Tarjeta
+                                                    </th>
+                                                    <th>
+                                                        Banco
+                                                    </th>
+                                                    <th>
+                                                        Fecha
+                                                    </th>
+                                                    <th>
+                                                        No Boleta
+                                                    </th>
+                                                    <th>
+                                                        No Monto
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblTarjeta"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group" style="float:right;">
+                                        <label for="Total">Total:</label>
+                                        <label id="TotalTarjeta">0.00</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane form-horizontal" id="panel-696502">
+                                <div class="form-group" style="padding-left:20px">
+                                    <div class="table-responsive" style="height:400px; overflow-y:auto">
+                                        <table class="table table-hover" id="tabla-transferencias">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        No Transferencia
+                                                    </th>
+                                                    <th>
+                                                        Detalle
+                                                    </th>
+                                                    <th>
+                                                        Fecha
+                                                    </th>
+                                                    <th>
+                                                        No Boleta
+                                                    </th>
+                                                    <th>
+                                                        No Monto
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblTransferencias"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group" style="float:right;">
+                                        <label for="Total">Total:</label>
+                                        <label id="TotalTransferencia">0.00</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+    </div>
+
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        // Función para dar formato numérico
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+        // Asignar eventos a los diferentes controles del formualrio
+
+        if($("#PagosBascula").val() != null || $("#PagosBascula").val() != "")
+        {
+            LimpiarModelo();
+        }
+
+        $("#Tarjetas").val($("#SumaTarjeta").val());
+        $("#Transferencia").val($("#SumaTransferencia").val());
+
+        $("#ConteoTotal").change(function () {
+            CalcularAjusteCaja();           
+        });
+
+        $("#BalanceCierre").change(function () {
+            CalcularAjusteCaja();
+        });
+
+        $("#BalanceApertura").change(function () {
+            CalcularBalnceCierre();
+        });
+
+        $("#RecibosDinero").change(function () {
+            CalcularBalnceCierre();
+        });
+                        
+        $("#Efectivo").change(function () {
+            CalcularConteoTotal();
+        });
+
+        $("#Transferencia").change(function () {
+            CalcularConteoTotal();
+        });
+
+        $("#Tarjetas").change(function () {
+            CalcularConteoTotal();
+        });
+
+        $("#Moneda").change(function () {
+            CambioMoneda();
+        });
+
+        $("#Cantidad").change(function () {
+            CambioTotalEfectivo();
+        });
+        
+        $("#Denominacion").change(function () {
+            CambioTotalEfectivo();
+        });
+             
+
+    });// end document ready
+
+    // Calcula el ajuste de caja, con la diferencia de balance de cierre - conteo total
+    function CalcularAjusteCaja() {
+        var conteo = $("#ConteoTotal").val();
+        var balance = $("#BalanceCierre").val();
+        var ajuste = balance - conteo;
+        $("#AjusteCaja").val(ajuste);
+    }
+
+    // Se calcula el balance de cierre, que se obtiene con la suma de balance de apertura
+    function CalcularBalnceCierre() {
+        var balance = $("#BalanceApertura").val();
+        var recibos = $("#RecibosDinero").val();
+        var cierre = balance + recibos;
+        $("#BalanceCierre").val(cierre);
+    }
+
+    // Calcular el conteo total con la suma del dinero registrado en efctivo + el total de transferencias + el total de tarjetas
+    function CalcularConteoTotal() {
+        var tarjetas = $("#Tarjetas").val();
+       var transferencia = $("#Transferencia").val();
+        var efectivo = $("#Efectivo").val();
+        var conteo = Number(tarjetas) + Number(transferencia) + Number(efectivo);
+        $("#ConteoTotal").val(conteo);
+    }
+
+    // Evento que carga las denominaciones de las monedas segun el tipo de moneda 
+    //y de la misma manera las transacciones y pagos con tarjetas que se hiceron con esa moneda
+    function CambioMoneda() {
+        var moneda = $("#Moneda").val();
+        CargarDenominaciones(moneda);
+        CargarMontosMoneda(moneda);
+    }
+
+    // Carga las transacciones y pagos con tarjetas que se hiceron con la moneda seleccionada
+    function CargarMontosMoneda(moneda) {
+        var path = "/CierreCaja/CargarValoresTotales?Moneda=" + moneda;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (datos) {
+                var Cierre = datos[0];
+                var ListaTarjetas = datos[1];
+                var ListaTransferencias = datos[2];
+                var PagosBascula = datos[3];
+                var Creditos = datos[4];
+
+                $("#BalanceApertura").val(Cierre.BalanceApertura);
+                $("#BalanceCierre").val(Cierre.BalanceCierre);
+                $("#Tarjetas").val(Cierre.Tarjetas);
+                $("#Transferencia").val(Cierre.Transferencia);
+                var conteo = Number(Cierre.Transferencia) + Number(Cierre.Tarjetas);
+                $("#ConteoTotal").val(conteo);
+                $("#PagosBascula").val(JSON.stringify(PagosBascula));
+                $("#ListaCreditos").val(JSON.stringify(Creditos));
+
+                CalcularAjusteCaja();
+                CargarTablaTarjeta(ListaTarjetas);
+                CargarTablaTranferencia(ListaTransferencias);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("Se presentó un error al cargar los datos", "", "error");
+            },
+            traditional: true
+
+        });
+    }
+
+    //Carga las denominaciones de moneda segun la moneda seleccionada
+    function CargarDenominaciones(moneda) {
+        var path = "/CierreCaja/CargarDenominacionesMoneda?Moneda=" + moneda;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                populateDD('Denominacion', data);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#Denominacion").empty();
+            },
+            traditional: true
+
+        });
+    }
+    // Funcion para llenar de manera dinámica el dropdown de contratos
+    function populateDD(_idPopulate, data) {
+        var dd = $("#" + _idPopulate);
+        dd.empty();
+        dd.append($('<option></option>').val("").html(""));
+        for (var i = 0; i < data.length; i++) {
+
+            dd.append($('<option></option>').val(data[i].Id).html(data[i].Nombre));
+
+        }
+    }
+
+    // Calcula el total del efectivo segun la cantidad digitada y la denominacion seleccionada
+    function CambioTotalEfectivo() {
+        var cantidad = $("#Cantidad").val();
+        var denominacion = $("#Denominacion option:selected").text();
+        denominacion = denominacion.substring(1, denominacion.length);
+        var total = Number(cantidad) * Number(denominacion);
+        $("#Total").val(total);
+      //  $("#TotalEfectivo").text(total);
+    }
+
+    //Incluye una fila en la tabla de efectivo coon la informacion ingresada 
+    $("#btnAgregarEfectivo").click(function () {
+     
+        if ($("#Denominacion").val() == "" || $("#Cantidad").val() == "")
+        {
+            swal("Debe completar la información del conteo de dinero en efectivo", "", "error");
+           // alert("Debe completar la información del conteo de dinero en efectivo");
+        }
+        else
+        {
+            var tabla = $("#tblEfectivo")[0];
+
+            var row = document.createElement("tr");
+
+            // Denominacion ID
+            var denominacion = document.createElement("td");
+            denominacion.innerText = $("#Denominacion").val();
+            denominacion.innerHTML = $("#Denominacion").val();
+            denominacion.style.display = "none";
+            row.appendChild(denominacion);
+
+            // Denominacion Descripcion
+            var descripcion = document.createElement("td");
+            descripcion.innerText = $("#Denominacion option:selected").text();
+            descripcion.innerHTML = $("#Denominacion option:selected").text();
+            row.appendChild(descripcion);
+
+            // Cantidad
+            var cantidad = document.createElement("td");
+            cantidad.innerText = $("#Cantidad").val();
+            cantidad.innerHTML = $("#Cantidad").val();
+            row.appendChild(cantidad);
+
+            // Total 
+            var total = document.createElement("td");
+            total.innerText = $("#Total").val();
+            total.innerHTML = $("#Total").val();
+            row.appendChild(total);
+
+            tabla.appendChild(row);
+
+            var totalEfectivo = $("#TotalEfectivo").text();
+            totalEfectivo = Number(totalEfectivo) + Number($("#Total").val());
+            $("#TotalEfectivo").text(totalEfectivo);
+            $("#Efectivo").val(totalEfectivo)
+            CalcularConteoTotal();
+            CalcularAjusteCaja();
+            LimpiarEfectivo();
+        }
+    });
+
+    function LimpiarEfectivo() {
+        $("#Total").val("0");
+        $("#Cantidad").val("0");
+        $("#Denominacion").val("");
+    }
+   
+    // Carga la tabla de Tarjetas con la informacion necesaria, segun el tipo de moneda indicada
+    function CargarTablaTarjeta(datos)
+    {
+        var tabla = $("#tblTarjeta")[0];
+        var suma = 0;
+
+        for (var i = 0; i < datos.length; i++)
+        {
+            var Tarjeta = datos[i];
+            var row = document.createElement("tr");
+            row.id = Tarjeta.Id;
+            
+            // PagoBascula ID
+            var id = document.createElement("td");
+            id.innerText = Tarjeta.Id;
+            id.innerHTML = Tarjeta.Id;
+            id.style.display = "none";
+            row.appendChild(id);
+
+            // NumeroTarjeta
+            var id = document.createElement("td");
+            id.innerText = Tarjeta.NumeroTarjeta;
+            id.innerHTML = Tarjeta.NumeroTarjeta;
+            row.appendChild(id);
+
+            // Banco
+            var banco = document.createElement("td");
+            banco.innerText = Tarjeta.BancoDescripcion;
+            banco.innerHTML = Tarjeta.BancoDescripcion;
+            row.appendChild(banco);
+            
+            // Fecha
+            var stringFecha = Tarjeta.Fecha;
+            stringFecha = stringFecha.substring(6, 19);
+            var date = new Date(Number(stringFecha));
+            var fecha = document.createElement("td");
+            fecha.innerText = convertDate(date);
+            fecha.innerHTML = convertDate(date);
+            row.appendChild(fecha);
+            
+            // Boleta
+            var boleta = document.createElement("td");
+            boleta.innerText = Tarjeta.Boleta;
+            boleta.innerHTML = Tarjeta.Boleta;
+            row.appendChild(boleta);
+
+            // Monto
+            var monto = document.createElement("td");
+            monto.innerText = Number(Tarjeta.Monto).format(2);
+            monto.innerHTML = Number(Tarjeta.Monto).format(2);
+            row.appendChild(monto);
+
+            tabla.appendChild(row);
+
+            suma += Number(Tarjeta.Monto);
+        }
+
+        $("#TotalTarjeta").text(Number(suma).format(2));
+    }
+
+
+    // Carga la tabla de Transferencias con la informacion necesaria, segun el tipo de moneda indicada
+    function CargarTablaTranferencia(datos) {
+        var tabla = $("#tblTransferencias")[0];
+        var suma = 0;
+
+        for (var i = 0; i < datos.length; i++) {
+            var Transferencia = datos[i];
+            var row = document.createElement("tr");
+            row.id = Transferencia.Id;
+
+            // PagoBascula ID
+            var id = document.createElement("td");
+            id.innerText = Transferencia.Id;
+            id.innerHTML = Transferencia.Id;
+            id.style.display = "none";
+            row.appendChild(id);
+
+            // NumeroTransferencia
+            var id = document.createElement("td");
+            id.innerText = Transferencia.NumeroTransferencia;
+            id.innerHTML = Transferencia.NumeroTransferencia;
+            row.appendChild(id);
+
+            // DetalleTransferencia
+            var banco = document.createElement("td");
+            banco.innerText = Transferencia.DetalleTransferencia;
+            banco.innerHTML = Transferencia.DetalleTransferencia;
+            row.appendChild(banco);
+
+            // Fecha
+            var stringFecha = Transferencia.Fecha;
+            stringFecha = stringFecha.substring(6, 19);
+            var date = new Date(Number(stringFecha));
+            var fecha = document.createElement("td");
+            fecha.innerText = convertDate(date);
+            fecha.innerHTML = convertDate(date);
+            row.appendChild(fecha);
+
+            // Boleta
+            var boleta = document.createElement("td");
+            boleta.innerText = Transferencia.Boleta;
+            boleta.innerHTML = Transferencia.Boleta;
+            row.appendChild(boleta);
+
+            // Monto
+            var monto = document.createElement("td");
+            monto.innerText = Number(Transferencia.Monto).format(2);
+            monto.innerHTML = Number(Transferencia.Monto).format(2);
+            row.appendChild(monto);
+
+            tabla.appendChild(row);
+
+            suma += Number(Transferencia.Monto);
+        }
+
+        $("#TotalTransferencia").text(Number(suma).format(2));
+    }
+
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+
+    // Se encarga de guardar la informacion ingresada para el cierre de caja
+    $("#btnGuardar").click(function () {
+
+        var balance = $("#BalanceCierre").val();
+        var conteo = $("#ConteoTotal").val();
+        var continuar = true;
+
+        // Se comprueba si el balance de cierre es igual al conteo total, en caso de no serlo se presenta una notificacion al usuario 
+        // indicando la diferencia y confirmando si desea continuar con el cierre de caja
+        if(Number(balance) != Number(conteo))
+        {
+            var ajuste = $("#AjusteCaja").val();
+            if (confirm("Hay una diferencia de " + ajuste + " en el Ajuste de Caja. ¿Desea continuar con el cierre de caja?") != true)
+            {
+                continuar = false;
+            }
+        }
+  
+        // Se comprueba que existan datos validos para continuar con el cierre 
+        if(conteo == "" || Number(conteo) == 0)
+        {
+            continuar = false;
+        }
+
+        
+        if (continuar)
+        {
+            CargarInformacionPagosEfectivo();
+
+            var path = "/CierreCaja/CierreCaja";
+            $.ajax({
+                type: 'POST',
+                url: $("#frmCrear").attr('action'),
+                data: $("#frmCrear").serialize(),
+                success: function (data) {
+                    if (data != null)
+                    {
+                        //var id = data;
+                        $("#CierreID").val(data);
+                        $("#btnImprimir").removeAttr("disabled");
+                        $("#btnGuardar").hide();
+                        swal("Cierre de Caja", "Se realizó el cierre de caja de manera exitosa", "success");
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                   
+                },
+                traditional: true
+
+            });
+            //document.getElementById("btnSubmit").click();
+
+           // LimpiarModelo();
+        }
+    });
+
+    // Se encarga de guardar la informacion ingresada para el cierre de caja
+    $("#btnImprimir").click(function () {
+        var id = $("#CierreID").val();
+        window.open("/CierreCaja/ReporteCierreCaja?id=" + id, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+    });
+
+    // Carga la informacion que se encuentra en  la tabla de efectivo para ser guardarda con el cierre de caja
+    // se carga el json con la informacion recolectada de la tabla
+    function CargarInformacionPagosEfectivo() {
+        var tabla = $("#tblEfectivo")[0];
+        var datos = [];
+
+        for (var i = 0; i < tabla.childElementCount; i++) {
+            var row = tabla.children[i];
+
+            var denominacion = row.children[0].innerText;
+            var cantidad = row.children[2].innerText;
+                    
+            var efectivo = {
+                Denominacion: Number(denominacion),
+                Cantidad: Number(cantidad)
+            }
+
+            datos.push(efectivo);            
+        }
+
+        var jsonDatos = JSON.stringify(datos);
+        $("#PagoEfectivo").val(jsonDatos);
+
+    }
+
+    function LimpiarModelo () {
+        $("#PagoEfectivo").val("");
+        $("#Moneda").val("");
+        $("#BalanceCierre").val("");
+        $("#BalanceApertura").val("");
+        $("#Tarjetas").val("");
+        $("#Efectivo").val("");
+        $("#Transferencia").val("");
+        $("#AjusteCaja").val("");
+        $("#PagosBascula").val("");
+        $("#ConteoTotal").val("");
+    }
+
+</script>

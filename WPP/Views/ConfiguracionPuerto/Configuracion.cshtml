@@ -1,0 +1,70 @@
+﻿@model WPP.Model.ModuloBascula.ConfiguracionPuertoModel
+@{
+    ViewBag.Title = "Configuración ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Configuración del Puerto</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("GuardarConfiguracion", "ConfiguracionPuerto", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(m=> m.Id)
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label for="descripcion">Nombre PC</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.NombrePC, new { @Class = "form-control", id = "NombrePC", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.NombrePC)
+                </div>
+
+                <div class="form-group">
+                    <label for="Puerto">Puerto</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Puerto, new SelectList(ViewBag.Puertos, "Nombre", "Nombre"), new { @class = "form-control", id = "Puerto" })
+                    @Html.ValidationMessageFor(m => m.Puerto)
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                @Html.ActionLink("Cancelar", "Index", "ConfiguracionPuerto", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+       
+
+
+    });// end document ready
+
+
+</script>

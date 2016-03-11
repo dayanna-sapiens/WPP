@@ -1,0 +1,55 @@
+﻿@model WPP.Model.General.SolicitarContrasenaModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LogInLayout.cshtml";
+}
+
+
+
+    <link href="@Url.Content("~/Content/datepicker.css")" rel="stylesheet" type="text/css" />
+
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="login-div-container">
+            <div style="background-color:#2E4A71; color:white; text-align:center; height:50px; border-top-left-radius:13px; border-top-right-radius:13px;">
+                <h3 style="padding-top:11px;">Solicitar Constraseña</h3>
+            </div>
+            <div style="border:1px solid #2E4A71; padding-left:10px; padding-right:10px; padding-bottom:50px;">
+
+                <br />
+
+                @using (Html.BeginForm("SolicitarContrasena", "Usuario", FormMethod.Post, new { id = "frmLogin" }))
+                {   @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class=" control-label">Email:</label>
+
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control nameInput" })
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class=" control-label">Cédula:</label>
+
+                        @Html.TextBoxFor(m => m.Cedula,  new { @class = "form-control nameInput" })
+                        @Html.ValidationMessageFor(m => m.Cedula)
+                    </div>
+                    <div style="float:left">
+                        <button type="submit" class="btn btn-default">Enviar</button>                        
+                        @Html.ActionLink("Regresar", "Login", "Usuario", null, new { @Class = "btn btn-primary" })
+                    </div>
+                    <div style="float:right;">
+                        <img src="~/Images/Logo.png" alt="WPP" height="105" width="100" style="margin-top:-28px;">
+                    </div>
+                }
+
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+
+
+

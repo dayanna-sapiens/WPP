@@ -1,0 +1,56 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.CuadrillaModel
+
+@{
+    ViewBag.Title = "Cuadrilla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Eliminar Cuadrilla</h2>
+        @using (Html.BeginForm("Eliminar", "Cuadrilla", FormMethod.Post, new { id = "frmEliminarCuadrilla", @Class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            <br />
+            <div class="form-group">
+                <label for="Descripcion">Descripcion:</label>
+                @Html.DisplayFor(m => m.Descripcion, new { @Class = "form-control", id = "Descripcion" })
+            </div>
+            <div class="form-group">
+                <label for="Estado">Estado:</label>
+                @Html.DisplayFor(m => m.Estado, new { @Class = "form-control", id = "Estado" })
+            </div>
+            <div class="form-group">
+                <label for="Chofer">Chofer:</label>
+                @foreach (var c in Model.ListaEmpleados)
+                {
+                    if (c.Puesto == "Chofer")
+                    {
+                        @Html.Raw(c.Nombre)
+                    }
+                }
+            </div>
+            <div class="form-group">
+                <label for="Asistentes">Asistentes:</label>
+                <ul>
+                    @foreach (var c in Model.ListaEmpleados)
+                    {
+                        if (c.Puesto != "Chofer")
+                        {
+                            <li>@c.Nombre</li>
+                        }
+                    }
+                </ul>
+            </div>
+            <button type="submit" class="btn btn-primary">Ok</button>
+            @Html.ActionLink("Cancelar", "Index", "Cuadrilla", null, new { @Class = "btn btn-primary" })
+        }
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+
+

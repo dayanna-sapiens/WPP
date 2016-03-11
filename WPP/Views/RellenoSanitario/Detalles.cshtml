@@ -1,0 +1,44 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.RellenoSanitarioModel
+
+@{
+    ViewBag.Title = "Detalles del Relleno Sanitario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Detalles del Relleno Sanitario</h2>
+
+        @using (Html.BeginForm("Detalles", "RellenoSanitario", FormMethod.Post, new { id = "frmDetallesRellenoSanitario", @Class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                <label for="Descripcion">Nombre:</label>
+                @Html.DisplayFor(m => m.Nombre, new { @Class = "form-control", id = "Nombre" })
+            </div>
+          
+            <div class="form-group">
+                <label for="Estado">Estado:</label>
+                @if (Model.Estado)
+                {
+                    @Html.Raw("Activo")
+                }
+                else
+                {
+                    @Html.Raw("Inactivo")
+                }
+
+            </div>
+            @Html.ActionLink("Regresar", "Index", "RellenoSanitario", null, new { @Class = "btn btn-primary" })
+
+        }
+
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+

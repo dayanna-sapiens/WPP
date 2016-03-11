@@ -1,0 +1,403 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.RutaRecoleccionModel
+
+@{
+    ViewBag.Title = "Editar Ruta de Recolección";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    String ListaViajes = ViewBag.Viajes;
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <br />
+    <h3>Crear Ruta de Recolección</h3>
+    <br />
+
+    <div class="col-md-6" style="padding-right:30px;">
+
+        @using (Html.BeginForm("Editar", "RutaRecoleccion", FormMethod.Post, new { id = "frmEditarRellenoSanitario", @class = "form-horizontal" }))
+        {
+
+            @Html.ValidationSummary(true)
+            @Html.Hidden("RutaActual")
+            @Html.HiddenFor(m => m.ListaRutas)
+            @Html.HiddenFor(m => m.Compania)
+            @Html.HiddenFor(m => m.Id)
+            @Html.Hidden("ListaViajes", @ListaViajes)
+
+
+            <div class="form-group">
+                <label for="Nombre">Descripcion</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                @Html.TextBoxFor(m => m.Descripcion, new { @Class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Descripcion)
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Estado <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.Estado, new List<SelectListItem>{
+                                            new SelectListItem() {Text = "Activo", Value="Activo"},
+                                            new SelectListItem() {Text = "Inactivo", Value="Inactivo"}
+                                            }, String.Empty, new { @class = "form-control", id = "Estado" })
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+                <label class="col-md-2">Tipo <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.Tipo, new List<SelectListItem>{
+                                            new SelectListItem() {Text = "Municipal", Value="Municipal"},
+                                            new SelectListItem() {Text = "Comercial", Value="Comercial"},
+                                            new SelectListItem() {Text = "Roll-Off", Value="Roll-Off"}
+                                            }, String.Empty, new { @class = "form-control", id = "Tipo" })
+                    @Html.ValidationMessageFor(m => m.Tipo)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3" style="font-size:initial;text-decoration:underline">Viajes</label>
+            </div>
+            <div class="form-group">
+                <div class="table-responsive" style="height:200px; overflow-y:auto">
+                    <table class="table table-hover" id="tabla-viajes">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Cliente
+                                </th>
+                                <th>
+                                    Contrato
+                                </th>
+                                <th>
+                                    Producto
+                                </th>
+                                <th>
+                                    Ubicación
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblViajes"></tbody>
+                    </table>
+                </div>
+            </div>
+            <br />
+
+            <a id="btnGuardar" class="btn btn-primary">Guardar</a>
+            <button id="btnSubmit" type="submit" class="btn btn-primary" style="display:none;"></button>
+            @Html.ActionLink("Cancelar", "Index", "RutaRecoleccion", null, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+    <div class="col-md-6" style="padding-left:30px;">
+        <div class="row">
+            <div class="col-12-md">
+                <label class="col-md-2">Ruta </label>
+                <br />
+                <br />
+
+                <div class="col-md-10">
+                    @Html.TextBox("txtBuscar", "", new { @Class = "form-control", id = "txtBuscar", @placeholder = "Buscar" })
+                </div>
+                <div class="col-md-2">
+                    <a id="btnBuscar" class="btn btn-primary">Buscar  <span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <br />
+            <div class="col-12-md">
+
+                <br />
+                <div class="table-responsive" style="height:300px; overflow-y:auto">
+                    <table class="table table-hover" id="tabla-rutas">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Cliente
+                                </th>
+                                <th>
+                                    Contrato
+                                </th>
+                                <th>
+                                    Ubicación
+                                </th>
+                                <th>
+                                    Producto
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tblRutas"></tbody>
+                    </table>
+                </div>
+
+            </div>
+            <br />
+            <div class="col-12-md" style="float:right">
+                <a id="btnIncluirRuta" class="btn btn-primary">Incluir Ruta   <i class="fa fa-truck"></i></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        var data = JSON.parse($("#ListaViajes").val());
+        for (var i = 0; i < data.length; i++) {
+            var elemento = data[i];
+            CargarTablaViajes(elemento.Id, elemento.ContratoDescripcion, elemento.Descripcion, elemento.ProductoDescripcion, elemento.UbicacionDescripcion);
+        }
+
+
+    });// end document ready
+
+    $("#btnBuscar").click(function () {
+
+        var busqueda = $("#txtBuscar").val();
+        var tipo = "";
+        var path = "/Contrato/FiltrarContratosProyecto?busqueda=" + busqueda + "&tipo=" + tipo;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                if (data != null) {
+                    CargarRutas(data);
+                }
+                else {
+                    $("#tblRutas tr").remove();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#tblRutas tr").remove();
+            },
+            traditional: true
+
+        });
+
+    });
+
+
+    $("#btnGuardar").click(function () {
+
+        var tablaViajes = $("#tblViajes tr");
+        if (tablaViajes.length < 1) {
+
+            swal("Datos incompletos", "Debe indicar al menos una ruta", "error");
+           // alert("Debe indicar al menos una ruta");
+        }
+        else {
+            if (tablaViajes.length > 1 && ($("#Tipo").val() == "Municipal" || $("#Tipo").val() == "Roll-Off")) {
+
+                swal("Ruta Inválida", "Este tipo de recolección únicamente permite asignar una ruta.", "error");
+            }
+            else {
+                var Rutas = $("#ListaRutas").val();
+                for (var i = 0; i < tablaViajes.length; i++) {
+                    if (i == 0) {
+                        Rutas += tablaViajes[i].children[0].innerText;
+                    }
+                    else {
+                        Rutas += "," + tablaViajes[i].children[0].innerText;
+                    }
+                }
+                $("#ListaRutas").val(Rutas);
+
+                document.getElementById("btnSubmit").click();
+            }
+        }
+
+    });
+
+    $("#btnIncluirRuta").click(function () {
+
+        var Ruta = $("#RutaActual").val();
+        if (Ruta == "" || Ruta == null) {
+
+            swal("Datos incompletos", "Debe indicar al menos una ruta", "error");
+           // alert("Seleccione una ruta");
+        }
+        else {
+            var viaje = $("#tblViajes tr[id=Viaje" + Ruta + "]");
+            if (viaje.length == 0) {
+                var trRutas = $("#tblRutas tr[id=Ruta" + Ruta + "]")[0];
+
+                CargarTablaViajes(Ruta, trRutas.children[2].innerText, trRutas.children[1].innerText, trRutas.children[3].innerText, trRutas.children[4].innerText);
+
+                //var tabla = $("#tblViajes")[0];
+
+                //var row = document.createElement("tr");
+                //row.id = "Viaje" + Ruta;
+
+                //// ID del producto del contrato
+                //var id = document.createElement("td");
+                //id.innerText = Ruta;
+                //id.innerHTML = Ruta;
+                //id.style.display = "none";
+                //row.appendChild(id);
+
+                //// Nombre del cliente
+                //var cliente = document.createElement("td");
+                //cliente.innerText = trRutas.children[1].innerText;
+                //cliente.innerHTML = trRutas.children[1].innerText;
+                //row.appendChild(cliente);
+
+                //// Nombre del contrato
+                //var contrato = document.createElement("td");
+                //contrato.innerText = trRutas.children[2].innerText;
+                //contrato.innerHTML = trRutas.children[2].innerText;
+                //row.appendChild(contrato);
+
+                //// Ubicacion
+                //var ubicacion = document.createElement("td");
+                //ubicacion.innerText = trRutas.children[3].innerText;
+                //ubicacion.innerHTML = trRutas.children[3].innerText;
+                //row.appendChild(ubicacion);
+
+                //// Eliminar
+                //var eliminar = document.createElement("td");
+                //eliminar.title = "Eliminar";
+                //eliminar.id = "tdEliminar" + Ruta;
+                //var image = document.createElement("span");
+                //image.className = "glyphicon glyphicon-remove";
+                //eliminar.appendChild(image);
+                //row.appendChild(eliminar);
+
+                //tabla.appendChild(row);
+
+                //$('#tdEliminar' + Ruta).attr("onClick", "javascript:EliminarRow('" + Ruta + "'); return false;");
+
+                $("#txtBuscar").val("");
+                $("#tblRutas tr").remove();
+            }
+        }
+    });
+
+    function CargarTablaViajes(id, contrato, cliente, producto, ubicacion)
+    {
+        var tabla = $("#tblViajes")[0];
+
+        var row = document.createElement("tr");
+        row.id = "Viaje" + id;
+
+        // ID del producto del contrato
+        var tdid = document.createElement("td");
+        tdid.innerText = id;
+        tdid.innerHTML = id;
+        tdid.style.display = "none";
+        row.appendChild(tdid);
+
+        // Nombre del cliente
+        var tdcliente = document.createElement("td");
+        tdcliente.innerText = cliente;
+        tdcliente.innerHTML = cliente;
+        row.appendChild(tdcliente);
+
+        // Nombre del contrato
+        var tdcontrato = document.createElement("td");
+        tdcontrato.innerText = contrato;
+        tdcontrato.innerHTML = contrato;
+        row.appendChild(tdcontrato);
+
+        // Producto
+        var tdproducto = document.createElement("td");
+        tdproducto.innerText = producto;
+        tdproducto.innerHTML = producto;
+        row.appendChild(tdproducto);
+
+        // Ubicacion
+        var tdubicacion = document.createElement("td");
+        tdubicacion.innerText = ubicacion;
+        tdubicacion.innerHTML = ubicacion;
+        row.appendChild(tdubicacion);
+
+        // Eliminar
+        var eliminar = document.createElement("td");
+        eliminar.title = "Eliminar";
+        eliminar.id = "tdEliminar" + id;
+        var image = document.createElement("span");
+        image.className = "glyphicon glyphicon-remove";
+        eliminar.appendChild(image);
+        row.appendChild(eliminar);
+
+        tabla.appendChild(row);
+
+
+        $('#tdEliminar' + id).attr("onClick", "javascript:EliminarRow('" + id + "'); return false;");
+    }
+
+
+    // función para obtener la información del producto seleccionado
+    function SelectRow(id, precio, tipo, precioFosa) {
+        //var equipo = id;
+        $("#tblRutas tr").css("background-color", "#FFF");
+        var row = $('#Ruta' + id).css("background-color", "#D0EA93");
+        $("#RutaActual").val(id);
+    }
+
+    function EliminarRow(id) {
+        $("#Viaje" + id).remove();
+    }
+
+    function CargarRutas(data) {
+        $("#tblRutas tr").remove();
+
+        var tabla = $("#tblRutas")[0];
+
+        for (var i = 0; i < data.length; i++) {
+            for (var cont = 0; cont < data[i].Productos.length; cont++) {
+                var row = document.createElement("tr");
+                row.id = "Ruta" + data[i].Productos[cont].Id;
+
+                // ID del producto del contrato
+                var id = document.createElement("td");
+                id.innerText = data[i].Productos[cont].Id;
+                id.innerHTML = data[i].Productos[cont].Id;
+                id.style.display = "none";
+                row.appendChild(id);
+
+                // Nombre del cliente
+                var cliente = document.createElement("td");
+                cliente.innerText = data[i].Cliente.Numero + " - " + data[i].Cliente.Nombre;
+                cliente.innerHTML = data[i].Cliente.Numero + " - " + data[i].Cliente.Nombre;
+                row.appendChild(cliente);
+
+                // Nombre del contrato
+                var contrato = document.createElement("td");
+                contrato.innerText = data[i].Numero + " - " + data[i].DescripcionContrato;
+                contrato.innerHTML = data[i].Numero + " - " + data[i].DescripcionContrato;
+                row.appendChild(contrato);
+
+                // Producto
+                var producto = document.createElement("td");
+                producto.innerText = data[i].Productos[cont].Descripcion;
+                producto.innerHTML = data[i].Productos[cont].Descripcion;
+                row.appendChild(producto);
+
+                // Ubicacion
+                var ubicacion = document.createElement("td");
+                ubicacion.innerText = data[i].Productos[cont].Ubicacion.Descripcion;
+                ubicacion.innerHTML = data[i].Productos[cont].Ubicacion.Descripcion;
+                row.appendChild(ubicacion);
+
+                tabla.appendChild(row);
+
+                $('#Ruta' + data[i].Productos[cont].Id).attr("onClick", "javascript:SelectRow('" + data[i].Productos[cont].Id + "'); return false;");
+            }
+        }
+    }
+
+
+</script>

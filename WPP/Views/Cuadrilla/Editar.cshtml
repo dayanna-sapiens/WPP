@@ -1,0 +1,139 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.CuadrillaModel
+
+@{
+    ViewBag.Title = "Cuadrilla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Editar Cuadrilla</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Editar", "Cuadrilla", FormMethod.Post, new { id = "frmEditar", @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.Id)
+
+                <div class="form-group">
+                    <label for="Descripcion">Descripción</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Descripcion, new { @Class = "form-control", id = "Descripcion" })
+                    @Html.ValidationMessageFor(m => m.Descripcion)
+                </div>
+
+                <div class="form-group">
+                    <label for="Estado">Estado</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Estado, new List<SelectListItem>{
+                                                        new SelectListItem() {Text = "Activo", Value="Activo"},
+                                                        new SelectListItem() {Text = "Inactivo", Value="Inactivo"}
+                                                        }, new { @class = "form-control", id = "Estado" })
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+                <div class="form-group">
+                    <label for="Chofer">Chofer</label>
+                    @Html.DropDownListFor(m => m.Chofer, new SelectList(ViewBag.ListaChoferes, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Chofer" })
+                    @Html.ValidationMessageFor(m => m.Chofer)
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Asistentes</label>
+                    <br />
+                    @Html.HiddenFor(m => m.EmpleadosId)
+                    @Html.ValidationMessageFor(m => m.EmpleadosId)
+
+                    @if (ViewBag.ListaPeones != null)
+                    {
+                        var empleado = String.Empty;
+                        foreach (var Peones in ViewBag.ListaPeones)
+                        {
+                            var strEmpleado = Model.EmpleadosId.Split(',');
+                            foreach (var item in strEmpleado)
+                            {
+                                if (Convert.ToInt64(item) == Peones.Id)
+                                {
+                                    empleado = Peones.Id.ToString();
+                                    <input type="checkbox" value='@Peones.Id' name="ckbEmpleados" checked="checked" />
+                                    @Peones.Nombre
+                                    <br />
+                                }
+                            }
+                            if (empleado != Peones.Id.ToString())
+                            {
+                                <input type="checkbox" value='@Peones.Id' name="ckbEmpleados" />
+                                @Peones.Nombre
+                                <br />
+                            }
+                        }
+                    }
+                
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                @Html.ActionLink("Cancelar", "Index", "Cuadrilla", null, new { @Class = "btn btn-primary" })
+                
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+
+        $("input:checkbox[name='ckbEmpleados']").change(function () {
+            actual = $("input#EmpleadosId").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {
+                if (!actual) {
+                    actual = append;
+                    $("input#EmpleadosId").val(actual);
+                } else {
+                    actual = actual + ',' + append;
+                    $("input#EmpleadosId").val(actual);
+                }
+            } else {
+                if (actual) {
+                    if (actual.indexOf(append) == 0) {
+                        if (actual == append) {
+                            actual = '';
+                        } else {
+                            actual = actual.split(append + ',').pop();
+                        }
+                        $("input#EmpleadosId").val(actual);
+                    } else {
+                        preStr = actual.substring(0, actual.indexOf(append) - 1);
+                        postStr = actual.split(append).pop();
+                        actual = preStr + postStr;
+                        $("input#EmpleadosId").val(actual);
+                    }
+                }
+            }
+            //alert(actual);
+        });
+
+    });// end document ready
+
+
+
+</script>

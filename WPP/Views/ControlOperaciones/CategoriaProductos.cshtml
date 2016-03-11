@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Control de Operaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+<div class="row" style="margin-top:20px; ">
+
+    <div class="col-md-3"></div>
+    <div class="col-md-6" style="padding-right:30px;">
+        <br />
+        <h3>Categoría de Productos</h3>
+        <br />
+        @using (Html.BeginForm("CategoriaProductos", "ControlOperaciones", FormMethod.Post, new { id = "frmCategoriaProductos", @class = "form-horizontal" }))
+        {
+
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Descripción</label>
+                <div class="col-md-10">
+                    @Html.TextBox("Descripcion", "", new { @class = "form-control", id = "Descripcion" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Tipo</label>
+                <div class="col-md-4">
+                    @Html.DropDownList("ddlTipo", new List<SelectListItem>{
+                    new SelectListItem() {Text = "Todos", Value="Todos"},
+                    new SelectListItem() {Text = "Disposición Final", Value="DisposicionFinal"},
+                    new SelectListItem() {Text = "Fosas", Value="Fosas"},
+                    new SelectListItem() {Text = "Recolección", Value="Recoleccion"},
+                    new SelectListItem() {Text = "Ninguno", Value="Ninguno"}
+                    }, new { @class = "form-control", id = "ddlTipo" })
+                </div>
+            </div>
+            <div class="col-12-md" style="float:right; padding-top:100px;">
+                @*   <a id="btnReporteRecibos" class="btn btn-primary" disabled>Reporte de Recibos   <i class="fa fa-copy"></i></a>*@
+                <a id="btnReporte" class="btn btn-primary">Reporte   <i class="fa fa-file-o"></i></a>
+                <a id="btnExcel" class="btn btn-primary">Excel   <i class="fa fa-file-excel-o"></i></a>
+                <button id="btnSubmit" type="submit" style="display:none;" class="btn btn-primary"></button>
+                @Html.ActionLink("Cancelar", "CategoriaProductos", "ControlOperaciones", null, new { @Class = "btn btn-primary" })
+            </div>
+        }
+    </div>
+
+    <div class="col-md-3"></div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+
+    });// end document ready
+
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnReporte").click(function () {
+
+        var tipo = $("#ddlTipo").val();
+        var descripcion = $("#Descripcion").val();
+
+        var formato = "pdf";
+        window.open("/ControlOperaciones/ReporteCategoriaProducto?descripcion=" + descripcion + "&tipo=" + tipo + "&formato=" + formato, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+
+    });
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnExcel").click(function () {
+        var tipo = $("#ddlTipo").val();
+        var descripcion = $("#Descripcion").val();
+
+        var formato = "excel";
+        window.location.assign("/ControlOperaciones/ReporteCategoriaProducto?descripcion=" + descripcion +"&tipo=" + tipo + "&formato=" + formato);
+    });
+
+
+</script>
+

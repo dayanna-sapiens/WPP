@@ -1,0 +1,704 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.OTRModel
+@{
+    //string tipoOTR = ViewBag.TipoOTR;
+    ViewBag.Title = "OTR Roll-Off";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    String listaTamanos = ViewBag.ListaTamanos != null ? ViewBag.ListaTamanos : String.Empty;
+    String listaTipoEquipo = ViewBag.ListaTipoEquipo != null ? ViewBag.ListaTipoEquipo : String.Empty;
+    String listaAcciones = ViewBag.ListaAcciones != null ? ViewBag.ListaAcciones : String.Empty;
+    String listaContenedores = ViewBag.ListaContenedores != null ? ViewBag.ListaContenedores : String.Empty;
+
+}
+
+
+<div class="row" style="margin-top:20px; ">
+    <br />
+    <h3>Editar OTR Roll-Off</h3>
+    <br />
+
+
+    <div class="col-md-12">
+        @using (Html.BeginForm("EditarOTRRollOff", "OTR", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Tipo)
+            @Html.HiddenFor(m => m.ListaRutas)
+            @*@Html.HiddenFor(m => m.OTRHijas)
+            @Html.HiddenFor(m => m.OTRMadre)*@
+            @Html.HiddenFor(m => m.Estado)
+            @Html.Hidden("ListaTamanos", listaTamanos)
+            @Html.Hidden("ListaAcciones", listaAcciones)
+            @Html.Hidden("ListaTipoEquipo", listaTipoEquipo)
+            @Html.Hidden("ListaContenedores", listaContenedores)
+            @Html.Hidden("RutasCompletas")
+
+            <div class="form-group">
+                <label class="col-md-1">No OTR </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Consecutivo, new { @Class = "form-control", id = "Consecutivo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Consecutivo)
+                </div>
+                <label class="col-md-1">Fecha  <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Fecha, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "Fecha", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Fecha)
+                </div>
+                <label class="col-md-1">Estado </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Estado, new { @Class = "form-control", id = "Estado", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+                <label class="col-md-1">Equipo <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.NombreEquipo, new { @Class = "form-control", id = "NombreEquipo" })
+                    @Html.ValidationMessageFor(m => m.NombreEquipo)
+                    @Html.HiddenFor(m => m.Equipo)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1">Origen <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.Origen, new SelectList(ViewBag.ListaRellenos, "Id", "Nombre"), String.Empty, new { @Class = "form-control", id = "Origen" })
+                    @Html.ValidationMessageFor(m => m.Origen)
+                </div>
+                <label class="col-md-1">Destino <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.Destino, new SelectList(ViewBag.ListaRellenos, "Id", "Nombre"), String.Empty, new { @Class = "form-control", id = "Destino" })
+                    @Html.ValidationMessageFor(m => m.Destino)
+                </div> 
+                <label class="col-md-1">Relleno <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.Relleno, new SelectList(ViewBag.ListaRellenos, "Id", "Nombre"), String.Empty, new { @Class = "form-control", id = "Relleno" })
+                    @Html.ValidationMessageFor(m => m.Relleno)
+                </div>                
+            </div>
+            <div class="form-group">
+                <label class="col-md-1" style="padding-right:0px;">Cliente <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.Cliente, new SelectList(ViewBag.ListaClientes, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Cliente" })
+                    @Html.ValidationMessageFor(m => m.Cliente)
+                </div>
+                <label class="col-md-1" style="padding-right:0px;">Contrato <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.Contrato, new SelectList(ViewBag.ListaContratos, "Id", "DescripcionContrato"), String.Empty, new { @class = "form-control", id = "Contrato" })
+                    @Html.ValidationMessageFor(m => m.Contrato)
+                </div>
+                <label class="col-md-1" style="padding-right:0px;">Cuadrilla <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.Cuadrilla, new SelectList(ViewBag.ListaCuadrilla, "Id", "Descripcion"), String.Empty, new { @class = "form-control", id = "Cuadrilla" })
+                    @Html.ValidationMessageFor(m => m.Cuadrilla)
+                </div>
+            </div>
+            <div class="form-group">
+                @*<div class="form-group" id="divRutaRecoleccion">*@
+            <label class="col-md-1" style="padding-right:0px;">Ruta Recolección <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+            <div class="col-md-3">
+                @Html.DropDownListFor(m => m.RutaRecoleccion, new SelectList(ViewBag.ListaRutaRecoleccion, "Id", "Descripcion"), String.Empty, new { @class = "form-control", id = "RutaRecoleccion" })
+                @Html.ValidationMessageFor(m => m.RutaRecoleccion)
+            </div>
+            <label class="col-md-2" style="padding-right:0px;">Observaciones</label>
+            <div class="col-md-6">
+                @Html.TextAreaFor(m => m.Observaciones, new { @class = "form-control", id = "Observaciones" })
+                @Html.ValidationMessageFor(m => m.Observaciones)
+            </div>
+        </div>
+
+            <button id="btnSubmit" type="submit" class="btn btn-primary" style="display:none">Submmit</button>
+        }
+
+    </div>
+
+    <div class="col-md-12">
+
+        <div class="row" id="divRowRutas">
+            <div class="col-12-md">
+                <label class="col-md-2">Ruta </label>
+            </div>
+            <br />
+            <div class="col-12-md">
+                <br />
+                <div class="table-responsive" style="height:300px; overflow-y:auto">
+                    <table class="table table-hover" id="tabla-rutas">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Cliente
+                                </th>
+                                <th>
+                                    Contrato
+                                </th>
+                                <th>
+                                    Ubicación
+                                </th>
+                                <th>
+                                    Tipo Equipo
+                                </th>
+                                <th>
+                                    Acción
+                                </th>
+                                <th>
+                                    Equipo
+                                </th>
+                                <th>
+                                    Tamaño
+                                </th>
+                                <th>
+                                    Observaciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblRutas"></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="row" id="divRowOTR" style="display:none">
+            <div class="col-12-md">
+                <label class="col-md-10">OTRs Activas </label>
+            </div>
+            <br />
+            <div class="col-12-md">
+                <br />
+                <div class="table-responsive" style="height:200px; overflow-y:auto">
+                    <table class="table table-hover" id="tabla-otr">
+                        <thead>
+                            <tr>
+                                <th>
+
+                                </th>
+                                <th>
+                                    OTR
+                                </th>
+                                <th>
+                                    Fecha
+                                </th>
+                                <th>
+                                    Equipo
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tblOTR"></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+
+        <a id="btnGuardar" class="btn btn-primary">Guardar</a>
+     @*   <a id="btnCobrar" class="btn btn-primary">Imprimir</a>*@
+        @Html.ActionLink("Cancelar", "Index", "OTR", null, new { @Class = "btn btn-primary" })
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        // Función para dar formato numérico
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+        // Se incializa el valor de algunas variables;
+
+        var today = new Date();
+        $('#Fecha').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        //CargarContratos();
+        
+        // Si se indica que es una OTR madre se deshabilita la ruta de recoleccion, se oculta la tabla de rutas y se muestra la tabla de OTRs,
+        // de lo contrario se oculta la tabla de OTRs y se muestra la tabla de rutas y se habilita la parte de rutas de recoleccion
+        //if ($("#OTRMadre").val() == "False" || $("#OTRMadre").val() == "false") {
+            ListarRutasRecoleccion(true);
+            $("#RutaRecoleccion").prop("disabled", false);
+            $("#divRowRutas").show();
+            $("#divRowOTR").hide();
+        //}
+        //else {
+        //    $("#RutaRecoleccion").prop("disabled", true);
+        //    $("#RutaRecoleccion").val("");
+        //    $("#divRowRutas").hide();
+        //    $("#divRowOTR").show();
+        //    CargarOTRs();
+
+        //}
+
+        //Autocomplete de equipo
+        $("#NombreEquipo").autocomplete({
+            source: "../Equipo/AutoCompleteEquipo",
+            minLength: 1,
+            select: function (event, ui) {
+                console.log(JSON.stringify(ui));
+                $("#Equipo").val(ui.item.id);
+                $("#NombreEquipo").val(ui.item.value);
+            }
+        });
+
+        //Autocomplete de contenedor
+        $("#NombreContenedor").autocomplete({
+            source: "../Contenedor/AutoCompleteContenedor",
+            minLength: 1,
+            select: function (event, ui) {
+                console.log(JSON.stringify(ui));
+                $("#Contenedor").val(ui.item.id);
+                $("#NombreContenedor").val(ui.item.value);
+            }
+        });
+
+        $("#Cliente").change(function () {
+            CargarContratos();
+        });
+
+    });// end document ready
+
+
+    // Se obtienen los puntos que componen la ruta de recoleccion seleccionada
+    $("#RutaRecoleccion").change(function () {
+        ListarRutasRecoleccion(false);
+    });
+
+    // Obtiene la lista de puntos segun la ruta de recoleccion indicada
+    function ListarRutasRecoleccion(completar) {
+        var busqueda = $("#RutaRecoleccion").val();
+        var path = "/RutaRecoleccion/CargarRutasRecoleccion?ruta=" + busqueda;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                if (data != null) {
+                    CargarRutas(data, completar);
+                }
+                else {
+                    $("#tblRutas tr").remove();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#tblRutas tr").remove();
+            },
+            traditional: true
+
+        });
+    }
+
+    // Se guarda la informacion de la OTR y se valida que la informacion requerida haya sido completada
+    $("#btnGuardar").click(function () {
+
+        var equipo = $("#Equipo").val();
+        if (equipo == "" || equipo == null || equipo == "0") {
+            var errorArray = {};
+
+            errorArray["NombreEquipo"] = 'Equipo inválido';
+
+            $('#frmCrear').validate().showErrors(errorArray);
+        }
+        else {
+            // Se valida que si no es OTR madre se seleccione una ruta de recoleccion
+            //$("#OTRMadre").val() == "False" && 
+            if ($("#RutaRecoleccion").val() == "") {
+                var errorArray = {};
+
+                errorArray["RutaRecoleccion"] = 'Debe seleccionar la ruta de recolección';
+
+                $('#frmCrear').validate().showErrors(errorArray);
+            }
+            else {
+                //if ($("#OTRMadre").val() == "False" || $("#OTRMadre").val() == "false") {
+                    //Se valida que toda la informacion de las rutas sea completada
+
+                    CargarInformacionRutas();
+                    if ($("#RutasCompletas").val() == "false" || $("#RutasCompletas").val() == "False")
+                    {
+                        swal("Datos incompletos", "Debe completar toda la información de las rutas de esta OTR", "error");
+                        //alert('Debe completar toda la información de las rutas de esta OTR');
+                    }
+                    else
+                    {
+                        $.ajax({
+                            url: '/OTR/EditarOTRRollOff',
+                            data: $('#frmCrear').serializeArray(),
+                            type: 'POST',
+                            success: function (data) {
+                                if (data != null) {
+                                    window.open("/OTR/ReporteOTR?id=" + data, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+                                }
+                                else {
+
+                                }
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                            },
+                            traditional: true
+                        });
+                       // document.getElementById("btnSubmit").click();
+                    }
+                //}
+                //else {
+                //    // se valida que si se selecciono que es una OTR madre al menos seleccione una OTR hija
+                //    CargarOTRHijas();
+                //    if ($("#OTRHijas").val() == "") {
+                //        swal("Datos incompletos", "Debe seleccionar al menos una OTR activa", "error");
+                //       // alert("Debe seleccionar al menos una OTR activa");
+                //    }
+                //    else {
+                //        document.getElementById("btnSubmit").click();
+                //    }
+
+                //}
+            }
+        }
+    });
+
+    // Se crea la tabala de puntos de ruta de recoleccion con la informacion recuperada
+    function CargarRutas(data, completar) {
+        $("#tblRutas tr").remove();
+
+        var tabla = $("#tblRutas")[0];
+
+        var ListaTamanos = JSON.parse($("#ListaTamanos").val());
+        var ListaTipoEquipos = JSON.parse($("#ListaAcciones").val());
+        var ListaAcciones = JSON.parse($("#ListaTipoEquipo").val());
+        var ListaContenedores = JSON.parse($("#ListaContenedores").val());
+
+        for (var i = 0; i < data.length; i++)
+        {
+            
+            var row = document.createElement("tr");
+            row.id = data[i].Id;
+
+            // ID del producto del contrato
+            var id = document.createElement("td");
+            id.innerText = data[i].Id;
+            id.innerHTML = data[i].Id;
+            id.style.display = "none";
+            row.appendChild(id);
+
+            // Nombre del cliente
+            var cliente = document.createElement("td");
+            cliente.innerText = data[i].Descripcion;
+            cliente.innerHTML = data[i].Descripcion;
+            row.appendChild(cliente);
+
+            // Nombre del contrato
+            var contrato = document.createElement("td");
+            contrato.innerText = data[i].ContratoDescripcion;
+            contrato.innerHTML = data[i].ContratoDescripcion;
+            row.appendChild(contrato);
+
+            // Ubicación
+            var ubicacion = document.createElement("td");
+            ubicacion.innerText = data[i].UbicacionDescripcion;
+            ubicacion.innerHTML = data[i].UbicacionDescripcion;
+            row.appendChild(ubicacion);
+
+            // Tipo Equipo
+            var accion = document.createElement("td");
+            var selectAccion = document.createElement("select");
+            selectAccion.id = "cmbAccion" + data[i].Id;
+            selectAccion.className = "form-control";
+            accion.appendChild(selectAccion);
+            row.appendChild(accion);
+
+            // Acción  
+            var tipoEquipo = document.createElement("td");
+            var select = document.createElement("select");
+            select.id = "cmbTipoEquipo" + data[i].Id;
+            select.className = "form-control";
+            select.style.width = "225px";
+            tipoEquipo.appendChild(select);
+            row.appendChild(tipoEquipo);
+
+            // Equipo
+            var equipo = document.createElement("td");
+            var selectEquipo = document.createElement("select");
+            selectEquipo.id = "cmbEquipo" + data[i].Id;
+            selectEquipo.className = "form-control";
+            selectEquipo.style.width = "125px";
+            equipo.appendChild(selectEquipo);
+            row.appendChild(equipo);
+
+            // Tamaño
+            var tamano = document.createElement("td");
+            var selectTamano = document.createElement("select");
+            selectTamano.id = "cmbTamano" + data[i].Id;
+            selectTamano.className = "form-control";
+            selectTamano.style.width = "75px";
+            tamano.appendChild(selectTamano);
+            row.appendChild(tamano);
+
+            // Observaciones
+            var observaciones = document.createElement("td");
+            var input = document.createElement("textarea");
+            input.id = "txtObservaciones" + data[i].Id;
+            input.className = "form-control";
+            input.style.width = "200px";
+            observaciones.appendChild(input);
+            row.appendChild(observaciones);
+
+            tabla.appendChild(row);
+
+            populateCatalogo("cmbTipoEquipo" + data[i].Id, ListaTipoEquipos);
+            populateCatalogo("cmbAccion" + data[i].Id, ListaAcciones);
+            populateCatalogo("cmbTamano" + data[i].Id, ListaTamanos);
+            populateContenedor("cmbEquipo" + data[i].Id, ListaContenedores);
+                     
+        }
+
+        // Se llena los controles con la informacion que le corresponde a cada uno de los puntos de ruta de recoleccion
+        if (completar)
+        {
+            var ListaRutas = JSON.parse($("#ListaRutas").val());
+
+            for (var cont = 0; cont < ListaRutas.length; cont++) {
+                $("#cmbEquipo" + ListaRutas[cont].Viaje).val(ListaRutas[cont].Contenedor);
+                $("#cmbAccion" + ListaRutas[cont].Viaje).val(ListaRutas[cont].TipoEquipo);
+                $("#txtObservaciones" + ListaRutas[cont].Viaje).val(ListaRutas[cont].Observaciones);
+                $("#cmbTamano" + ListaRutas[cont].Viaje).val(ListaRutas[cont].Tamano);
+                $("#cmbTipoEquipo" + ListaRutas[cont].Viaje).val(ListaRutas[cont].Accion);
+
+                var row = $("#" + ListaRutas[cont].Viaje)[0];
+                var idViaje = document.createElement("td");
+                idViaje.innerText = ListaRutas[cont].Id;
+                idViaje.innerHTML = ListaRutas[cont].Id;
+                idViaje.style.display = "none";
+                row.appendChild(idViaje);
+            }
+        }
+        
+    }
+    
+    // Se cargan todas las OTR pendientes segun el tipo de OTR 
+    function CargarOTRs() {
+        var busqueda = $("#Tipo").val();
+        var path = "/OTR/CargarListaOTR?tipo=" + busqueda;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                if (data != null) {
+                    CargarListaOTR(data);
+                }
+                else {
+                    $("#tblOTR tr").remove();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#tblOTR tr").remove();
+            },
+            traditional: true
+
+        });
+    }
+
+    // Se crea la tabla de OTRs con la informacion obtenida
+    //function CargarListaOTR(data) {
+    //    $("#tblOTR tr").remove();
+
+    //    var tabla = $("#tblOTR")[0];
+    //    var hijas = ($("#OTRHijas").val()).split(",");
+
+    //    for (var i = 0; i < data.length; i++) {
+
+    //        var row = document.createElement("tr");
+    //        row.id = data[i].Id;
+
+    //        var checkbox = document.createElement('input');
+    //        checkbox.type = "checkbox";
+    //        checkbox.name = data[i].Id;
+    //        checkbox.id = data[i].Id;
+    //        for (var cont = 0; cont < hijas.length; cont++) {
+    //            var hija = hijas[cont];
+    //            if (hija == data[i].Id) {
+    //                checkbox.checked = true;
+    //            }
+    //        }
+    //        row.appendChild(checkbox);
+
+    //        // ID del producto del contrato
+    //        var id = document.createElement("td");
+    //        id.innerText = data[i].Id;
+    //        id.innerHTML = data[i].Id;
+    //        id.style.display = "none";
+    //        row.appendChild(id);
+
+    //        // Consecutivo OTR
+    //        var consecutivo = document.createElement("td");
+    //        consecutivo.innerText = data[i].Consecutivo;
+    //        consecutivo.innerHTML = data[i].Consecutivo;
+    //        row.appendChild(consecutivo);
+
+    //        // Fecha
+    //        var stringFecha = data[i].Fecha;
+    //        stringFecha = stringFecha.substring(6, 19);
+    //        var date = new Date(Number(stringFecha));
+    //        var fecha = document.createElement("td");
+    //        fecha.innerText = convertDate(date);
+    //        fecha.innerHTML = convertDate(date);
+    //        row.appendChild(fecha);
+
+    //        // Equipo
+    //        var equipo = document.createElement("td");
+    //        equipo.innerText = data[i].NombreEquipo;
+    //        equipo.innerHTML = data[i].NombreEquipo;
+    //        row.appendChild(equipo);
+
+    //        tabla.appendChild(row);
+
+
+    //    }
+    //}
+
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+
+
+    // Se obtiene las OTR hijas que fueron seleccionada y se llena un json con esta informacion 
+    // esto con el fin de guardar dicha informacion
+    //function CargarOTRHijas() {
+    //    var tabla = $("#tblOTR")[0];
+    //    var idHijas = "";
+    //    for (var i = 0; i < tabla.childElementCount; i++) {
+    //        var row = tabla.children[i];
+
+    //        var check = row.children[0];
+    //        if (check.checked) {
+    //            if (i == 0) {
+    //                idHijas += row.children[1].innerText;
+    //            }
+    //            else {
+    //                idHijas += "," + row.children[1].innerText;
+    //            }
+    //        }
+    //    }
+    //    $("#OTRHijas").val(idHijas);
+    //}
+
+    // Carga el dropdown de contratos segun el cliente seleccionado
+    function CargarContratos() {
+        var cliente = $("#Cliente").val();
+        var path = "/Contrato/CargarContratos?idCliente=" + cliente;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                populateDD('Contrato', data, "Contrato");
+
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#Contrato").empty();
+            },
+            traditional: true
+
+        });
+    }
+
+    // Funcion para llenar de manera dinámica el dropdown de contratos
+    function populateDD(_idPopulate, data, tipo) {
+        var dd = $("#" + _idPopulate);
+        dd.empty();
+        dd.append($('<option></option>').val("").html(""));
+        for (var i = 0; i < data.length; i++) {
+
+            dd.append($('<option></option>').val(data[i].Id).html(data[i].DescripcionContrato));
+
+        }
+    }
+
+    // Funcion para llenar de manera dinámica el dropdown de Tamano, Tipo de equipo y accion
+    function populateCatalogo(_idPopulate, data) {
+        var dd = $("#" + _idPopulate);
+        dd.empty();
+        dd.append($('<option></option>').val("").html(""));
+        for (var i = 0; i < data.length; i++) {
+
+            dd.append($('<option></option>').val(data[i].Id).html(data[i].Nombre));
+
+        }
+    }
+
+    // Funcion para llenar de manera dinámica el dropdown de contenedores
+    function populateContenedor(_idPopulate, data) {
+        var dd = $("#" + _idPopulate);
+        dd.empty();
+        dd.append($('<option></option>').val("").html(""));
+        for (var i = 0; i < data.length; i++) {
+
+            dd.append($('<option></option>').val(data[i].Id).html(data[i].Codigo));
+
+        }
+    }
+
+    // Se obtiene la informacion ingresada de los puntos de ruta de recoleccion 
+    // y se crea un json estos datos con el fin de guardar la informacion ingresada
+    function CargarInformacionRutas()
+    {
+        var tabla = $("#tblRutas")[0];
+        var datos = [];
+        var datosCompletos = true;
+
+        for (var i = 0; i < tabla.childElementCount; i++)
+        {
+            var row = tabla.children[i];
+
+            var observacion = row.children[8].children[0].value;
+            var tipoEquipo = row.children[4].children[0].value;
+            var accion = row.children[5].children[0].value;
+            var tamano = row.children[7].children[0].value;
+            var contenedor = row.children[6].children[0].value;
+            var viaje = row.children[0].innerText;
+            var id = row.children[9] == undefined ? "0" : row.children[9].innerText;
+
+            if (accion != "" && tipoEquipo != "" && tamano != "" && contenedor != "") {
+                var viaje = {
+                    Observaciones: observacion,
+                    Accion: Number(accion),
+                    TipoEquipo: Number(tipoEquipo),
+                    Tamano: Number(tamano),
+                    Contenedor: Number(contenedor),
+                    Viaje: Number(viaje),
+                    Id: Number(id)
+                }
+
+                datos.push(viaje);
+            }
+            else {
+                datosCompletos = false;
+            }
+
+        }
+
+        var jsonDatos = JSON.stringify(datos);
+        $("#ListaRutas").val(jsonDatos);
+        $("#RutasCompletas").val(datosCompletos);
+
+    }
+
+
+</script>

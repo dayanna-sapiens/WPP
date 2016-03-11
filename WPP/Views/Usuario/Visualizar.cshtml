@@ -1,0 +1,92 @@
+﻿@model WPP.Model.UsuarioModel
+
+@{
+    ViewBag.Title = "Detalles de Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Detalles del Usuario</h2>
+        <br /><br />
+
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(m => m.Id)
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            @Html.DisplayFor(m => m.Nombre, new { @Class = "form-control", id = "Nombre" })
+        </div>
+        <div class="form-group">
+            <label for="Apellido1">Apellido 1:</label>
+            @Html.DisplayFor(m => m.Apellido1, new { @Class = "form-control", id = "Apellido1" })
+        </div>
+        <div class="form-group">
+            <label for="Apellido2">Apellido 2:</label>
+            @Html.DisplayFor(m => m.Apellido2, new { @Class = "form-control", id = "Apellido2" })
+        </div>
+        <div class="form-group">
+            <label for="Cedula">Cédula:</label>
+            @Html.DisplayFor(m => m.Cedula, new { @Class = "form-control", id = "Cedula" })
+        </div>
+        <div class="form-group">
+            <label for="NumeroEmpleado">Número Empleado:</label>
+            @Html.DisplayFor(m => m.NumeroEmpleado, new { @Class = "form-control", id = "NumeroEmpleado" })
+        </div>
+        <div class="form-group">
+            <label for="FechaNac">Fecha de nacimiento:</label>
+            @Html.DisplayFor(m => m.FechaNac, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "FechaNac" })
+        </div>
+        <div class="form-group">
+            <label for="Telefono">Teléfono:</label>
+            @Html.DisplayFor(m => m.Telefono, new { @Class = "form-control", id = "Telefono" })
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            @Html.DisplayFor(m => m.Email, new { @Class = "form-control", id = "Email" })
+        </div>
+        <div class="form-group">
+            <label for="nombre">Roles:</label>
+            <br />
+
+            @foreach (string rol in Model.Roles.Split(','))
+            {
+                @Html.Raw(rol)
+                <br />
+            }
+        </div>
+        <div class="form-group">
+            <label for="nombre">Compañías:</label>
+            <br />
+            @if (ViewBag.ListaCompanias != null)
+            {
+                foreach (var item in ViewBag.ListaCompanias)
+                {
+                    @Html.Raw(item.Nombre)
+                    <br />
+                }
+            }
+        </div>
+
+        @Html.ActionLink("Regresar", "Index", "Usuario", null, new { @Class = "btn btn-primary" })
+    </div>
+
+</div>
+<div class="col-md-3"></div>
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        var initialRoles = '';
+
+        $("input#Roles").val(initialRoles);
+
+    });// end document ready
+
+</script>

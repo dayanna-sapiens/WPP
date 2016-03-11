@@ -1,0 +1,183 @@
+﻿@model WPP.Model.ModuloBascula.BoletaManualModel
+@{
+    ViewBag.Title = "Boleta Manual";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <br />
+    <h3>Boleta Manual</h3>
+    <br />
+    <div class="col-md-12">
+        @using (Html.BeginForm("Crear", "BoletaManual", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                <label class="col-md-1">Boleta <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.NumeroBoleta, new { @Class = "form-control", id = "NumeroBoleta" })
+                    @Html.ValidationMessageFor(m => m.NumeroBoleta)
+                </div>
+                <label class="col-md-1">Sitio  </label>
+                <div class="col-md-2">
+                    @Html.DropDownListFor(m => m.Sitio, new SelectList(ViewBag.ListaRellenos, "Id", "Nombre"), String.Empty, new { @Class = "form-control", id = "Sitio" })
+                    @Html.ValidationMessageFor(m => m.Sitio)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1">Fecha  </label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Fecha, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "Fecha", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Fecha)
+                </div>
+                <label class="col-md-1">Hora  <span title="Formato requerido HH:MM" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.Hora, "", new { @Class = "form-control", id = "Hora", @placeholder = "00:00" })
+                    @Html.ValidationMessageFor(m => m.Hora)
+                </div>
+                <label class="col-md-1">OTR  <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(m => m.OTRConsecutivo, new { @Class = "form-control", id = "OTRConsecutivo" })
+                    @Html.ValidationMessageFor(m => m.OTRConsecutivo)
+                    @Html.HiddenFor(m => m.OTR)
+                </div>
+                <label class="col-md-1">Equipo</label>
+                <div class="col-md-2">
+                    @Html.TextBox("Equipo", "", new { @Class = "form-control", id = "Equipo", @readonly = "readonly" })
+                </div>               
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1">Cliente</label>
+                <div class="col-sm-5">
+                    @Html.TextBox("Cliente", "", new { @Class = "form-control", id = "Cliente", @readonly = "readonly" })
+                </div>
+                <label class="col-md-1" style="padding-right:8px;">Factura a nombre de </label>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.DescripcionCliente, "", new { @Class = "form-control", id = "ContratoDescripcion"})
+                    @Html.ValidationMessageFor(m => m.DescripcionCliente)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Observaciones</label>
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Observaciones, new { @Class = "form-control", id = "Observaciones"})
+                    @Html.HiddenFor(m => m.Observaciones)
+                </div>               
+            </div>
+            <div class="form-group">
+                <label class="col-md-1" style="padding-right:0px;">Peso Bruto</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.PesoBruto, new { @Class = "form-control", id = "PesoBruto" })
+                    @Html.ValidationMessageFor(m => m.PesoBruto)
+                </div>
+
+                <label class="col-md-1" style="padding-right:0px;">Peso Tara</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.PesoTara, new { @Class = "form-control", id = "PesoTara" })
+                    @Html.ValidationMessageFor(m => m.PesoTara)
+                </div>
+                <label class="col-md-1" style="padding-right:0px;">Peso Neto</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.PesoNeto, new { @Class = "form-control", id = "PesoNeto" })
+                    @Html.ValidationMessageFor(m => m.PesoNeto)
+                </div>
+            </div>
+            <a id="btnGuardar" class="btn btn-primary">Guardar</a>          
+            <button id="btnSubmit" type="submit" class="btn btn-primary" style="display:none;"></button>
+            @Html.ActionLink("Cancelar", "Index", "BoletaManual", null, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        // Función para dar formato numérico
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+
+        // Se incializa el valor de algunas variables;
+
+        var d = new Date();
+        var date = (d.getUTCDate()) + '/' + (d.getUTCMonth() + 1) + '/' + (d.getUTCFullYear());
+        $("#Fecha").val(date);
+        
+        $('#Fecha').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(d.getFullYear(), d.getMonth(), d.getDate())
+        });
+
+        $("#Estado").val("Activa");
+
+        $("#OTRConsecutivo").change(function () {
+            CargarOTR();
+        });
+
+    });// end document ready
+
+
+
+
+    // función para cargar los productos de acuerdo al contrato seleccionado
+    function CargarOTR() {
+        var otr = $("#OTRConsecutivo").val();
+        var path = "/OTR/CargarOTR?id=" + otr;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                var otr = data[0];
+                var equipo = data[1];
+
+                $("#Equipo").val(equipo.Placa);
+                $("#OTR").val(otr.Id);
+                $("#Producto").val(otr.Ruta);
+                $("#Cliente").val(otr.DescripcionCliente);             
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#OTR").empty();
+                $("#Cliente").empty();
+                $("#Equipo").empty();
+                swal("OTR inválida", "Por favor verifique el número de OTR para continuar con esta boleta", "warning");
+                //alert("OTR inválida, por favor verifique el número de OTR para continuar con esta boleta ");
+            },
+            traditional: true
+        });
+    }
+
+
+   
+    
+   
+
+    // Cambia el estado de la boleta,
+    // indicando que esta boleta debe terminarse ya que el equipo necesita repesaje
+    $("#btnGuardar").click(function () {
+
+      //  $("#Estado").val("Repesaje");
+        document.getElementById("btnSubmit").click();
+    });
+
+</script>

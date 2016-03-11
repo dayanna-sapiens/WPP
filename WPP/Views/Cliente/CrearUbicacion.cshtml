@@ -1,0 +1,63 @@
+﻿@model WPP.Model.ModuloContratos.UbicacionClienteModel
+@{
+    ViewBag.Title = "Crear Ubicación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h3>Ubicación para el cliente: @ViewBag.NombreCliente</h3>
+<div class="row">
+    <div class="col-md-12">
+        <br />
+        <h3>Agregar Ubicación</h3>
+        <br />
+        @using (Html.BeginForm("CrearUbicacion", "Cliente", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Cliente)
+
+            <div class="form-group">
+                <label class="col-sm-2">Descripción <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.Descripción, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Descripción)
+                </div>
+                <label class="col-md-2">Contactos </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Contacto, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Contacto)
+                </div>               
+            </div>
+            <div class="form-group">
+                
+                <label class="col-md-2">Dirección </label>
+                <div class="col-md-4">
+                    @Html.TextAreaFor(m => m.Direccion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Direccion)
+                </div>
+               
+                <label class="col-md-2">Email </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Teléfono  </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Telefono, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Telefono)
+                </div>
+                <label class="col-md-2">Estado  <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.Estado, new SelectList(ViewBag.ListaEstado, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Estado" })
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Agregar Ubicación</button>
+
+            @Html.ActionLink("Regresar", "Detalles", "Cliente", new { idCliente = Model.Cliente }, new { @Class = "btn btn-primary" })
+        }
+    </div>
+</div>

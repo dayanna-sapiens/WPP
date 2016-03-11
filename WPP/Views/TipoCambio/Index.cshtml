@@ -1,0 +1,67 @@
+﻿@model WPP.Model.General.TipoCambioModel
+@{
+    ViewBag.Title = "Tipo de Cambio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Tipo de Cambio</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("GuardarTipoCambio", "TipoCambio", FormMethod.Post, new { id = "frmGuardar", @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label for="descripcion">Fecha:</label>   
+                    @Html.TextBox("Fecha", "", new { @Class = "form-control", id = "Fecha", @readonly="readonly" })
+                </div>
+                <div class="form-group">
+                    <label>Compra <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                    @Html.TextBoxFor(m => m.Compra, new { @class = "form-control", id = "Compra", @type = "number", @min = "0", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Compra)
+                </div>
+                <div class="form-group">
+                    <label>Venta <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                    @Html.TextBoxFor(m => m.Venta, new { @class = "form-control", id = "Venta", @type = "number", @min = "0", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Venta)
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                @Html.ActionLink("Cancelar", "Index", "TipoCambio", null, new { @Class = "btn btn-primary" })
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+
+    $(document).ready(function () {
+
+      
+        
+
+        var d = new Date();
+        var date = (d.getUTCDate()) + '/' + (d.getUTCMonth() + 1) + '/' + (d.getUTCFullYear());
+        $("#Fecha").val(date);
+
+      
+
+    });// end document ready
+
+
+</script>

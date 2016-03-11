@@ -1,0 +1,313 @@
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'04-08-2015','Comerciales','usuario17@gmail.com','Grupo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'04-08-2015','Municipales','usuario17@gmail.com','Grupo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'04-08-2015','Comerciales','usuario17@gmail.com','TipoCompania',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'04-08-2015','Municipales','usuario17@gmail.com','TipoCompania',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'04-08-2015','Municipales','usuario17@gmail.com','TipoCompania',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Días','usuario17@gmail.com','UnidadCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Horas','usuario17@gmail.com','UnidadCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Kilogramos','usuario17@gmail.com','UnidadCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Lote','usuario17@gmail.com','UnidadCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Meses','usuario17@gmail.com','UnidadCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Metros Cúbicos','usuario17@gmail.com','UnidadCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Otros','usuario17@gmail.com','UnidadCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Servicios','usuario17@gmail.com','UnidadCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Servicios','usuario17@gmail.com','UnidadCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Viajes','usuario17@gmail.com','UnidadCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Báscula','usuario17@gmail.com','ProcesoCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Comercial','usuario17@gmail.com','ProcesoCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Facturación','usuario17@gmail.com','ProcesoCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','OT','usuario17@gmail.com','ProcesoCobro',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','3.5','usuario17@gmail.com','Tamaño',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','4','usuario17@gmail.com','Tamaño',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','6','usuario17@gmail.com','Tamaño',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','10','usuario17@gmail.com','Tamaño',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','15','usuario17@gmail.com','Tamaño',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','18','usuario17@gmail.com','Tamaño',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','22','usuario17@gmail.com','Tamaño',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','24','usuario17@gmail.com','Tamaño',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','25','usuario17@gmail.com','Tamaño',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','30','usuario17@gmail.com','Tamaño',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','30','usuario17@gmail.com','Tamaño',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Automóvil','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Back Hoe','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Báscula','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Camión Abierto','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Camión Cerrado','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Carga Trasera','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Cargador de oruga','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Carreta','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Chapulín','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Compactador','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Compactador estacionado','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Compactador pato','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Contenedor','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Desconocido','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Excavadora','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Motoniveladorara','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Pala','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Pick Up','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Roll Off','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Roll Off Compactador','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Tanqueta','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Tractor compactador','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Tractor de oruga','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Trailer','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Vagoneta','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Vehículo 4x4','usuario17@gmail.com','TipoEquipo',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Alquiler de equipo','usuario17@gmail.com','TipoProducto',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Disposición Final','usuario17@gmail.com','TipoProducto',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Fosa','usuario17@gmail.com','TipoProducto',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Mantenimiento de equipo','usuario17@gmail.com','TipoProducto',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Otros','usuario17@gmail.com','TipoProducto',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Recolección Carga Trasera','usuario17@gmail.com','TipoProducto',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Recolección Roll-Off','usuario17@gmail.com','TipoProducto',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Activo','usuario17@gmail.com','EstadoProducto',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Inactivo','usuario17@gmail.com','EstadoProducto',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Activo','usuario17@gmail.com','EstadoContrato',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Inactivo','usuario17@gmail.com','EstadoContrato',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Pendiente','usuario17@gmail.com','EstadoContrato',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Terminado','usuario17@gmail.com','EstadoContrato',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Diario','usuario17@gmail.com','Repesaje',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Periódico','usuario17@gmail.com','Repesaje',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Por Viaje','usuario17@gmail.com','Repesaje',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Cada fin de mes','usuario17@gmail.com','ModoFacturacion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Cada fin de quincena','usuario17@gmail.com','ModoFacturacion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Día específico de la semana','usuario17@gmail.com','ModoFacturacion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Día específico del mes','usuario17@gmail.com','ModoFacturacion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Lunes','usuario17@gmail.com','DiaSemana',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Martes','usuario17@gmail.com','DiaSemana',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Miércoles','usuario17@gmail.com','DiaSemana',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Jueves','usuario17@gmail.com','DiaSemana',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Viernes','usuario17@gmail.com','DiaSemana',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Sábado','usuario17@gmail.com','DiaSemana',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Domingo','usuario17@gmail.com','DiaSemana',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Mensual','usuario17@gmail.com','EsquemaRevaloracion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Bimestral','usuario17@gmail.com','EsquemaRevaloracion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Indefinido','usuario17@gmail.com','EsquemaRevaloracion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Anual','usuario17@gmail.com','EsquemaRevaloracion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Semestral','usuario17@gmail.com','EsquemaRevaloracion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Temporales','usuario17@gmail.com','EsquemaRevaloracion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Trimestral','usuario17@gmail.com','EsquemaRevaloracion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Carga Trasera Comercial','usuario17@gmail.com','TipoServicio',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Carga Trasera Municipal','usuario17@gmail.com','TipoServicio',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Cotización','usuario17@gmail.com','TipoServicio',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Facturación Manual','usuario17@gmail.com','TipoServicio',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Otros Servicios','usuario17@gmail.com','TipoServicio',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Paso por báscula sin OTR','usuario17@gmail.com','TipoServicio',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Reciclaje','usuario17@gmail.com','TipoServicio',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'20-AUG-2015','Roll Off','usuario17@gmail.com','TipoServicio',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'21-AUG-2015','Activo','usuario17@gmail.com','EstadoUbicacion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'21-AUG-2015','Inactivo','usuario17@gmail.com','EstadoUbicacion',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Semanal','usuario17@gmail.com','Frecuencia',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Bisemanal','usuario17@gmail.com','Frecuencia',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Cada 10 días','usuario17@gmail.com','Frecuencia',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'8-SEP-2015','Efectivo','usuario17@gmail.com','FormaPago',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'8-SEP-2015','Tarjeta','usuario17@gmail.com','FormaPago',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'8-SEP-2015','Banco Nacional de Costa Rica','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'8-SEP-2015','Banco Costa Rica','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Diario','usuario17@gmail.com','Frecuencia',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Bac San José','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Banco Banex','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Banco Crédito Agrícola de Cartago','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Banco Cuscatlán','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Banco General','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Banco HSBC','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Banco Interfín','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Banco LAFISE','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Banco Popular y de Desarrollo Comunal','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Banco Promérica','usuario17@gmail.com','Banco',0);
+
+ insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','CitiBank','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Mucap','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Mutual Alajuela','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Scotiabank','usuario17@gmail.com','Banco',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Compactador','usuario17@gmail.com','TipoEquipoRollOff',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Contenedor','usuario17@gmail.com','TipoEquipoRollOff',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Compactador estacionario','usuario17@gmail.com','TipoEquipoRollOff',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','A llevar Cont/Comp','usuario17@gmail.com','AccionRollOff',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','A llevar Cont/Comp Nuevo','usuario17@gmail.com','AccionRollOff',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','A recolectar Cont/Comp','usuario17@gmail.com','AccionRollOff',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','A retirar Cont/Comp','usuario17@gmail.com','AccionRollOff',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Otra','usuario17@gmail.com','AccionRollOff',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Transportar carga restante','usuario17@gmail.com','AccionRollOff',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'13-AUG-2015','Transportar sin carga','usuario17@gmail.com','AccionRollOff',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$0,01','usuario17@gmail.com','DenominacionDolar',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$0,05','usuario17@gmail.com','DenominacionDolar',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$0,10','usuario17@gmail.com','DenominacionDolar',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$0,25','usuario17@gmail.com','DenominacionDolar',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$0,50','usuario17@gmail.com','DenominacionDolar',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$1','usuario17@gmail.com','DenominacionDolar',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$2','usuario17@gmail.com','DenominacionDolar',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$5','usuario17@gmail.com','DenominacionDolar',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$10','usuario17@gmail.com','DenominacionDolar',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$20','usuario17@gmail.com','DenominacionDolar',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$50','usuario17@gmail.com','DenominacionDolar',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','$100','usuario17@gmail.com','DenominacionDolar',0);
+		
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢1','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢5','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢10','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢25','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢50','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢100','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢500','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢1000','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢2000','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢5000','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢10000','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢20000','usuario17@gmail.com','DenominacionColon',0);
+
+insert into wpp.catalogo (id,version,createdate,nombre,createdby,tipo,isdeleted) values (wpp.SEQ_Catalogo.nextval,1,'23-AUG-2015','¢50000','usuario17@gmail.com','DenominacionColon',0);																											

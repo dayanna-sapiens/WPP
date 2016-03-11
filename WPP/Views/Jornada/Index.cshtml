@@ -1,0 +1,145 @@
+﻿@model PagedList.IPagedList<WPP.Entities.Objects.ModuloNomina.Jornada>
+@using WPP.Model;
+@using PagedList.Mvc;
+@using PagedList;
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Jornada";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:5%;">
+        <h2>Filtrar por: </h2>
+
+        @using (Html.BeginForm(Html.BeginForm("Buscar", "Jornada", FormMethod.Get)))
+        {
+            <div class="form-group">
+                Descripción: @Html.TextBox("searchStringDescripcion", ViewBag.currentFilterDescripcion as string, new { @class = "form-control col-lg-3" })
+            </div>
+            <div class="form-group">
+                Tipo: @Html.TextBox("searchStringTipo", ViewBag.currentFilterTipo as string, new { @class = "form-control" })
+            </div>
+   
+
+            <div class="form-group">
+                Filas: @Html.DropDownList("searchStringFilas", new List<SelectListItem>{
+                    new SelectListItem() {Text = "10", Value="10"},
+                    new SelectListItem() {Text = "25", Value="25"},
+                    new SelectListItem() {Text = "50", Value="50"},
+                    new SelectListItem() {Text = "100", Value="100"}
+                 }, ViewBag.currentFilterFilas as string, new { @Class = "form-control", id = "searchStringFilas" })
+            </div>
+            <div>
+                <button type="submit" value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </div>
+        }
+    </div>
+
+
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>Jornada Laboral</h2>
+        
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+        <br />
+        <br />
+
+        <div class="table-responsive" style="height:300px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-producto">
+                <tr>
+                    <th>
+                        @Html.ActionLink("Descripción", "Buscar", "Jornada", new
+               {
+                   sortOrder = ViewBag.DescripcionSortParam,
+                   currentFilterDescripcion = ViewBag.CurrentDescripcion,
+                   currentFilterTipo = ViewBag.CurrentTipo,
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Tipo", "Buscar", "Jornada", new
+               {
+                   sortOrder = ViewBag.TipoSortParam,
+                   currentFilterDescripcion = ViewBag.CurrentDescripcion,
+                   currentFilterTipo = ViewBag.CurrentTipo,
+               }, null)
+                    </th>                 
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+
+                            @if (Session["Roles"].ToString().Contains("Administrador de Jornada Laboral") || Session["Roles"].ToString().Contains("Administrador de Jornada Laboral") || Session["Roles"].ToString().Contains("Consultor de Jornada Laboral"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Detalles", "Jornada", new { id = item.Id })" data-toggle="tooltip" title="Detalles">
+                                        <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            }
+                            @if (Session["Roles"].ToString().Contains("Administrador de Jornada Laboral"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Editar", "Jornada", new { id = item.Id })" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            }
+                           
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+        <div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Buscar", "Jornada",
+                                new
+                                {
+                                    page,
+                                    sortOrder = ViewBag.CurrentSort,
+                                    currentFilterDescripcion = ViewBag.CurrentDescripcion,
+                                    currentFilterTipo = ViewBag.CurrentTipo,
+                                    currentFilterFilas = ViewBag.CurrentFilas
+                                }))
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).load(function () {
+        document.getElementById("btnBuscar").click();
+    })
+
+    $(document).ready(function () {
+    
+    });// end document ready
+
+</script>

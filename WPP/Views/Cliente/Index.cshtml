@@ -1,0 +1,237 @@
+﻿@model PagedList.IPagedList<WPP.Entities.Objects.ModuloContratos.Cliente>
+@using WPP.Model;
+@using PagedList.Mvc;
+@using PagedList;
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:5%;">
+        <h2>Filtrar por: </h2>
+
+        @using (Html.BeginForm(Html.BeginForm("Buscar", "Cliente", FormMethod.Get)))
+        {
+            <p>
+                Nombre: @Html.TextBox("searchStringNombre", ViewBag.CurrentNombre as string, new { @class = "form-control col-lg-3" })
+            </p>
+            <p>
+                Nombre Corto: @Html.TextBox("searchStringNombreCorto", ViewBag.currentFilterNombreCorto as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Grupo: @Html.TextBox("searchStringGrupo", ViewBag.currentFilterGrupo as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Tipo: @Html.TextBox("searchStringTipo", ViewBag.currentFilterTipo as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Número: @Html.TextBox("searchStringNumero", ViewBag.currentFilterNumero as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Filas: @Html.DropDownList("searchStringFilas", new List<SelectListItem>{
+                            new SelectListItem() {Text = "10", Value="10"},
+                            new SelectListItem() {Text = "25", Value="25"},
+                            new SelectListItem() {Text = "50", Value="50"},
+                            new SelectListItem() {Text = "100", Value="100"}
+                         }, ViewBag.currentFilterFilas as string, new { @Class = "form-control", id = "searchStringFilas" })
+            </p>
+            <p>
+                <button type="submit" value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </p>
+        }
+    </div>
+
+
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>Clientes</h2>
+
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+
+        <br /><br />
+        @if (Session["Roles"].ToString().Contains("Editor de Clientes") || Session["Roles"].ToString().Contains("Administrador de Clientes"))
+        {
+             @Html.ActionLink("Crear Cliente", "Crear", "Cliente", new { @class = "btn btn-primary" })
+             <br /><br />
+        }
+
+
+        <div class="table-responsive" style="height:300px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-compania">
+                <tr>
+                    <th>
+                        @Html.ActionLink("Nombre", "Buscar", "Cliente", new
+               {
+                   sortOrder = ViewBag.NombreSortParam,
+                   currentFilterNombre = ViewBag.CurrentNombre,
+                   currentFilterNombreCorto = ViewBag.CurrentNombreCorto,
+                   currentFilterGrupo = ViewBag.CurrentGrupo,
+                   currentFilterTipo = ViewBag.CurrentTipo,
+                   currentFilterNumero = ViewBag.CurrentNumero
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Nombre Corto", "Buscar", "Cliente", new
+               {
+                   sortOrder = ViewBag.NombreCortoSortParam,
+                   currentFilterNombre = ViewBag.CurrentNombre,
+                   currentFilterNombreCorto = ViewBag.CurrentNombreCorto,
+                   currentFilterGrupo = ViewBag.CurrentGrupo,
+                   currentFilterTipo = ViewBag.CurrentTipo,
+                   currentFilterNumero = ViewBag.CurrentNumero
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Grupo", "Buscar", "Cliente", new
+               {
+                   sortOrder = ViewBag.GrupoSortParam,
+                   currentFilterNombre = ViewBag.CurrentNombre,
+                   currentFilterNombreCorto = ViewBag.CurrentNombreCorto,
+                   currentFilterGrupo = ViewBag.CurrentGrupo,
+                   currentFilterTipo = ViewBag.CurrentTipo,
+                   currentFilterNumero = ViewBag.CurrentNumero
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Tipo", "Buscar", "Cliente", new
+               {
+                   sortOrder = ViewBag.TipoSortParam,
+                   currentFilterNombre = ViewBag.CurrentNombre,
+                   currentFilterNombreCorto = ViewBag.CurrentNombreCorto,
+                   currentFilterGrupo = ViewBag.CurrentGrupo,
+                   currentFilterTipo = ViewBag.CurrentTipo,
+                   currentFilterNumero = ViewBag.CurrentNumero
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Número", "Buscar", "Cliente", new
+               {
+                   sortOrder = ViewBag.NumeroSortParam,
+                   currentFilterNombre = ViewBag.CurrentNombre,
+                   currentFilterNombreCorto = ViewBag.CurrentNombreCorto,
+                   currentFilterGrupo = ViewBag.CurrentGrupo,
+                   currentFilterTipo = ViewBag.CurrentTipo,
+                   currentFilterNumero = ViewBag.CurrentNumero
+               }, null)
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NombreCorto)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Grupo.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Tipo.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Numero)</td>
+                            
+                            @if (Session["Roles"].ToString().Contains("Editor de Clientes") || Session["Roles"].ToString().Contains("Administrador de Clientes"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("CrearContacto", "Cliente", new { idCliente = item.Id })" data-toggle="tooltip" title="Agregar Contacto">
+                                        <span class="glyphicon glyphicon-user" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>   
+                            }
+                            
+                           
+                            @if (Session["Roles"].ToString().Contains("Editor de Clientes") || Session["Roles"].ToString().Contains("Administrador de Clientes"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("CrearUbicacion", "Cliente", new { idCliente = item.Id })" data-toggle="tooltip" title="Agregar Ubicación">
+                                        <span class="glyphicon glyphicon-map-marker" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>   
+                            }
+                            
+                            
+                            @if (Session["Roles"].ToString().Contains("Editor de Clientes") || Session["Roles"].ToString().Contains("Administrador de Clientes") || Session["Roles"].ToString().Contains("Consultor de Clientes"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Detalles", "Cliente", new { idCliente = item.Id })" data-toggle="tooltip" title="Detalles">
+                                        <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>   
+                            }
+                            
+                           
+                            @if (Session["Roles"].ToString().Contains("Editor de Clientes") || Session["Roles"].ToString().Contains("Administrador de Clientes"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Editar", "Cliente", new { idCliente = item.Id })" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>   
+                            }
+                           
+                            
+                            @if (Session["Roles"].ToString().Contains("Administrador de Clientes"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Eliminar", "Cliente", new { idCliente = item.Id })" data-toggle="tooltip" title="Eliminar">
+                                        <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>  
+                            }
+                                
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+            <div>
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("Buscar", "Cliente",
+                                new
+                                {
+                                    page,
+                                    sortOrder = ViewBag.CurrentSort,
+                                    currentFilterNombre = ViewBag.CurrentNombre,
+                                    currentFilterNombreCorto = ViewBag.CurrentNombreCorto,
+                                    currentFilterGrupo = ViewBag.CurrentGrupo,
+                                    currentFilterTipo = ViewBag.CurrentTipo,
+                                    currentFilterNumero = ViewBag.CurrentNumero,
+                                    currentFilterFilas = ViewBag.CurrentFilas
+                                }))
+
+            </div>
+
+
+        </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+        $(document).load(function () {
+            document.getElementById("btnBuscar").click();
+        })
+
+        $(document).ready(function () {
+            function editarCompania(IdCompania) {
+            }
+        });// end document ready
+
+</script>

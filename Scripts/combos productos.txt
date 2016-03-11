@@ -1,0 +1,82 @@
+proceso que genera el cobro
+Bascula
+Comercial
+Facturacion
+OT
+
+
+Unidad de cobro
+centimetros cubicos
+dias
+horas
+kilogramos
+lote
+meses
+lote
+metros cubicos
+otros
+servicios 
+toneladas
+viajes
+
+
+
+tamaño
+3.5
+4
+6
+10
+15
+18
+22
+24
+25
+30
+31
+
+
+
+tipo de producto
+alquiler de equipo
+disposicion final
+fosa
+mantenimiento de equipo
+otros
+recoleccion carga trasera
+recoleccion roll off
+
+
+
+
+
+
+
+Automóvil 
+Back Hoe
+Báscula
+Camión Abierto
+Camión Cerrado
+Carga Trasera
+Cargador de oruga
+Carreta
+Chapulín
+Compactador
+Compactador estacionado
+Compactador pato
+contenedor
+Desconocido
+Excavadora
+Motoniveladorara
+Pala
+Pick Up
+Roll Off
+Roll Off Compactador
+Tanqueta
+Tractor compactador
+Tractores de oriuga
+Trailer
+Vagoneta
+Vehícula 4x4
+
+
+

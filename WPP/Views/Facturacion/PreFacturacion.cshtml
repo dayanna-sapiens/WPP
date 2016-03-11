@@ -1,0 +1,647 @@
+﻿ 
+@{
+    ViewBag.Title = "PreFacturación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (null != TempData["alertMessage"])
+    {
+        <script type="text/javascript">
+
+            swal("", "@TempData["alertMessage"]", "error");
+            /// ("@TempData["alertMessage"]");
+        </script>
+    }
+
+    double venta = ViewBag.TipoCambioVenta != null ? ViewBag.TipoCambioVenta.Valor : 0;
+    long consecutivo = ViewBag.Consecutivo != null ? ViewBag.Consecutivo : 0;
+}
+
+<div class="row" style="margin-top:20px; ">
+  
+
+    <div class="col-md-12" style="padding-right:30px;">
+        <br />
+        <h3>Prefacturación</h3>
+        <br />
+        @using (Html.BeginForm("PreFacturacion", "Facturacion", FormMethod.Post, new { id = "frmPrefacturar", @class = "form-horizontal" }))
+        {
+
+            @Html.ValidationSummary(true)
+            @Html.Hidden("Contrato")
+            @Html.Hidden("TipoCambioVenta", @venta)
+            @Html.Hidden("Consecutivo", @consecutivo)
+            @Html.Hidden("IdReporte")
+            @Html.Hidden("ListaDetalle")
+
+            <div class="form-group">        
+                <label class="col-md-1" style="padding-left:0px; padding-right:0px;">Tipo Cambio </label>
+                <div class="col-md-2">
+                   @Html.TextBox("TipoCambio", "", new { @class = "form-control", id = "TipoCambio", @readonly = "readonly" })
+                </div>
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Ultimo formulario Impreso </label>
+                <div class="col-md-2">
+                    @Html.TextBox("UltimoFormulario", "", new { @class = "form-control", id = "UltimoFormulario", @readonly = "readonly" })
+                </div>  
+            </div>
+            <div class="form-group">
+                <label class="col-md-1" style="padding-left:0px; padding-right:0px;">Moneda </label>
+                <div class="col-md-2">
+                    @Html.DropDownList("Moneda", new List<SelectListItem>{
+                    new SelectListItem() {Text = "Colones", Value="Colones"},
+                    new SelectListItem() {Text = "Dólares", Value="Dolares"}
+                    }, String.Empty, new { @class = "form-control", id = "Moneda" })
+                </div>
+                <label class="col-md-1" style="padding-left:0px; padding-right:0px;">Modo de Facturación </label>
+                <div class="col-md-2">
+                    @Html.DropDownList("ModoFacturacion", new List<SelectListItem>{
+                    new SelectListItem() {Text = "Cada fin de mes", Value="Cada fin de mes"},
+                    new SelectListItem() {Text = "Cada fin de quincena", Value="Cada fin de quincena"}
+                 }, String.Empty, new { @class = "form-control", id = "ModoFacturacion" })
+                </div>
+                <label class="col-md-1" style="padding-left:0px; padding-right:0px;">Desde </label>
+                <div class="col-md-2">
+                    @Html.TextBox("Desde", "", new { @class = "form-control", id = "Desde", @readonly = "readonly" })
+                </div>
+                <label class="col-md-1" style="padding-left:0px; padding-right:0px;">Hasta </label>
+                <div class="col-md-2">
+                    @Html.TextBox("Hasta", "", new { @class = "form-control", id = "Hasta", @readonly = "readonly" })
+                </div>
+            </div>
+            @*<div class="form-group">
+                <div class="col-md-6" style="font-weight:bold; padding-left:0px; padding-right:0px;">
+                    <input type="checkbox" name="CargaTrasera" value="CargaTrasera" id="CargaTrasera"> Sólo carga trasera comercial
+                </div>
+                <div class="col-md-6" style="font-weight:bold; padding-left:0px; padding-right:0px;">
+                    <input type="checkbox" name="FacturacionManual" value="FacturacionManual" id="FacturacionManual"> Incluye cobros de facturación manual
+                </div>                
+            </div>*@
+    <div class="row">
+        <div class="col-12-md">
+            <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Contratos </label>
+            <br />
+            <br />
+
+            <div class="col-md-8">
+                @Html.TextBox("txtBuscar", "", new { @Class = "form-control", id = "txtBuscar", @placeholder = "Buscar" })
+            </div>
+            <div class="col-md-4">
+                <a id="btnBuscar" class="btn btn-primary">Buscar  <span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>              
+                <a id="btnGenerar" class="btn btn-primary">Generar   <i class="fa fa-list"></i></a>
+                <button id="btnSubmit" type="submit" style="display:none;" class="btn btn-primary"></button>
+                @Html.ActionLink("Cancelar", "PreFacturacion", "Facturacion", null, new { @Class = "btn btn-primary" })
+            </div>
+        </div>
+        <br />
+        <div class="col-12-md">
+
+            <br />
+            <div class="table-responsive" style="height:220px; overflow:auto">
+                <table class="table table-hover" id="tabla-contratos">
+                    <thead>
+                        <tr>
+                            <th>
+                                Cliente
+                            </th>
+                            <th>
+                                Contrato
+                            </th>
+                            <th>
+                                Desde
+                            </th>
+                            @*<th>
+                                Estado
+                            </th>*@
+                        </tr>
+                    </thead>
+                    <tbody id="tblContratos"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+        }
+    </div>
+    <div id="divLoader" class="col-md-12" style="display:none; text-align:center;">
+        <img src="~/Images/loader.gif" alt="WPP" height="40" width="40" style="margin-top:-19px; margin-bottom:-20px;">
+    </div>
+
+    <div id="divPrefactura" class="col-md-12" style="display:none;">
+
+        <div class="col-12-md">
+            <h3>Detalle</h3>
+            <br />
+            <div class="table-responsive" style="height:550px; overflow:auto">
+                <table class="table table-hover" id="tabla-detalle">
+                    <thead>
+                        <tr>
+                            <th>
+                            </th>
+                            <th>
+                                Ruta
+                            </th>
+                            <th>
+                                Boleta
+                            </th>
+                            <th>
+                                Fecha
+                            </th>
+                            <th>
+                                Descripción
+                            </th>
+                            <th>
+                                Cantidad
+                            </th>
+                            <th>
+                                Unidad
+                            </th>
+                            <th>
+                                Precio Total
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblDetalle"></tbody>
+                </table>
+            </div>
+            <div class="form-group" style="width:100%">
+                <div class="form-group" style="float:right;">   
+                    <div class="col-md-12">
+                        <label for="Total">Total Adeudado:</label>
+                        <label id="TotalAdeudado"></label>
+                    </div>       
+                    <br />
+                    <div class="col-md-12" style="margin-bottom:10px;">
+                        <label class="col-md-4" style="padding-left:0px; padding-right:0px; font-weight:normal;">Total Prefactura:</label>
+                        <div class="col-md-8">
+                            @Html.TextBox("TotalPrefactura", "", new { @class = "form-control", id = "TotalPrefactura", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <a id="btnReporteRecibos" class="btn btn-primary" disabled>Reporte de Recibos   <i class="fa fa-copy"></i></a>
+                    <a id="btnPrefacturar" class="btn btn-primary">Prefacturar   <i class="fa fa-check-square-o"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        // Función para dar formato numérico
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+        String.prototype.replaceAll = function (str1, str2, ignore) {
+            return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
+        }
+
+        // Se inicializan los datos y controles necesarios
+
+        $("#TipoCambio").val($("#TipoCambioVenta").val());
+        $("#UltimoFormulario").val($("#Consecutivo").val());
+        
+
+        var today = new Date();
+        $('#Desde').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        $('#Hasta').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+       
+
+        $("input[type='checkbox']").on('change', function(){
+            if (this.checked) {
+                var x = 1;
+            }
+            else {
+                var x = 0;
+            }
+        });
+
+
+    });// end document ready
+
+    
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado 
+    $("#btnBuscar").click(function () {
+
+        var busqueda = $("#txtBuscar").val();
+        var moneda = $("#Moneda").val();       
+
+        var path = "/Contrato/BusquedaContratos?busqueda=" + busqueda + "&moneda=" + moneda;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                if (data != null) {
+                    CargarContratos(data);
+                }
+                else {
+                    $("#tblContratos tr").remove();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#tblContratos tr").remove();
+            },
+            traditional: true
+
+        });
+
+    });
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado 
+    $("#btnReporteRecibos").click(function () {
+
+        var idReporte = $("#IdReporte").val();
+        window.open("/Facturacion/ReporteDetalleRecibos?id=" + idReporte, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+
+    });
+
+
+    // Lista los contratos encontrados que hayan coincidido con la informacion ingresada
+    function CargarContratos(data) {
+        $("#tblContratos tr").remove();
+
+        var tabla = $("#tblContratos")[0];
+
+        for (var i = 0; i < data.length; i++) {
+
+            var row = document.createElement("tr");
+            row.id = "Contrato" + data[i].Id;
+
+            // ID del contrato
+            var id = document.createElement("td");
+            id.innerText = data[i].Id;
+            id.innerHTML = data[i].Id;
+            id.style.display = "none";
+            row.appendChild(id);
+
+            // Nombre del cliente
+            var cliente = document.createElement("td");
+            cliente.innerText = data[i].DescripcionCliente;
+            cliente.innerHTML = data[i].DescripcionCliente;
+            row.appendChild(cliente);
+
+            // Descripcion del contrato
+            var contrato = document.createElement("td");
+            contrato.innerText = data[i].DescripcionContrato;
+            contrato.innerHTML = data[i].DescripcionContrato;
+            row.appendChild(contrato);
+
+            // Desde
+            var stringFecha = data[i].FechaInicio;
+            stringFecha = stringFecha.substring(6, 19);
+            var date = new Date(Number(stringFecha));
+            var desde = document.createElement("td");
+            desde.innerText = convertDate(date);
+            desde.innerHTML = convertDate(date);
+            row.appendChild(desde);
+
+            // Estado
+            //var estado = document.createElement("td");
+            //estado.innerText = data[i].EstadoDescripcion;
+            //estado.innerHTML = data[i].EstadoDescripcion;
+            //row.appendChild(estado);
+
+            tabla.appendChild(row);
+
+            $('#Contrato' + data[i].Id).attr("onClick", "javascript:SelectRow('" + data[i].Id + "'); return false;");
+        }
+
+    }
+
+
+    // Lista los contratos encontrados que hayan coincidido con la informacion ingresada
+    function CargarDetallePrefacturacion(data) {
+        $("#tblDetalle tr").remove();
+
+        var tabla = $("#tblDetalle")[0];
+
+        for (var i = 0; i < data.length; i++) {
+
+            var row = document.createElement("tr");
+            row.id = "Chk"+ i;
+
+            //Checkbox
+            var checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
+            row.appendChild(checkbox);
+
+            // ID OTR
+            var idOTR = document.createElement("td");
+            idOTR.innerText = data[i].OTR;
+            idOTR.innerHTML = data[i].OTR;
+            idOTR.style.display = "none";
+            row.appendChild(idOTR);
+
+            // CONSECUTIVO OTR
+            var ConsecutivoOTR = document.createElement("td");
+            ConsecutivoOTR.innerText = data[i].ConsecutivoOTR == "0" ? "" : data[i].ConsecutivoOTR;
+            ConsecutivoOTR.innerHTML = data[i].ConsecutivoOTR == "0" ? "" : data[i].ConsecutivoOTR;
+            row.appendChild(ConsecutivoOTR);
+
+            // TIPO BOLETA
+            var TipoBascula = document.createElement("td");
+            TipoBascula.innerText = data[i].Bascula != "0" ? "Bascula" : "BoletaManual";
+            TipoBascula.innerHTML = data[i].Bascula != "0" ? "Bascula" : "BoletaManual";
+            TipoBascula.style.display = "none";
+            row.appendChild(TipoBascula);
+
+            // ID BOLETA
+            var Bascula = document.createElement("td");
+            Bascula.innerText = data[i].Bascula != "0" ? data[i].Bascula : data[i].BoletaManual;
+            Bascula.innerHTML = data[i].Bascula != "0" ? data[i].Bascula : data[i].BoletaManual;
+            Bascula.style.display = "none";
+            row.appendChild(Bascula);
+
+            // CONSECUTIVO BOLETA
+            var ConsecutivoBoleta = document.createElement("td");
+            ConsecutivoBoleta.innerText = data[i].ConsecutivoBoleta;
+            ConsecutivoBoleta.innerHTML = data[i].ConsecutivoBoleta;
+            row.appendChild(ConsecutivoBoleta);
+            
+            // FECHA
+            var stringFecha = data[i].Fecha;
+            stringFecha = stringFecha.substring(6, 19);
+            var date = new Date(Number(stringFecha));
+            var fecha = document.createElement("td");
+            fecha.innerText = convertDate(date);
+            fecha.innerHTML = convertDate(date);
+            row.appendChild(fecha);
+
+            // DESCRIPCION
+            var Descripcion = document.createElement("td");
+            Descripcion.innerText = data[i].Descripcion;
+            Descripcion.innerHTML = data[i].Descripcion;
+            row.appendChild(Descripcion);
+
+            // CANTIDAD
+            var Cantidad = document.createElement("td");
+            Cantidad.innerText = Number(data[i].Cantidad).format(2);
+            Cantidad.innerHTML = Number(data[i].Cantidad).format(2);
+            row.appendChild(Cantidad);
+
+            // UNIDAD DE COBRO
+            var Unidad = document.createElement("td");
+            Unidad.innerText = data[i].Unidad;
+            Unidad.innerHTML = data[i].Unidad;
+            row.appendChild(Unidad);
+
+            // PRECIO
+            var Precio = document.createElement("td");
+            Precio.innerText = Number(data[i].Precio).format(2);
+            Precio.innerHTML = Number(data[i].Precio).format(2);
+            row.appendChild(Precio);
+
+            // PRODUCTO
+            var Producto = document.createElement("td");
+            Producto.innerText = data[i].Producto;
+            Producto.innerHTML = data[i].Producto;
+            Producto.style.display = "none";
+            row.appendChild(Producto);
+
+            // MONEDA
+            var Moneda = document.createElement("td");
+            Moneda.innerText = data[i].Moneda;
+            Moneda.innerHTML = data[i].Moneda;
+            Moneda.style.display = "none";
+            row.appendChild(Moneda);
+            
+            // PERIODO
+            var Periodo = document.createElement("td");
+            Periodo.innerText = data[i].Periodo;
+            Periodo.innerHTML = data[i].Periodo;
+            Periodo.style.display = "none";
+            row.appendChild(Periodo);
+
+
+            tabla.appendChild(row);
+
+            $('#Chk' + i).attr("onChange", "javascript:ChangeCheck('" + i + "'); return false;");
+        }
+        
+    }
+
+    function ChangeCheck(id) {
+
+        var row = $("#Chk" + id);
+        var precio = Number(row[0].children[10].innerHTML.replaceAll(",", ""));
+        var check = row[0].children[0].checked;
+
+        var Total = $("#TotalPrefactura").val() == "" ? "0" : $("#TotalPrefactura").val();
+        Total = Number(Total.replaceAll(",", ""));
+
+        if (check)
+        {
+            Total += precio;
+        }
+        else {
+            Total -= precio;
+        }
+
+        $("#TotalPrefactura").val(Number(Total).format(2));
+
+    }
+
+    // función para obtener la información del contrato seleccionado
+    function SelectRow(id) {
+        //var equipo = id;
+        $("#tblContratos tr").css("background-color", "#FFF");
+        var row = $('#Contrato' + id).css("background-color", "#D0EA93");
+        $("#Contrato").val(id);
+    }
+
+
+    // Este metodo se encarga de generar y mostrar los items a prefacturar del contrato indicado en el periodo seleccionado
+    $("#btnGenerar").click(function () {
+
+        var contrato = $("#Contrato").val();
+        var desde = $("#Desde").val();
+        var hasta = $("#Hasta").val();
+
+
+        if (contrato != "" && desde != "" && hasta != "") {
+            var path = "/Facturacion/GenerarPrefactura?contrato=" + contrato + "&desde=" + desde + "&hasta=" + hasta;
+            $.ajax({
+                beforeSend: function () {
+                    $("#divLoader").css('display', 'block');
+                },
+                type: 'POST',
+                url: path,
+                success: function (data) {
+                    if (data != null) {
+
+                        $("#divPrefactura").show();
+                        CargarDetallePrefacturacion(data[0]);
+                        $("#TotalAdeudado").text(Number(data[1]).format(2));
+                    }
+                    else {
+
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                },
+                traditional: true
+
+            }).always(function () {
+                $("#divLoader").hide();
+            });
+        }
+        else {
+            swal("", "Debe seleccionar un contrato y el periodo en el cual desea llevar a cabo la prefacturación", "error");
+        }
+
+    });
+
+
+    // Este metodo se encarga de prefacturar el contrato indicado en el periodo seleccionado
+    $("#btnPrefacturar").click(function () {
+
+        var contrato = $("#Contrato").val();
+        var desde = $("#Desde").val();
+        var hasta = $("#Hasta").val();
+
+        var datos = [];
+        $("input[type=checkbox]:checked").each(function () {
+            //cada elemento seleccionado
+            var row = $(this)[0].parentNode;
+            detalle = {
+                OTR: Number(row.children[1].innerText),
+                ConsecutivoOTR: Number(row.children[2].innerText),
+                Bascula: row.children[3].innerText == "Bascula" ? Number(row.children[4].innerText) : 0,
+                BoletaManual: row.children[3].innerText == "BoletaManual" ? Number(row.children[4].innerText) : 0,
+                ConsecutivoBoleta: row.children[5].innerText,
+               // Fecha: row.children[6].innerText,
+                Descripcion: row.children[7].innerText,
+                Cantidad: Number(row.children[8].innerText.replaceAll(",", "")),
+                Precio: Number(row.children[10].innerText.replaceAll(",", "")),
+                Producto:  Number(row.children[11].innerText),
+                Moneda: row.children[12].innerText,
+                Periodo: row.children[13].innerText,
+            };
+            datos.push(detalle);
+        });
+
+        var listaDetalle = JSON.stringify(datos);
+        //var listaDetalle = datos.serializeArray();
+        $("#ListaDetalle").val(listaDetalle);
+
+        if (contrato != "" && desde != "" && hasta != "") {
+            var path = "/Facturacion/Prefacturar";
+            $.ajax({              
+                type: 'POST',
+                url: path,
+                data: $('#frmPrefacturar').serializeArray(),
+                success: function (data) {
+                    if (data != null) {
+
+                        $("#btnReporteRecibos").removeAttr("disabled");
+                        $("#IdReporte").val(data);
+                        swal("", "Se realizó el proceso de prefacturación de manera exitosa", "success");
+                        window.open("/Facturacion/ReportePrefacturacion?id=" + data, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+                    }
+                    else {
+
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                },
+                traditional: true
+
+            });
+        }
+        else {
+            swal("", "Debe seleccionar un contrato y el periodo en el cual desea llevar a cabo la prefacturación", "error");
+        }
+
+    });
+
+    // Este metodo se encarga de dar formato a la fecha para que se muestre en el listado 
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado 
+    $("#ModoFacturacion").change(function () {
+
+        var modo = $("#ModoFacturacion").val();
+        switch (modo) {
+            case "Cada fin de mes":
+                {
+                    var date = new Date();
+                    var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
+                    var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+                    var desde = primerDia.getDate() + "/" + (Number(primerDia.getMonth()) + 1)   + "/" + primerDia.getFullYear();
+                    var hasta = ultimoDia.getDate() + "/" + (Number(ultimoDia.getMonth()) + 1) + "/" + ultimoDia.getFullYear();
+                    $('#Desde').val(desde);
+                    $('#Hasta').val(hasta);
+                    $('#Desde').datepicker({
+                        startDate: new Date(primerDia.getFullYear(), primerDia.getMonth() + 1, primerDia.getDate())
+                    })
+                    $('#Hasta').datepicker({
+                        startDate: new Date(ultimoDia.getFullYear(), ultimoDia.getMonth() + 1, ultimoDia.getDate())
+                    })
+                }
+                break;
+            case "Cada fin de quincena":
+                {
+                    var date = new Date();
+                    var primerDia = new Date();
+                    var ultimoDia = new Date();
+
+                    if (date.getDate() <= 15) {
+                        primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
+                        ultimoDia = new Date(date.getFullYear(), date.getMonth(), 15);
+                    }
+                    else {
+                        primerDia = new Date(date.getFullYear(), date.getMonth(), 16);
+                        ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+                    }
+
+                    var desde = primerDia.getDate() + "/" + (Number(primerDia.getMonth()) + 1) + "/" + primerDia.getFullYear();
+                    var hasta = ultimoDia.getDate() + "/" + (Number(ultimoDia.getMonth()) + 1) + "/" + ultimoDia.getFullYear();
+                    $('#Desde').val(desde);
+                    $('#Hasta').val(hasta);
+                    $('#Desde').datepicker({
+                        startDate: new Date(primerDia.getFullYear(), primerDia.getMonth() + 1, primerDia.getDate())
+                    })
+                    $('#Hasta').datepicker({
+                        startDate: new Date(ultimoDia.getFullYear(), ultimoDia.getMonth() + 1, ultimoDia.getDate())
+                    })
+                }
+                break;
+            default:
+
+        }
+    });
+
+</script>

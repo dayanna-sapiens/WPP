@@ -1,0 +1,40 @@
+﻿@model WPP.Model.ModuloFacturacion.ConsecutivoFacturacionModel
+@{
+    ViewBag.Title = "Consecutivo Facturación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Actualizar consecutivo de facturación</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("GuardarConsecutivo", "ConsecutivoFacturacion", FormMethod.Post, new { id = "frmGuardar", @class = "form-horizontal" }))
+            {
+
+                @Html.ValidationSummary(true)
+
+
+                <div class="form-group">
+                    <label>Consecutivo <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                    @Html.TextBoxFor(m => m.Secuencia, new { @class = "form-control", id = "Consecutivo", @type = "number", @min = "0", @max = "100000000000", @step = "1" })
+                    @Html.ValidationMessageFor(m => m.Secuencia)
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                @Html.ActionLink("Cancelar", "Index", "ConsecutivoFacturacion", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+

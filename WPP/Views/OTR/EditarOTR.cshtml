@@ -1,0 +1,456 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.OTRModel
+@{
+    //string tipoOTR = ViewBag.TipoOTR;
+    ViewBag.Title = "OTR" + Model.Tipo;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+ 
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <br />
+    <h3>Planificar OTR @Model.Tipo</h3>
+    <br />
+    <div class="col-md-6" style="padding-right:30px;">
+        <div class="row" id="divRowRutas">
+            <div class="col-12-md">
+                <label class="col-md-2">Ruta </label>
+            </div>
+            <br />
+            <div class="col-12-md">
+
+                <br />
+                <div class="table-responsive" style="height:400px; overflow-y:auto">
+                    <table class="table table-hover" id="tabla-viajes">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Cliente
+                                </th>
+                                <th>
+                                    Contrato
+                                </th>
+                                <th>
+                                    Ubicación
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblViajes"></tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="row" id="divRowOTR">
+            <div class="col-12-md">
+                <label class="col-md-10">OTRs Activas </label>
+            </div>
+            <br />
+            <div class="col-12-md">
+
+                <br />
+                <div class="table-responsive" style="height:400px; overflow-y:auto">
+                    <table class="table table-hover" id="tabla-otr">
+                        <thead>
+                            <tr>
+                                <th>
+
+                                </th>
+                                <th>
+                                    OTR
+                                </th>
+                                <th>
+                                    Fecha
+                                </th>
+                                <th>
+                                    Equipo
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblOTR"></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("EditarOTR", "OTR", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Tipo)
+            @Html.HiddenFor(m => m.Id)
+            @*@Html.HiddenFor(m => m.OTRHijas)
+            @Html.HiddenFor(m => m.OTRMadre)*@
+
+            <div class="form-group">
+                <label class="col-md-2">No OTR </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Consecutivo, new { @Class = "form-control", id = "Consecutivo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Consecutivo)
+                </div>
+                <label class="col-md-2">Fecha  <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Fecha, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "Fecha", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Fecha)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2">Estado </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Estado, new { @Class = "form-control", id = "Estado", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+                <label class="col-md-2">Equipo <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.NombreEquipo, new { @Class = "form-control", id = "NombreEquipo" })
+                    @Html.ValidationMessageFor(m => m.NombreEquipo)
+                    @Html.HiddenFor(m => m.Equipo)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Origen <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(m => m.Origen, new SelectList(ViewBag.ListaRellenos, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Origen" })
+                    @Html.ValidationMessageFor(m => m.Origen)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2" style="padding-right:8px;">Destino <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Destino, new SelectList(ViewBag.ListaRellenos, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Destino" })
+                    @Html.ValidationMessageFor(m => m.Destino)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2" style="padding-right:8px;">Relleno <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Relleno, new SelectList(ViewBag.ListaRellenos, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Relleno" })
+                    @Html.ValidationMessageFor(m => m.Relleno)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2" style="padding-right:0px;">Cliente <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Cliente, new SelectList(ViewBag.ListaClientes, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Cliente" })
+                    @Html.ValidationMessageFor(m => m.Cliente)
+                </div>
+            </div>
+            <div class="form-group" id="divRutaRecoleccion">
+                <label class="col-md-4" style="padding-right:0px;">Ruta Recolección <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-8">
+                    @Html.DropDownListFor(m => m.RutaRecoleccion, new SelectList(ViewBag.ListaRutaRecoleccion, "Id", "Descripcion"), String.Empty, new { @class = "form-control", id = "RutaRecoleccion" })
+                    @Html.ValidationMessageFor(m => m.RutaRecoleccion)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2" style="padding-right:0px;">Cuadrilla <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Cuadrilla, new SelectList(ViewBag.ListaCuadrilla, "Id", "Descripcion"), String.Empty, new { @class = "form-control", id = "Cuadrilla" })
+                    @Html.ValidationMessageFor(m => m.Cuadrilla)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3" style="padding-right:0px;">Observaciones</label>
+                <div class="col-md-12">
+                    @Html.TextAreaFor(m => m.Observaciones, new { @class = "form-control", id = "Observaciones" })
+                    @Html.ValidationMessageFor(m => m.Observaciones)
+                </div>
+            </div>
+            <button id="btnSubmit" type="submit" class="btn btn-primary" style="display:none">Submmit</button>
+            <a id="btnGuardar" class="btn btn-primary">Guardar</a>
+            @*<a id="btnCobrar" class="btn btn-primary">Imprimir</a>*@
+            @Html.ActionLink("Cancelar", "Index", "OTR", null, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        // Función para dar formato numérico
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+
+        // Se incializa el valor de algunas variables;
+
+        var today = new Date();
+        $('#Fecha').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        //Autocomplete de equipo
+        $("#NombreEquipo").autocomplete({
+            source: "/Equipo/AutoCompleteEquipo",
+            minLength: 1,
+            select: function (event, ui) {
+                console.log(JSON.stringify(ui));
+                $("#Equipo").val(ui.item.id);
+                $("#NombreEquipo").val(ui.item.value);
+            }
+        });
+
+
+        // Si se indica que es una OTR madre se deshabilita la ruta de recoleccion, se oculta la tabla de rutas y se muestra la tabla de OTRs,
+        // de lo contrario se oculta la tabla de OTRs y se muestra la tabla de rutas y se habilita la parte de rutas de recoleccion
+        //if ($("#OTRMadre").val() == "False" || $("#OTRMadre").val() == "false") {
+            ListarRutasRecoleccion();
+            $("#divRowRutas").show();
+            $("#divRutaRecoleccion").show();
+            $("#divRowOTR").hide();
+        //}
+        //else {
+        //    $("#divRutaRecoleccion").hide();
+        //    $("#divRowRutas").hide();
+        //    $("#divRowOTR").show();
+        //    CargarOTRs();
+
+        //}
+
+    });// end document ready
+
+    // Se guarda la informacion de la OTR y se valida que la informacion requerida haya sido completada
+    $("#btnGuardar").click(function () {
+        var estado = $("#Estado").val();
+        if (estado == "Completado")
+        {
+            alert("Esta OTR no puede ser editada, ya ha sido cerrada");
+        }
+        else {
+            var equipo = $("#Equipo").val();
+            if (equipo == "" || equipo == null || equipo == "0") {
+                var errorArray = {};
+
+                errorArray["NombreEquipo"] = 'Equipo inválido';
+
+                $('#frmCrear').validate().showErrors(errorArray);
+            }
+            else {
+
+                $.ajax({
+                    url: '/OTR/EditarOTR',
+                    data: $('#frmCrear').serializeArray(),
+                    type: 'POST',
+                    success: function (data) {
+                        if (data != null) {
+                            window.open("/OTR/ReporteOTR?id=" + data, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+                        }
+                        else {
+
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                    },
+                    traditional: true
+                });
+                //document.getElementById("btnSubmit").click();
+            }
+        }
+    });
+
+
+    // Se obtienen los puntos que componen la ruta de recoleccion seleccionada
+    $("#RutaRecoleccion").change(function () {
+         ListarRutasRecoleccion();
+    });
+
+    // Obtiene la lista de puntos segun la ruta de recoleccion indicada
+    function ListarRutasRecoleccion() {
+        var busqueda = $("#RutaRecoleccion").val();
+        var path = "/RutaRecoleccion/CargarRutasRecoleccion?ruta=" + busqueda;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                if (data != null) {
+                    CargarRutas(data);
+                }
+                else {
+                    $("#tblViajes tr").remove();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $("#tblViajes tr").remove();
+            },
+            traditional: true
+
+        });
+    }
+
+    // Se crea la tabala de puntos de ruta de recoleccion con la informacion recuperada
+    function CargarRutas(data) {
+        $("#tblViajes tr").remove();
+
+        var tabla = $("#tblViajes")[0];
+
+        for (var i = 0; i < data.length; i++) {
+
+            var row = document.createElement("tr");
+            row.id = data[i].Id;
+
+            // ID del producto del contrato
+            var id = document.createElement("td");
+            id.innerText = data[i].Id;
+            id.innerHTML = data[i].Id;
+            id.style.display = "none";
+            row.appendChild(id);
+
+            // Nombre del cliente
+            var cliente = document.createElement("td");
+            cliente.innerText = data[i].Descripcion;
+            cliente.innerHTML = data[i].Descripcion;
+            row.appendChild(cliente);
+
+            // Nombre del contrato
+            var contrato = document.createElement("td");
+            contrato.innerText = data[i].ContratoDescripcion;
+            contrato.innerHTML = data[i].ContratoDescripcion;
+            row.appendChild(contrato);
+
+            // Ubicacion
+            var ubicacion = document.createElement("td");
+            ubicacion.innerText = data[i].UbicacionDescripcion;
+            ubicacion.innerHTML = data[i].UbicacionDescripcion;
+            row.appendChild(ubicacion);
+
+            tabla.appendChild(row);
+
+
+        }
+    }
+
+    // Se cargan todas las OTR pendientes segun el tipo de OTR 
+    //function CargarOTRs() {
+    //    var busqueda = $("#Tipo").val();
+    //    var path = "/OTR/CargarListaOTR?tipo=" + busqueda;
+    //    $.ajax({
+    //        type: 'POST',
+    //        url: path,
+    //        success: function (data) {
+    //            if (data != null) {
+    //                CargarListaOTR(data);
+    //            }
+    //            else {
+    //                $("#tblOTR tr").remove();
+    //            }
+    //        },
+    //        error: function (xhr, textStatus, errorThrown) {
+    //            $("#tblOTR tr").remove();
+    //        },
+    //        traditional: true
+
+    //    });
+    //}
+
+    // Se crea la tabla de OTRs con la informacion obtenida
+    //function CargarListaOTR(data) {
+    //    $("#tblOTR tr").remove();
+
+    //    var tabla = $("#tblOTR")[0];
+    //    var hijas = ($("#OTRHijas").val()).split(",");
+
+    //    for (var i = 0; i < data.length; i++) {
+
+    //        var row = document.createElement("tr");
+    //        row.id = data[i].Id;
+
+    //        var checkbox = document.createElement('input');
+    //        checkbox.type = "checkbox";
+    //        checkbox.name = data[i].Id;
+    //        checkbox.id = data[i].Id;
+    //        for (var cont = 0; cont < hijas.length; cont++)
+    //        {
+    //            var hija = hijas[cont];
+    //            if (hija == data[i].Id)
+    //            {
+    //                checkbox.checked = true;
+    //            }
+    //        }
+    //        row.appendChild(checkbox);
+
+    //        // ID del producto del contrato
+    //        var id = document.createElement("td");
+    //        id.innerText = data[i].Id;
+    //        id.innerHTML = data[i].Id;
+    //        id.style.display = "none";
+    //        row.appendChild(id);
+
+    //        // Consecutivo OTR
+    //        var consecutivo = document.createElement("td");
+    //        consecutivo.innerText = data[i].Consecutivo;
+    //        consecutivo.innerHTML = data[i].Consecutivo;
+    //        row.appendChild(consecutivo);
+
+    //        // Fecha
+    //        var stringFecha = data[i].Fecha;
+    //        stringFecha = stringFecha.substring(6, 19);
+    //        var date = new Date(Number(stringFecha));
+    //        var fecha = document.createElement("td");
+    //        fecha.innerText = convertDate(date);
+    //        fecha.innerHTML = convertDate(date);
+    //        row.appendChild(fecha);
+
+    //        // Equipo
+    //        var equipo = document.createElement("td");
+    //        equipo.innerText = data[i].NombreEquipo;
+    //        equipo.innerHTML = data[i].NombreEquipo;
+    //        row.appendChild(equipo);
+
+    //        tabla.appendChild(row);
+
+
+    //    }
+    //}
+
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+
+    // Se obtiene las OTR hijas que fueron seleccionada y se llena un json con esta informacion 
+    // esto con el fin de guardar dicha informacion
+    //function CargarOTRHijas() {
+    //    var tabla = $("#tblOTR")[0];
+    //    var idHijas = "";
+    //    for (var i = 0; i < tabla.childElementCount; i++) {
+    //        var row = tabla.children[i];
+
+    //        var check = row.children[0];
+    //        if (check.checked) {
+    //            if (i == 0) {
+    //                idHijas += row.children[1].innerText;
+    //            }
+    //            else {
+    //                idHijas += "," + row.children[1].innerText;
+    //            }
+    //        }
+    //    }
+    //    $("#OTRHijas").val(idHijas);
+    //}
+
+   
+</script>

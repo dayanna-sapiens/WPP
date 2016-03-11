@@ -1,0 +1,89 @@
+﻿@model WPP.Model.General.CombustibleModel
+
+@{
+    ViewBag.Title = "Combustible";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Registrar Combustible</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Crear", "Combustible", FormMethod.Post, new { id = "frmCrearCombustible", @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    <label for="FechaNac">Fecha inicial</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.FechaDesde, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "FechaDesde", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.FechaDesde)
+                </div>            
+                <div class="form-group">
+                    <label for="FechaNac">Fecha final</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.FechaHasta, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "FechaHasta", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.FechaHasta)
+                </div>
+                <div class="form-group">
+                    <label for="Apellido2">Precio Gasolina</label>    <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Gasolina, new { @Class = "form-control", id = "Gasolina", @type = "number", @min = "0", @max = "100000000000" })
+                    @Html.ValidationMessageFor(m => m.Gasolina)
+                </div>
+                <div class="form-group">
+                    <label for="Cedula">Precio Diesel</label>    <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Diesel, new { @Class = "form-control", id = "Diesel", @type = "number", @min = "0", @max = "100000000000" })
+                    @Html.ValidationMessageFor(m => m.Diesel)
+                </div>               
+
+                <button type="submit" class="btn btn-primary">Crear</button>
+                @Html.ActionLink("Cancelar", "Index", "Combustible", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        var today = new Date();
+        $('#FechaHasta').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        $('#FechaDesde').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+
+    });// end document ready
+
+
+
+</script>

@@ -1,0 +1,676 @@
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San José', 0);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Heredia', 0);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cartago', 0);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Alajuela', 0);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Limón', 0);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guanacaste', 0);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Puntarenas', 0);
+
+
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San José',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Escazú',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Desamparados',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Puriscal',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tarrazú',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Aserrí',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mora',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Goicoechea',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Ana',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Alajuelita',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Vásquez de Coronado',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Acosta',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tibás',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Moravia',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Montes de Oca',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Turrubares',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Dota',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Curridabat',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pérez Zeledón',    1);
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'León Cortés',    1);
+
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Carmen', '8');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Merced', '8');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Hospital', '8');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Catedral', '8');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Zapote', '8');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Francisco de Dos Ríos', '8');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Uruca', '8');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mata Redonda', '8');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pavas', '8');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Hatillo', '8');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Sebastián', '8');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Escazú', '9');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Antonio', '9');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '9');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Desamparados', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Miguel', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Juan de Dios', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael Arriba', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Antonio', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Frailes', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Patarrá', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Cristóbal', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Rosario', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Damas', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael Abajo', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Gravilias', '10');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Los Guidos', '10');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santiago', '11');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mercedes Sur', '11');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Barbacoas', '11');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Grifo Alto', '11');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '11');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Candelarita', '11');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Desamparados', '11');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Antonio', '11');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Chires', '11');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Marcos', '12');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Lorenzo', '12');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Carlos', '12');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Aserrí', '13');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tarbaca', '13');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Vuelta de Jorco', '13');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Gabriel', '13');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Legua', '13');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Monterrey', '13');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Salitrillos', '13');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Ciudad Colón', '14');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guayabo', '14');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tabarcia', '14');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Piedras Negras', '14');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Picagres', '14');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Jaris', '14');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guadalupe', '15');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Francisco', '15');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Calle Blancos', '15');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mata de Plátano', '15');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Ipís', '15');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Rancho Redondo', '15');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Purral', '15');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Ana', '16');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Salitral', '16');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pozos', '16');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Uruca', '16');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Piedades', '16');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Brasil', '16');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Alajuelita', '17');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Josecito', '17');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Antonio', '17');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Concepción', '17');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Felipe', '17');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Isidro', '18');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '18');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Dulce Nombre de Jesús', '18');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Patalillo', '18');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cascajal', '18');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Ignacio', '19');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guaitil', '19');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Palmichal', '19');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cangrejal', '19');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sabanillas', '19');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Juan', '20');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cinco Esquinas', '20');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Anselmo Llorente', '20');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'León XIII', '20');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Colima', '20');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pedro', '22');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sabanilla', '22');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mercedes', '22');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '22');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pablo', '23');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pedro', '23');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Juan de Mata', '23');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Luis', '23');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Carara', '23');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa María', '23');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Jardín', '23');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Copey', '23');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Curridabat', '25');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Granadilla', '25');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sánchez', '25');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tirrases', '25');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Isidro de El General', '26');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'El General', '26');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Daniel Flores', '26');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Rivas', '26');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pedro', '26');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Platanares', '26');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pejibaye', '26');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cajón', '26');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Barú', '26');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Río Nuevo', '26');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Páramo', '26');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pablo', '24');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Andrés', '24');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Llano Bonito', '24');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Isidro', '24');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Cruz', '24');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Antonio', '24');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Vicente', '21');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Jerónimo', '21');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Trinidad', '21');
+
+
+
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Heredia', '2');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Barva', '2');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santo Domingo', '2');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Bárbara', '2');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '2');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Isidro', '2');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Belén', '2');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Flores', '2');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pablo', '2');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sarapiquí', '2');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Heredia', '149');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mercedes', '149');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Francisco', '149');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Ulloa', '149');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Varablanca', '149');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Barva', '150');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pedro', '150');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pablo', '150');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Roque', '150');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Lucía', '150');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San José de la Montaña', '150');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santo Domingo', '151');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Vicente', '151');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Miguel', '151');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Paracito', '151');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santo Tomás', '151');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Rosa', '151');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tures', '151');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pará', '151');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Bárbara', '152');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pedro', '152');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Juan', '152');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Jesús', '152');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santo Domingo', '152');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Purabá', '152');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '153');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Josecito', '153');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santiago', '153');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Angeles', '153');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Concepción', '153');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Isidro', '154');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San José', '154');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Concepción', '154');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Francisco', '154');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Antonio', '155');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Ribera', '155');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Asunción', '155');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Joaquín', '156');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Barrantes', '156');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Llorente', '156');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pablo', '157');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Rincón de Sabanilla', '157');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Puerto Viejo', '158');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Virgen', '158');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Las Horquetas', '158');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Llanuras del Gasper', '158');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cureña', '158');
+
+
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cartago', '3');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Paraíso', '3');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Unión', '3');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Jiménez', '3');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Turrialba', '3');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Alvarado', '3');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Oreamuno', '3');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'El Guarco', '3');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Oriental', '206');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Occidental', '206');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Carmen', '206');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Nicolás', '206');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Agua Caliente (San Francisco);', '206');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guadalupe (Arenilla);', '206');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Corralillo', '206');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tierra Blanca', '206');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Dulce Nombre', '206');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Llano Grande', '206');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Quebradilla', '206');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Paraíso', '207');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santiago de Paraíso', '207');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Orosi', '207');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cachí', '207');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Llanos de Santa Lucía', '207');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tres Ríos', '208');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San diego', '208');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Juan', '208');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '208');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Concepción', '208');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Dulce Nombre', '208');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Ramón', '208');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Río Azul', '208');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Juan Viñas', '209');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tucurrique', '209');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pejibaye', '209');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Turrialba', '210');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Suiza', '210');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Peralta', '210');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Cruz', '210');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Teresita', '210');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pavones', '210');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tuis', '210');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tayutic', '210');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Rosa', '210');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tres Equis', '210');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Isabel', '210');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Chirripó', '210');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pacayas', '211');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cervantes', '211');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Capellades', '211');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '212');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cot', '212');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Potrero Cerrado', '212');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cipreses', '212');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Rosa', '212');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tejar', '213');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Isidro', '213');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tobosi', '213');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Patio de Agua', '213');
+
+
+
+
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Alajuela', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Ramón', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Grecia', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Mateo', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Atenas', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Naranjo', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Palmares', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Poás', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Orotina', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Carlos', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Zarcero', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Valverde Vega', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Upala', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Los Chiles', '4');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guatuso', '4');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Alajuela', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San José', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Carrizal', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Antonio', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guácima', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Isidro', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sabanilla', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Río Segundo', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Desamparados', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Turrúcares', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tambor', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Garita', '265');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sarapiquí', '265');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Ramón', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santiago', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Juan', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Piedades Norte', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Piedades Sur', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Isidro', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Angeles', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Alfaro', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Volio', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Concepción', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Zapotal', '266');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Peñas Blancas', '266');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Grecia', '267');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Isidro', '267');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San José', '267');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Roque', '267');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tacares', '267');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Río Cuarto', '267');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Puente de Piedra', '267');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Bolivar', '267');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Mateo', '268');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Desmonte', '268');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Jesús María', '268');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Atenas', '269');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Jesús', '269');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mercedes', '269');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Isidro', '269');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Concepción', '269');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San José', '269');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Eulalia', '269');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Escobal', '269');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Naranjo', '270');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Miguel', '270');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San José', '270');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cirrí Sur', '270');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Jerónimo', '270');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Juan', '270');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'El Rosario', '270');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Palmitos', '270');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Palmares', '271');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Zaragoza', '271');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Buenos Aires', '271');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santiago', '271');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Candelaria', '271');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Esquipulas', '271');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Granja', '271');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pedro', '272');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Juan', '272');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '272');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Carrillos', '272');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sabana Redonda', '272');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Orotina', '273');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mastate', '273');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Hacienda Vieja', '273');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Coyolar', '273');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Ceiba', '273');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Quesada', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Florencia', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Buenvista', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Aguas Zarcas', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Venecia', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pital', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Fortuna', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Tigra', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Palmera', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Venado', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cutris', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Monterrey', '274');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pocosol', '274');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Zarcero', '275');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Laguna', '275');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tapezco', '275');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guadalupe', '275');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Palmira', '275');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Zapote', '275');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Brisas', '275');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sarchí Norte', '276');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sarchí Sur', '276');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Toro Amarillo', '276');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pedro', '276');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Rodríguez', '276');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Upala', '277');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Aguas Claras', '277');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San José (Pizote);', '277');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Bijagua', '277');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Delicias', '277');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Dos Ríos', '277');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Yolillal', '277');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Los Chiles', '278');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Caño Negro', '278');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'El Amparo', '278');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Jorge', '278');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '279');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Buenavista', '279');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cote', '279');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Katira', '279');
+
+
+
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Limón', '5');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pococí', '5');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Siquirres', '5');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Talamanca', '5');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Matina', '5');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guácimo', '5');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Limón', '391');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Valle La Estrella', '391');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Río Blanco', '391');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Matama', '391');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guápiles', '391');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Jiménes', '391');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Rita', '391');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Roxana', '391');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cariari', '391');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Colorado', '391');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Siquirres', '392');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pacuarito', '392');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Florida', '392');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Germania', '392');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cairo', '392');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Alegría', '392');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Bratsi', '393');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sixaola', '393');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cahuita', '393');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Telire', '393');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Matina', '394');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Batán', '394');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Carrandi', '394');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guácimo', '395');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mercedes', '395');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pocora', '395');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Río Jiménes', '395');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Duacarí', '395');
+
+
+
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Puntarenas', '7');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Esparza', '7');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Buenos Aires', '7');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Montes de Oro', '7');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Osa', '7');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Quepos ', '7');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Golfito', '7');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Coto Brus', '7');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Parrita', '7');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Corredores', '7');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Garabito', '7');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Puntarenas', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pitahaya', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Chomes', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Lepanto', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Paquera', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Manzanillo', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guacimal', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Barranca', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Monteverde', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Isla del Coco', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cóbano', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Chacarita', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Chira', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Acapulco', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'El Roble', '425');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Arancibia', '425');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Espíritu Santo', '426');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Juan Grande', '426');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Macacona', '426');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Rafael', '426');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Jerónimo', '426');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Buenos Aires', '427');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Volcán', '427');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Potrero Grande', '427');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Boruca', '427');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pilas', '427');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Colinas', '427');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Chánguena', '427');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Ciolley', '427');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Brunka', '427');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Miramar', '428');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Unión', '428');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Isidro', '428');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cortés', '429');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Palmar', '429');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sierpe', '429');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Bahía Ballena', '429');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Piedras Blancas', '429');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Quepos', '430');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Savegre', '430');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Naranjito', '430');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Golfito', '431');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Puerto Jiménez', '431');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Guaycará', '431');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pavón', '431');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Vito', '432');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sabalito', '432');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Aguabuena', '432');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Limoncito', '432');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Pittier', '432');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Parrita', '433');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Corredor', '434');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Cuesta', '434');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Paso Canoas', '434');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Laurel', '434');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Jacó', '435');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tárcoles', '435');
+
+
+
+
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Liberia', '6');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Nicoya', '6');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Cruz', '6');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Bagaces', '6');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Carrilo', '6');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cañas', '6');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Abangares', '6');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tilarán', '6');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Nandayure', '6');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Cruz', '6');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Hojancha', '6');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Liberia', '493');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cañas Dulces', '493');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mayorga', '493');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Nacascolo', '493');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Curubandé', '493');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Nicoya', '494');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mansión', '494');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Antonio', '494');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Quebrada Honda', '494');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sámara', '494');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Nosara', '494');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Belén de Nosarita', '493');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Cruz', '495');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Bolsón', '495');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Veintisiete de Abril', '495');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tempate', '495');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cartagena', '495');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cuajiniquil', '495');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Diriá', '495');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cabo velas', '495');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tamarindo', '495');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Bagaces', '496');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Fortuna', '496');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Mogote', '496');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Río Naranjo', '496');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Filadelfia', '497');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Palmira', '497');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sardinal', '497');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Belén', '497');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Cañas', '498');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Palmira', '498');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Miguel', '498');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Bebedero', '498');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Porozal', '498');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Las Juntas', '499');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Sierra', '499');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Juan', '499');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Colorado', '499');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tilarán', '500');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Quebrada Grande', '500');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tronadora', '500');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Rosa', '500');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Líbano', '500');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Tierras Morenas', '500');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Arenal', '500');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Carmona', '501');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Rita', '501');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Zapotal', '501');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'San Pablo', '501');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Porvenir', '501');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Bejuco', '501');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Cruz', '502');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Cecilia', '502');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'La Garita', '502');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Santa Elena', '502');
+
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Hojancha', '503');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Monte Romo', '503');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Puerto Carrillo', '503');
+insert into wpp.regiones(id,version,createdate,createdby,isdeleted,nombre,nodopadre) values (wpp.SEQ_Regiones.NEXTVAL,1,'04-08-2015','dbarboza@sapiens.co.cr',0,'Huacas', '503');
+
+
+

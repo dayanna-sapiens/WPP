@@ -1,0 +1,74 @@
+﻿@model WPP.Model.ModuloNomina.DiasFestivosModel
+@{
+    ViewBag.Title = "Días Festivos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Editar Día Festivo</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Editar", "DiasFestivos", FormMethod.Post, new { id = "frmEdiarDiasFestivos", @class = "form-horizontal" }))
+            {
+
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m=>m.Id)
+
+                <div class="form-group">
+                    <label for="Descripcion">Descripción</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Descripcion, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Descripcion)
+                </div>
+                <div class="form-group">
+                    <label for="Dia">Día</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Dia, new { @class = "form-control", id = "Dia", @type = "number", @min = "1", @max = "31", @step = "1" })
+                    @Html.ValidationMessageFor(m => m.Dia)
+                </div>
+
+                <div class="form-group">
+                    <label for="Mes">Mes</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Mes, new List<SelectListItem>{
+                                      new SelectListItem() {Value = "1", Text="Enero"},
+                                    new SelectListItem() {Value = "2", Text="Febrero"},
+                                    new SelectListItem() {Value = "3", Text="Marzo"},
+                                    new SelectListItem() {Value = "4", Text="Abril"},
+                                    new SelectListItem() {Value = "5", Text="Mayo"},
+                                    new SelectListItem() {Value = "6", Text="Junio"},
+                                    new SelectListItem() {Value = "7", Text="Julio"},
+                                    new SelectListItem() {Value = "8", Text="Agosto"},
+                                    new SelectListItem() {Value = "9", Text="Septiembre"},
+                                    new SelectListItem() {Value = "10", Text="Octubre"},
+                                    new SelectListItem() {Value = "11", Text="Noviembre"},
+                                    new SelectListItem() {Value = "12", Text="Diciembre"}
+                        }, String.Empty, new { @class = "form-control", id = "Mes" })
+                        @Html.ValidationMessageFor(m => m.Mes)
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    @Html.ActionLink("Cancelar", "Index", "DiasFestivos", null, new { @Class = "btn btn-primary" })
+
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+
+    });// end document ready
+
+   
+</script>

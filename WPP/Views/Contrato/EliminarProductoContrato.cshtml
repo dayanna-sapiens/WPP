@@ -1,0 +1,237 @@
+﻿@model WPP.Model.ModuloContratos.ProductoContratoModel
+@{
+    ViewBag.Title = "Eliminar Producto del Contrato";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<h2>Eliminar Producto del Contrato: @ViewBag.Contrato</h2>
+
+<div class="row" style="padding-top:2%">
+    <div class="col-md-12">
+        @using (Html.BeginForm("EliminarProductoContrato", "Contrato", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="form-group">
+                <label class="col-sm-2">Descripción</label>
+                <div class="col-sm-4">
+                    @Html.DisplayFor(m => m.Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Descripcion)
+                </div>
+
+                <label class="col-md-2">Servicio</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.ServicioDescripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ServicioDescripcion)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Producto</label>
+                <div class="col-md-4">
+                    @Html.Raw(ViewBag.Categoria) @Html.DisplayFor(m => m.ProductoDescripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ProductoDescripcion)
+                </div>
+
+                <label class="col-md-2">Estado</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.Estado, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="col-md-2">Unidad de Cobro</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.UnidadCobro, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UnidadCobro)
+                </div>
+
+
+                <label class="col-md-2">Tipo de Equipo</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.TipoEquipo, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.TipoEquipo)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="col-md-2">Proceso de Cobro</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.ProcesoCobro, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ProcesoCobro)
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label class="col-md-2">Fecha Inicial</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.FechaInicial, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FechaInicial)
+                </div>
+
+
+                <label class="col-md-2">Fecha Fin</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.FechaFinal, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FechaFinal)
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <label class="col-md-2">Cuenta Contable de Crédito</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.CuentaContableCredito, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CuentaContableCredito)
+                </div>
+
+
+                <label class="col-md-2">Cobrar este producto al cliente</label>
+                <div class="col-md-4">
+                    @if (Model.CobrarProductoCliente != null)
+                    {
+                        if ((bool)Model.CobrarProductoCliente)
+                        {
+                            @Html.Raw("Si")
+                        }
+                        else
+                        {
+                            @Html.Raw("No")
+                        }
+                    }
+                    
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <label class="col-md-2">Ruta de recolección</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.RutaRecoleccionDescripcion, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.RutaRecoleccionDescripcion)
+                </div>
+
+
+                <label class="col-md-2">Ruta</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.Ruta, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Ruta)
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <label class="col-md-2">Frecuencia</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.FrecueciaDescripcion, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FrecueciaDescripcion)
+                </div>
+
+
+                <label class="col-md-2">Días de la Semana</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.DiasSemana, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.DiasSemana)
+                </div>
+            </div>
+            <div class="form-group">
+
+                <label class="col-md-2">Esquema de revaloración</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.EsquemaRelevanciaDescripcion, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.EsquemaRelevanciaDescripcion)
+                </div>
+
+
+                <label class="col-md-2">Ubicación</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.UbicacionDescripcion, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UbicacionDescripcion)
+                </div>
+            </div>
+            <div class="form-group">
+
+                <label class="col-md-2">Moneda</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.Moneda, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Moneda)
+                </div>
+
+
+                <label class="col-md-2">SubItem</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.SubItem, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.SubItem)
+                </div>
+            </div>
+            if (ViewBag.Categoria != null)
+            {
+                if (ViewBag.Categoria == "Fosas")
+                {
+                    <div class="form-group" id="divFosas">
+
+                        <label class="col-md-2">Precio por fosa</label>
+                        <div class="col-md-4">
+                            @Html.DisplayFor(m => m.PrecioFosa, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.PrecioFosa)
+                        </div>
+
+
+                        <label class="col-md-2">Desecho de fosa</label>
+                        <div class="col-md-4">
+                            @Html.DisplayFor(m => m.ProductoFosaDescripcion, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ProductoFosa)
+                        </div>
+                    </div>
+                }
+            }
+
+            <div class="form-group">
+
+                <label class="col-md-2">Cantidad</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.Cantidad, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Cantidad)
+                </div>
+
+
+                <label class="col-md-2">Monto</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.Monto, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Monto)
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <label class="col-md-2">Descuento</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.Descuento, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Descuento)
+                </div>
+
+
+                <label class="col-md-2">Precio</label>
+                <div class="col-md-4">
+                    @Html.DisplayFor(m => m.Total, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Total)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nombre">¿Está seguro que desea eliminar este producto del contrato?</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Eliminar</button>
+            @Html.ActionLink("Regresar", "Detalles", "Contrato", new { idContrato = Model.Contrato }, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+</div>

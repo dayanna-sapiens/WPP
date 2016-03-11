@@ -1,0 +1,107 @@
+﻿@model WPP.Model.ModuloBascula.BasculaModel
+
+@{
+    ViewBag.Title = "Eliminar Boleta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Eliminar Boleta</h2>
+        @using (Html.BeginForm("EliminarBoletaConOTR", "Bascula", FormMethod.Post, new { id = "frmEliminarBoleta", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                <label for="Boleta">Boleta:</label>
+                @Html.DisplayFor(m => m.Boleta, new { @Class = "form-control", id = "Boleta" })
+            </div>
+            <div class="form-group">
+                <label for="OTR">OTR:</label>
+                @Html.DisplayFor(m => m.ConsecutivoOTR, new { @Class = "form-control", id = "ConsecutivoOTR" })
+            </div>
+            <div class="form-group">
+                <label for="Fecha">Fecha:</label>
+                @Html.DisplayFor(m => m.Fecha, new { @Class = "form-control", id = "Fecha" })
+            </div>
+            <div class="form-group">
+                <label for="EquipoWPP">Tipo Equipo:</label>
+                @if (Model.EquipoWPP)
+                {
+                    @Html.Raw("Equipo WPP")
+                }
+                else
+                {
+                    @Html.Raw("Equipo Externo")
+                }
+            </div>
+            <div class="form-group">
+                <label for="Estado">Estado:</label>
+                @Html.DisplayFor(m => m.Estado, new { @Class = "form-control", id = "Estado" })
+            </div>
+            <div class="form-group">
+                <label for="PlacaEquipo">Placa del Equipo:</label>
+                @Html.DisplayFor(m => m.PlacaEquipo, new { @Class = "form-control", id = "PlacaEquipo" })
+            </div>
+            <div class="form-group">
+                <label for="Cliente">Cliente:</label>
+                @Html.DisplayFor(m => m.Cliente, new { @Class = "form-control", id = "Cliente" })
+            </div>
+            <div class="form-group">
+                <label for="ContratoDescripcion">Contrato:</label>
+                @Html.DisplayFor(m => m.ContratoDescripcion, new { @Class = "form-control", id = "ContratoDescripcion" })
+            </div>
+            <div class="form-group">
+                <label for="NombreCliente">Nombre Cliente:</label>
+                @Html.DisplayFor(m => m.NombreCliente, new { @Class = "form-control", id = "NombreCliente" })
+            </div>
+            <div class="form-group">
+                <label for="Eje1">Eje 1:</label>
+                @Html.DisplayFor(m => m.Eje1, new { @Class = "form-control", id = "Eje1" })
+            </div>
+            <div class="form-group">
+                <label for="Eje2">Eje 2:</label>
+                @Html.DisplayFor(m => m.Eje2, new { @Class = "form-control", id = "Eje2" })
+            </div>
+            <div class="form-group">
+                <label for="Eje3">Eje 3:</label>
+                @Html.DisplayFor(m => m.Eje3, new { @Class = "form-control", id = "Eje3" })
+            </div>
+            <div class="form-group">
+                <label for="PesoBruto">Peso Bruto:</label>
+                @Html.DisplayFor(m => m.PesoBruto, new { @Class = "form-control", id = "PesoBruto" })
+            </div>
+            <div class="form-group">
+                <label for="PesoTara">Peso Tara:</label>
+                @Html.DisplayFor(m => m.PesoTara, new { @Class = "form-control", id = "PesoTara" })
+            </div>
+            <div class="form-group">
+                <label for="PesoNeto">Peso Neto:</label>
+                @Html.DisplayFor(m => m.PesoNeto, new { @Class = "form-control", id = "PesoNeto" })
+            </div>
+            <button type="submit" class="btn btn-primary">Ok</button>
+            @Html.ActionLink("Cancelar", "Index", "Bascula", null, new { @Class = "btn btn-primary" })
+
+        }
+
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        // Fomrato para los valores numericos
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+
+    });// end document ready
+
+</script>
+

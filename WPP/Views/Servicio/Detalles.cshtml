@@ -1,0 +1,30 @@
+﻿@model WPP.Model.ModuloContratos.ServicioModel
+
+@{
+    ViewBag.Title = "Detalles del Servicio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Detalles del Servicio</h2>
+
+      
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                <label for="Descripcion">Nombre:</label>
+                @Html.DisplayFor(m => m.Nombre)
+            </div>
+            <div class="form-group">
+                <label for="Categoria">Activo:</label>
+                @Html.DisplayFor(m => m.Activo)
+            </div>
+         
+            @Html.ActionLink("Regresar", "Index", "Servicio", null, new { @Class = "btn btn-primary" })
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+

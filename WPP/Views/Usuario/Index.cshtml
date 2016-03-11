@@ -1,0 +1,213 @@
+﻿@model PagedList.IPagedList<WPP.Entities.Objects.Generales.Usuario>
+@using WPP.Model;
+@using PagedList.Mvc;
+@using PagedList;
+ 
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:5%;">
+        <h2>Filtrar por: </h2>
+
+        @using (Html.BeginForm(Html.BeginForm("Buscar", "Usuario", FormMethod.Get)))
+        {
+            <p>
+                Nombre: @Html.TextBox("searchStringNombre", ViewBag.CurrentNombre as string, new { @class = "form-control col-lg-3" })
+            </p>
+            <p>
+                Email: @Html.TextBox("searchStringEmail", ViewBag.currentFilterEmail as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Apellido 1: @Html.TextBox("searchStringApellido1", ViewBag.currentFilterApellido1 as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Apellido 2: @Html.TextBox("searchStringApellido2", ViewBag.currentFilterApellido2 as string, new { @class = "form-control" })
+            </p>
+            <p>
+                Cédula: @Html.TextBox("searchStringCedula", ViewBag.currentFilterCedula as string, new { @class = "form-control" })
+            </p>
+            <p>               
+                Filas: @Html.DropDownList("searchStringFilas", new List<SelectListItem>{
+                    new SelectListItem() {Text = "10", Value="10"},
+                    new SelectListItem() {Text = "25", Value="25"},
+                    new SelectListItem() {Text = "50", Value="50"},
+                    new SelectListItem() {Text = "100", Value="100"}
+                 }, ViewBag.currentFilterFilas as string, new { @Class = "form-control", id = "searchStringFilas" })
+            </p>
+            <p>
+                <button type="submit" value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </p>
+        }
+    </div>
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>Usuarios</h2>
+
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+
+        <br /><br />
+        @if (Session["Roles"].ToString().Contains("Editor de Usuarios") || Session["Roles"].ToString().Contains("Administrador de Usuarios"))
+        {            
+            @Html.ActionLink("Crear Usuario", "Crear", "Usuario", new { @class = "btn btn-primary" })
+            <br /><br />
+        }
+
+        <div class="table-responsive" style="height:300px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-usuarios">
+
+                <tr>
+                    <th>
+                        @Html.ActionLink("Email", "Buscar", "Usuario", new
+                        {
+                            sortOrder = ViewBag.EmailSortParam,
+                            currentFilterNombre = ViewBag.CurrentNombre,
+                            currentFilterEmail = ViewBag.CurrentEmail,
+                            currentFilterApellido1 = ViewBag.CurrentApellido1,
+                            currentFilterApellido2 = ViewBag.CurrentApellido2,
+                            currentFilterCedula = ViewBag.CurrentCedula
+                        }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Nombre", "Buscar", "Usuario", new
+                        {
+                            sortOrder = ViewBag.NameSortParam,
+                            currentFilterNombre = ViewBag.CurrentNombre,
+                            currentFilterEmail = ViewBag.CurrentEmail,
+                            currentFilterApellido1 = ViewBag.CurrentApellido1,
+                            currentFilterApellido2 = ViewBag.CurrentApellido2,
+                            currentFilterCedula = ViewBag.CurrentCedula
+                        }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Apellido1", "Buscar", "Usuario", new
+                        {
+                            sortOrder = ViewBag.NameSortParam,
+                            currentFilterNombre = ViewBag.CurrentNombre,
+                            currentFilterEmail = ViewBag.CurrentEmail,
+                            currentFilterApellido1 = ViewBag.CurrentApellido1,
+                            currentFilterApellido2 = ViewBag.CurrentApellido2,
+                            currentFilterCedula = ViewBag.CurrentCedula
+                        }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Apellido2", "Buscar", "Usuario", new
+                        {
+                            sortOrder = ViewBag.NameSortParam,
+                            currentFilterNombre = ViewBag.CurrentNombre,
+                            currentFilterEmail = ViewBag.CurrentEmail,
+                            currentFilterApellido1 = ViewBag.CurrentApellido1,
+                            currentFilterApellido2 = ViewBag.CurrentApellido2,
+                            currentFilterCedula = ViewBag.CurrentCedula
+                        }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("Cédula", "Buscar", "Usuario", new
+                        {
+                            sortOrder = ViewBag.NameSortParam,
+                            currentFilterNombre = ViewBag.CurrentNombre,
+                            currentFilterEmail = ViewBag.CurrentEmail,
+                            currentFilterApellido1 = ViewBag.CurrentApellido1,
+                            currentFilterApellido2 = ViewBag.CurrentApellido2,
+                            currentFilterCedula = ViewBag.CurrentCedula
+                        }, null)
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Apellido1)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Apellido2)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Cedula)</td>
+                            @*<td>@Html.DisplayFor(modelItem => item.Roles)</td>*@
+                            
+                            @if (Session["Roles"].ToString().Contains("Editor de Usuarios") || Session["Roles"].ToString().Contains("Administrador de Usuarios")
+                                || Session["Roles"].ToString().Contains("Consultor de Usuarios"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Visualizar", "Usuario", new { IdUsuario = item.Id })" data-toggle="tooltip" title="Detalles">
+                                        <span class="glyphicon glyphicon-info-sign" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>   
+                            }
+                            
+
+                            @if (Session["Roles"].ToString().Contains("Editor de Usuarios") || Session["Roles"].ToString().Contains("Administrador de Usuarios"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Editar", "Usuario", new { IdUsuario = item.Id })" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>    
+                            }
+                            
+                          
+                            @if (Session["Roles"].ToString().Contains("Administrador de Usuarios"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Eliminar", "Usuario", new { IdUsuario = item.Id })" data-toggle="tooltip" title="Eliminar">
+                                        <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>  
+                            }
+                            
+                        </tr>
+                    }                   
+                }
+
+            </table>
+        </div>
+        <div>
+            <div >
+                <br />
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("Buscar", "Usuario",
+                                new
+                                {
+                                    page,
+                                    sortOrder = ViewBag.CurrentSort,
+                                    currentFilterNombre = ViewBag.CurrentNombre,
+                                    currentFilterEmail = ViewBag.CurrentEmail,
+                                    currentFilterApellido1 = ViewBag.CurrentApellido1,
+                                    currentFilterApellido2 = ViewBag.CurrentApellido2,
+                                    currentFilterCedula = ViewBag.CurrentCedula,
+                                    currentFilterFilas = ViewBag.CurrentFilas
+                                }))
+            </div>            
+        </div>
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).load(function () {
+        document.getElementById("btnBuscar").click();
+    })
+
+    $(document).ready(function () {
+        function editarUsuario(IdUsuario) {
+        }
+    });// end document ready
+
+</script>

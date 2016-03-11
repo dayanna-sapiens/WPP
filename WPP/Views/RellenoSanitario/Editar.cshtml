@@ -1,0 +1,104 @@
+﻿@model WPP.Model.ModuloOperacionRecoleccion.RellenoSanitarioModel
+    @{
+        ViewBag.Title = "Editar Relleno Sanitario";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+    }
+
+
+
+    <div class="row" style="margin-top:20px; ">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 body-form">
+            <div>
+                <h2>Editar Producto</h2>
+
+                <br /><br />
+
+                @using (Html.BeginForm("Editar", "RellenoSanitario", FormMethod.Post, new { id = "frmEditarProducto", @class = "form-horizontal" }))
+                {
+
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(m => m.Id)
+
+                    <div class="form-group">
+                        <label for="Nombre">Nombre</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                        @Html.TextBoxFor(m => m.Nombre, new { @Class = "form-control", id = "Nombre" })
+                        @Html.ValidationMessageFor(m => m.Nombre)
+                    </div>                 
+                    <div class="form-group">
+                        <label for="Estado">Estado</label><span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                        <br />
+                        <input id="Activo" type="radio" name="rdbEstado" value="1" checked="checked">Activo
+                        <input id="Inactivo" type="radio" name="rdbEstado" value="0">Inactivo
+                        @Html.HiddenFor(m => m.Estado)
+                        @Html.ValidationMessageFor(m => m.Estado)
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Editar</button>
+                    @Html.ActionLink("Cancelar", "Index", "RellenoSanitario", null, new { @Class = "btn btn-primary" })
+
+                }
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+
+    </div>
+
+
+    <script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+       
+
+        if ($("#Estado").val() == "" || $("#Estado").val() == "False" || $("#Estado").val() == "false") {
+            $("#Estado").val(false);
+            $("#Inactivo").prop("checked", true);
+        }
+        else {
+            $("#Estado").val(true);
+            $("#Activo").prop("checked", true);
+        }
+
+        $("input:radio[name='rdbEstado']").change(function () {
+            actual = $("#Estado").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {
+                actual = append;
+                $("#Estado").val(actual == "0" ? false : true);
+
+            } else {
+                $("#Estado").val(true);
+            }
+        });
+
+
+    });// end document ready
+
+    function OnchangeCategoria() {
+        var opcion = $("#Categoria option:selected");
+        var disposicion = opcion[0].dataset.disposicion;
+        if (disposicion == "DisposicionFinal") {
+            $("#divPrecio").css("display", "block");
+            $("#divMoneda").css("display", "block");
+        }
+        else {
+            $("#divPrecio").css("display", "none");
+            $("#divMoneda").css("display", "none");
+        }
+
+    }
+
+    </script>

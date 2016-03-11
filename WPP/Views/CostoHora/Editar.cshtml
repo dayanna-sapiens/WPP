@@ -1,0 +1,81 @@
+﻿@model WPP.Model.General.CostoHoraModel
+
+@{
+    ViewBag.Title = "Costo Hora";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Registrar Costo Hora</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Editar", "CostoHora", FormMethod.Post, new { id = "frmEditarCostoHora", @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.Id)
+                <div class="form-group">
+                    <label for="FechaNac">Fecha inicial</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.FechaInicio, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "FechaInicio", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.FechaInicio)
+                </div>
+                <div class="form-group">
+                    <label for="FechaNac">Fecha final</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.FechaFin, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "FechaFin", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.FechaFin)
+                </div>
+                <div class="form-group">
+                    <label for="Tipo">Tipo</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Tipo, new List<SelectListItem>{
+                        new SelectListItem() {Text = "Chofer", Value="Chofer"},
+                        new SelectListItem() {Text = "Recolector", Value="Recolector"},
+                        new SelectListItem() {Text = "Taller", Value="Taller"}
+                    },String.Empty, new { @class = "form-control", id = "Tipo" })
+                        @Html.ValidationMessageFor(m => m.Tipo)
+                </div>
+                <div class="form-group">
+                    <label for="Apellido2">Monto</label>    <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Monto, new { @Class = "form-control", id = "Monto", @type = "number", @min = "0", @max = "100000000000" })
+                    @Html.ValidationMessageFor(m => m.Monto)
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                @Html.ActionLink("Cancelar", "Index", "CostoHora", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+
+    });// end document ready
+
+
+
+</script>
+

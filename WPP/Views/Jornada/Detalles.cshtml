@@ -1,0 +1,37 @@
+﻿@model WPP.Model.ModuloNomina.JornadaModel
+
+@{
+    ViewBag.Title = "Detalles Jornada";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Detalles de la Jornada Laboral</h2>
+
+
+        @Html.HiddenFor(m => m.Id)
+        <div class="form-group">
+            <label for="Descripcion">Descripción:</label>
+            @Html.DisplayFor(m => m.Descripcion)
+        </div>
+        <div class="form-group">
+            <label for="Tipo">Tipo:</label>
+            @Html.DisplayFor(m => m.Tipo)
+        </div>
+        <div class="form-group">
+            <label for="Tipo">Hora Inicio:</label>
+            @Html.DisplayFor(m => m.HoraInicio)
+        </div>
+        <div class="form-group">
+            <label for="Tipo">Hora Fin:</label>
+            @Html.DisplayFor(m => m.HoraFin)
+        </div>
+        @Html.ActionLink("Regresar", "Index", "Jornada", null, new { @Class = "btn btn-primary" })
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+

@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "Control de Operaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+
+<div class="row" style="margin-top:20px; ">
+
+    <div class="col-md-3"></div>
+    <div class="col-md-6" style="padding-right:30px;">
+        <br />
+        <h3>Contratos</h3>
+        <br />
+        @using (Html.BeginForm("Contrato", "ControlOperaciones", FormMethod.Post, new { id = "frmContrato", @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Desde </label>
+                <div class="col-md-4">
+                    @Html.TextBox("Desde", "", new { @class = "form-control", id = "Desde", @readonly = "readonly" })
+                </div>
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Hasta </label>
+                <div class="col-md-4">
+                    @Html.TextBox("Hasta", "", new { @class = "form-control", id = "Hasta", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group"> 
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Estado</label>
+                <div class="col-md-4">
+                    @Html.DropDownList("ddlEstado", new List<SelectListItem>{
+                    new SelectListItem() {Text = "Todos", Value="Todos"},
+                     new SelectListItem() {Text = "Activo", Value="Activo"},
+                    new SelectListItem() {Text = "Inactivo", Value="Inactivo"},
+                    new SelectListItem() {Text = "Vencido", Value="Vencido"}
+                    }, new { @class = "form-control", id = "ddlEstado" })
+                </div>
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Ejecutivo</label>
+                <div class="col-md-4">
+                    @Html.DropDownList("ddlEjecutivo", new SelectList(ViewBag.ListaEjecutivos, "Id", "NombreCompleto"), "Todos", new { @class = "form-control", id = "ddlEjecutivo" })
+                </div>
+            </div>
+            <div class="form-group">
+               
+                <div class="col-md-6" style="font-weight:bold; padding-left:0px; padding-right:0px;">
+                    <input type="checkbox" name="ContratosFacturados" value="ContratosFacturados" id="ContratosFacturados"> Mostrar solo contratos facturados
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Cliente</label>
+                <div class="col-md-10">
+                    @Html.TextBox("Cliente", "", new { @class = "form-control", id = "Cliente" })
+                </div>
+            </div>
+            if (Session["Roles"].ToString().Contains("Reportes Gerencia"))
+            {
+                <div class="form-group">
+                    <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Compañía </label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("Compania", new SelectList(ViewBag.ListaCompania, "Id", "Nombre"), "Todos", new { @class = "form-control", id = "Compania" })
+                    </div>
+                </div>
+            }
+            <div class="col-12-md" style="float:right; padding-top:100px;">
+                @*   <a id="btnReporteRecibos" class="btn btn-primary" disabled>Reporte de Recibos   <i class="fa fa-copy"></i></a>*@
+                <a id="btnReporte" class="btn btn-primary">Reporte   <i class="fa fa-file-o"></i></a>
+                <a id="btnExcel" class="btn btn-primary">Excel   <i class="fa fa-file-excel-o"></i></a>
+                <button id="btnSubmit" type="submit" style="display:none;" class="btn btn-primary"></button>
+                @Html.ActionLink("Cancelar", "Contrato", "ControlOperaciones", null, new { @Class = "btn btn-primary" })
+            </div>
+        }
+    </div>
+
+    <div class="col-md-3"></div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+
+
+
+        // Se inicializan los datos y controles necesario
+
+        var today = new Date();
+        $('#Desde').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        $('#Hasta').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+    });// end document ready
+
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnReporte").click(function () {
+
+        var desde = $("#Desde").val();
+        var hasta = $("#Hasta").val();
+        var facturados = $("#ContratosFacturados").is(':checked');
+        var estado = $("#ddlEstado").val();
+        var ejectutivo = $("#ddlEjecutivo").val() == "" ? "Todos" : $("#ddlEjecutivo").val();
+        var cliente = $("#Cliente").val();
+        var compania = "";
+        if ($("#Compania").val() != undefined) {
+            compania = $("#Compania").val() == "" ? "Todos" : $("#Compania").val();
+        }
+
+        var formato = "pdf";
+        window.open("/ControlOperaciones/ReporteContratosXEjecutivo?desde=" + desde + "&hasta=" + hasta + "&cliente=" + cliente + "&ejecutivo=" + ejectutivo + "&estado=" + estado + "&contratosFacturados=" + facturados + "&formato=" + formato + "&compania=" + compania, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+
+    });
+
+    // Al dar click en el boton de buscar, obtiene los contratos que coincidan con el cliente o contrato ingresado
+    $("#btnExcel").click(function () {
+        var desde = $("#Desde").val();
+        var hasta = $("#Hasta").val();
+        var facturados = $("#ContratosFacturados").is(':checked');
+        var ejectutivo = $("#ddlEjecutivo").val() == "" ? "Todos" : $("#ddlEjecutivo").val();
+        var estado = $("#ddlEstado").val();
+        var cliente = $("#Cliente").val();
+        var compania = "";
+        if ($("#Compania").val() != undefined) {
+            compania = $("#Compania").val() == "" ? "Todos" : $("#Compania").val();
+        }
+
+        var formato = "excel";
+        window.location.assign("/ControlOperaciones/ReporteContratosXEjecutivo?desde=" + desde + "&hasta=" + hasta + "&cliente=" + cliente + "&ejecutivo=" + ejectutivo + "&estado=" + estado + "&contratosFacturados=" + facturados + "&formato=" + formato + "&compania=" + compania);
+    });
+
+
+
+    // Este metodo se encarga de dar formato a la fecha para que se muestre en el listado
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+
+
+
+</script>
+
+

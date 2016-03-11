@@ -1,0 +1,64 @@
+﻿@model WPP.Model.CompaniaModel
+
+@{
+    ViewBag.Title = "Eliminar Compañía";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Eliminar Compañía</h2>
+
+        @using (Html.BeginForm("Eliminar", "Compania", FormMethod.Post, new { id = "frmEliminarCompania", @Class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                <label for="Grupo">Grupo:</label>
+                @Html.DisplayFor(m => m.GrupoNombre, new { @Class = "form-control", id = "Grupo" })
+            </div>
+            <div class="form-group">
+                <label for="Nombre">Nombre de la Compañía:</label>
+                @Html.DisplayFor(m => m.Nombre, new { @Class = "form-control", id = "Nombre" })
+            </div>
+            <div class="form-group">
+                <label for="TipoCliente">Tipo de Cliente:</label>
+                @Html.DisplayFor(m => m.TipoNombre, new { @Class = "form-control", id = "Tipo" })
+            </div>       
+            <div class="form-group">
+                <label for="NombreCorto">Nombre Corto:</label>
+                @Html.DisplayFor(m => m.NombreCorto, new { @Class = "form-control", id = "NombreCorto" })
+            </div>
+            <div class="form-group">
+                <label for="Cedula">Cédula:</label>
+                @Html.DisplayFor(m => m.Cedula, new { @Class = "form-control", id = "Cedula" })
+            </div>
+            <div class="form-group">
+                <label for="RepresentanteLegal">Representante Legal:</label>
+                @Html.DisplayFor(m => m.RepresentanteLegal, new { @Class = "form-control", id = "RepresentanteLegal" })
+            </div>
+            <div class="form-group">
+                <label for="Telefono">Teléfono:</label>
+                @Html.DisplayFor(m => m.Telefono, new { @Class = "form-control", id = "Telefono" })
+            </div>
+            <div class="form-group">
+                <label for="Email">Email:</label>
+                @Html.DisplayFor(m => m.Email, new { @Class = "form-control", id = "Email" })
+            </div>
+            <div class="form-group">
+                <label for="nombre">¿Está seguro que desea eliminar a esta compañía?</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ok</button>
+            @Html.ActionLink("Cancelar", "Index", "Compania", null, new { @Class = "btn btn-primary" })
+
+        }
+
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+

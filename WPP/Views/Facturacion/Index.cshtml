@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Index";
+    if (null != TempData["alertMessage"])
+    {
+        <script type="text/javascript">
+
+            swal("", "@TempData["alertMessage"]", "error");
+            /// ("@TempData["alertMessage"]");
+        </script>
+    }
+}
+
+<h2>Index</h2>

@@ -1,0 +1,291 @@
+﻿@model WPP.Model.ModuloContratos.ClienteModel
+@{
+    ViewBag.Title = "Detalles Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row" style="padding-top:2%">
+    <div class="col-md-5 form-horizontal">
+        <h2>Detalles del Cliente</h2>
+
+        <br /><br />
+        <div class="form-group">
+            <label for="Grupo">Grupo:</label>
+            @Html.DisplayFor(m => m.GrupoNombre)
+        </div>
+        <div class="form-group">
+            <label for="Numero">Número:</label>
+            @Html.DisplayFor(m => m.Numero)
+        </div>
+        <div class="form-group">
+            <label for="Nombre">Nombre del Cliente:</label>
+            @Html.DisplayFor(m => m.Nombre)
+        </div>
+        <div class="form-group">
+            <label for="Cedula">Cédula:</label>
+            @Html.DisplayFor(m => m.Cedula)
+        </div>
+        <div class="form-group">
+            <label for="TipoCliente">Tipo de Cliente:</label>
+            @Html.DisplayFor(m => m.TipoNombre)
+        </div>
+        <div class="form-group">
+            <label for="NombreComercial">Nombre Comercial:</label>
+            @Html.DisplayFor(m => m.NombreComercial)
+        </div>
+        <div class="form-group">
+            <label for="NombreCorto">Nombre Corto:</label>
+            @Html.DisplayFor(m => m.NombreCorto)
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            @Html.DisplayFor(m => m.Email)
+        </div>
+        <div class="form-group">
+            <label for="Telefono1">Teléfono 1:</label>
+            @Html.DisplayFor(m => m.Telefono1)
+        </div>
+        <div class="form-group">
+            <label for="Telefono2">Teléfono 2:</label>
+            @Html.DisplayFor(m => m.Telefono2)
+        </div>
+        <div class="form-group">
+            <label for="Fax">Fax:</label>
+            @Html.DisplayFor(m => m.Fax)
+        </div>
+        <div class="form-group">
+            <label for="FechaDesactivacion">Fecha Desactivación:</label>
+            @Html.DisplayFor(m => m.FechaDesactivacion)
+        </div>
+        <div class="form-group">
+            <label for="RepresentanteLegal">Representante Legal:</label>
+            @Html.DisplayFor(m => m.RepresentanteLegal)
+        </div>
+        <div class="form-group">
+            <label for="Direccion">Dirección:</label>
+            @Html.DisplayFor(m => m.Direccion)
+        </div>
+        <div class="form-group">
+            <label for="Provincia">Provincia:</label>
+            @if (Model.Provincia.HasValue)
+            {
+                @Html.DisplayFor(m => m.ProvinciaNombre)
+            }
+        </div>
+        <div class="form-group">
+            <label for="Canton">Cantón:</label>
+
+            @if (Model.Canton.HasValue)
+            {
+                @Html.DisplayFor(m => m.CantonNombre)
+            }
+
+
+        </div>
+        <div class="form-group">
+            <label for="Distrito">Distrito:</label>
+            @if (Model.Distrito.HasValue)
+            {
+                @Html.DisplayFor(m => m.DistritoNombre)
+            }
+        </div>
+        <div class="row">
+            @if (Session["Roles"].ToString().Contains("Editor de Clientes") || Session["Roles"].ToString().Contains("Administrador de Clientes"))
+            {
+                <div class="col-md-4">
+                    @Html.ActionLink("Crear Contacto", "CrearContacto", "Cliente", new { IdCliente = Model.Id }, new { @Class = "btn btn-primary" })
+                </div>
+                <div class="col-md-4">
+                    @Html.ActionLink("Crear Ubicación", "CrearUbicacion", "Cliente", new { IdCliente = Model.Id }, new { @Class = "btn btn-primary" })
+                </div>
+            }
+            <div class="col-md-4">
+                @Html.ActionLink("Regresar", "Index", "Cliente", null, new { @Class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    @*<div class="col-md-1"></div>*@
+    <div class="col-md-7">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tabbable" id="tabs-779403">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#panel-454895" data-toggle="tab">Contactos</a>
+                            </li>
+                            <li>
+                                <a href="#panel-696503" data-toggle="tab">Ubicaciones</a>
+                            </li>
+                            <li>
+                                <a href="#panel-696502" data-toggle="tab">Contratos</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active form-horizontal" id="panel-454895">
+                                <h2>Contactos</h2>
+
+                                <div class="table-responsive" style="height:400px; overflow-y:auto">
+                                    <table class="table table-hover" id="tabla-contactos">
+                                        <tr>
+                                            <th>
+                                                Nombre
+                                            </th>
+                                            <th>
+                                                Email
+                                            </th>
+                                            <th>
+                                                Teléfono 1
+                                            </th>
+                                            <th>
+                                                Ext 1
+                                            </th>
+                                            <th>
+                                                Teléfono 2
+                                            </th>
+                                            <th>
+                                                Ext 2
+                                            </th>
+                                            <th>
+                                                Cedula
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+
+                                        @if (Model.Contactos != null)
+                                        {
+                                            foreach (var contacto in Model.Contactos.Where(m => m.IsDeleted == false))
+                                            {
+                                                <tr>
+                                                    <td>@contacto.Nombre</td>
+                                                    <td>@contacto.Email</td>
+                                                    <td>@contacto.Telefono1</td>
+                                                    <td>@contacto.Ext1</td>
+                                                    <td>@contacto.Telefono2</td>
+                                                    <td>@contacto.Ext2</td>
+                                                    <td>@contacto.Cedula</td>
+                                                    @if (Session["Roles"].ToString().Contains("Editor de Clientes") || Session["Roles"].ToString().Contains("Administrador de Clientes"))
+                                                    {
+                                                        <td>
+                                                            <a href="@Url.Action("EditarContacto", "Cliente", new { idContacto = contacto.Id })" data-toggle="tooltip" title="Editar">
+                                                                <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                                            </a>
+                                                        </td>
+                                                    }
+                                                    @if (Session["Roles"].ToString().Contains("Administrador de Clientes"))
+                                                    {
+                                                        <td>
+                                                            <a href="@Url.Action("EliminarContacto", "Cliente", new { idContacto = contacto.Id })" data-toggle="tooltip" title="Eliminar">
+                                                                <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                                            </a>
+                                                        </td>
+                                                    }
+                                                </tr>
+                                            }
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane form-horizontal" id="panel-696503">
+                                <h2>Ubicaciones</h2>
+
+                                <div class="table-responsive" style="height:400px; overflow-y:auto">
+                                    <table class="table table-hover" id="tabla-ubicaciones">
+                                        <tr>
+                                            <th>
+                                                Descripción
+                                            </th>
+                                            <th>
+                                                Contacto
+                                            </th>
+                                            <th>
+                                                Teléfono
+                                            </th>
+                                            <th>
+                                                Email
+                                            </th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+
+                                        @if (Model.Ubicaciones != null)
+                                        {
+                                            foreach (var ubicacion in Model.Ubicaciones.Where(m => m.IsDeleted == false))
+                                            {
+                                                <tr>
+                                                    <td>@ubicacion.Descripcion</td>
+                                                    <td>@ubicacion.Contacto</td>
+                                                    <td>@ubicacion.Telefono</td>
+                                                    <td>@ubicacion.Email</td>
+                                                    @if (Session["Roles"].ToString().Contains("Editor de Clientes") || Session["Roles"].ToString().Contains("Administrador de Clientes"))
+                                                    {
+                                                        <td>
+                                                            <a href="@Url.Action("EditarUbicacion", "Cliente", new { idUbicacion = ubicacion.Id })" data-toggle="tooltip" title="Editar">
+                                                                <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                                            </a>
+                                                        </td>
+                                                    }
+                                                    @if (Session["Roles"].ToString().Contains("Administrador de Clientes"))
+                                                    {
+                                                        <td>
+                                                            <a href="@Url.Action("EliminarUbicacion", "Cliente", new { idUbicacion = ubicacion.Id })" data-toggle="tooltip" title="Eliminar">
+                                                                <span class="glyphicon glyphicon-trash" style="font-size:medium" aria-hidden="true"></span>
+                                                            </a>
+                                                        </td>
+                                                    }
+                                                </tr>
+                                            }
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane form-horizontal" id="panel-696502">
+                                <h2>Contratos</h2>
+
+                                <div class="table-responsive" style="height:400px; overflow-y:auto">
+                                    <table class="table table-hover" id="tabla-contratos">
+                                        <tr>
+                                            <th>
+                                                No Contrato
+                                            </th>
+                                            <th>
+                                                Descripción
+                                            </th>
+                                            <th>
+                                                Punto Facturación
+                                            </th>
+                                            <th>
+                                                Estado
+                                            </th>
+                                        </tr>
+
+                                        @if (Model.Contratos != null)
+                                        {
+                                            foreach (var contrato in Model.Contratos)
+                                            {
+                                                <tr>
+                                                    <td>@contrato.Numero</td>
+                                                    <td>@contrato.DescripcionContrato</td>
+                                                    <td>@contrato.PuntoFacturacion.Nombre</td>
+                                                    <td>@contrato.Estado</td>
+
+                                                </tr>
+                                            }
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+</div>
+
+

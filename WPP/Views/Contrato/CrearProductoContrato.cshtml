@@ -1,0 +1,439 @@
+﻿@model WPP.Model.ModuloContratos.ProductoContratoModel
+@{
+    ViewBag.Title = "Crear Productos del Contrato";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<h3>Producto para el contrato: @ViewBag.Contrato</h3>
+<div class="row">
+    <div class="col-md-12">
+        <br />
+        <h3>Agregar Producto</h3>
+        <br />
+        @using (Html.BeginForm("CrearProductoContrato", "Contrato", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Contrato)
+
+            <div class="form-group">
+                <label class="col-sm-2">Descripción <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Descripcion)
+                </div>
+
+                <label class="col-md-2">Servicio <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.Servicio, new SelectList(ViewBag.ListaServicio, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Servicio" })
+                    @Html.ValidationMessageFor(m => m.Servicio)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Producto <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    <select id="cmbProducto" class="form-control">
+                        <option></option>
+                        @if (ViewBag.ListaCategoriaProducto != null)
+                        { 
+                            foreach (var item in ViewBag.ListaCategoriaProducto)
+                            {
+                                <optgroup label="@item.Nombre">
+                                    @foreach (var product in ViewBag.ListaProducto)
+                                    {
+                                        if (product.Categoria == item.Id)
+                                        {
+                                            <option value="@product.Id">@product.Descripcion</option>
+                                        }
+                                    }
+                                </optgroup>
+                            }
+                        }
+                       
+                    </select>
+                    @Html.HiddenFor(m => m.Producto)
+                    @Html.ValidationMessageFor(m => m.Producto)
+                </div>
+
+                <label class="col-md-2">Estado <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">                    
+                    @Html.DropDownListFor(m => m.Estado , new List<SelectListItem>{
+                    new SelectListItem() {Text = "Activo", Value="Activo"},
+                 }, String.Empty, new { @class = "form-control", id = "Estado" })             
+                    @Html.ValidationMessageFor(m => m.Estado)
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="col-md-2">Tipo de Equipo </label>
+                <div class="col-md-4">                    
+                    @Html.TextBoxFor(m => m.TipoEquipo, String.Empty, new { @class = "form-control", id = "TipoEquipo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.TipoEquipo)
+                </div>
+                <label class="col-md-2">Proceso de Cobro </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.ProcesoCobro, String.Empty, new { @class = "form-control", id = "ProcesoCobro", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.ProcesoCobro)
+                </div>
+            </div>
+            <div class="form-group" id="divDisposicion" style="display:none;">
+                <label class="col-md-3">Servicio ligado a Recolección </label>
+                <div class="col-md-3">
+                    <input id="RecoleccionSi" type="radio" name="rdbRecoleccion" value="1">Si
+                    <input id="RecoleccionNo" type="radio" name="rdbRecoleccion" value="0" checked="checked">No
+                    @Html.HiddenFor(m=> m.LigadoRecoleccion)
+                </div>
+                <label class="col-md-2">Producto Recolección </label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.Recoleccion, new SelectList(ViewBag.ListaProductoRecoleccion, "Id", "Descripcion"), new { @class = "form-control", id = "Recoleccion", disabled = "disabled" })
+                    @Html.ValidationMessageFor(m => m.Recoleccion)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Fecha Inicial  <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.FechaInicial, "{0:dd-MM-yyyy}", new { @Class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.FechaInicial)
+                </div>
+
+                <label class="col-md-2">Fecha Fin   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.FechaFinal, "{0:dd-MM-yyyy}", new { @Class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.FechaFinal)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Cuenta Contable de Crédito  <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.CuentaContableCredito, new List<SelectListItem>{
+                    new SelectListItem() {Text = "4-01-01-00-00: IO clientes Municipales", Value="4-01-01-00-00: IO clientes Municipales"},
+                    new SelectListItem() {Text = "5-01-01-00-00: IO clientes Comerciales", Value="5-01-01-00-00: IO clientes Comerciales"}
+                 }, String.Empty, new { @class = "form-control", id = "CuentaContableCredito" })
+                    @Html.ValidationMessageFor(m => m.CuentaContableCredito)
+                </div>
+                <label class="col-md-3">Cobrar este producto al cliente</label>
+                <input type="checkbox" id="ckbCobrarProductoCliente" name="ckbCobrarProductoCliente" />     
+                    @Html.HiddenFor(m=> m.CobrarProductoCliente)            
+                    @Html.ValidationMessageFor(m => m.CobrarProductoCliente)
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Ruta de recolección</label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.RutaRecoleccion, new SelectList(ViewBag.ListaRutaRecoleccion, "Id", "Descripcion"), String.Empty, new { @class = "form-control", id = "Descripcion" })
+                    @Html.ValidationMessageFor(m => m.RutaRecoleccion)
+                </div>
+                <label class="col-md-2">Ruta</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Ruta, new { @class = "form-control", id = "Ruta" })
+                    @Html.ValidationMessageFor(m => m.Ruta)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Frecuencia</label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.Frecuecia, new SelectList(ViewBag.ListaFrecuencia, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Frecuecia" })
+                    @Html.ValidationMessageFor(m => m.EsquemaRelevancia)
+                </div>
+                <label class="col-md-2">Días de la semana</label>
+                <div class="col-md-4"> 
+                    @Html.HiddenFor(m => m.DiasSemana)
+                    @Html.ValidationMessageFor(m => m.DiasSemana)
+                   
+                    <input type="checkbox" value='Lunes' name="ckbDias" />@Html.Raw("Lunes") &nbsp;
+                    <input type="checkbox" value='Martes' name="ckbDias" />@Html.Raw("Martes") &nbsp;
+                    <input type="checkbox" value='Miercoles' name="ckbDias" />@Html.Raw("Miércoles") &nbsp;
+                    <input type="checkbox" value='Jueves' name="ckbDias" />@Html.Raw("Jueves")
+                    <br />
+                    <input type="checkbox" value='Viernes' name="ckbDias" />@Html.Raw("Viernes") &nbsp;
+                    <input type="checkbox" value='Sabado' name="ckbDias" />@Html.Raw("Sábado") &nbsp;
+                    <input type="checkbox" value='Domingo' name="ckbDias" />@Html.Raw("Domingo")
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Esquema de revaloración</label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.EsquemaRelevancia, new SelectList(ViewBag.ListaEsquemaRelevancia, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "EsquemaRelevancia" })
+                    @Html.ValidationMessageFor(m => m.EsquemaRelevancia)
+                </div>
+                <label class="col-md-2">Ubicación   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.Ubicacion, new SelectList(ViewBag.ListaUbicacion, "Id", "Descripción"), String.Empty, new { @class = "form-control", id = "Ubicacion" })
+                    @Html.ValidationMessageFor(m => m.Ubicacion)
+                </div>
+            </div>
+            <div class="form-group">
+                
+                <label class="col-md-2">SubItem</label>
+                <div class="col-md-4">                    
+                    @Html.TextBoxFor(m => m.SubItem, new { @class = "form-control", id = "SubItem" })
+                @Html.ValidationMessageFor(m => m.SubItem)
+                </div>
+                <label class="col-md-2">Proyecto   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.Proyecto, new SelectList(ViewBag.ListaProyectos, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Proyecto" })
+                    @Html.ValidationMessageFor(m => m.Proyecto)
+                </div>
+            </div>
+            <div class="form-group" id="divFosas" style="display:none;">
+                <label class="col-md-2">Precio por fosa  <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.PrecioFosa, new { @class = "form-control", id = "PrecioFosa", @type = "number", @min = "0", @max = "100000000000" })
+                    @Html.ValidationMessageFor(m => m.PrecioFosa)
+                </div>
+                <label class="col-md-2">Desecho en fosa </label>
+                <div class="col-md-4">
+                    <select id="cmbProductoFosa" class="form-control">
+                        @if (ViewBag.ListaCategoriaProducto != null)
+                        {
+                            <option></option>
+                            foreach (var item in ViewBag.ListaCategoriaProducto)
+                            {
+                                if (item.Tipo == "DisposicionFinal")
+                                {
+                                    <optgroup label="@item.Nombre">
+                                        @foreach (var product in ViewBag.ListaProducto)
+                                        {
+                                            if (product.Categoria == item.Id)
+                                            {
+                                                <option value="@product.Id">@product.Descripcion</option>
+                                            }
+                                        }
+                                    </optgroup>
+                                }
+                            }
+                        }
+
+                    </select>
+                    @Html.HiddenFor(m => m.ProductoFosa)
+                    @Html.ValidationMessageFor(m => m.ProductoFosa)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Cantidad  <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Cantidad, new { @class = "form-control", id = "Cantidad", @type = "number", @min = "0", @max = "100000000000" })
+                    @Html.ValidationMessageFor(m => m.Cantidad)
+                </div>
+                <label class="col-md-2">Unidad de Cobro </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.UnidadCobro, String.Empty, new { @class = "form-control", id = "UnidadCobro", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.UnidadCobro)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Moneda  </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Moneda, new { @class = "form-control", id = "Moneda", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Moneda)
+                </div><label class="col-md-2">Monto  <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Monto, new { @class = "form-control", id = "Monto", @type = "number", @min = "1", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Monto)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Descuento</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Descuento, new { @class = "form-control", id = "Descuento", @type = "number", @min = "0", @max = "100" })
+                    @Html.ValidationMessageFor(m => m.Descuento)
+                </div>
+                <label class="col-md-2">Precio</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Total, new { @class = "form-control", id = "Total", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Total)
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            @Html.ActionLink("Regresar", "Detalles", "Contrato", new { idContrato = Model.Contrato }, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        var today = new Date();
+        $('#FechaInicial').datepicker({
+            format: 'dd-mm-yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        var today = new Date();
+        $('#FechaFinal').datepicker({
+            format: 'dd-mm-yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        $("input:checkbox[name='ckbCobrarProductoCliente']").change(function () {
+            if ($(this).is(":checked")) {
+                $('#CobrarProductoCliente').val(true);
+            }
+            else {
+                $('#CobrarProductoCliente').val(false);
+            }
+        });
+
+        $('#Cantidad').on("change", function () {
+            CalcularPrecio();
+        });
+        $('#Monto').on("change", function () {
+            CalcularPrecio();
+        });
+        $('#Descuento').on("change", function () {
+            CalcularPrecio();
+        });
+
+        $('#cmbProducto').on("change", function () {
+            $('#Producto').val($("#cmbProducto").val());
+            ObtenerInformacionProducto();
+        });
+
+        $('#cmbProductoFosa').on("change", function () {
+            $('#ProductoFosa').val($("#cmbProductoFosa").val());
+        });
+
+        $("input[name=rdbRecoleccion]:radio").change(function () {
+            var valor = $("input[type='radio']:checked").val();
+            $("#LigadoRecoleccion").val(valor == "0" ? false : true);
+
+            if (valor == "0") {
+                $("#Recoleccion").prop('disabled', 'disabled');
+            }
+            else {
+                ObtenerProductosRecoleccion();
+                $("#Recoleccion").prop('disabled', false);
+            }          
+        });
+
+        $("input:checkbox[name='ckbDias']").change(function () {
+            actual = $("input#DiasSemana").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {
+                if (!actual) {
+                    actual = append;
+                    $("input#DiasSemana").val(actual);
+                } else {
+                    actual = actual + ',' + append;
+                    $("input#DiasSemana").val(actual);
+                }
+            } else {
+                if (actual) {
+                    if (actual.indexOf(append) == 0) {
+                        if (actual == append) {
+                            actual = '';
+                        } else {
+                            actual = actual.split(append + ',').pop();
+                        }
+                        $("input#DiasSemana").val(actual);
+                    } else {
+                        preStr = actual.substring(0, actual.indexOf(append) - 1);
+                        postStr = actual.split(append).pop();
+                        actual = preStr + postStr;
+                        $("input#DiasSemana").val(actual);
+                    }
+                }
+            }
+            //alert(actual);
+        });
+   
+    });// end document ready
+
+
+    function CalcularPrecio() {
+        var cantidad = $('#Cantidad').val();
+        var monto = $('#Monto').val();
+        var descuento = $('#Descuento').val();
+
+        var subtotal = cantidad * monto;
+        var total = subtotal - ((descuento * subtotal) / 100);
+        $('#Total').val(total);
+    }
+
+    function ObtenerInformacionProducto() {
+        var producto = $("#Producto").val();
+        var path = "/Producto/CargarProducto?idProducto=" + producto;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                $("#UnidadCobro").val(data.UnidadCobroNombre);
+                $("#TipoEquipo").val(data.TipoEquipoNombre);
+                $("#ProcesoCobro").val(data.ProcesoCobroNombre);
+                if (data.CategoriaNombre == "Fosas")
+                {
+                    $("#divFosas").css("display", "block");
+                }
+                else
+                {
+                    $("#divFosas").css("display", "none");
+                }
+
+                if (data.CategoriaNombre == "DisposicionFinal")
+                {
+                    $("#divDisposicion").css("display", "block");
+                }
+                else {
+                    $("#divDisposicion").css("display", "none");
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("Error","Hubo un error a la hora de obtener la información", "error");
+                //alert("Error");
+            },
+            traditional: true
+
+        });
+    }
+
+    function ObtenerProductosRecoleccion() {
+        var contrato = $("#Contrato").val();
+        var path = "/Contrato/ObtenerProductosRecoleccion?idContrato=" + contrato;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+
+                populateDD('Recoleccion', data);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("Error", "Hubo un error a la hora de obtener la información", "error");
+                //alert("Error");
+            },
+            traditional: true
+
+        });
+    }
+
+    // Funcion para llenar de manera dinámica el dropdown de Recoleccion
+    function populateDD(_idPopulate, data) {
+        var dd = $("#" + _idPopulate);
+        dd.empty();
+       // dd.append($('<option></option>').val("").html(""));
+        for (var i = 0; i < data.length; i++) {
+
+            dd.append($('<option></option>').val(data[i].Id).html(data[i].Descripcion));
+
+        }
+    }
+
+</script>

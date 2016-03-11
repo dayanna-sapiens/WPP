@@ -1,0 +1,77 @@
+﻿@model WPP.Model.ModuloBascula.BoletaManualModel
+
+@{
+    ViewBag.Title = "Boleta Manual";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    String Cliente = ViewBag.Cliente != null ? ViewBag.Cliente : "";
+    String Equipo = ViewBag.Equipo != null ? ViewBag.Equipo : "";
+}
+}
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <h2>Eliminar Boleta Manual</h2>
+        @using (Html.BeginForm("Eliminar", "BoletaManual", FormMethod.Post, new { id = "frmEliminarBoleta", @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="form-group">
+                <label for="NumeroBoleta">Número de Boleta:</label>
+                @Html.DisplayFor(m => m.NumeroBoleta, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Sitio">Sitio:</label>
+                @Html.DisplayFor(m => m.SitioDescripcion, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Fecha">Fecha:</label>
+                @Html.DisplayFor(m => m.Fecha, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Hora">Hora:</label>
+                @Html.DisplayFor(m => m.Hora, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="OTR">OTR:</label>
+                @Html.DisplayFor(m => m.OTRConsecutivo, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Eje2">Equipo:</label>
+                @Html.Raw(@Equipo)
+            </div>
+            <div class="form-group">
+                <label for="Eje3">Cliente:</label>
+                @Html.Raw(@Cliente)
+            </div>
+            <div class="form-group">
+                <label for="DescripcionCliente">Facturar a nombre de: </label>
+                @Html.DisplayFor(m => m.DescripcionCliente, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Peso">Observaciones:</label>
+                @Html.DisplayFor(m => m.Observaciones, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="PesoBruto">Peso Bruto:</label>
+                @Html.DisplayFor(m => m.PesoBruto, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="PesoTara">Peso Tara:</label>
+                @Html.DisplayFor(m => m.PesoTara, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="PesoNeto">Peso Neto:</label>
+                @Html.DisplayFor(m => m.PesoNeto, new { @Class = "form-control" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ok</button>
+            @Html.ActionLink("Cancelar", "Index", "BoletaManual", null, new { @Class = "btn btn-primary" })
+
+        }
+
+    </div>
+    <div class="col-md-3"></div>
+</div>

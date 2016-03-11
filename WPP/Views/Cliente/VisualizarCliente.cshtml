@@ -1,0 +1,284 @@
+﻿@model WPP.Model.ModuloContratos.ClienteModel
+@{
+    ViewBag.Title = "Visualizar Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-5 body-form">
+        <div>
+            <h2>Detalles del Cliente</h2>
+
+            <br /><br />
+
+            <div class="form-group">
+                <label for="Grupo">Nombre</label>
+                @Html.DisplayFor(m => m.Nombre)
+            </div>
+            <div class="form-group">
+                <label for="Grupo">Nombre Comercial</label>
+                @Html.DisplayFor(m => m.NombreComercial)
+            </div>
+            <div class="form-group">
+                <label for="Grupo">Nombre Corto</label>
+                @Html.DisplayFor(m => m.NombreCorto)
+            </div>
+            <div class="form-group">
+                <label for="Grupo">Tipo</label>
+                @Html.DisplayFor(m => m.TipoNombre)
+            </div>
+            <div class="form-group">
+                <label for="Grupo">Grupo</label>
+                @Html.DisplayFor(m => m.GrupoNombre)
+            </div>
+            <div class="form-group">
+                <label for="Grupo">Representante Legal</label>
+                @Html.DisplayFor(m => m.RepresentanteLegal)
+            </div>
+            <div class="form-group">
+                <label for="Grupo">Número</label>
+                @Html.DisplayFor(m => m.Numero)
+            </div>
+            <div class="form-group">
+                <label for="Grupo">Teléfono 1</label>
+                @Html.DisplayFor(m => m.Telefono1)
+            </div>
+            <div class="form-group">
+                <label for="Grupo">Teléfono 2</label>
+                @Html.DisplayFor(m => m.Telefono2)
+            </div>
+
+
+
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-5 body-form">
+        <div class="row">
+            <div class="col-12-md">
+                @using (Html.BeginForm("CrearContacto", "Cliente", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(m => m.Contacto.ParentId)
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Nombre</label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(m => m.Contacto.Nombre, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Nombre)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Cédula</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Cedula, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Cedula)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Email</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Email)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Teléfono 1</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Telefono1, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Telefono1)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Extensión 1</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Ext1, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Ext1)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Teléfono 2</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Telefono2, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Telefono2)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Extensión 2</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Ext1, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Ext2)
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Agregar Contacto</button>
+
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12-md">
+                <h2>Contactos</h2>
+                <br /><br />
+
+                <br /><br />
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tabla-contactos">
+                        <tr>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Cédula
+                            </th>
+                            <th>
+                                Teléfono 1
+                            </th>
+                            <th>
+                                Ext 1
+                            </th>
+                            <th>
+                                Teléfono 2
+                            </th>
+                            <th>
+                                Ext 2
+                            </th>
+                            <th>
+                                Celular
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var contacto in Model.Contactos)
+                        {
+                            <tr>
+                                <td>@contacto.Nombre</td>
+                                <td>@contacto.Email</td>
+                                <td>
+                                    @contacto.Cedula
+                                </td>
+                                <td>@contacto.Telefono1</td>
+                                <td>@contacto.Ext1</td>
+                                <td>@contacto.Telefono2</td>
+                                <td>@contacto.Ext2</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12-md">
+                @using (Html.BeginForm("CrearContacto", "Cliente", FormMethod.Post, new { id = "frmCrear", @class = "form-horizontal" }))
+                {
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(m => m.Contacto.ParentId)
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Nombre</label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(m => m.Contacto.Nombre, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Nombre)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Cédula</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Cedula, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Cedula)
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Email</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Email)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Teléfono 1</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Telefono1, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Telefono1)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Extensión 1</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Ext1, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Ext1)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Teléfono 2</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Telefono2, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Telefono2)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Extensión 2</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Contacto.Ext1, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Contacto.Ext2)
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Agregar Contacto</button>
+
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12-md">
+                <h2>Ubicaciones</h2>
+                <br /><br />
+
+                <br /><br />
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tabla-ubicaciones">
+                        <tr>
+                            <th>
+                                Descripción
+                            </th>
+                            <th>
+                                Contacto
+                            </th>
+                            <th>
+                                Teléfono
+                            </th>
+                            <th>
+                                Email
+                            </th>                          
+                            <th></th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var ubicaciones in Model.Ubicaciones)
+                        {
+                            <tr>
+                                <td>@ubicaciones.Descripcion</td>
+                                <td>
+                                    @ubicaciones.Contacto
+                                </td>
+                                <td>@ubicaciones.Telefono</td>
+                                <td>@ubicaciones.Email</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

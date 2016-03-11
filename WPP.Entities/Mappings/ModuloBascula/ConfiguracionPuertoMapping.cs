@@ -1,0 +1,31 @@
+﻿using FluentNHibernate.Mapping;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WPP.Entities.Objects.ModuloBascula;
+
+namespace WPP.Entities.Mappings.ModuloBascula
+{
+    public class ConfiguracionPuertoMapping : ClassMap<ConfiguracionPuerto>
+    {
+        public ConfiguracionPuertoMapping() 
+        {
+            Table("ConfiguracionPuerto");
+            Id(x => x.Id).GeneratedBy.Sequence("SEQ_ConfiguracionPuerto");
+            Version(u => u.Version);
+            Map(u => u.CreateDate).Not.Nullable();
+            Map(u => u.CreatedBy).Not.Nullable();
+            Map(u => u.DateLastModified).Nullable();
+            Map(u => u.ModifiedBy).Nullable();
+            Map(u => u.DeleteDate).Nullable();
+            Map(u => u.DeletedBy).Nullable();
+            Map(u => u.IsDeleted).Not.Nullable();
+            
+            Map(r => r.NombrePC).Not.Nullable();
+            Map(r => r.Puerto).Not.Nullable();
+
+        }
+    }
+}

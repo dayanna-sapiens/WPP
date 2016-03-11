@@ -1,0 +1,119 @@
+﻿@model WPP.Model.ModuloNomina.JornadaModel
+@{
+    ViewBag.Title = "Editar Jornada";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Editar Jornada</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Editar", "Jornada", FormMethod.Post, new { id = "frmEditarJornada", @class = "form-horizontal" }))
+            {
+
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.Id)
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Descripcion, new { @Class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Descripcion)
+                </div>
+                <div class="form-group">
+                    <label for="Tipo">Tipo</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.DropDownListFor(m => m.Tipo, new List<SelectListItem>{
+                        new SelectListItem() {Text = "Diurno", Value="Diurno"},
+                        new SelectListItem() {Text = "Nocturno", Value="Nocturno"}
+                    },new { @class = "form-control", id = "Tipo" })
+                    @Html.ValidationMessageFor(m => m.Tipo)
+                </div>
+                <div class="form-group">          
+                   
+                    <label class="col-md-3" for="HoraInicio">Hora Inicio   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(m => m.HoraInicio, new List<SelectListItem>{
+                                    new SelectListItem() {Text = "01:00", Value="01:00"},
+                                    new SelectListItem() {Text = "02:00", Value="02:00"},
+                                    new SelectListItem() {Text = "03:00", Value="03:00"},
+                                    new SelectListItem() {Text = "04:00", Value="04:00"},
+                                    new SelectListItem() {Text = "05:00", Value="05:00"},
+                                    new SelectListItem() {Text = "06:00", Value="06:00"},
+                                    new SelectListItem() {Text = "07:00", Value="07:00"},
+                                    new SelectListItem() {Text = "08:00", Value="08:00"},
+                                    new SelectListItem() {Text = "09:00", Value="09:00"},
+                                    new SelectListItem() {Text = "10:00", Value="10:00"},
+                                    new SelectListItem() {Text = "11:00", Value="11:00"},
+                                    new SelectListItem() {Text = "12:00", Value="12:00"},
+                                    new SelectListItem() {Text = "13:00", Value="13:00"},
+                                    new SelectListItem() {Text = "14:00", Value="14:00"},
+                                    new SelectListItem() {Text = "15:00", Value="15:00"},
+                                    new SelectListItem() {Text = "16:00", Value="16:00"},
+                                    new SelectListItem() {Text = "17:00", Value="17:00"},
+                                    new SelectListItem() {Text = "18:00", Value="18:00"},
+                                    new SelectListItem() {Text = "19:00", Value="19:00"},
+                                    new SelectListItem() {Text = "20:00", Value="20:00"},
+                                    new SelectListItem() {Text = "21:00", Value="21:00"},
+                                    new SelectListItem() {Text = "22:00", Value="22:00"},
+                                    new SelectListItem() {Text = "23:00", Value="23:00"},
+                                    new SelectListItem() {Text = "24:00", Value="24:00"}
+                                }, String.Empty, new { @class = "form-control", id = "Tipo" })
+                        @Html.ValidationMessageFor(m => m.HoraInicio)
+                    </div>
+                    <label class="col-md-3" for="HoraFin">Hora Fin   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(m => m.HoraFin, new List<SelectListItem>{
+                                    new SelectListItem() {Text = "01:00", Value="01:00"},
+                                    new SelectListItem() {Text = "02:00", Value="02:00"},
+                                    new SelectListItem() {Text = "03:00", Value="03:00"},
+                                    new SelectListItem() {Text = "04:00", Value="04:00"},
+                                    new SelectListItem() {Text = "05:00", Value="05:00"},
+                                    new SelectListItem() {Text = "06:00", Value="06:00"},
+                                    new SelectListItem() {Text = "07:00", Value="07:00"},
+                                    new SelectListItem() {Text = "08:00", Value="08:00"},
+                                    new SelectListItem() {Text = "09:00", Value="09:00"},
+                                    new SelectListItem() {Text = "10:00", Value="10:00"},
+                                    new SelectListItem() {Text = "11:00", Value="11:00"},
+                                    new SelectListItem() {Text = "12:00", Value="12:00"},
+                                    new SelectListItem() {Text = "13:00", Value="13:00"},
+                                    new SelectListItem() {Text = "14:00", Value="14:00"},
+                                    new SelectListItem() {Text = "15:00", Value="15:00"},
+                                    new SelectListItem() {Text = "16:00", Value="16:00"},
+                                    new SelectListItem() {Text = "17:00", Value="17:00"},
+                                    new SelectListItem() {Text = "18:00", Value="18:00"},
+                                    new SelectListItem() {Text = "19:00", Value="19:00"},
+                                    new SelectListItem() {Text = "20:00", Value="20:00"},
+                                    new SelectListItem() {Text = "21:00", Value="21:00"},
+                                    new SelectListItem() {Text = "22:00", Value="22:00"},
+                                    new SelectListItem() {Text = "23:00", Value="23:00"},
+                                    new SelectListItem() {Text = "24:00", Value="24:00"}
+                                }, String.Empty, new { @class = "form-control", id = "Tipo" })
+                        @Html.ValidationMessageFor(m => m.HoraFin)
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Editar</button>
+                @Html.ActionLink("Cancelar", "Index", "Jornada", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+
+</script>

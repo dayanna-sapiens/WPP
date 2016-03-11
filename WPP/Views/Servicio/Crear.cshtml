@@ -1,0 +1,107 @@
+﻿@model WPP.Model.ModuloContratos.ServicioModel
+@{
+    ViewBag.Title = "Crear Servicio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Crear Servicio</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Crear", "Servicio", FormMethod.Post, new { id = "frmCrearProducto", @class = "form-horizontal" }))
+            {
+
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label for="descripcion">Nombre</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Nombre, new { @Class = "form-control", id = "Descripcion" })
+                    @Html.ValidationMessageFor(m => m.Nombre)
+                </div>
+            
+
+                <button type="submit" class="btn btn-primary">Crear</button>
+                @Html.ActionLink("Cancelar", "Index", "Servicio", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        var json = $("#LstCategorias").val();
+        var lstCategorias = $.parseJSON(json);
+           
+        // Se setea el dataset que indica si es de tipo Disposicion
+        var lstCat = document.getElementById("Categoria");
+        for (var i = 0; i < lstCat.length; i++) {
+            var actual = lstCat[i];
+            if (i != 0) {
+                var c =lstCategorias[i - 1];
+                actual.dataset.disposicion = lstCategorias[i - 1].Tipo;
+            }
+            else {
+                actual.dataset.disposicion = "Ninguno";
+            }
+        }
+
+        $("#Categoria").change(function () {         
+            var opcion = $("#Categoria option:selected");
+            var disposicion = opcion[0].dataset.disposicion;
+            if (disposicion == "DisposicionFinal")
+            {
+                $("#divPrecio").css("display", "block");//divPrecio
+            }
+            else {
+                $("#divPrecio").css("display", "none");//divPrecio
+            }
+        });
+
+        $("#RutasRecoleccion").val(false);
+
+
+        $("input:radio[name='rutaRecoleccion']").change(function () {
+            actual = $("#RutasRecoleccion").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {
+                actual = append;
+                $("#RutasRecoleccion").val(actual == "0" ? false : true);
+
+            } else {
+                $("#RutasRecoleccion").val(true);
+            }
+        });
+
+
+    });// end document ready
+
+
+</script>

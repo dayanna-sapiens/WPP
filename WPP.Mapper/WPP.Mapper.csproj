@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3771DD9E-3C36-443E-89AF-8DB7E2C150A6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WPP.Mapper</RootNamespace>
+    <AssemblyName>WPP.Mapper</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="General\AnuncioMapper.cs" />
+    <Compile Include="General\CombustibleMapper.cs" />
+    <Compile Include="General\CompaniaMapper.cs" />
+    <Compile Include="General\CatalogoMapper.cs" />
+    <Compile Include="General\CostoCamionMapper.cs" />
+    <Compile Include="General\CostoHoraMapper.cs" />
+    <Compile Include="General\PuntoFacturacionMapper.cs" />
+    <Compile Include="General\RegionMapper.cs" />
+    <Compile Include="ModuloBascula\BasculaMapper.cs" />
+    <Compile Include="ModuloBascula\BoletaManualMapper.cs" />
+    <Compile Include="ModuloBascula\ConfiguracionPuertoMapper.cs" />
+    <Compile Include="ModuloBascula\ContenedorMapper.cs" />
+    <Compile Include="ModuloBascula\EquipoMapper.cs" />
+    <Compile Include="ModuloBascula\PagoBaculaMapper.cs" />
+    <Compile Include="ModuloCierreCaja\CierreCajaMapper.cs" />
+    <Compile Include="ModuloCierreCaja\EfectivoCierreCajaMapper.cs" />
+    <Compile Include="ModuloContratos\CategoriaProductoMapper.cs" />
+    <Compile Include="ModuloContratos\ContactoClienteMapper.cs" />
+    <Compile Include="ModuloContratos\ClienteMapper.cs" />
+    <Compile Include="ModuloContratos\ContratoMapper.cs" />
+    <Compile Include="ModuloContratos\ProductoContratoMapper.cs" />
+    <Compile Include="ModuloContratos\ProductoMapper.cs" />
+    <Compile Include="ModuloFacturacion\DetalleFacturacionMapper.cs" />
+    <Compile Include="ModuloFacturacion\FacturacionMapper.cs" />
+    <Compile Include="ModuloFacturacion\ReversionMapper.cs" />
+    <Compile Include="ModuloNomina\ConsecutivoNominaMapper.cs" />
+    <Compile Include="ModuloNomina\CostoRutaRecoleccionMapper.cs" />
+    <Compile Include="ModuloNomina\DiasFestivosMapper.cs" />
+    <Compile Include="ModuloNomina\ItemNominaMapper.cs" />
+    <Compile Include="ModuloNomina\JornadaMapper.cs" />
+    <Compile Include="ModuloNomina\PlanillaMapper.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\ContenedorHistorialMapper.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\RutaRecoleccionMapper.cs" />
+    <Compile Include="ModuloContratos\ServicioMapper.cs" />
+    <Compile Include="ModuloContratos\UbicacionClienteMapper.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\CuadrillaMapper.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\EmpleadoRecoleccionMapper.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\OTRMapper.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\RellenoSanitarioMapper.cs" />
+    <Compile Include="ModuloOperacionRecoleccion\ViajeOTRMapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="General\UsuarioMapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WPP.Entities\WPP.Entities.csproj">
+      <Project>{b4f21b53-c0c2-4010-be42-faf1ae07272b}</Project>
+      <Name>WPP.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPP.Model\WPP.Model.csproj">
+      <Project>{952d5a34-ee58-426a-9487-d23e9673d146}</Project>
+      <Name>WPP.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

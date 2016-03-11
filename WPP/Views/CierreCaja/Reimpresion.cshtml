@@ -1,0 +1,233 @@
+﻿@model WPP.Model.ModuloBascula.BasculaModel
+@{
+    ViewBag.Title = "Reimpresión de recibo de caja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+   
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <br />
+        <h3>Reimpresión de recibo de caja</h3>
+        <br />
+        @using (Html.BeginForm("ReimpresionReciboCaja", "CierreCaja", FormMethod.Post, new { id = "frmReimpresion", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.Hidden("Modelo")
+            @Html.Hidden("Sumatoria")
+            @Html.Hidden("Categoria")
+            @Html.Hidden("Producto")
+            @Html.Hidden("Compania")
+
+            <div class="form-group">
+                <label class="col-md-2">Número de recibo</label>
+                <div class="col-md-10">
+                    @Html.TextBox("NumeroRecibo", "", new { @Class = "form-control", id = "NumeroRecibo" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Fecha</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Fecha, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "Fecha", @readonly = "readonly" })
+                </div>
+                <label class="col-md-2">No Boleta</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.SecuenciaBoleta, "", new { @Class = "form-control", id = "SecuenciaBoleta", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Cliente</label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.NombreCliente, "", new { @Class = "form-control", id = "NombreCliente", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-6"></label>
+                <label class="col-md-2">Monto Total</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Total, "", new { @Class = "form-control", id = "Total", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-6"></label>
+                <label class="col-md-2">Paga con</label>
+                <div class="col-md-4">                    
+                    @Html.TextBox("PagaCon", "", new { @Class = "form-control", id = "PagaCon", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-6"></label>
+                <label class="col-md-2">Vuelto</label>
+                <div class="col-md-4">                    
+                    @Html.TextBox("Vuelto", "", new { @Class = "form-control", id = "Vuelto", @readonly = "readonly" })
+                </div>
+            </div>
+            <a id="btnReimprimir" class="btn btn-primary">Reimprimir</a>
+            @Html.ActionLink("Cancelar", "Reimpresion", "CierreCaja", null, new { @Class = "btn btn-primary" })
+        }
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+    })
+
+    $("#NumeroRecibo").change(function () {
+        var recibo = $("#NumeroRecibo").val();
+        var path = "/CierreCaja/CargarInformacionRecibo?recibo=" + recibo;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                if (data != null) {
+                    var modelo = data[0];
+                    var producto = data[1];
+                    var compania = data[2];
+                    var sumatoria = data[3];
+                    var categoria = data[4];
+                    
+                    var moneda = modelo.Moneda == "Colones" ? "₡" : "$";
+                    var stringFecha = modelo.Fecha;
+                    stringFecha = stringFecha.substring(6, 19);
+                    var date = new Date(Number(stringFecha));
+
+                    var fecha = convertDate(date);//(modelo.Fecha.getUTCDate()) + '/' + (modelo.Fecha.getUTCMonth() + 1) + '/' + (modelo.Fecha.getUTCFullYear());
+                    var vuelto = Number(sumatoria) - Number(modelo.Total);
+
+
+                    $("#Fecha").val(fecha);
+                    $("#SecuenciaBoleta").val(modelo.Boleta);
+                    $("#NombreCliente").val(modelo.NumeroCliente + " - " + modelo.NombreCliente);
+                    $("#Total").val(moneda + " " + Number(modelo.Total).format(2));
+                    $("#PagaCon").val(moneda + " " + Number(sumatoria).format(2));
+                    $("#Vuelto").val(moneda + " " + Number(vuelto).format(2));
+
+                    $("#Sumatoria").val(sumatoria);
+                    $("#Categoria").val(categoria);
+                    $("#Modelo").val(JSON.stringify(modelo));
+                    $("#Compania").val(JSON.stringify(compania));
+                    $("#Producto").val(JSON.stringify(producto));
+                }
+                else {
+                    swal("Número de recibo inválido", "Por favor verifique la información ingresada", "error");
+                    //alert("Número de recibo inválido");
+                    $("#NumeroRecibo").empty();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("Número de recibo inválido", "Por favor verifique la información ingresada", "error");
+                $("#NumeroRecibo").empty();
+            },
+            traditional: true
+
+        });
+    });
+
+    // Función para reimprimir un recibo de caja
+    $("#btnReimprimir").click(function () {
+
+        var modelo = JSON.parse($("#Modelo").val());
+        var producto = JSON.parse($("#Producto").val());
+        var compania = JSON.parse($("#Compania").val());
+        var sumatoria = $("#Sumatoria").val();
+        var categoria = $("#Categoria").val();
+        
+        ImpresionRecibo(modelo, producto, compania, sumatoria, categoria);
+    
+    });
+
+    function ImpresionRecibo(modelo, producto, compania, sumatoria, categoria)
+    {
+        var moneda = modelo.Moneda == "Colones" ? "₡" : "$";
+        var stringFecha = modelo.Fecha;
+        stringFecha = stringFecha.substring(6, 19);
+        var date = new Date(Number(stringFecha));
+
+        var fecha = convertDate(date);//(modelo.Fecha.getUTCDate()) + '/' + (modelo.Fecha.getUTCMonth() + 1) + '/' + (modelo.Fecha.getUTCFullYear());
+        var vuelto = Number(sumatoria) - Number(modelo.Total);
+        
+        var cant = Number(modelo.PesoBruto) / 1000;
+        cant = cant < 1 ? 1 : cant;
+        var ListaProducto =
+                       "<tr>"
+                           + "<td> " + cant + " ton </td>";
+        if (categoria == "Fosas")
+        {
+            ListaProducto += "<td> " + producto.Descripcion + " ( " + producto.ProductoFosaDescripcion + ") </td>";
+        }
+        else {
+
+            ListaProducto += "<td> " + producto.Descripcion + " </td>";
+        }
+        ListaProducto +=     "<td> " + Number(producto.Monto).format(2) + " </td>"
+                       + "</tr>";
+
+        if (categoria == "Fosas") {
+            var fosas = Number(cant) / 3;
+            var cantFosas = Math.ceil(Number(fosas));
+            ListaProducto +=
+                       "<tr>"
+                           + "<td> " + cantFosas + " uni </td>"
+                           + "<td> " + producto.Descripcion + " ( " + producto.ProductoDescripcion + ") </td>";
+                           + "<td> " + Number(producto.PrecioFosa).format(2) + " </td>"
+                       + "</tr>";
+        }
+    
+        var boleta =
+                       "<div id='divImpresion' style='margin-top:55px' align='center'> "
+                           + "---------------------------------------"
+                           + " <div> " + compania.Nombre + " </div> "
+                           + " <div> Céd Jurídica: " + compania.Cedula + "</div> "
+                           + " <div> Teléfono: " + compania.Telefono + "</div> "
+                           + " <div> " + fecha  + "</div> "
+                           + "---------------------------------------"
+                       + " </div>"
+                       + "<div align='center'> "
+                           + "No. Recibo: "+ $("#NumeroRecibo").val() + " </br> "
+                           + "No. Boleta: " + modelo.Boleta + " </br> "
+                           + "Cliente: " + modelo.NumeroCliente + " </br> " + modelo.NombreCliente + " </br> "
+                           + "Equipo: " + modelo.PlacaEquipo + " </br> "
+                           + "---------------------------------------" + " </br> "
+                           + " <table>"
+                           + " <tr style='border-bottom:1pt solid black;'>"
+                           + " <td> Cant</td>"
+                           + " <td> Producto</td>"
+                           + " <td> Precio</td>"
+                           + " </tr>"
+                           + ListaProducto
+                           + " </table>"
+                           + "---------------------------------------" + " </br> "
+                           + " <div>"
+                           + " Total: " + moneda + " " + Number(modelo.Total).format(2) + " </br> "
+                           + " Paga con : " + moneda + " " + Number(sumatoria).format(2) + " </br> "
+                           + " Vuelto: " + moneda + " " + Number(vuelto).format(2)
+                           + " </div> "
+                           + "---------------------------------------" + " </br> "
+                           + " <div> ¡GRACIAS POR PREFERIRNOS! </div>"
+                           + "---------------------------------------" + " </br> "
+                       + " </div></br> ";
+        
+        var mywindow = window.open('', 'my div', 'height=400,width=600');
+        mywindow.document.write('<html><head><title></title>');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(boleta);
+        mywindow.document.write('</body></html>');
+
+        mywindow.print();
+        mywindow.close();
+    }
+
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+</script>

@@ -1,0 +1,733 @@
+﻿@model WPP.Model.ModuloBascula.PagoBasculaModel
+@{
+    ViewBag.Title = "Recaudación en Caja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    String totalFactura = ViewBag.Bascula.Total.ToString("#,##0.00");
+    long idBoleta = ViewBag.Bascula.Id;
+    String monedaContrato = ViewBag.Bascula.Contrato.Moneda;
+
+   // double compra = ViewBag.TipoCambioCompra != null ? ViewBag.TipoCambioCompra.Valor : 0;
+    double venta = ViewBag.TipoCambioVenta != null ? ViewBag.TipoCambioVenta.Valor : 0;
+
+    String Usuario = ViewBag.Usuario;
+    long NumBoleta = ViewBag.Bascula.Boleta;
+    String ClienteNombre = ViewBag.Bascula.Contrato.Cliente.Nombre;
+    long ClienteNum = ViewBag.Bascula.Contrato.Cliente.Numero;
+    String Equipo = ViewBag.Bascula.Equipo.Placa;
+    String CompaniaNombre = ViewBag.Bascula.Compania.Nombre;
+    String CompaniaCed = ViewBag.Bascula.Compania.Cedula;
+    String CompaniaTel = ViewBag.Bascula.Compania.Telefono;
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <br />
+    <h3>Recaudación en caja</h3>
+    <br />
+    <div class="col-md-6" style="padding-right:30px;">
+        <div class="row">
+            <div class="col-12-md">
+                <label for="Cliente">Cliente:</label>
+                @ViewBag.Bascula.NombreCliente
+                <br />
+                <br />
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tabla-productos">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Producto
+                                </th>
+                                <th>
+                                    Cant
+                                </th>
+                                <th>
+                                    Unidad
+                                </th>
+                                <th>
+                                    Moneda
+                                </th>
+                                <th>
+                                    Precio Unitario
+                                </th>
+                                <th>
+                                    Monto Total
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblProductos">
+                            @if (ViewBag.Bascula != null)
+                            {
+                                bool Fosa = ViewBag.Bascula.Producto.Producto.Categoria.Tipo == "Fosas" ? true : false;
+                                var cant = (ViewBag.Bascula.PesoNeto / 1000);
+                                cant = cant < 1 ? 1 : cant; 
+                                
+                                <tr>
+                                   @if (Fosa)
+                                    {
+                                        var descripcion = ViewBag.Bascula.Producto.Descripcion + " (" + ViewBag.Bascula.Producto.ProductoFosa.Descripcion + ")";
+                                        <td> @descripcion</td>
+                                    }
+                                   else
+                                   {
+                                        <td>@ViewBag.Bascula.Producto.Descripcion</td> 
+                                   }
+                                    
+                                    <td>
+                                        @cant
+                                    </td>
+                                   <td> Toneladas</td>                                 
+                                    <td>
+                                        @ViewBag.Bascula.Contrato.Moneda
+                                    </td>
+                                    <td>
+                                        @ViewBag.Bascula.Producto.Monto.ToString("#,##0.00")
+                                    </td>
+                                    @if (Fosa)
+                                    {
+                                        var precio = cant * ViewBag.Bascula.Producto.Monto;
+                                        <td> @precio.ToString("#,##0.00")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @ViewBag.Bascula.Total.ToString("#,##0.00")
+                                        </td>
+                                    }
+                                </tr>
+                                if (Fosa)
+                                {
+                                    var descripcion = ViewBag.Bascula.Producto.Descripcion + " (" + ViewBag.Bascula.Producto.Producto.Descripcion + ")";
+                                    var fosaNumero = Convert.ToDouble(cant) / 3;
+                                    var cantFosas = Math.Ceiling(fosaNumero);
+                                    var precioFosa = ViewBag.Bascula.Producto.PrecioFosa;
+                                    var total = precioFosa * cantFosas;
+                                    <tr>
+                                        <td>                                           
+                                            @descripcion
+                                        </td>
+                                        <td>
+                                            @cantFosas
+                                        </td>
+                                        <td>
+                                            Unidad
+                                        </td>
+                                        <td>
+                                            @ViewBag.Bascula.Contrato.Moneda
+                                        </td>
+                                        <td>
+                                            @precioFosa.ToString("#,##0.00")
+                                        </td>
+                                        <td>
+                                            @total.ToString("#,##0.00")
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group" style="float:right;">
+                    <label for="Total">Total adeudado:</label>                    
+                    @ViewBag.Bascula.Total.ToString("#,##0.00")
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("AplicarPagoBascula", "Bascula", FormMethod.Post, new { id = "frmRecaudacion", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Bacula)
+            @Html.Hidden("Boleta", @idBoleta)
+            @Html.Hidden("IdBoleta", @idBoleta)
+            @Html.Hidden("MonedaContrato", @monedaContrato)
+            @*@Html.Hidden("TipoCambioCompra", @compra)*@
+            @Html.Hidden("TipoCambioVenta", @venta)
+            @Html.Hidden("CompaniaTel", @CompaniaTel)
+            @Html.Hidden("CompaniaCed", @CompaniaCed)
+            @Html.Hidden("CompaniaNombre", @CompaniaNombre)
+            @Html.Hidden("Usuario", @Usuario)
+            @Html.Hidden("Equipo", @Equipo)
+            @Html.Hidden("ClienteNumero", @ClienteNum)
+            @Html.Hidden("ClienteNombre", @ClienteNombre)
+            @Html.Hidden("NumeroBoleta", @NumBoleta)
+
+            @Html.Hidden("CountTotalPagos")
+
+            <div class="form-group">
+                <label class="col-md-2">Fecha </label>
+                <div class="col-md-4">
+                   @Html.TextBox("FechaPago", "", "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "FechaPago", @readonly = "readonly" })
+                </div>
+                <label class="col-md-2" style="padding-left:0px; padding-right:0px;">Forma Pago <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                <div class="col-md-4">
+                   @Html.DropDownListFor(m => m.FormaPago, new List<SelectListItem>{
+                    new SelectListItem() {Text = "Efectivo", Value="Efectivo"},
+                    new SelectListItem() {Text = "Tarjeta", Value="Tarjeta"},
+                    new SelectListItem() {Text = "Transferencia", Value="Transferencia"}
+                    }, String.Empty, new { @class = "form-control", id = "FormaPago" })
+                    @Html.ValidationMessageFor(m => m.FormaPago)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2">Moneda </label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m=> m.Moneda, new List<SelectListItem>{
+                    new SelectListItem() {Text = "Colones", Value="Colones"},
+                    new SelectListItem() {Text = "Dólares", Value="Dolares"}
+                    }, String.Empty, new { @class = "form-control", id = "Moneda" })
+                    @Html.ValidationMessageFor(m => m.Moneda)
+                </div>            
+                <label class="col-sm-2" style="padding-left:0px; padding-right:0px;">Tipo Cambio</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m=> m.TipoCambio, new { @Class = "form-control", id = "TipoCambio", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group" id="divBanco" style="display:none">
+                <label class="col-md-2">Banco </label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Banco, new SelectList(ViewBag.ListaBanco, "Id", "Nombre"), String.Empty, new { @class = "form-control", id = "Banco" })                </div>
+            </div>
+            <div class="form-group" id="divTarjeta" style="display:none">
+                <label class="col-md-2">Número Tarjeta </label>
+                <div class="col-md-4">                    
+                    @Html.TextBoxFor(m => m.NumeroTarjeta, new { @Class = "form-control", id = "NumeroTarjeta", @type = "number" })
+                </div>
+                <label class="col-sm-2" style="padding-left:0px; padding-right:0px;">Número Aprobación</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.NumeroAprobacion, new { @Class = "form-control", id = "NumeroAprobacion", @type = "number" })
+                </div>
+            </div>  
+            <div class="form-group" id="divTransferencia" style="display:none">
+                <label class="col-md-2">Número Transferencia </label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.NumeroTransferencia, new { @Class = "form-control", id = "NumeroTransferencia", @type = "number" })
+                </div>
+                <label class="col-sm-2" style="padding-left:0px; padding-right:0px;">Fecha</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Fecha, new { @Class = "form-control", id = "Fecha" })
+                </div>
+            </div>        
+            <div class="form-group" id="divDetalle" style="display:none">
+                <label class="col-md-2">Detalle Transferencia </label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.DetalleTransferencia, new { @class = "form-control", id = "DetalleTransferencia" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Monto Exacto Recibido</label>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Monto, new { @Class = "form-control", id = "Monto", @type = "number", @min = "0", @max = "100000000000", @step = "0.1" })
+                    @Html.ValidationMessageFor(m => m.Monto)
+                </div>
+                <div class="col-md-3">
+                    <a id="btnIncluirPago" class="btn btn-primary">Incluir Pago</a>
+                </div>
+                @*<button id="btnSubmit" type="submit" class="btn btn-primary" hidden="hidden"></button>*@
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover" id="tabla-productos">
+                    <thead>
+                        <tr>
+                            <th>
+                               Forma Pago
+                            </th>
+                            <th>
+                                Moneda
+                            </th>
+                            <th>
+                                Monto
+                            </th>
+                            <th>
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="tblFormaPago"> 
+                        @if(ViewBag.ListaPagos != null)
+                        {
+                            foreach (var item in ViewBag.ListaPagos)
+                            {
+                                var tdid = "td" + item.Id;
+                                <tr id="@item.Id">
+                                    <td>
+                                        @item.FormaPago.Nombre
+                                    </td>
+                                    <td>
+                                        @item.Moneda
+                                    </td>
+                                    <td>
+                                        @item.Monto.ToString("#,##0.00")
+                                    </td>
+                                    <td id="@tdid" onclick="return EliminarRow(@item.Id)">
+                                      <a title="Eliminar" data-toggle="tooltip">
+                                          <span class='glyphicon glyphicon-trash' style='font-size:medium' aria-hidden='true'></span>
+                                      </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                                            
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div class="form-group">
+                <label class="col-md-2">Pagos realizados</label>
+                <div class="col-md-4">
+                    @Html.TextBox("PagosRealizados", "", new { @Class = "form-control", id = "PagosRealizados", @readonly = "readonly" })
+                </div>
+                <label class="col-sm-2" style="padding-left:0px; padding-right:0px;">Total Pagos</label>
+                <div class="col-md-4">
+                    @Html.TextBox("TotalPagos", "", new { @Class = "form-control", id = "TotalPagos", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Saldo de la Factura</label>
+                <div class="col-md-9">
+                    @Html.TextBox("SaldoFactura", @totalFactura, new { @Class = "form-control", id = "SaldoFactura", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Moneda Vuelto</label>
+                <div class="col-md-4">
+                    @Html.DropDownList("MonedaVuelto", new List<SelectListItem>{
+                    new SelectListItem() {Text = "Colones", Value="Colones"},
+                    new SelectListItem() {Text = "Dólares", Value="Dolares"}
+                    }, String.Empty, new { @class = "form-control", id = "MonedaVuelto" })
+                </div>
+                <label class="col-sm-2">Vuelto</label>
+                <div class="col-md-4">
+                    @Html.TextBox("Vuelto", "", new { @Class = "form-control", id = "Vuelto", @readonly = "readonly" })
+                </div>
+            </div>
+            <a id="btnAplicarPago" class="btn btn-primary">Aplicar</a>
+            @Html.ActionLink("Index", "Index", "Bascula", null, new { @Class = "btn btn-primary",id="btnIndex", @hidden="hidden", @style="display:none;" })
+            @Html.ActionLink("Cancelar", "BoletaSinOTR", "Bascula", null, new { @Class = "btn btn-primary" })
+
+        }
+    </div>
+</div>
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        // Función para dar formato numérico
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+        String.prototype.replaceAll = function (str1, str2, ignore) {
+            return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
+        }
+
+        var d = new Date();
+        var date = (d.getUTCDate()) + '/' + (d.getUTCMonth() + 1) + '/' + (d.getUTCFullYear());
+        $("#FechaPago").val(date);
+
+        $('#Fecha').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(d.getFullYear(), d.getMonth(), d.getDate())
+        });
+
+
+        if ($("#tblFormaPago")[0].childElementCount > 0)
+        {
+            var total = $("#SaldoFactura").val();
+            total = total.replaceAll(",", "");
+            var totalPagos = $("#TotalPagos").val();
+            totalPagos = totalPagos.replaceAll(",", "");
+
+            if (Number(totalPagos) > Number(total)) {
+                var vuelto = Number(totalPagos) - Number(total);
+                $("#Vuelto").val(Number(vuelto).format(2));
+                $("#MonedaVuelto").val($("#MonedaContrato").val());
+            }
+        }
+
+        $("#TipoCambio").val($("#TipoCambioVenta").val());
+        $("#Bacula").val($("#IdBoleta").val());
+        
+        var tabla = $("#tblFormaPago")[0];
+        if(tabla.childElementCount > 0)
+        {
+            var tipoCambioVenta = $("#TipoCambioVenta").val();
+            var monedaContrato = $("#MonedaContrato").val();
+
+            for (var i = 0; i < tabla.childElementCount; i++) {
+                var row = tabla.children[i];
+                var monto = row.children[2].innerText;
+                var moneda = row.children[1].innerText;
+                monto = monto.replaceAll(",", "");
+
+                if (moneda != monedaContrato) {
+                    if (moneda == "Colones") {
+                        monto = monto / tipoCambioVenta;
+                    }
+                    else {
+                        monto = monto * tipoCambioVenta;
+                    }
+                }
+
+                CalcularTotales(monto);
+            }
+        }
+
+        // Al cambiar la forma de pago evalua si se muestra o no la sección para  tarjetas
+        $("#FormaPago").change(function () {
+           
+            //var FormaPago = $("#FormaPago option:selected").text();
+            var FormaPago = $("#FormaPago").val();
+            switch (FormaPago) {
+                case "Tarjeta":                    
+                    $("#divBanco").css("display", "block");
+                    $("#divTarjeta").css("display", "block");
+                    $("#divDetalle").css("display", "none");
+                    $("#divTransferencia").css("display", "none");
+                    break;
+                case "Efectivo":
+                    $("#divBanco").css("display", "none");
+                    $("#divTarjeta").css("display", "none");
+                    $("#divDetalle").css("display", "none");
+                    $("#divTransferencia").css("display", "none");
+                    break;
+                case "Transferencia":
+                    $("#divBanco").css("display", "none");
+                    $("#divTarjeta").css("display", "none");
+                    $("#divDetalle").css("display", "block");
+                    $("#divTransferencia").css("display", "block");
+                    break;
+                           
+            }
+           
+        });
+
+        $("#MonedaVuelto").change(function () {
+
+            var monedaContrato = $("#MonedaContrato").val();
+            var moneda = $("#MonedaVuelto").val();
+            var tipoCambioVenta = $("#TipoCambioVenta").val();
+           
+            //if (moneda != monedaContrato) {
+                var monto = $("#Vuelto").val();
+                monto = monto.replaceAll(",", "");
+
+                if (moneda != "Colones") {
+
+                    monto = monto / tipoCambioVenta;
+                }
+                else {
+                    monto = monto * tipoCambioVenta;
+                }
+                $("#Vuelto").val(Number(monto).format(2));
+        });
+
+    });// end document ready
+
+    $("#btnIncluirPago").click(function () {
+        var validacionMonto = $("#Monto").valid();
+        var validacionFormaPago = $("#FormaPago").valid();
+        var validacionMobeda = $("#Moneda").valid();
+
+        if (validacionMonto == true && validacionMobeda == true && validacionFormaPago == true) {
+            // var FormaPago = $("FormaPago option:selected").text();
+            var FormaPago = $("FormaPago").val();
+            var moneda = $("#Moneda").val();
+            //var tipoCambioVenta = $("#TipoCambioVenta").val();
+            var monedaContrato = $("#MonedaContrato").val();
+            var monto = $("#Monto").val();
+
+            $.ajax({
+                url: '/Bascula/GuardarPagoBascula',
+                data: $('#frmRecaudacion').serializeArray(),
+                type: 'POST',
+                success: function (data) {
+                    AgregarFormaPago(data);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    LimpiarPago();
+                },
+                traditional: true
+            });
+        }
+        else { }
+    });
+
+    $("#btnAplicarPago").click(function () {
+
+        var Pagos = $("#TotalPagos").val();
+        Pagos = Pagos.replaceAll(",","");
+        var total = $("#SaldoFactura").val();
+        total = total.replaceAll(",","");
+        
+        if(Number(Pagos) >= Number(total))
+        {
+            var boleta = $("#Bacula").val();
+
+            $.ajax({
+                url: '/Bascula/AplicarPagoBascula?idBoleta=' + boleta,
+                type: 'POST',
+                success: function (data) {
+                if (data != null && data != "")
+                {
+                    var f = new Date();
+                    var date = (f.getUTCDate()) + '/' + (f.getUTCMonth() + 1) + '/' + (f.getUTCFullYear());
+                    var moneda = $("#MonedaVuelto").val() == "Colones" ? "₡" : "$";
+
+                    var tblProducto = $("#tblProductos tr"); 
+                    var producto = 
+                        "<tr>"
+                            + "<td> " + tblProducto[0].children[1].innerHTML + " ton </td>"
+                            + "<td> " + tblProducto[0].children[0].innerHTML + " </td>"
+                            + "<td> " + tblProducto[0].children[5].innerHTML + " </td>"
+                        + "</tr>";
+
+                    if(tblProducto.childElementCount > 1)
+                    {
+                        producto += 
+                            "<tr>"
+                                + "<td> " + tblProducto[1].children[1].innerHTML + " uni </td>"
+                                + "<td> " + tblProducto[1].children[0].innerHTML + " </td>"
+                                + "<td> " + tblProducto[1].children[5].innerHTML + " </td>"
+                            + "</tr>";
+                    }
+
+                    var boleta = 
+                        "<div id='divImpresion' style='margin-top:55px' align='center'> "
+                            + "---------------------------------------"
+                            + " <div> " + $("#CompaniaNombre").val() + " </div> "
+                            + " <div> Céd Jurídica: " + $("#CompaniaCed").val() + "</div> "
+                            + " <div> Teléfono: " + $("#CompaniaTel").val() + "</div> "
+                            + " <div> " + date +"  "+ f.getHours() + ":" + f.getMinutes() + ":" + f.getSeconds()+"</div> "
+                            + "---------------------------------------"
+                        + " </div>"
+                        + "<div align='center'> "
+                            + "No. Recibo: " + data + " </br> " 
+                            + "No. Boleta: " + $("#Boleta").val() + " </br> " 
+                            + "Cliente: " + $("#ClienteNumero").val() + " </br> "+ $("#ClienteNombre").val() + " </br> "
+                            + "Cajero: " + $("#Usuario").val()  + " </br> "
+                            + "Equipo: " + $("#Equipo").val() + " </br> "
+                            + "---------------------------------------"+ " </br> "
+                            + " <table>"
+                            +    " <tr style='border-bottom:1pt solid black;'>"
+                            +        " <td> Cant</td>"
+                            +        " <td> Producto</td>"
+                            +        " <td> Precio</td>"
+                            +    " </tr>"
+                            + producto
+                            + " </table>"
+                            + "---------------------------------------"+ " </br> "
+                            + " <div>" 
+                            + " Total: " +  $("#SaldoFactura").val() + " </br> "  
+                            + " Paga con : " + $("#TotalPagos").val() + " </br> " 
+                            + " Vuelto: " + moneda + " " + $("#Vuelto").val()
+                            + " </div> "
+                            + "---------------------------------------"+ " </br> "
+                            + " <div> ¡GRACIAS POR PREFERIRNOS! </div>"
+                            + "---------------------------------------"+ " </br> "
+                        + " </div></br> ";
+
+                    var mywindow = window.open('', 'my div', 'height=400,width=600');
+                    mywindow.document.write('<html><head><title></title>');
+                    mywindow.document.write('</head><body >');
+                    mywindow.document.write(boleta);
+                    mywindow.document.write('</body></html>');
+
+                    mywindow.print();
+                    mywindow.close();
+
+
+                    document.getElementById("btnIndex").click();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+            },
+            traditional: true
+            })
+        }
+        else
+        {
+            
+            swal("Pago insuficiente", "", "error");
+           // alert("Pago insuficiente");
+        }
+
+    });
+
+    function AgregarFormaPago(data)
+    {
+        var tabla = $("#tblFormaPago")[0];
+        var row = document.createElement("tr");
+        row.id = data.Id;
+
+        // Forma de pago
+        var formaPago = document.createElement("td");
+        formaPago.innerText = data.FormaPago;
+        formaPago.innerHTML = data.FormaPago;
+        row.appendChild(formaPago);
+
+        // Moneda del pago
+        var total = document.createElement("td");
+        total.innerText = data.Moneda;
+        total.innerHTML = data.Moneda;
+        row.appendChild(total);
+
+        // Monto del pago
+        var total = document.createElement("td");
+        total.innerText = Number(data.Monto).format(2);
+        total.innerHTML = Number(data.Monto).format(2);
+        row.appendChild(total);
+
+        // Monto del pago
+        var lnkElimminar = document.createElement("td");
+        lnkElimminar.id = "td" + data.Id;
+        var a = document.createElement('a');
+        a.innerHTML = "<span class='glyphicon glyphicon-trash' style='font-size:medium' aria-hidden='true'></span>";
+        a.dataset.toggle = "tooltip";
+        a.title = "Eliminar";
+        lnkElimminar.appendChild(a);
+        row.appendChild(lnkElimminar);
+
+        tabla.appendChild(row);
+
+        $('#td' + data.Id).attr("onClick", "javascript:EliminarRow('" + data.Id + "'); return false;");
+
+        var monto = data.Monto;
+        var moneda =  data.Moneda;        
+        var tipoCambioVenta = $("#TipoCambioVenta").val();
+        var monedaContrato = $("#MonedaContrato").val();
+
+        if (moneda != monedaContrato)
+        {
+            if(moneda == "Colones")
+            {
+                monto = monto /  tipoCambioVenta;
+            }
+            else
+            {
+                monto = monto * tipoCambioVenta;
+            }
+        }
+
+        CalcularTotales(monto);
+        LimpiarPago();
+    }
+
+    function CalcularTotales(monto) {
+        var count = $("#tblFormaPago")[0].childElementCount;
+
+        var Pagos = $("#TotalPagos").val();
+        Pagos = Pagos.replaceAll(",","");
+        var total = $("#SaldoFactura").val();
+        totalPagos = Number(monto) + Number(Pagos);
+
+        totalPagos = Number(totalPagos).format(2);
+        $("#TotalPagos").val(totalPagos);
+        $("#PagosRealizados").val(count);
+
+        var total = total.replaceAll(",", "");
+        totalPagos = totalPagos.replaceAll(",", "");
+        if (Number(totalPagos) > Number(total))
+        {
+            var vuelto = Number(totalPagos) - Number(total);
+            $("#Vuelto").val(Number(vuelto).format(2));
+            $("#MonedaVuelto").val($("#MonedaContrato").val());
+        }
+
+    }
+
+    function EliminarRow(id)
+    {
+        $.ajax({
+            url: '/Bascula/EliminarPagoBascula?idPago='+id,
+            type: 'POST',
+            success: function (data) {
+                if (data == true)
+                {
+                    $("#" + id).remove(); // remove row
+
+                    var total = $("#SaldoFactura").val();
+                    total = total.replaceAll(",", "");
+                    var totalPagos = 0;
+
+                    var tabla = $("#tblFormaPago")[0];
+                    if (tabla.childElementCount > 0) {
+                        var tipoCambioVenta = $("#TipoCambioVenta").val();
+                        var monedaContrato = $("#MonedaContrato").val();
+
+                        for (var i = 0; i < tabla.childElementCount; i++) {
+                            var row = tabla.children[i];
+                            var monto = row.children[2].innerText;
+                            var moneda = row.children[1].innerText;
+                            monto = monto.replaceAll(",", "");
+
+                            if (moneda != monedaContrato) {
+                                if (moneda == "Colones") {
+                                    monto = monto / tipoCambioVenta;
+                                }
+                                else {
+                                    monto = monto * tipoCambioVenta;
+                                }
+                            }
+
+                            totalPagos = totalPagos + monto;
+                        }
+                    }
+                    
+                    var newCount = Number($("#PagosRealizados").val()) - 1;
+                    $("#PagosRealizados").val(newCount);
+                    $("#TotalPagos").val(Number(totalPagos).format(2));
+
+                    if (Number(totalPagos) > Number(total)) {
+                        var vuelto = Number(totalPagos) - Number(total);
+                        $("#Vuelto").val(Number(vuelto).format(2));
+                        $("#MonedaVuelto").val($("#MonedaContrato").val());
+                    }
+                    else {
+                        var vuelto = 0;
+                        $("#Vuelto").val(Number(vuelto).format(2));
+                    }
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+            },
+            traditional: true
+        })
+        return false; // prevents default behavior
+    }
+
+    function LimpiarPago() {
+        $("#Monto").val(0);
+        $("#Moneda").val("");
+        $("#NumeroTarjeta").val("");
+        $("#FormaPago").val("");
+        $("#NumeroAprobacion").val("");
+        $("#Banco").val("");
+        $("#NumeroTransferencia").val("");
+        $("#DetalleTransferencia").val("");
+    }
+
+
+</script>

@@ -1,0 +1,326 @@
+﻿@model WPP.Model.ModuloFacturacion.FacturacionModel
+
+@{
+    ViewBag.Title = "Facturación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (null != TempData["alertMessage"])
+    {
+        <script type="text/javascript">
+
+            swal("", "@TempData["alertMessage"]", "error");
+            /// ("@TempData["alertMessage"]");
+        </script>
+    }
+
+    long consecutivo = ViewBag.Consecutivo == null ? 0 : ViewBag.Consecutivo;
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <br />
+        <h3>Consulta de Factura</h3>
+        <br />
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Reversión de Facturas</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">Observaciones:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        <button id="btnReversarModal" type="button" class="btn btn-primary">Reversar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        @using (Html.BeginForm("ConsultaFactura", "Facturacion", FormMethod.Post, new { id = "frmFacturacion", @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.Hidden("Compania")
+            @Html.Hidden("Consecutivo", @consecutivo)
+            @Html.Hidden("Id")
+            
+           
+
+            <div class="form-group">              
+                <label class="col-md-3" style="padding-right:0px;">Último formulario impreso</label>
+                <div class="col-md-9">                    
+                    @Html.TextBox("Formulario", "", new { @Class = "form-control", id = "Formulario", @readonly="readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3" style="padding-right:0px;">Número de factura</label>
+                <div class="col-md-3">
+                    @Html.TextBox("NumeroFactura", "", new { @Class = "form-control", id = "NumeroFactura" })
+                </div>
+                <label class="col-md-2">Fecha de emisión</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.CreateDate, "{0:dd/MM/yyyy}", new { @Class = "form-control", id = "CreateDate", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">                
+                <label class="col-md-2">Registrada por</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.CreatedBy, "", new { @Class = "form-control", id = "CreatedBy", @readonly = "readonly" })
+                </div>
+                <label class="col-md-2">Estado</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Estado, "", new { @Class = "form-control", id = "Estado", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Moneda</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Moneda, "", new { @Class = "form-control", id = "Moneda", @readonly = "readonly" })
+                </div>
+                <label class="col-md-2">Monto</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Monto, "", new { @Class = "form-control", id = "Monto", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Cliente</label>
+                <div class="col-md-10">
+                    @Html.TextBox("Cliente", "", new { @Class = "form-control", id = "Cliente", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Contrato</label>
+                <div class="col-md-10">
+                    @Html.TextBox("ContratoDescripcion", "", new { @Class = "form-control", id = "ContratoDescripcion", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2">Periodo</label>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Descripcion, "", new { @Class = "form-control", id = "Descripcion", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Observaciones</label>
+                <div class="col-md-12">
+                    @Html.TextAreaFor(m => m.Observaciones, new { @Class = "form-control", id = "Observaciones", @readonly = "readonly" })
+                </div>
+            </div>
+            <a id="btnDetalle" class="btn btn-primary">Ver detalle cobros <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+            @*<a id="btnReimprimir" class="btn btn-primary">Reimprimir <span class="glyphicon glyphicon-print" aria-hidden="true"></span></a>*@
+            <a id="btnAnular" class="btn btn-primary">Anular <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></a>
+            
+            if(Session["Roles"].ToString().Contains("Reversión de Facturación"))
+            {
+                <a id="btnReversar" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Reversar <i class="fa fa-undo"></i></a>
+            }
+            @Html.ActionLink("Cancelar", "ConsultaFactura", "Facturacion", null, new { @Class = "btn btn-primary", id="btnCancelar" })
+        }
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+    })
+
+    $("#btnDetalle").click(function () {
+
+        var factura = $("#NumeroFactura").val();
+        if (factura != "") {
+            window.open("/Facturacion/ReporteConsultaDetalleRecibo?factura=" + factura, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+        }
+        else {
+            swal("Número de factura inválido", "Por favor digite el número de factura que desea anular", "error");
+        }
+    });
+
+    $("#Formulario").val($("#Consecutivo").val());
+
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var x = 1;
+    })
+
+    $("#btnReversarModal").click(function () {
+        var factura = $("#Id").val();
+        var observaciones = $("#message-text").val();        
+        if (factura != "" && factura != "0" && observaciones != "") {
+            var path = "/Facturacion/ReversarFacturar?factura=" + factura + "&observaciones=" + observaciones;
+            $.ajax({
+                type: 'POST',
+                url: path,
+                success: function (data) {
+                    if (data != null) {
+                        $("#exampleModal").modal('hide');
+                        window.open("/Facturacion/ReporteReversion?IdReversion=" + data, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+                    }
+                    else {
+                        swal("", "Hubo un error al reversar la factura", "error");
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    swal("", "Hubo un error al reversar la factura", "error");
+                },
+                traditional: true
+
+            });
+        }
+        else {
+            swal("Datos incompletos", "Debe seleccionar la prefactura que desea reversar e incluir una observación del motivo de la reversión", "error");
+        }
+
+    });
+
+
+
+
+    // Función para reimprimir una factura
+    $("#btnReimprimir").click(function () {
+
+        var factura = $("#NumeroFactura").val();
+
+        if (factura != "") {
+            var path = "/Facturacion/ReimprimirFactura?factura=" + factura;
+            $.ajax({
+                type: 'POST',
+                url: path,
+                success: function (data) {
+                    if (data != null) {
+
+                        window.open("/Facturacion/ReporteFacturacion?id=" + data, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+                        //$("#Consecutivo").val("");
+                        //$("#NumeroFactura").val("");
+                        //$("#CreateDate").val("");
+                        //$("#CreateDate").val("");
+                        //$("#Observaciones").val("");
+                        //$("#Moneda").val("");
+                        //$("#CreatedBy").val("");
+                        //$("#Cliente").val("");
+                        //$("#Monto").val("");
+                        //$("#ContratoDescripcion").val("");
+                        //$("#Estado").val("");
+                        //$("#Descripcion").val("");
+                        
+
+                    }
+                    else {
+                        swal("", "Hubo un error al reimprimir la factura", "error");
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    swal("", "Hubo un error al anular la factura", "error");
+                },
+                traditional: true
+
+            });
+        }
+        else {
+            swal("Número de factura inválido", "Por favor digite el número de factura que desea anular", "error");
+        }
+
+    });
+
+    // Función para anular una factura
+    $("#btnAnular").click(function () {
+        var factura = $("#NumeroFactura").val();
+        if (factura != "") {
+            var path = "/Facturacion/AnularFactura?factura=" + factura;
+            $.ajax({
+                type: 'POST',
+                url: path,
+                success: function (data) {
+                    if (data != null) {
+                        $("#Consecutivo").val("");
+                        $("#NumeroFactura").val("");
+                        $("#CreateDate").val("");
+                        $("#CreateDate").val("");
+                        $("#Observaciones").val("");
+                        $("#Moneda").val("");
+                        $("#CreatedBy").val("");
+                        $("#Cliente").val("");
+                        $("#Monto").val("");
+                        $("#ContratoDescripcion").val("");
+                        $("#Estado").val("");
+                        $("#Descripcion").val("");
+                        $("#Id").val("");
+                        swal("", "La factura fue anulada", "success");
+                    }
+                    else {
+                        swal("", "Hubo un error al anular la factura", "error");
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    swal("", "Hubo un error al anular la factura", "error");
+                },
+                traditional: true
+
+            });
+        }
+        else {
+            swal("Número de factura inválido", "Por favor digite el número de factura que desea anular", "error");
+        }
+    });
+
+    // Función para cargar la informacion de la factura por medio del numero de factura ingresado
+    $("#NumeroFactura").change(function () {
+        var factura = $("#NumeroFactura").val();
+        var path = "/Facturacion/CargarFactura?factura=" + factura;
+        $.ajax({
+            type: 'POST',
+            url: path,
+            success: function (data) {
+                if (data != null) {
+                    var modelo = data;
+
+                    var stringFecha = modelo.CreateDate;
+                    stringFecha = stringFecha.substring(6, 19);
+                    var date = new Date(Number(stringFecha));
+
+                    var fecha = convertDate(date);//(modelo.Fecha.getUTCDate()) + '/' + (modelo.Fecha.getUTCMonth() + 1) + '/' + (modelo.Fecha.getUTCFullYear());
+
+                    $("#CreateDate").val(fecha);
+                    $("#Observaciones").val(modelo.Observaciones);
+                    $("#Moneda").val(modelo.Moneda);
+                    $("#CreatedBy").val(modelo.CreatedBy);
+                    $("#Cliente").val(modelo.ClienteDescripcion);
+                    $("#Monto").val(Number(modelo.Monto).format(2));
+                    $("#ContratoDescripcion").val(modelo.ContratoDescripcion);
+                    $("#Estado").val(modelo.Estado);
+                    $("#Descripcion").val(modelo.Descripcion);
+                    $("#Id").val(modelo.Id);
+
+                }
+                else {
+                    swal("Número de factura inválido", "Por favor verifique la información ingresada", "error");
+                    //alert("Número de recibo inválido");
+                    $("#NumeroFactura").empty();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                swal("Número de factura inválido", "Por favor verifique la información ingresada", "error");
+                $("#NumeroFactura").empty();
+            },
+            traditional: true
+
+        });
+    });
+
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+</script>

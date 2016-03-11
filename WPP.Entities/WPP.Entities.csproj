@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4F21B53-C0C2-4010-BE42-FAF1AE07272B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WPP.Entities</RootNamespace>
+    <AssemblyName>WPP.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Mappings\Generales\AnuncioMapping.cs" />
+    <Compile Include="Mappings\Generales\CombustibleMapping.cs" />
+    <Compile Include="Mappings\Generales\CostoCamionMapping.cs" />
+    <Compile Include="Mappings\Generales\CostoHoraMapping.cs" />
+    <Compile Include="Mappings\ModuloBascula\BoletaManualMapping.cs" />
+    <Compile Include="Mappings\ModuloBascula\ConfiguracionPuertoMapping.cs" />
+    <Compile Include="Mappings\ModuloCierreCaja\CierreCajaMapping.cs" />
+    <Compile Include="Mappings\Generales\TipoCambioMapping.cs" />
+    <Compile Include="Mappings\ModuloBascula\BasculaMapping.cs" />
+    <Compile Include="Mappings\ModuloBascula\ConsecutivoBoletaMapping.cs" />
+    <Compile Include="Mappings\Generales\RecoveryPasswordMapping.cs" />
+    <Compile Include="Mappings\ModuloBascula\ContenedorMapping.cs" />
+    <Compile Include="Mappings\ModuloBascula\EquipoMapping.cs" />
+    <Compile Include="Mappings\ModuloBascula\PagoBasculaMapping.cs" />
+    <Compile Include="Mappings\ModuloBascula\ConsecutivoReciboPagoMapping.cs" />
+    <Compile Include="Mappings\ModuloCierreCaja\ConsecutivoCierreCajaMapping.cs" />
+    <Compile Include="Mappings\ModuloCierreCaja\EfectivoCierreCajaMapping.cs" />
+    <Compile Include="Mappings\ModuloContratos\ClienteBitacoraMapping.cs" />
+    <Compile Include="Mappings\ModuloContratos\ConsecutivoClienteMapping.cs" />
+    <Compile Include="Mappings\ModuloContratos\ConsecutivoContratoMapping.cs" />
+    <Compile Include="Mappings\ModuloContratos\ContratoBitacoraMapping.cs" />
+    <Compile Include="Mappings\ModuloFacturacion\ConsecutivoFacturacionMapping.cs" />
+    <Compile Include="Mappings\ModuloFacturacion\DetalleFacturacionMapping.cs" />
+    <Compile Include="Mappings\ModuloFacturacion\FacturacionMapping.cs" />
+    <Compile Include="Mappings\ModuloFacturacion\ReversionMapping.cs" />
+    <Compile Include="Mappings\ModuloNomina\ConsecutivoNominaMapping.cs" />
+    <Compile Include="Mappings\ModuloNomina\CostoRutaRecoleccionMapping.cs" />
+    <Compile Include="Mappings\ModuloNomina\DiasFestivosMapping.cs" />
+    <Compile Include="Mappings\ModuloNomina\ItemNominaMapping.cs" />
+    <Compile Include="Mappings\ModuloNomina\JonadaMapping.cs" />
+    <Compile Include="Mappings\ModuloNomina\PlanillaMapping.cs" />
+    <Compile Include="Mappings\ModuloOperacionRecoleccion\ContenedorHistorialMapping.cs" />
+    <Compile Include="Objects\Generales\ClienteBitacora.cs" />
+    <Compile Include="Objects\Generales\CostoHora.cs" />
+    <Compile Include="Objects\ModuloBascula\ConfiguracionPuerto.cs" />
+    <Compile Include="Objects\ModuloContratos\ContratoBitacora.cs" />
+    <Compile Include="Objects\ModuloFacturacion\Reversion.cs" />
+    <Compile Include="Objects\ModuloNomina\DiasFestivos.cs" />
+    <Compile Include="Mappings\ModuloOperacionRecoleccion\ConsecutivoOTRMapping.cs" />
+    <Compile Include="Mappings\ModuloOperacionRecoleccion\CuadrillaMaping.cs" />
+    <Compile Include="Mappings\ModuloOperacionRecoleccion\EmpleadoRecoleccionMapping.cs" />
+    <Compile Include="Mappings\ModuloOperacionRecoleccion\OTRMapping.cs" />
+    <Compile Include="Mappings\ModuloOperacionRecoleccion\RellenoSanitarioMapping.cs" />
+    <Compile Include="Mappings\ModuloOperacionRecoleccion\ViajeOTRMapping.cs" />
+    <Compile Include="Objects\Generales\Anuncio.cs" />
+    <Compile Include="Objects\Generales\Combustible.cs" />
+    <Compile Include="Objects\Generales\CostoCamion.cs" />
+    <Compile Include="Objects\ModuloBascula\BoletaManual.cs" />
+    <Compile Include="Objects\ModuloBascula\ConsecutivoReciboPago.cs" />
+    <Compile Include="Objects\ModuloCierreCaja\CierreCaja.cs" />
+    <Compile Include="Objects\Generales\TipoCambio.cs" />
+    <Compile Include="Objects\ModuloBascula\Contenedor.cs" />
+    <Compile Include="Objects\ModuloBascula\PagoBascula.cs" />
+    <Compile Include="Mappings\ModuloContratos\ProductoContratoMapping.cs" />
+    <Compile Include="Mappings\ModuloOperacionRecoleccion\RutaRecoleccionMapping.cs" />
+    <Compile Include="Mappings\ModuloContratos\ServicioMapping.cs" />
+    <Compile Include="Mappings\ModuloContratos\UbicacionClienteMapping.cs" />
+    <Compile Include="Objects\Generales\PuntoFacturacion.cs" />
+    <Compile Include="Mappings\Generales\PuntoFacturacionMapping.cs" />
+    <Compile Include="Mappings\ModuloContratos\CategoriaProductoMapping.cs" />
+    <Compile Include="Mappings\ModuloContratos\ProductoMapping.cs" />
+    <Compile Include="Mappings\ModuloContratos\ClientesMapping.cs" />
+    <Compile Include="Mappings\Generales\RegionMapping.cs" />
+    <Compile Include="Mappings\ModuloContratos\ContactoClienteMapping.cs" />
+    <Compile Include="Mappings\ModuloContratos\ContratoMapping.cs" />
+    <Compile Include="Objects\Generales\SystemVars.cs" />
+    <Compile Include="Objects\ModuloBascula\Bascula.cs" />
+    <Compile Include="Objects\ModuloBascula\ConsecutivoBoleta.cs" />
+    <Compile Include="Objects\Generales\RecoveryPassword.cs" />
+    <Compile Include="Objects\ModuloBascula\Equipo.cs" />
+    <Compile Include="Objects\ModuloCierreCaja\ConsecutivoCierreCaja.cs" />
+    <Compile Include="Objects\ModuloCierreCaja\EfectivoCierreCaja.cs" />
+    <Compile Include="Objects\ModuloContratos\CategoriaProducto.cs" />
+    <Compile Include="Objects\ModuloContratos\ConsecutivoCliente.cs" />
+    <Compile Include="Objects\ModuloContratos\ConsecutivoContrato.cs" />
+    <Compile Include="Objects\ModuloContratos\Producto.cs" />
+    <Compile Include="Objects\Generales\ContactoBase.cs" />
+    <Compile Include="Objects\Generales\Catalogo.cs" />
+    <Compile Include="Mappings\Generales\CompaniaMapping.cs" />
+    <Compile Include="Mappings\Generales\CatalogoMapping.cs" />
+    <Compile Include="Mappings\Generales\UsuarioMapping.cs" />
+    <Compile Include="Objects\Generales\ContactoCompania.cs" />
+    <Compile Include="Objects\ModuloContratos\Cliente.cs" />
+    <Compile Include="Objects\Generales\Region.cs" />
+    <Compile Include="Objects\ModuloContratos\ContactoCliente.cs" />
+    <Compile Include="Objects\ModuloContratos\Contrato.cs" />
+    <Compile Include="Objects\ModuloContratos\ProductoContrato.cs" />
+    <Compile Include="Objects\ModuloFacturacion\ConsecutivoFacturacion.cs" />
+    <Compile Include="Objects\ModuloFacturacion\DetalleFacturacion.cs" />
+    <Compile Include="Objects\ModuloFacturacion\Facturacion.cs" />
+    <Compile Include="Objects\ModuloNomina\ConsecutivoNomina.cs" />
+    <Compile Include="Objects\ModuloNomina\CostoRutaRecoleccion.cs" />
+    <Compile Include="Objects\ModuloNomina\ItemNomina.cs" />
+    <Compile Include="Objects\ModuloNomina\Jornada.cs" />
+    <Compile Include="Objects\ModuloNomina\Planilla.cs" />
+    <Compile Include="Objects\ModuloOperacionRecoleccion\ContenedorHistorial.cs" />
+    <Compile Include="Objects\ModuloOperacionRecoleccion\RutaRecoleccion.cs" />
+    <Compile Include="Objects\ModuloContratos\Servicio.cs" />
+    <Compile Include="Objects\ModuloContratos\UbicacionCliente.cs" />
+    <Compile Include="Objects\ModuloOperacionRecoleccion\ConsecutivoOTR.cs" />
+    <Compile Include="Objects\ModuloOperacionRecoleccion\Cuadrilla.cs" />
+    <Compile Include="Objects\ModuloOperacionRecoleccion\EmpleadoRecoleccion.cs" />
+    <Compile Include="Objects\ModuloOperacionRecoleccion\OTR.cs" />
+    <Compile Include="Objects\ModuloOperacionRecoleccion\RellenoSanitario.cs" />
+    <Compile Include="Objects\ModuloOperacionRecoleccion\ViajeOTR.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Objects\Generales\Compania.cs" />
+    <Compile Include="Objects\Base\Entity.cs" />
+    <Compile Include="Objects\Generales\Usuario.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

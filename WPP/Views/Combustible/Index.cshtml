@@ -1,0 +1,157 @@
+﻿@model PagedList.IPagedList<WPP.Entities.Objects.Generales.Combustible>
+@using WPP.Model;
+@using PagedList.Mvc;
+@using PagedList;
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/Content/font-awesome.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Combustible";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3" role="navigation" style="padding-top:5%;">
+        <h2>Filtrar por: </h2>
+
+        @using (Html.BeginForm(Html.BeginForm("Buscar", "Combustible", FormMethod.Get)))
+        {
+            <div class="form-group">
+                <label>Fecha Inicial:</label> @Html.TextBox("searchStringFechaInicial", ViewBag.CurrentFechaInicial as string, "{0:dd/MM/yyyy}", new { id = "searchStringFechaInicial", @class = "form-control col-lg-3", @readonly = "readonly" })
+            </div>
+            <div class="form-group">
+                <label>Fecha Final:</label> @Html.TextBox("searchStringFechaFinal", ViewBag.CurrentFechaFinal as string, "{0:dd/MM/yyyy}", new { id = "searchStringFechaFinal", @class = "form-control col-lg-3", @readonly = "readonly" })
+            </div>
+            <div class="form-group">
+                <label>Filas:</label> @Html.DropDownList("searchStringFilas", new List<SelectListItem>{
+                    new SelectListItem() {Text = "10", Value="10"},
+                    new SelectListItem() {Text = "25", Value="25"},
+                    new SelectListItem() {Text = "50", Value="50"},
+                    new SelectListItem() {Text = "100", Value="100"}
+                 }, ViewBag.currentFilterFilas as string, new { @Class = "form-control", id = "searchStringFilas" })
+            </div>
+            <p>
+                <button type="submit" value="Buscar" id="btnBuscar" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </p>
+        }
+    </div>
+
+
+    <div class="col-md-9" style="padding-top:2%;">
+        <h2>Combustible</h2>
+
+
+        @if (ViewBag.Mensaje != null)
+        {
+            Html.Raw(ViewBag.Mensaje);
+        }
+
+        <br /><br />
+
+        @if (Session["Roles"].ToString().Contains("Administrador de Combustible"))
+        {
+            @Html.ActionLink("Registrar Combustible", "Crear", "Servicio", new { @class = "btn btn-primary" })
+            <br /><br />
+        }
+
+        <div class="table-responsive" style="height:300px; overflow-y:auto">
+            <table class="table table-hover" id="tabla-producto">
+                <tr>
+                    <th>
+                        @Html.ActionLink("FechaInicial", "Buscar", "Combustible", new
+               {
+                   sortOrder = ViewBag.FechaInicialSortParam,
+                   currentFechaInicial = ViewBag.CurrentFechaInicial,
+                   currentFechaFinal = ViewBag.CurrentFEchaFinal
+               }, null)
+                    </th>
+                    <th>
+                        @Html.ActionLink("FechaFinal", "Buscar", "Combustible", new
+               {
+                   sortOrder = ViewBag.FechaFinalSortParam,
+                   currentFechaInicial = ViewBag.CurrentFechaInicial,
+                   currentFechaFinal = ViewBag.CurrentFEchaFinal
+               }, null)
+                    </th>
+                    <th>Gasolina</th>
+                    <th>Diesel</th>
+                    <th></th>
+                </tr>
+
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        var fechaDesde = item.FechaDesde.ToString("dd/MM/yyyy");
+                        var fechaHasta = item.FechaHasta.ToString("dd/MM/yyyy");
+                        <tr>
+                            <td>@Html.Raw(fechaDesde)</td>
+                            <td>@Html.Raw(fechaHasta)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Gasolina)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Diesel)</td>
+                           
+                            @if (Session["Roles"].ToString().Contains("Administrador de Combustible"))
+                            {
+                                <th>
+                                    <a href="@Url.Action("Editar", "Combustible", new { id = item.Id })" data-toggle="tooltip" title="Editar">
+                                        <span class="glyphicon glyphicon-edit" style="font-size:medium" aria-hidden="true"></span>
+                                    </a>
+                                </th>   
+                            }
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+        <div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Buscar", "Combustible",
+                                new
+                                {
+                                    page,
+                                    sortOrder = ViewBag.FechaFinalSortParam,
+                                    currentFechaInicial = ViewBag.CurrentFechaInicial,
+                                    currentFinal = ViewBag.CurrentFechaFinal
+                                }))
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).load(function () {
+        // document.getElementById("btnBuscar").click();
+    })
+
+    $(document).ready(function () {
+        function editarProducto(IdProducto) {
+        }
+
+        var today = new Date();
+        $('#searchStringFechaInicial').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+        $('#searchStringFechaFinal').datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+        });
+
+    });// end document ready
+
+</script>

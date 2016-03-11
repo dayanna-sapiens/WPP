@@ -1,0 +1,66 @@
+PUNTO DE FACTURACION
+
+* RESALOMA de Alajuela S.A
+	- El sistema no me deja entrar
+*
+* WPP Continental
+	- EBI El Huaso
+	- EBI La Carpio
+	- EBI Limón
+	- Los Mangos
+	- Los Pinos
+	- Orotina
+	- Río Azul
+	- San Pedro
+
+* WPP Orotina S.A
+	- San Pedro
+
+* WPP Los Mango S.A
+	- Los Mangos 
+	- San Pedro
+
+* WPP Los Pinos S.A
+	- Los Pinos
+	- San Pedro
+
+* WPP Manejo de Desechos y Contrucción S.A
+	- San Pedro
+
+* WPP Municipal S.A
+	- San Pedro
+
+
+
+
+---------------
+
+
+REPESAJE
+
+* Diario
+* Periódico
+* Por Viaje
+
+
+---------------
+
+
+MODO DE FACTURACION
+
+* Cada fin de mes
+* Cada fin de quincena
+* Día específico de la semana
+* Día específico del mes
+
+---------------
+
+
+ESTADO
+
+* Activo
+* Anulado
+* Pendiente
+* Terminado
+
+

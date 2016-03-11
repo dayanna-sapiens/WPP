@@ -1,0 +1,103 @@
+﻿@model WPP.Model.ModuloContratos.CategoriaProductoModel
+
+@{
+    ViewBag.Title = "Categoría de Productos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row" style="margin-top:20px; ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 body-form">
+        <div>
+            <h2>Editar Categoría Producto</h2>
+
+            <br /><br />
+
+            @using (Html.BeginForm("Editar", "CategoriaProducto", FormMethod.Post, new { id = "frmEditarCategoriaProducto", @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(m => m.Tipo)
+                @Html.HiddenFor(m => m.Id)
+
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    @Html.TextBoxFor(m => m.Nombre, new { @Class = "form-control", id = "Nombre" })
+                    @Html.ValidationMessageFor(m => m.Nombre)
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre">Tipo</label>   <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    <br />
+                    <input id="DisposicionFinal" type="radio" name="Tipo" value="DisposicionFinal">Disposición Final / Destrucción
+                    <br />
+                    <input id="Fosas" type="radio" name="Tipo" value="Fosas">Fosas
+                    <br />
+                    <input id="Recoleccion" type="radio" name="Tipo" value="Recoleccion">Recolección
+                    <br />
+                    <input id="Ninguno" type="radio" name="Tipo" value="Ninguno">Ninguno
+                    <br />
+                    @Html.ValidationMessageFor(m => m.Tipo)
+                    <br />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Editar</button>
+                @Html.ActionLink("Cancelar", "Index", "CategoriaProducto", null, new { @Class = "btn btn-primary" })
+
+            }
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        switch ($("#Tipo").val()) {
+            case "DisposicionFinal":
+                $("#DisposicionFinal").prop("checked", true);
+                break;
+            case "Fosas":
+                $("#Fosas").prop("checked", true);
+                break;
+            case "Recoleccion":
+                $("#Recoleccion").prop("checked", true);
+                break;
+            case "Ninguno":
+                $("#Ninguno").prop("checked", true);
+                break;
+
+        }
+
+        $("input:radio[name='Tipo']").change(function () {
+            actual = $("#Tipo").val();
+            append = $(this).val();
+            if ($(this).is(":checked")) {
+                actual = append;
+                $("#Tipo").val(actual);
+
+            } else {
+                $("#Tipo").val("Ninguno");
+            }
+        });
+
+    });// end document ready
+
+
+
+</script>
