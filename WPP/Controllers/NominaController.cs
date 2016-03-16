@@ -16,6 +16,9 @@ using WPP.Entities.Objects.ModuloContratos;
 using WPP.Service.Generales;
 using WPP.Service.ModuloBascula;
 using WPP.Service.ModuloBoletaManual;
+using WPP.Mapper.ModuloNomina;
+using WPP.Model.ModuloNomina;
+using Newtonsoft.Json;
 
 namespace WPP.Controllers
 {
@@ -30,9 +33,11 @@ namespace WPP.Controllers
         ICostoHoraService costoHoraService;
         IBasculaService basculaService;
         IBoletaManualService boletaManualService;
+        IDiasFestivosService feriadosService;
+        PlanillaMapper nominaMapper;
 
         public NominaController(IPlanillaService nomina, IItemNominaService item, ICompaniaService compania, IEmpleadoRecoleccionService empleado, ICostoRutaRecoleccionService costo,
-            IOTRService otr, ICostoHoraService costoHora, IBasculaService bascula, IBoletaManualService boleta)
+            IOTRService otr, ICostoHoraService costoHora, IBasculaService bascula, IBoletaManualService boleta, IDiasFestivosService feriados)
         {
             planillaService = nomina;
             itemService = item;
@@ -43,6 +48,8 @@ namespace WPP.Controllers
             costoHoraService = costoHora;
             basculaService = bascula;
             boletaManualService = boleta;
+            feriadosService = feriados;
+            nominaMapper = new PlanillaMapper();
         }
 
         public ActionResult Index()
@@ -56,8 +63,23 @@ namespace WPP.Controllers
             return View();
         }
 
+   
+        public ActionResult NominaRecolector(PlanillaModel model)
+        {
+            IDictionary<string, object> criteria = new Dictionary<string, object>();
+            criteria.Add("Id", model.Id);
+            criteria.Add("IsDeleted", false);
+            var item = planillaService.Get(criteria);
+            ViewBag.ItemsLunes = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Monday).ToList();
+            ViewBag.ItemsMartes = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Tuesday).ToList();
+            ViewBag.ItemsMiercoles = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Wednesday).ToList();
+            ViewBag.ItemsJueves = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Thursday).ToList();
+            ViewBag.ItemsViernes = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Friday).ToList();
+            ViewBag.ItemsSabado = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Saturday).ToList();
+            return View(model);
+        }
         [HttpPost]
-        public ActionResult Importar(HttpPostedFileBase excelfile)
+        public ActionResult Cargar(HttpPostedFileBase excelfile)
         {
             if (excelfile == null || excelfile.ContentLength == 0)
             {
@@ -92,7 +114,7 @@ namespace WPP.Controllers
                             var fecha = table.Rows[row][2].ToString();
                             if(fecha != String.Empty)
                             {
-                                item.Fecha = Convert.ToDateTime(table.Rows[row][2].ToString());
+                                item.Fecha = Convert.ToDateTime(fecha);
                                 item.Entrada = table.Rows[row][3].ToString();
                                 item.Salida = table.Rows[row][4].ToString();                            
                             }
@@ -177,16 +199,18 @@ namespace WPP.Controllers
                                 
                             }
 
-                           // IDictionary<string, object> criteriaDetails = new Dictionary<string, object>();
+                            criteriaDetails = new Dictionary<string, object>();
                             //criteriaDetails.Add("Codigo", item  
                             criteriaDetails.Add("IsDeleted", false);
-                            var costoHora = costoHoraService.GetByDate(item.Fecha, "Recolector");
+                            var listCosto = costoHoraService.GetByDate("Recolector");
+                            listCosto = listCosto.Where(s=>s.FechaInicio.AddDays(-1) <= item.Fecha && s.FechaFin.AddDays(1) >= item.Fecha).ToList();
+                            var costoHora = listCosto.FirstOrDefault();
 
-                            if(item.Salida != null)
+                            if(item.Salida != null && item.Salida != String.Empty)
                             {
                                 var cantHoras = Convert.ToDateTime(item.Salida) - Convert.ToDateTime(item.Entrada);
-                                item.TotalHoras = Convert.ToDouble(cantHoras.TotalHours + "." + cantHoras.TotalMinutes);
-                                if (Convert.ToDouble(Convert.ToDateTime(item.Entrada)) > 18 ) // Nocturno
+                                item.TotalHoras = Convert.ToDouble(cantHoras.Hours + "." + cantHoras.Minutes);
+                                if (Convert.ToDateTime(item.Entrada).Hour > 18 ) // Nocturno
                                 {
                                     item.HorasOrdinarias = item.TotalHoras > 6 ? 6 : item.TotalHoras;
                                     item.HorasExtra = item.TotalHoras > 6 ? item.TotalHoras - 6 : 0;
@@ -194,11 +218,11 @@ namespace WPP.Controllers
                                 }
                                 else  
                                 {
-                                    if (Convert.ToDouble(Convert.ToDateTime(item.Entrada)) > 12) // Nocturno con algunas horas mixtas
+                                    if (Convert.ToDateTime(item.Entrada).Hour > 12) // Nocturno con algunas horas mixtas
                                     {
                                         item.HorasOrdinarias = item.TotalHoras > 6 ? 6 : item.TotalHoras;
                                         item.HorasExtra = item.TotalHoras > 6 ? item.TotalHoras - 6 : 0;
-                                        var horasMixtas = (19 - Convert.ToDouble(Convert.ToDateTime(item.Entrada))) * 0.14 * costoHora.Monto;
+                                        var horasMixtas = (19 - Convert.ToDateTime(item.Entrada).TimeOfDay.TotalHours) * 0.14 * costoHora.Monto;
                                         item.MontoOrdinario = horasMixtas + (item.HorasOrdinarias * costoHora.Monto);
                                       
                                     }
@@ -206,9 +230,9 @@ namespace WPP.Controllers
                                     {
                                         item.HorasOrdinarias = item.TotalHoras > 8 ? 8 : item.TotalHoras;
                                         item.HorasExtra = item.TotalHoras > 8 ? item.TotalHoras - 8 : 0;
-                                        if (Convert.ToDouble(Convert.ToDateTime(item.Entrada)) < 5) // en caso de que existan horas mixtas
+                                        if (Convert.ToDateTime(item.Entrada).Hour < 5) // en caso de que existan horas mixtas
                                         {
-                                            var horasMixtas = (5 - Convert.ToDouble(Convert.ToDateTime(item.Entrada))) * 0.14 * costoHora.Monto;
+                                            var horasMixtas = (5 - Convert.ToDateTime(item.Entrada).TimeOfDay.TotalHours) * 0.14 * costoHora.Monto;
                                             item.MontoOrdinario = horasMixtas + (item.HorasOrdinarias * costoHora.Monto);
                                         }
                                         else
@@ -221,33 +245,75 @@ namespace WPP.Controllers
                                 item.Total = item.MontoOrdinario + item.MontoExtra;
                                 item.Toneladas = toneladas;
                                 item.Compensacion = toneladas > item.Total ? 0 : item.Total - toneladas;
+
+                                // en caso que el dia laborado sea feriado por ley (pago doble) 
+                                IDictionary<string, object> criteriaFeriado = new Dictionary<string, object>();
+                                criteriaFeriado.Add("Dia", item.Fecha.Day);
+                                criteriaFeriado.Add("Mes", item.Fecha.Month);
+                                var feriado = feriadosService.Get(criteriaFeriado);
+                                if(feriado != null)
+                                {
+                                    
+                                }
+
                             }
                             else
                             {
-                                item.Salida = String.Empty;
-                                item.Entrada = String.Empty;
-                                item.TotalHoras = 0;
-                                item.Compensacion = 0;
-                                item.HorasExtra = 0;
-                                item.HorasOrdinarias = 0;
-                                item.MontoExtra = 0;
-                                item.MontoOrdinario = 0;
-                                item.Toneladas = 0;
-                                item.Total = 0;        
+                                // Verificar si el dia es de pago obligatorio
+                                IDictionary<string, object> criteriaFeriado = new Dictionary<string, object>();
+                                criteriaFeriado.Add("Dia", item.Fecha.Day);
+                                criteriaFeriado.Add("Mes", item.Fecha.Month);
+                                var feriado = feriadosService.Get(criteriaFeriado);
+                                if (feriado != null)
+                                {
+                                    item.Salida = String.Empty;
+                                    item.Entrada = String.Empty;
+                                    item.TotalHoras = 8;
+                                    item.Compensacion = 0;
+                                    item.HorasExtra = 0;
+                                    item.HorasOrdinarias = 8;
+                                    item.MontoExtra = 0;
+                                    item.MontoOrdinario = 0;
+                                    item.Toneladas = 0;
+                                    item.Total = 0;   
+
+                                }
+                                else 
+                                {
+                                    //En caso de que no se presentó 
+                                    item.Salida = String.Empty;
+                                    item.Entrada = String.Empty;
+                                    item.TotalHoras = 0;
+                                    item.Compensacion = 0;
+                                    item.HorasExtra = 0;
+                                    item.HorasOrdinarias = 0;
+                                    item.MontoExtra = 0;
+                                    item.MontoOrdinario = 0;
+                                    item.Toneladas = 0;
+                                    item.Total = 0;   
+                                }
+
+                                 
                             }
                             itemService.Create(item);
+
                         }
                         nomina.DetallesNomina = DetallesNomina;
                         planillaService.Update(nomina);
+
+                        var model = nominaMapper.GetBoletaNominaModel(nomina);
+                        model.ListaDetalles = DetallesNomina;
+                        return RedirectToAction("NominaRecolector", model);
                     }
                 }
                 else
                 {
                     ViewBag.Error = "El archivo a importar no es permitido";
+                    View("Cargar");
                 }
             }
 
-            return View("Cargar");
+            return  View();
         }
     }
 }

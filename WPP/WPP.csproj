@@ -1578,6 +1578,10 @@
     <Content Include="Views\Empleado\Detalles.cshtml" />
     <Content Include="Views\Empleado\Editar.cshtml" />
     <Content Include="Views\Empleado\Eliminar.cshtml" />
+    <Content Include="Views\Nomina\NominaRecolector.cshtml" />
+    <Content Include="Views\Nomina\NominaChofer.cshtml" />
+    <Content Include="Views\Nomina\NominaTaller.cshtml" />
+    <Content Include="Views\Nomina\_NominaRecolector.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,7 +16,7 @@ namespace WPP.Service.Generales
         CostoHora Update(CostoHora entity);
         IList<CostoHora> ListAll();
         IList<CostoHora> GetAll(IDictionary<string, object> criterias);
-        CostoHora GetByDate(DateTime fecha, string tipo);
+        IList<CostoHora> GetByDate(string tipo);
         IPagedList<CostoHora> PagingSearch(String desde, String hasta, int page, int itemsPerPage, String sortOrder);
     }
 }

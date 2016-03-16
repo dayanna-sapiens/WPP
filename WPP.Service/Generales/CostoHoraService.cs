@@ -48,16 +48,13 @@ namespace WPP.Service.Generales
         {
             return repository.GetAll();
         }
-
-        public CostoHora GetByDate(DateTime fecha, string tipo)
+        
+        public IList<CostoHora> GetByDate(string tipo)
         {
             var query = repository.GetQuery();
             query = query.Where(u => u.IsDeleted == false && u.Tipo == tipo);
 
-            query = query.Where(u => u.FechaInicio.AddDays(-1) <= fecha && u.FechaFin.AddDays(1) >= fecha);
-
-
-            return query.ToList().FirstOrDefault();
+            return query.ToList();
         }
 
         public IPagedList<CostoHora> PagingSearch(String desde, String hasta, int page, int itemsPerPage, String sortOrder)
