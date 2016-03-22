@@ -6,8 +6,8 @@
 
 
 <div class="row" style="margin-top:20px; ">
-  
-        <div class="col-md-12" style="padding-right:30px;">
+    <div class="col-md-2"> </div>
+        <div class="col-md-8" style="padding-right:30px;">
             <br />
             <h3>Cargar Nómina</h3>
             <br />
@@ -16,25 +16,26 @@
 
 
                 <div class="form-group">
-                    <label class="col-md-2" style="padding-left:0px;" >Archivo Excel <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
+                    <label class="col-md-2" style="padding-left:0px;">Archivo Excel <span title="Este campo es requerido" style="font-size:x-small" class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></label>
                     <div class="col-md-10">
                         <input type="file" name="excelfile" id="excelfile" style="display:inline" />
                         <a id="btnGuardar" class="btn btn-primary" style="display:none;"></a>
-                        @Html.Raw(ViewBag.Error)    
-                    </div>                                 
+                        @Html.Raw(ViewBag.Error)
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2" style="padding-left:0px;">Descripción</label>
-                    <div class="col-md-5">
-                        @Html.TextBox("txtDescripcion", "", new { id = "txtDescripcion", @class = "form-control col-md-5" })    
-                          </div>
-                    <div class="col-md-1">
-                        <button id="btnSubmit" type="submit" class="btn btn-primary">Importar  <span class="glyphicon  glyphicon-upload" aria-hidden="true"></span></button>
-                    </div>
+                    <div class="col-md-10">
+                        @Html.TextBox("txtDescripcion", "", new { id = "txtDescripcion", @class = "form-control col-md-5" })
+                    </div>      
+                </div>
+                <div class="form-group" style="float:right">
+                        <button id="btnSubmit" type="submit" class="btn btn-primary">Importar  <span class="glyphicon  glyphicon-upload" aria-hidden="true"></span></button>        
                 </div>
             }
         </div>
-    </div>
+    <div class="col-md-2"> </div>
+</div>
 
 
 

@@ -19,6 +19,7 @@ using WPP.Service.ModuloBoletaManual;
 using WPP.Mapper.ModuloNomina;
 using WPP.Model.ModuloNomina;
 using Newtonsoft.Json;
+using WPP.Model;
 
 namespace WPP.Controllers
 {
@@ -66,18 +67,69 @@ namespace WPP.Controllers
    
         public ActionResult NominaRecolector(PlanillaModel model)
         {
-            IDictionary<string, object> criteria = new Dictionary<string, object>();
-            criteria.Add("Id", model.Id);
-            criteria.Add("IsDeleted", false);
-            var item = planillaService.Get(criteria);
-            ViewBag.ItemsLunes = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Monday).ToList();
-            ViewBag.ItemsMartes = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Tuesday).ToList();
-            ViewBag.ItemsMiercoles = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Wednesday).ToList();
-            ViewBag.ItemsJueves = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Thursday).ToList();
-            ViewBag.ItemsViernes = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Friday).ToList();
-            ViewBag.ItemsSabado = item.DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Saturday).ToList();
+            var DetallesNomina = (List<ItemNomina>)Session["Detalles"];
+            ViewBag.ItemsLunes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Monday).ToList();
+            ViewBag.ItemsMartes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Tuesday).ToList();
+            ViewBag.ItemsMiercoles = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Wednesday).ToList();
+            ViewBag.ItemsJueves = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Thursday).ToList();
+            ViewBag.ItemsViernes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Friday).ToList();
+            ViewBag.ItemsSabado = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Saturday).ToList();
             return View(model);
         }
+
+        public JsonResult GuardarNominaRecolector(PlanillaModel model)
+        {
+            try
+            {
+                List<ItemNominaModel> detalles = JsonConvert.DeserializeObject<List<ItemNominaModel>>(Request.Form["ListaDetallesModel"]);
+
+                Compania compania = companiaService.Get(Session["Compania"] != null ? Convert.ToInt64(Session["Compania"].ToString()) : 0);
+                Planilla nomina = new Planilla();
+                nomina.Descripcion = model.Descripcion;
+                nomina.Version = 1;
+                nomina.CreateDate = DateTime.Now;
+                nomina.IsDeleted = false;
+                nomina.CreatedBy = ObtenerUsuarioActual().Nombre;
+                nomina.Compania = compania;
+                nomina.Estado = "Generada";
+                nomina.DetallesNomina = new List<ItemNomina>();
+                nomina = planillaService.Create(nomina);
+
+                foreach (var item in detalles)
+                {
+                    ItemNomina detalle = new ItemNomina();
+                    detalle.Nomina = nomina;
+                    detalle.IsDeleted = false;
+                    detalle.CreateDate = DateTime.Now;
+                    detalle.CreatedBy = ObtenerUsuarioActual().Nombre;
+                    detalle.Version = 1;
+                    detalle.Compensacion = item.Compensacion;
+                    detalle.Entrada = item.Entrada;
+                    detalle.Salida = item.Salida;
+                    detalle.Toneladas = item.Toneladas;
+                    detalle.Total = item.Total;
+                    detalle.TotalHoras = item.TotalHoras;
+                    detalle.HorasExtra = item.HorasExtra;
+                    detalle.HorasOrdinarias = item.HorasOrdinarias;
+                    detalle.MontoExtra = item.MontoExtra;
+                    detalle.MontoOrdinario = item.MontoOrdinario;
+                    detalle.Fecha = Convert.ToDateTime(item.Fecha);
+                    detalle.Empleado = empleadoService.Get(item.Empleado);
+
+                    itemService.Create(detalle);
+
+                    nomina.DetallesNomina.Add(detalle);
+                }
+
+                planillaService.Update(nomina);
+                return Json(nomina.Id);
+            }
+            catch(Exception ex)
+            {
+                return Json(null);
+            }
+        }
+
         [HttpPost]
         public ActionResult Cargar(HttpPostedFileBase excelfile)
         {
@@ -137,24 +189,12 @@ namespace WPP.Controllers
                     {
                         Compania compania = companiaService.Get(Session["Compania"] != null ? Convert.ToInt64(Session["Compania"].ToString()) : 0);
                         Planilla nomina = new Planilla();
-                        nomina.Version = 1;
-                        nomina.CreateDate = DateTime.Now;
-                        nomina.IsDeleted = false;
-                        nomina.CreatedBy = ObtenerUsuarioActual().Nombre;
                         nomina.DetallesNomina = new List<ItemNomina>();
-                        nomina.Compania = compania;
-                        nomina.Estado = "Borrador";
                         nomina.Descripcion = Request.Form["txtDescripcion"] != null ? Request.Form["txtDescripcion"] : "Planilla";
-                        nomina = planillaService.Create(nomina);
+                      
 
                         foreach (var item in DetallesNomina)
                         {
-                            item.Nomina = nomina;
-                            item.IsDeleted = false;
-                            item.CreateDate = DateTime.Now;
-                            item.CreatedBy = ObtenerUsuarioActual().Nombre;
-                            item.Version = 1;
-
                             //Obtener OTR
                              IDictionary<string, object> criteriaDetails = new Dictionary<string, object>();
                             criteriaDetails.Add("Fecha", item.Fecha);
@@ -295,21 +335,22 @@ namespace WPP.Controllers
 
                                  
                             }
-                            itemService.Create(item);
+                            //itemService.Create(item);
 
                         }
-                        nomina.DetallesNomina = DetallesNomina;
-                        planillaService.Update(nomina);
+                       // nomina.DetallesNomina = DetallesNomina;
+                       // planillaService.Update(nomina);
 
                         var model = nominaMapper.GetBoletaNominaModel(nomina);
                         model.ListaDetalles = DetallesNomina;
+                        Session["Detalles"] = DetallesNomina;
                         return RedirectToAction("NominaRecolector", model);
                     }
                 }
                 else
                 {
                     ViewBag.Error = "El archivo a importar no es permitido";
-                    View("Cargar");
+                    RedirectToAction("Cargar");
                 }
             }
 

@@ -16,5 +16,6 @@ namespace WPP.Model.ModuloNomina
         public virtual string Estado { set; get; }
 
         public virtual IList<ItemNomina> ListaDetalles { set; get; }
+        public virtual IList<ItemNominaModel> ListaDetallesModel { set; get; }
     }
 }

@@ -25,5 +25,6 @@ namespace WPP.Model
         public String CodigoEmpleado { set; get; }
         public long Nomina  { set; get; }
         public String DescripcionNomina { set; get; }
+        public String Fecha { set; get; }
     }
 }
