@@ -36,9 +36,10 @@ namespace WPP.Controllers
         IBoletaManualService boletaManualService;
         IDiasFestivosService feriadosService;
         PlanillaMapper nominaMapper;
+        IConsecutivoNominaService consecutivoService;
 
         public NominaController(IPlanillaService nomina, IItemNominaService item, ICompaniaService compania, IEmpleadoRecoleccionService empleado, ICostoRutaRecoleccionService costo,
-            IOTRService otr, ICostoHoraService costoHora, IBasculaService bascula, IBoletaManualService boleta, IDiasFestivosService feriados)
+            IOTRService otr, ICostoHoraService costoHora, IBasculaService bascula, IBoletaManualService boleta, IDiasFestivosService feriados, IConsecutivoNominaService consecutivo)
         {
             planillaService = nomina;
             itemService = item;
@@ -50,6 +51,7 @@ namespace WPP.Controllers
             basculaService = bascula;
             boletaManualService = boleta;
             feriadosService = feriados;
+            consecutivoService = consecutivo;
             nominaMapper = new PlanillaMapper();
         }
 
@@ -67,6 +69,7 @@ namespace WPP.Controllers
    
         public ActionResult NominaRecolector(PlanillaModel model)
         {
+            // Se divide los items obtenidos por dias y se retorna el modelo
             var DetallesNomina = (List<ItemNomina>)Session["Detalles"];
             ViewBag.ItemsLunes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Monday).ToList();
             ViewBag.ItemsMartes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Tuesday).ToList();
@@ -82,7 +85,9 @@ namespace WPP.Controllers
             try
             {
                 List<ItemNominaModel> detalles = JsonConvert.DeserializeObject<List<ItemNominaModel>>(Request.Form["ListaDetallesModel"]);
+                
 
+                // Se crea la nomina 
                 Compania compania = companiaService.Get(Session["Compania"] != null ? Convert.ToInt64(Session["Compania"].ToString()) : 0);
                 Planilla nomina = new Planilla();
                 nomina.Descripcion = model.Descripcion;
@@ -92,6 +97,7 @@ namespace WPP.Controllers
                 nomina.CreatedBy = ObtenerUsuarioActual().Nombre;
                 nomina.Compania = compania;
                 nomina.Estado = "Generada";
+                nomina.Tipo = "Recolector";
                 nomina.DetallesNomina = new List<ItemNomina>();
                 nomina = planillaService.Create(nomina);
 
@@ -161,6 +167,7 @@ namespace WPP.Controllers
                     {
                         for (int row = 1; row < table.Rows.Count; row++)
                         {
+
                             ItemNomina item = new ItemNomina();
                             string codigoEmpleado = table.Rows[row][0].ToString();
                             var fecha = table.Rows[row][2].ToString();
@@ -192,7 +199,6 @@ namespace WPP.Controllers
                         nomina.DetallesNomina = new List<ItemNomina>();
                         nomina.Descripcion = Request.Form["txtDescripcion"] != null ? Request.Form["txtDescripcion"] : "Planilla";
                       
-
                         foreach (var item in DetallesNomina)
                         {
                             //Obtener OTR
@@ -235,12 +241,10 @@ namespace WPP.Controllers
                                     // La cantidad de toneladas obtenidas se multiplican por el costo de la ruta
                                     // y se divide entre la cantidad de recolectores de la cuadrilla
                                     toneladas += (costo * peso) / Cuadrilla.Count;
-                                }
-                                
+                                }                                
                             }
 
                             criteriaDetails = new Dictionary<string, object>();
-                            //criteriaDetails.Add("Codigo", item  
                             criteriaDetails.Add("IsDeleted", false);
                             var listCosto = costoHoraService.GetByDate("Recolector");
                             listCosto = listCosto.Where(s=>s.FechaInicio.AddDays(-1) <= item.Fecha && s.FechaFin.AddDays(1) >= item.Fecha).ToList();
@@ -286,37 +290,50 @@ namespace WPP.Controllers
                                 item.Toneladas = toneladas;
                                 item.Compensacion = toneladas > item.Total ? 0 : item.Total - toneladas;
 
-                                // en caso que el dia laborado sea feriado por ley (pago doble) 
-                                IDictionary<string, object> criteriaFeriado = new Dictionary<string, object>();
-                                criteriaFeriado.Add("Dia", item.Fecha.Day);
-                                criteriaFeriado.Add("Mes", item.Fecha.Month);
-                                var feriado = feriadosService.Get(criteriaFeriado);
-                                if(feriado != null)
-                                {
-                                    
-                                }
-
                             }
                             else
                             {
-                                // Verificar si el dia es de pago obligatorio
+                                // en caso que el dia laborado sea feriado por ley 
                                 IDictionary<string, object> criteriaFeriado = new Dictionary<string, object>();
                                 criteriaFeriado.Add("Dia", item.Fecha.Day);
                                 criteriaFeriado.Add("Mes", item.Fecha.Month);
                                 var feriado = feriadosService.Get(criteriaFeriado);
                                 if (feriado != null)
                                 {
-                                    item.Salida = String.Empty;
-                                    item.Entrada = String.Empty;
-                                    item.TotalHoras = 8;
-                                    item.Compensacion = 0;
-                                    item.HorasExtra = 0;
-                                    item.HorasOrdinarias = 8;
-                                    item.MontoExtra = 0;
-                                    item.MontoOrdinario = 0;
-                                    item.Toneladas = 0;
-                                    item.Total = 0;   
+                                    // Se busca la nomina que se genero hace una semana
+                                    criteriaFeriado = new Dictionary<string, object>();
+                                    criteriaFeriado.Add("IsDeletd", false);
+                                    criteriaFeriado.Add("Compania", compania);
+                                    criteriaFeriado.Add("Tipo", "Recolector");
+                                    criteriaFeriado.Add("Estado", "Generada");
+                                    var ListNomina = planillaService.GetAll(criteriaFeriado);
+                                    ListNomina = ListNomina.Where(s => s.CreateDate >= DateTime.Now.AddDays(-9) && s.CreateDate <= DateTime.Now.AddDays(-5)).ToList();
+                                    var nominaAnterior = ListNomina.FirstOrDefault();
 
+                                    //Se selcciona los detalles de la nomina que corresponden al empleado actual
+                                    var itemsAnterior = nominaAnterior.DetallesNomina.Where(s => s.Empleado.Id == item.Empleado.Id).ToList();
+
+                                    //Si hay un dia feriado y se saca el promedio de la cantidad de toneladas que se hicieron durante esa semana
+                                    //en caso que en esa semana tambien se haya dado un dia feriado, se saca el promedio entre los dias laborados
+                                    if (itemsAnterior.Count > 0)
+                                    {
+                                        var totalToneladas = itemsAnterior.Sum(s => s.Toneladas);
+                                        listCosto = costoHoraService.GetByDate("Recolector");
+                                        listCosto = listCosto.Where(s => s.FechaInicio.AddDays(-1) <= item.Fecha && s.FechaFin.AddDays(1) >= item.Fecha).ToList();
+                                        costoHora = listCosto.FirstOrDefault();
+
+                                        totalToneladas = totalToneladas / 6;
+                                        item.Salida = String.Empty;
+                                        item.Entrada = String.Empty;
+                                        item.TotalHoras = 8;
+                                        item.HorasExtra = 0;
+                                        item.HorasOrdinarias = 8;
+                                        item.MontoExtra = 0;
+                                        item.MontoOrdinario =  8 * costoHora.Monto;
+                                        item.Toneladas = totalToneladas;
+                                        item.Total = item.MontoOrdinario;   
+                                        item.Compensacion = totalToneladas > item.Total ? 0 : item.Total - totalToneladas;
+                                    }
                                 }
                                 else 
                                 {
@@ -331,15 +348,9 @@ namespace WPP.Controllers
                                     item.MontoOrdinario = 0;
                                     item.Toneladas = 0;
                                     item.Total = 0;   
-                                }
-
-                                 
+                                }                                 
                             }
-                            //itemService.Create(item);
-
                         }
-                       // nomina.DetallesNomina = DetallesNomina;
-                       // planillaService.Update(nomina);
 
                         var model = nominaMapper.GetBoletaNominaModel(nomina);
                         model.ListaDetalles = DetallesNomina;

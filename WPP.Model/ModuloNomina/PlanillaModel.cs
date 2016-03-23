@@ -14,7 +14,7 @@ namespace WPP.Model.ModuloNomina
         public virtual string Descripcion { set; get; }
         public virtual long Compania { set; get; }
         public virtual string Estado { set; get; }
-
+        public virtual string Tipo { set; get; }
         public virtual IList<ItemNomina> ListaDetalles { set; get; }
         public virtual IList<ItemNominaModel> ListaDetallesModel { set; get; }
     }

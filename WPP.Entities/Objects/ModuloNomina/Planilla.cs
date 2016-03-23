@@ -13,6 +13,7 @@ namespace WPP.Entities.Objects.ModuloNomina
         public virtual string Descripcion { set; get; }
         public virtual Compania Compania { set; get; }
         public virtual string Estado { set; get; }
+        public virtual string Tipo { set; get; }
         public virtual IList<ItemNomina> DetallesNomina { set; get; }
     }
 }

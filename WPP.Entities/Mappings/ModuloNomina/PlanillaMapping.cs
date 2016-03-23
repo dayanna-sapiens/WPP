@@ -25,6 +25,7 @@ namespace WPP.Entities.Mappings.ModuloNomina
 
             Map(u => u.Descripcion).Nullable();
             Map(u => u.Estado).Nullable();
+            Map(u => u.Tipo).Nullable();
 
             References(c => c.Compania, "CompaniaId").LazyLoad().Cascade.None();
 
