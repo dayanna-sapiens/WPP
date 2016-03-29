@@ -1,5 +1,966 @@
-﻿@{
+﻿@model WPP.Model.ModuloNomina.PlanillaModel
+@{
+    //string tipoOTR = ViewBag.TipoOTR;
     ViewBag.Title = "Nomina";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
-<h2>NominaTaller</h2>
+
+<div class="row" style="margin-top:20px;">
+
+    <div class="col-md-12" style="padding-right:30px;">
+        <br />
+        <h3>Nómina Taller</h3>
+        <br />
+        @using (Html.BeginForm("GuardarNominaTaller", "Nomina", FormMethod.Post, new { id = "frmNomina", @class = "form-horizontal form-cargar", enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(m => m.Descripcion)
+            @Html.HiddenFor(m => m.ListaDetallesModel)
+            @Html.ValidationSummary(true)
+            <div class="form-group" id="divPlanilla">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tabbable" id="tabs-779403">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#panel-454895" data-toggle="tab">Lunes</a>
+                                    </li>
+                                    <li>
+                                        <a href="#panel-696503" data-toggle="tab">Martes</a>
+                                    </li>
+                                    <li>
+                                        <a href="#panel-696502" data-toggle="tab">Miércoles</a>
+                                    </li>
+                                    <li>
+                                        <a href="#panel-696504" data-toggle="tab">Jueves</a>
+                                    </li>
+                                    <li>
+                                        <a href="#panel-696505" data-toggle="tab">Viernes</a>
+                                    </li>
+                                    <li>
+                                        <a href="#panel-696506" data-toggle="tab">Sábado</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active form-horizontal" id="panel-454895">
+                                        <br />
+                                        <div class="col-md-12 table-responsive" style="height:350px; overflow:auto">
+                                            <table class="table table-hover" id="tabla-lunes">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Cod
+                                                        </th>
+                                                        <th>
+                                                            Nombre
+                                                        </th>
+                                                        <th>
+                                                            Fecha
+                                                        </th>
+                                                        <th>
+                                                            Entrada
+                                                        </th>
+                                                        <th>
+                                                            Salida
+                                                        </th>
+                                                        <th>
+                                                            Total hrs
+                                                        </th>
+                                                        <th>
+                                                            Ord
+                                                        </th>
+                                                        <th>
+                                                            Ext
+                                                        </th>
+                                                        <th>
+                                                            Monto Ord
+                                                        </th>
+                                                        <th>
+                                                            Monto Ext
+                                                        </th>
+                                                        <th>
+                                                            Suma Ord + Ext
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tblLunes">
+                                                    @if (ViewBag.ItemsLunes != null)
+                                                    {
+                                                        foreach (var item in ViewBag.ItemsLunes)
+                                                        {
+                                                            if (item.Empleado != null)
+                                                            {
+                                                                <tr>
+                                                                    <td style="display:none">
+                                                                        @item.Id
+                                                                    </td>
+                                                                    <td style="display:none">
+                                                                        @item.Empleado.Id
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Codigo
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Nombre
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Fecha.ToString("dd/MM/yyyy")
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Entrada
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Salida
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtHorasLunes" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtOrdLunes" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtExtLunes" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontOrdLunes" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontExtLunes" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtTotalLunes" class="form-control" value="@Math.Round(item.Total, 2)">
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane form-horizontal" id="panel-696503">
+                                        <br />
+                                        <div class="col-md-12 table-responsive" style="height:350px; overflow:auto">
+                                            <table class="table table-hover" id="tabla-martes">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Cod
+                                                        </th>
+                                                        <th>
+                                                            Nombre
+                                                        </th>
+                                                        <th>
+                                                            Fecha
+                                                        </th>
+                                                        <th>
+                                                            Entrada
+                                                        </th>
+                                                        <th>
+                                                            Salida
+                                                        </th>
+                                                        <th>
+                                                            Total hrs
+                                                        </th>
+                                                        <th>
+                                                            Ord
+                                                        </th>
+                                                        <th>
+                                                            Ext
+                                                        </th>
+                                                        <th>
+                                                            Monto Ord
+                                                        </th>
+                                                        <th>
+                                                            Monto Ext
+                                                        </th>
+                                                        <th>
+                                                            Suma Ord + Ext
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tblMartes">
+                                                    @if (ViewBag.ItemsMartes != null)
+                                                    {
+                                                        foreach (var item in ViewBag.ItemsMartes)
+                                                        {
+                                                            if (item.Empleado != null)
+                                                            {
+                                                                <tr>
+                                                                    <td style="display:none">
+                                                                        @item.Id
+                                                                    </td>
+                                                                    <td style="display:none">
+                                                                        @item.Empleado.Id
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Codigo
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Nombre
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Fecha.ToString("dd/MM/yyyy")
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Entrada
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Salida
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtHorasMartes" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtOrdMartes" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtExtMartes" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontOrdMartes" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontExtMartes" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtTotalMartes" class="form-control" value="@Math.Round(item.Total, 2)">
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane form-horizontal" id="panel-696502">
+                                        <br />
+                                        <div class="col-md-12 table-responsive" style="height:350px; overflow:auto">
+                                            <table class="table table-hover" id="tabla-miercoles">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Cod
+                                                        </th>
+                                                        <th>
+                                                            Nombre
+                                                        </th>
+                                                        <th>
+                                                            Fecha
+                                                        </th>
+                                                        <th>
+                                                            Entrada
+                                                        </th>
+                                                        <th>
+                                                            Salida
+                                                        </th>
+                                                        <th>
+                                                            Total hrs
+                                                        </th>
+                                                        <th>
+                                                            Ord
+                                                        </th>
+                                                        <th>
+                                                            Ext
+                                                        </th>
+                                                        <th>
+                                                            Monto Ord
+                                                        </th>
+                                                        <th>
+                                                            Monto Ext
+                                                        </th>
+                                                        <th>
+                                                            Suma Ord + Ext
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tblMiercoles">
+                                                    @if (ViewBag.ItemsMiercoles != null)
+                                                    {
+                                                        foreach (var item in ViewBag.ItemsMiercoles)
+                                                        {
+                                                            if (item.Empleado != null)
+                                                            {
+                                                                <tr>
+                                                                    <td style="display:none">
+                                                                        @item.Id
+                                                                    </td>
+                                                                    <td style="display:none">
+                                                                        @item.Empleado.Id
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Codigo
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Nombre
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Fecha.ToString("dd/MM/yyyy")
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Entrada
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Salida
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtHorasMiercoles" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtOrdMiercoles" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtExtMiercoles" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontOrdMiercoles" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontExtMiercoles" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtTotalMiercoles" class="form-control" value="@Math.Round(item.Total, 2)">
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane form-horizontal" id="panel-696504">
+                                        <br />
+                                        <div class="col-md-12 table-responsive" style="height:350px; overflow:auto">
+                                            <table class="table table-hover" id="tabla-jueves">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Cod
+                                                        </th>
+                                                        <th>
+                                                            Nombre
+                                                        </th>
+                                                        <th>
+                                                            Fecha
+                                                        </th>
+                                                        <th>
+                                                            Entrada
+                                                        </th>
+                                                        <th>
+                                                            Salida
+                                                        </th>
+                                                        <th>
+                                                            Total hrs
+                                                        </th>
+                                                        <th>
+                                                            Ord
+                                                        </th>
+                                                        <th>
+                                                            Ext
+                                                        </th>
+                                                        <th>
+                                                            Monto Ord
+                                                        </th>
+                                                        <th>
+                                                            Monto Ext
+                                                        </th>
+                                                        <th>
+                                                            Suma Ord + Ext
+                                                        </th>
+                                                        <th>
+                                                            Toneladas
+                                                        </th>
+                                                        <th>
+                                                            Compensación
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tblJueves">
+                                                    @if (ViewBag.ItemsJueves != null)
+                                                    {
+                                                        foreach (var item in ViewBag.ItemsJueves)
+                                                        {
+                                                            if (item.Empleado != null)
+                                                            {
+                                                                <tr>
+                                                                    <td style="display:none">
+                                                                        @item.Id
+                                                                    </td>
+                                                                    <td style="display:none">
+                                                                        @item.Empleado.Id
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Codigo
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Nombre
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Fecha.ToString("dd/MM/yyyy")
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Entrada
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Salida
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtHorasJueves" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtOrdJueves" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtExtJueves" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontOrdJueves" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontExtJueves" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtTotalJueves" class="form-control" value="@Math.Round(item.Total, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtToneladasJueves" class="form-control" value="@Math.Round(item.Toneladas, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtCompensacionJueves" class="form-control" value="@Math.Round(item.Compensacion, 2)">
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane form-horizontal" id="panel-696505">
+                                        <br />
+                                        <div class="col-md-12 table-responsive" style="height:350px; overflow:auto">
+                                            <table class="table table-hover" id="tabla-viernes">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Cod
+                                                        </th>
+                                                        <th>
+                                                            Nombre
+                                                        </th>
+                                                        <th>
+                                                            Fecha
+                                                        </th>
+                                                        <th>
+                                                            Entrada
+                                                        </th>
+                                                        <th>
+                                                            Salida
+                                                        </th>
+                                                        <th>
+                                                            Total hrs
+                                                        </th>
+                                                        <th>
+                                                            Ord
+                                                        </th>
+                                                        <th>
+                                                            Ext
+                                                        </th>
+                                                        <th>
+                                                            Monto Ord
+                                                        </th>
+                                                        <th>
+                                                            Monto Ext
+                                                        </th>
+                                                        <th>
+                                                            Suma Ord + Ext
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tblViernes">
+                                                    @if (ViewBag.ItemsViernes != null)
+                                                    {
+                                                        foreach (var item in ViewBag.ItemsViernes)
+                                                        {
+                                                            if (item.Empleado != null)
+                                                            {
+                                                                <tr>
+                                                                    <td style="display:none">
+                                                                        @item.Id
+                                                                    </td>
+                                                                    <td style="display:none">
+                                                                        @item.Empleado.Id
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Codigo
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Nombre
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Fecha.ToString("dd/MM/yyyy")
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Entrada
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Salida
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtHorasViernes" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtOrdViernes" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtExtViernes" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontOrdViernes" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontExtViernes" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtTotalViernes" class="form-control" value="@Math.Round(item.Total, 2)">
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtToneladasViernes" class="form-control" value="@Math.Round(item.Toneladas, 2)">
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtCompensacionViernes" class="form-control" value="@Math.Round(item.Compensacion, 2)">
+
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane form-horizontal" id="panel-696506">
+                                        <br />
+                                        <div class="col-md-12 table-responsive" style="height:350px; overflow:auto">
+                                            <table class="table table-hover" id="tabla-sabado">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Cod
+                                                        </th>
+                                                        <th>
+                                                            Nombre
+                                                        </th>
+                                                        <th>
+                                                            Fecha
+                                                        </th>
+                                                        <th>
+                                                            Entrada
+                                                        </th>
+                                                        <th>
+                                                            Salida
+                                                        </th>
+                                                        <th>
+                                                            Total hrs
+                                                        </th>
+                                                        <th>
+                                                            Ord
+                                                        </th>
+                                                        <th>
+                                                            Ext
+                                                        </th>
+                                                        <th>
+                                                            Monto Ord
+                                                        </th>
+                                                        <th>
+                                                            Monto Ext
+                                                        </th>
+                                                        <th>
+                                                            Suma Ord + Ext
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tblSabado">
+                                                    @if (ViewBag.ItemsSabado != null)
+                                                    {
+                                                        foreach (var item in ViewBag.ItemsSabado)
+                                                        {
+                                                            if (item.Empleado != null)
+                                                            {
+                                                                <tr>
+                                                                    <td style="display:none">
+                                                                        @item.Id
+                                                                    </td>
+                                                                    <td style="display:none">
+                                                                        @item.Empleado.Id
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Codigo
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Empleado.Nombre
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Fecha.ToString("dd/MM/yyyy")
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Entrada
+                                                                    </td>
+                                                                    <td>
+                                                                        @item.Salida
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtHorasSabado" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtOrdSabado" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtExtSabado" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontOrdSabado" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtMontExtSabado" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" min="0" id="txtTotalSabado" class="form-control" value="@Math.Round(item.Total, 2)">
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <button id="btnSubmit" type="submit" class="btn btn-primary" style="display:none">Submmit</button>
+            <a id="btnGuardar" class="btn btn-primary">Guardar</a>
+            @Html.ActionLink("Cancelar", "Cargar", "Nomina", null, new { @Class = "btn btn-primary" })
+        }
+    </div>
+
+</div>
+
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        jQuery.validator.methods.date = function (value, element) {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isSafari || isChrome) {
+                var d = new Date();
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+            } else {
+                return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+            }
+        };
+
+        // Función para dar formato numérico
+        Number.prototype.format = function (n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
+
+        // Se incializa el valor de algunas variables;
+
+
+    });// end document ready
+
+
+
+    // Se guarda la informacion de la OTR y se valida que la informacion requerida haya sido completada
+    $("#btnGuardar").click(function () {
+
+        CargarInformacion();
+
+        $.ajax({
+            url: '/Nomina/GuardarNominaTaller',
+            data: $('#frmNomina').serializeArray(),
+            type: 'POST',
+            success: function (data) {
+                if (data != null) {
+
+                    swal("", "Se realizó el proceso de nomina de manera exitosa", "success");
+                    window.location.href = "/Nomina/Cargar";
+                }
+                else {
+                    swal("Error", "Se presento un error a la hora de generar el proceso de nomina", "error");
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+            },
+            traditional: true
+        });
+
+    });
+
+
+
+
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
+    }
+
+
+    // Se obtiene la informacion ingresada de los puntos de ruta de recoleccion
+    // y se crea un json estos datos con el fin de guardar la informacion ingresada
+    function CargarInformacion()
+    {
+        var tablaLunes = $("#tblLunes")[0];
+        var tablaMartes = $("#tblMartes")[0];
+        var tablaMiercoles = $("#tblMiercoles")[0];
+        var tablaJueves = $("#tblJueves")[0];
+        var tablaViernes = $("#tblViernes")[0];
+        var tablaSabado = $("#tblSabado")[0];
+
+        var datos = [];
+
+        //LUNES
+        for (var i = 0; i < tablaLunes.childElementCount; i++)
+        {
+            var row = tablaLunes.children[i];
+
+            var empleado = row.children[1].innerHTML;
+            var fecha = row.children[4].innerHTML;
+            var entrada = row.children[5].innerHTML;
+            var salida = row.children[6].innerHTML;
+            var horas = row.children[7].children[0].value;
+            var ord = row.children[8].children[0].value;
+            var ext = row.children[9].children[0].value;
+            var montoOrd = row.children[10].children[0].value;
+            var montoExt = row.children[11].children[0].value;
+            var total = row.children[12].children[0].value;
+
+            if (horas != "" && ord != "" && total != "" && montoOrd != "") {
+                var detalle = {
+                    Empleado: Number(empleado.trim()),
+                    Entrada: entrada.trim(),
+                    Salida: salida.trim(),
+                    Fecha: fecha.trim(),
+                    TotalHoras: Number(horas),
+                    HorasOrdinarias: Number(ord),
+                    HorasExtra: Number(ext),
+                    MontoOrdinario: Number(montoOrd),
+                    MontoExtra: Number(montoExt),
+                    Total: Number(total),
+                    Toneladas: Number(0),
+                    Compensacion: Number(0)
+                }
+
+                datos.push(detalle);
+            }
+        }
+
+        //MARTES
+        for (var i = 0; i < tablaMartes.childElementCount; i++) {
+            var row = tablaMartes.children[i];
+
+            var empleado = row.children[1].innerHTML;
+            var fecha = row.children[4].innerHTML;
+            var entrada = row.children[5].innerHTML;
+            var salida = row.children[6].innerHTML;
+            var horas = row.children[7].children[0].value;
+            var ord = row.children[8].children[0].value;
+            var ext = row.children[9].children[0].value;
+            var montoOrd = row.children[10].children[0].value;
+            var montoExt = row.children[11].children[0].value;
+            var total = row.children[12].children[0].value;
+
+            if (horas != "" && ord != "" && total != "" && montoOrd != "") {
+                var detalle = {
+                    Empleado: Number(empleado.trim()),
+                    Entrada: entrada.trim(),
+                    Salida: salida.trim(),
+                    Fecha: fecha.trim(),
+                    TotalHoras: Number(horas),
+                    HorasOrdinarias: Number(ord),
+                    HorasExtra: Number(ext),
+                    MontoOrdinario: Number(montoOrd),
+                    MontoExtra: Number(montoExt),
+                    Total: Number(total),
+                    Toneladas: Number(0),
+                    Compensacion: Number(0)
+                }
+
+                datos.push(detalle);
+            }
+        }
+
+        //MIERCOLES
+        for (var i = 0; i < tablaMiercoles.childElementCount; i++) {
+            var row = tablaMiercoles.children[i];
+
+            var empleado = row.children[1].innerHTML;
+            var fecha = row.children[4].innerHTML;
+            var entrada = row.children[5].innerHTML;
+            var salida = row.children[6].innerHTML;
+            var horas = row.children[7].children[0].value;
+            var ord = row.children[8].children[0].value;
+            var ext = row.children[9].children[0].value;
+            var montoOrd = row.children[10].children[0].value;
+            var montoExt = row.children[11].children[0].value;
+            var total = row.children[12].children[0].value;
+
+            if (horas != "" && ord != "" && total != "" && montoOrd != "") {
+                var detalle = {
+                    Empleado: Number(empleado.trim()),
+                    Entrada: entrada.trim(),
+                    Salida: salida.trim(),
+                    Fecha: fecha.trim(),
+                    TotalHoras: Number(horas),
+                    HorasOrdinarias: Number(ord),
+                    HorasExtra: Number(ext),
+                    MontoOrdinario: Number(montoOrd),
+                    MontoExtra: Number(montoExt),
+                    Total: Number(total),
+                    Toneladas: Number(0),
+                    Compensacion: Number(0)
+                }
+
+                datos.push(detalle);
+            }
+        }
+
+        //JUEVES
+        for (var i = 0; i < tablaJueves.childElementCount; i++) {
+            var row = tablaJueves.children[i];
+
+            var empleado = row.children[1].innerHTML;
+            var fecha = row.children[4].innerHTML;
+            var entrada = row.children[5].innerHTML;
+            var salida = row.children[6].innerHTML;
+            var horas = row.children[7].children[0].value;
+            var ord = row.children[8].children[0].value;
+            var ext = row.children[9].children[0].value;
+            var montoOrd = row.children[10].children[0].value;
+            var montoExt = row.children[11].children[0].value;
+            var total = row.children[12].children[0].value;
+
+            if (horas != "" && ord != "" && total != "" && montoOrd != "") {
+                var detalle = {
+                    Empleado: Number(empleado.trim()),
+                    Entrada: entrada.trim(),
+                    Salida: salida.trim(),
+                    Fecha: fecha.trim(),
+                    TotalHoras: Number(horas),
+                    HorasOrdinarias: Number(ord),
+                    HorasExtra: Number(ext),
+                    MontoOrdinario: Number(montoOrd),
+                    MontoExtra: Number(montoExt),
+                    Total: Number(total),
+                    Toneladas: Number(0),
+                    Compensacion: Number(0)
+                }
+
+                datos.push(detalle);
+            }
+        }
+
+        //VIERNES
+        for (var i = 0; i < tablaViernes.childElementCount; i++) {
+            var row = tablaViernes.children[i];
+
+            var empleado = row.children[1].innerHTML;
+            var fecha = row.children[4].innerHTML;
+            var entrada = row.children[5].innerHTML;
+            var salida = row.children[6].innerHTML;
+            var horas = row.children[7].children[0].value;
+            var ord = row.children[8].children[0].value;
+            var ext = row.children[9].children[0].value;
+            var montoOrd = row.children[10].children[0].value;
+            var montoExt = row.children[11].children[0].value;
+            var total = row.children[12].children[0].value;
+
+            if (horas != "" && ord != "" && total != "" && montoOrd != "") {
+                var detalle = {
+                    Empleado: Number(empleado.trim()),
+                    Entrada: entrada.trim(),
+                    Salida: salida.trim(),
+                    Fecha: fecha.trim(),
+                    TotalHoras: Number(horas),
+                    HorasOrdinarias: Number(ord),
+                    HorasExtra: Number(ext),
+                    MontoOrdinario: Number(montoOrd),
+                    MontoExtra: Number(montoExt),
+                    Total: Number(total),
+                    Toneladas: Number(0),
+                    Compensacion: Number(0)
+                }
+
+                datos.push(detalle);
+            }
+        }
+
+        //SABADO
+        for (var i = 0; i < tablaSabado.childElementCount; i++) {
+            var row = tablaSabado.children[i];
+
+            var empleado = row.children[1].innerHTML;
+            var fecha = row.children[4].innerHTML;
+            var entrada = row.children[5].innerHTML;
+            var salida = row.children[6].innerHTML;
+            var horas = row.children[7].children[0].value;
+            var ord = row.children[8].children[0].value;
+            var ext = row.children[9].children[0].value;
+            var montoOrd = row.children[10].children[0].value;
+            var montoExt = row.children[11].children[0].value;
+            var total = row.children[12].children[0].value;
+
+            if (horas != "" && ord != "" && total != "" && montoOrd != "") {
+                var detalle = {
+                    Empleado: Number(empleado.trim()),
+                    Entrada: entrada.trim(),
+                    Salida: salida.trim(),
+                    Fecha: fecha.trim(),
+                    TotalHoras: Number(horas),
+                    HorasOrdinarias: Number(ord),
+                    HorasExtra: Number(ext),
+                    MontoOrdinario: Number(montoOrd),
+                    MontoExtra: Number(montoExt),
+                    Total: Number(total),
+                    Toneladas: Number(0),
+                    Compensacion: Number(0)
+                }
+
+                datos.push(detalle);
+            }
+        }
+
+        var jsonDatos = JSON.stringify(datos);
+        $("#ListaDetallesModel").val(jsonDatos);
+
+    }
+
+
+</script>

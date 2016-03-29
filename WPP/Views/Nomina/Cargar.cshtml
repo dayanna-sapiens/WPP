@@ -29,6 +29,16 @@
                         @Html.TextBox("txtDescripcion", "", new { id = "txtDescripcion", @class = "form-control col-md-5" })
                     </div>      
                 </div>
+                <div class="form-group">
+                    <label class="col-md-2" style="padding-left:0px;">Tipo</label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("ddlTipo", new List<SelectListItem>{
+                        new SelectListItem() {Text = "Recolector", Value="Recolector"},
+                        new SelectListItem() {Text = "Chofer", Value="Chofer"},
+                        new SelectListItem() {Text = "Taller", Value="Taller"}
+                    }, new { @class = "form-control", id = "TipoCombustible" })
+                    </div>
+                </div>
                 <div class="form-group" style="float:right">
                         <button id="btnSubmit" type="submit" class="btn btn-primary">Importar  <span class="glyphicon  glyphicon-upload" aria-hidden="true"></span></button>        
                 </div>
