@@ -387,20 +387,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_Nomina.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Datos\Nomina\ds_NominaCompensacion.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ds_NominaCompensacion.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Datos\Nomina\ds_NominaToneladas.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ds_NominaToneladas.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Datos\Nomina\ds_NominaTotal.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_NominaTotal.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Nomina\ds_NominaTotalHrs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_NominaTotalHrs.xsd</DependentUpon>
     </Compile>
     <Compile Include="Datos\OperacionRecoleccion\ds_CuadrillaPorTonelada.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -732,6 +727,18 @@
       <DependentUpon>rpt_Compensacion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Nomina\rpt_NominaTaller.cs">
+      <DependentUpon>rpt_NominaTaller.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\Nomina\rpt_NominaChofer.cs">
+      <DependentUpon>rpt_NominaChofer.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\Nomina\rpt_NominaRecolector.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -748,6 +755,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rpt_Total.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Nomina\rpt_TotalHrs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_TotalHrs.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Recoleccion\rpt_Cuadrilla.cs">
       <AutoGen>True</AutoGen>
@@ -1252,9 +1266,6 @@
     <Content Include="Datos\OperacionRecoleccion\ds_CuadrillaPorTonelada.xsc">
       <DependentUpon>ds_CuadrillaPorTonelada.xsd</DependentUpon>
     </Content>
-    <Content Include="Datos\Nomina\ds_NominaToneladas.xsc">
-      <DependentUpon>ds_NominaToneladas.xsd</DependentUpon>
-    </Content>
     <Content Include="Datos\Nomina\ds_Nomina.xsc">
       <DependentUpon>ds_Nomina.xsd</DependentUpon>
     </Content>
@@ -1266,25 +1277,6 @@
     <Content Include="Datos\Nomina\ds_Nomina.xss">
       <DependentUpon>ds_Nomina.xsd</DependentUpon>
     </Content>
-    <Content Include="Datos\Nomina\ds_NominaCompensacion.xsc">
-      <DependentUpon>ds_NominaCompensacion.xsd</DependentUpon>
-    </Content>
-    <None Include="Datos\Nomina\ds_NominaCompensacion.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ds_NominaCompensacion.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="Datos\Nomina\ds_NominaCompensacion.xss">
-      <DependentUpon>ds_NominaCompensacion.xsd</DependentUpon>
-    </Content>
-    <None Include="Datos\Nomina\ds_NominaToneladas.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ds_NominaToneladas.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="Datos\Nomina\ds_NominaToneladas.xss">
-      <DependentUpon>ds_NominaToneladas.xsd</DependentUpon>
-    </Content>
     <Content Include="Datos\Nomina\ds_NominaTotal.xsc">
       <DependentUpon>ds_NominaTotal.xsd</DependentUpon>
     </Content>
@@ -1295,6 +1287,17 @@
     </None>
     <Content Include="Datos\Nomina\ds_NominaTotal.xss">
       <DependentUpon>ds_NominaTotal.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Nomina\ds_NominaTotalHrs.xsc">
+      <DependentUpon>ds_NominaTotalHrs.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Nomina\ds_NominaTotalHrs.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_NominaTotalHrs.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Nomina\ds_NominaTotalHrs.xss">
+      <DependentUpon>ds_NominaTotalHrs.xsd</DependentUpon>
     </Content>
     <None Include="Datos\OperacionRecoleccion\ds_CuadrillaPorTonelada.xsd">
       <SubType>Designer</SubType>
@@ -1907,6 +1910,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rpt_Compensacion.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Nomina\rpt_NominaTaller.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_NominaTaller.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Nomina\rpt_NominaChofer.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_NominaChofer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Nomina\rpt_NominaRecolector.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rpt_NominaRecolector.cs</LastGenOutput>
@@ -1918,6 +1929,10 @@
     <EmbeddedResource Include="Reportes\Nomina\rpt_Total.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rpt_Total.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Nomina\rpt_TotalHrs.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_TotalHrs.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Recoleccion\rpt_Cuadrilla.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

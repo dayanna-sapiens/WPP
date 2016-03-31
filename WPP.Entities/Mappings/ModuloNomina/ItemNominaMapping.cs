@@ -28,6 +28,7 @@ namespace WPP.Entities.Mappings.ModuloNomina
             Map(u => u.Fecha).Nullable();
             Map(u => u.TotalHoras).Nullable();
             Map(u => u.HorasOrdinarias).Nullable();
+            Map(u => u.HorasExtra).Nullable();
             Map(u => u.MontoExtra).Nullable();
             Map(u => u.MontoOrdinario).Nullable();
             Map(u => u.Total).Nullable();

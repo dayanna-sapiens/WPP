@@ -20,6 +20,9 @@ using WPP.Mapper.ModuloNomina;
 using WPP.Model.ModuloNomina;
 using Newtonsoft.Json;
 using WPP.Model;
+using WPP.Datos.Nomina;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 
 namespace WPP.Controllers
 {
@@ -432,7 +435,7 @@ namespace WPP.Controllers
                         item.TotalHoras = Convert.ToDouble(cantHoras.Hours + "." + cantHoras.Minutes);
                         if (Convert.ToDateTime(item.Entrada).Hour > 18) // Nocturno
                         {
-                            item.HorasOrdinarias = item.TotalHoras > 6 ? 6 : item.TotalHoras;
+                            item.HorasOrdinarias = item.TotalHoras < 6 ? item.TotalHoras : 6;
                             item.HorasExtra = item.TotalHoras > 6 ? item.TotalHoras - 6 : 0;
                             item.MontoOrdinario = item.HorasOrdinarias * costoHora.Monto;
                         }
@@ -440,7 +443,7 @@ namespace WPP.Controllers
                         {
                             if (Convert.ToDateTime(item.Entrada).Hour > 12) // Nocturno con algunas horas mixtas
                             {
-                                item.HorasOrdinarias = item.TotalHoras > 6 ? 6 : item.TotalHoras;
+                                item.HorasOrdinarias = item.TotalHoras < 6 ? item.TotalHoras : 6;
                                 item.HorasExtra = item.TotalHoras > 6 ? item.TotalHoras - 6 : 0;
                                 var horasMixtas = (19 - Convert.ToDateTime(item.Entrada).TimeOfDay.TotalHours) * 0.14 * costoHora.Monto;
                                 item.MontoOrdinario = horasMixtas + (item.HorasOrdinarias * costoHora.Monto);
@@ -448,7 +451,7 @@ namespace WPP.Controllers
                             }
                             else // Diurno
                             {
-                                item.HorasOrdinarias = item.TotalHoras > 8 ? 8 : item.TotalHoras;
+                                item.HorasOrdinarias = item.TotalHoras < 8 ? item.TotalHoras : 8;
                                 item.HorasExtra = item.TotalHoras > 8 ? item.TotalHoras - 8 : 0;
                                 if (Convert.ToDateTime(item.Entrada).Hour < 5) // en caso de que existan horas mixtas
                                 {
@@ -766,5 +769,78 @@ namespace WPP.Controllers
                 return model;
             }
         }
+
+        #region REPORTES
+
+        public void ReporteNominaRecolector(string id, string formato)
+        {
+            if (id != String.Empty)
+            {
+                Planilla nomina = planillaService.Get(Convert.ToInt64(id));
+              
+                // Se indica el data set a utilizar
+                ds_Nomina dsNomina = new ds_Nomina();
+                var dtReporte = dsNomina.Tables["Reporte"];
+                var dtDatos = dsNomina.Tables["Datos"];
+
+                // Subreporte
+                ds_NominaTotal dsTotal = new ds_NominaTotal();
+                var dtDatosSubReport = dsTotal.Tables["Datos"];
+
+                // Rows DataTable Reporte
+                DataRow row = dtReporte.NewRow();
+                row["Compania"] = nomina.Compania.Nombre;
+                row["FechaActual"] = DateTime.Now;
+                row["Descripcion"] = nomina.Descripcion;
+                dtReporte.Rows.Add(row);
+
+
+                foreach (var item in nomina.DetallesNomina)
+                {
+                    // Rows DataTable Datos
+                    DataRow dato = dtDatos.NewRow();
+                    dato["Fecha"] = item.Fecha;
+                    dato["CodEmpleado"] = item.Empleado.Codigo;
+                    dato["Empleado"] = item.Empleado.Nombre;
+                    dato["Entrada"] = item.Entrada;
+                    dato["Salida"] = item.Salida;
+                    dato["TotalHrs"] = item.TotalHoras;
+                    dato["HrsOrdinarias"] = item.HorasOrdinarias;
+                    dato["HrsExtra"] = item.HorasExtra;
+                    dato["MontoHrsOrdinarias"] = item.MontoOrdinario;
+                    dato["MontoHrsExtra"] = item.MontoExtra;
+                    dato["Toneladas"] = item.Toneladas;
+                    dato["Compensacion"] = item.Compensacion;
+                    dato["Total"] = item.Total;
+
+                    dtDatos.Rows.Add(dato);
+
+                    DataRow datoSR = dtDatosSubReport.NewRow();
+                    datoSR["CodEmpleado"] = item.Empleado.Codigo;
+                    datoSR["Empleado"] = item.Empleado.Nombre; ;
+                    datoSR["Fecha"] = item.Fecha;
+                    datoSR["Compensacion"] = item.Compensacion;
+                    datoSR["Toneladas"] = item.Toneladas;
+
+                    dtDatosSubReport.Rows.Add(datoSR);
+                    
+                }
+
+                // Se genera el reporte deseado
+                ReportDocument rd = new ReportDocument();
+                string strRptPath = System.Web.HttpContext.Current.Server.MapPath("~/") + "Reportes//Nomina//rpt_NominaRecolector.rpt";
+
+                rd.Load(strRptPath);
+
+                rd.SetDataSource(dsNomina);// Se asigna el dataset al datasorce del reporte
+                rd.Subreports[0].SetDataSource(dsTotal);
+                rd.Subreports[1].SetDataSource(dsTotal);
+                rd.Subreports[2].SetDataSource(dsTotal);
+                var tipoFormato = formato == "pdf" ? ExportFormatType.PortableDocFormat : ExportFormatType.Excel;
+                rd.ExportToHttpResponse(tipoFormato, System.Web.HttpContext.Current.Response, false, "Nómina_Recolector");
+            }
+        }
+
+        #endregion
     }
 }
