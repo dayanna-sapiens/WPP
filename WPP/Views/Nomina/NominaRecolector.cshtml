@@ -764,11 +764,11 @@
             success: function (data) {
                 if (data != null) {
 
-                   // swal("", "Se realizó el proceso de nomina de manera exitosa", "success");
+                   // 
                     var formato = "excel";
+                    swal("", "Se realizó el proceso de nomina de manera exitosa", "success");
+                    window.location.href = "/Nomina/Cargar";
                     window.location.assign("/Nomina/ReporteNominaRecolector?id=" + data + "&formato=" + formato);
-
-                 //   window.location.href = "/Nomina/Cargar";
                 }
                 else {
                     swal("Error", "Se presento un error a la hora de generar el proceso de nomina", "error");

@@ -279,92 +279,98 @@ namespace WPP.Controllers
         [HttpPost]
         public ActionResult Cargar(HttpPostedFileBase excelfile)
         {
-            if (excelfile == null || excelfile.ContentLength == 0)
+            try
             {
-                ViewBag.Error = "Por favor seleccione el archivo excel que desea cargar";
-            }
-            else
-            {
-                if(excelfile.FileName.EndsWith("xls") || excelfile.FileName.EndsWith("xlsx"))
+                if (excelfile == null || excelfile.ContentLength == 0)
                 {
-                    string path = Server.MapPath("~/NominaDocs/" + excelfile.FileName);
-                    if(System.IO.File.Exists(path))
-                    {
-                        System.IO.File.Delete(path);
-                    }
-                    excelfile.SaveAs(path);
-                    
-                   //Se lee el archivo
-                    FileStream stream = new FileStream(path, FileMode.Open);
-                    IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-
-                    IList<ItemNomina> DetallesNomina = new List<ItemNomina>();
-
-                    DataSet result = excelReader.AsDataSet();
-
-                    //Se recorre las pestañas del excel (Cada uno de los dias)
-                    foreach (DataTable table in result.Tables)
-                    {
-                        for (int row = 1; row < table.Rows.Count; row++)
-                        {
-
-                            ItemNomina item = new ItemNomina();
-                            string codigoEmpleado = table.Rows[row][0].ToString();
-                            var fecha = table.Rows[row][2].ToString();
-                            if(fecha != String.Empty)
-                            {
-                                item.Fecha = Convert.ToDateTime(fecha);
-                                item.Entrada = table.Rows[row][3].ToString();
-                                item.Salida = table.Rows[row][4].ToString();                            
-                            }
-
-                            IDictionary<string, object> criteria = new Dictionary<string, object>();
-                            criteria.Add("Codigo", codigoEmpleado);
-                            criteria.Add("IsDeleted", false);
-                            EmpleadoRecoleccion empleado = empleadoService.Get(criteria);
-                            if(empleado != null)
-                            {
-                                item.Empleado = empleado;
-                            }
-                            DetallesNomina.Add(item);
-                        }
-                    }
-
-                    excelReader.Close();
-
-                    String tipo = Request.Form["ddlTipo"] != null ? Request.Form["ddlTipo"] : "Recolector";
-                    PlanillaModel model = new PlanillaModel();
-                    String Action = String.Empty;
-                    switch (tipo)
-                    {
-                        case "Recolector":
-                            model = CargarNominaRecolector(DetallesNomina);
-                            Session["Detalles"] = DetallesNomina;
-                            Action = "NominaRecolector";
-                            break;
-                        case "Chofer":
-                             model = CargarNominaRecolector(DetallesNomina);
-                            Session["Detalles"] = DetallesNomina;
-                            Action = "NominaChofer";
-                          //  return RedirectToAction("NominaRecolector", model);
-                            break;
-                        case "Taller":
-                             model = CargarNominaRecolector(DetallesNomina);
-                            Session["Detalles"] = DetallesNomina;
-                            Action = "NominaTaller";
-                          //  return RedirectToAction("NominaRecolector", model);
-                            break;
-                    }
-                    return RedirectToAction(Action, model);
+                    ViewBag.Error = "Por favor seleccione el archivo excel que desea cargar";
                 }
                 else
                 {
-                    ViewBag.Error = "El archivo a importar no es permitido";
-                    RedirectToAction("Cargar");
-                }
-            }
+                    if (excelfile.FileName.EndsWith("xls") || excelfile.FileName.EndsWith("xlsx"))
+                    {
+                        string path = Server.MapPath("~/NominaDocs/" + excelfile.FileName);
+                        if (System.IO.File.Exists(path))
+                        {
+                            System.IO.File.Delete(path);
+                        }
+                        excelfile.SaveAs(path);
 
-            return  View();
+                        //Se lee el archivo
+                        FileStream stream = new FileStream(path, FileMode.Open);
+                        IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                        IList<ItemNomina> DetallesNomina = new List<ItemNomina>();
+
+                        DataSet result = excelReader.AsDataSet();
+
+                        //Se recorre las pestañas del excel (Cada uno de los dias)
+                        foreach (DataTable table in result.Tables)
+                        {
+                            for (int row = 1; row < table.Rows.Count; row++)
+                            {
+
+                                ItemNomina item = new ItemNomina();
+                                string codigoEmpleado = table.Rows[row][0].ToString();
+                                var fecha = table.Rows[row][2].ToString();
+                                if (fecha != String.Empty)
+                                {
+                                    item.Fecha = Convert.ToDateTime(fecha);
+                                    item.Entrada = table.Rows[row][3].ToString();
+                                    item.Salida = table.Rows[row][4].ToString();
+                                }
+
+                                IDictionary<string, object> criteria = new Dictionary<string, object>();
+                                criteria.Add("Codigo", codigoEmpleado);
+                                criteria.Add("IsDeleted", false);
+                                EmpleadoRecoleccion empleado = empleadoService.Get(criteria);
+                                if (empleado != null)
+                                {
+                                    item.Empleado = empleado;
+                                }
+                                DetallesNomina.Add(item);
+                            }
+                        }
+
+                        excelReader.Close();
+
+                        String tipo = Request.Form["ddlTipo"] != null ? Request.Form["ddlTipo"] : "Recolector";
+                        PlanillaModel model = new PlanillaModel();
+                        String Action = String.Empty;
+                        switch (tipo)
+                        {
+                            case "Recolector":
+                                model = CargarNominaRecolector(DetallesNomina);
+                                Session["Detalles"] = DetallesNomina;
+                                Action = "NominaRecolector";
+                                break;
+                            case "Chofer":
+                                model = CargarNominaRecolector(DetallesNomina);
+                                Session["Detalles"] = DetallesNomina;
+                                Action = "NominaChofer";
+                                break;
+                            case "Taller":
+                                model = CargarNominaRecolector(DetallesNomina);
+                                Session["Detalles"] = DetallesNomina;
+                                Action = "NominaTaller";
+                                break;
+                        }
+                        return RedirectToAction(Action, model);
+                    }
+                    else
+                    {
+                        ViewBag.Error = "El archivo a importar no es permitido";
+                        RedirectToAction("Cargar");
+                    }
+                }
+
+            }
+            catch(Exception ex)
+            {
+                ViewBag.Error = "El archivo a importar no cuebta con el formato necesario";
+                RedirectToAction("Cargar");
+            }
+           return View();
         }
 
 
@@ -813,7 +819,6 @@ namespace WPP.Controllers
                     dato["Compensacion"] = item.Compensacion;
                     dato["Total"] = item.Total;
 
-                    dtDatos.Rows.Add(dato);
 
                     DataRow datoSR = dtDatosSubReport.NewRow();
                     datoSR["CodEmpleado"] = item.Empleado.Codigo;
@@ -824,7 +829,9 @@ namespace WPP.Controllers
 
                     dtDatosSubReport.Rows.Add(datoSR);
                     
+                    dtDatos.Rows.Add(dato);
                 }
+
 
                 // Se genera el reporte deseado
                 ReportDocument rd = new ReportDocument();
@@ -841,6 +848,135 @@ namespace WPP.Controllers
             }
         }
 
+        public void ReporteNominaChofer(string id, string formato)
+        {
+            if (id != String.Empty)
+            {
+                Planilla nomina = planillaService.Get(Convert.ToInt64(id));
+
+                // Se indica el data set a utilizar
+                ds_Nomina dsNomina = new ds_Nomina();
+                var dtReporte = dsNomina.Tables["Reporte"];
+                var dtDatos = dsNomina.Tables["Datos"];
+
+                // Subreporte
+                ds_NominaTotalHrs dsTotal = new ds_NominaTotalHrs();
+                var dtDatosSubReport = dsTotal.Tables["Datos"];
+
+                // Rows DataTable Reporte
+                DataRow row = dtReporte.NewRow();
+                row["Compania"] = nomina.Compania.Nombre;
+                row["FechaActual"] = DateTime.Now;
+                row["Descripcion"] = nomina.Descripcion;
+                dtReporte.Rows.Add(row);
+
+
+                foreach (var item in nomina.DetallesNomina)
+                {
+                    // Rows DataTable Datos
+                    DataRow dato = dtDatos.NewRow();
+                    dato["Fecha"] = item.Fecha;
+                    dato["CodEmpleado"] = item.Empleado.Codigo;
+                    dato["Empleado"] = item.Empleado.Nombre;
+                    dato["Entrada"] = item.Entrada;
+                    dato["Salida"] = item.Salida;
+                    dato["TotalHrs"] = item.TotalHoras;
+                    dato["HrsOrdinarias"] = item.HorasOrdinarias;
+                    dato["HrsExtra"] = item.HorasExtra;
+                    dato["MontoHrsOrdinarias"] = item.MontoOrdinario;
+                    dato["MontoHrsExtra"] = item.MontoExtra;
+                    dato["Total"] = item.Total;
+
+
+                    DataRow datoSR = dtDatosSubReport.NewRow();
+                    datoSR["CodEmpleado"] = item.Empleado.Codigo;
+                    datoSR["Empleado"] = item.Empleado.Nombre; ;
+                    datoSR["Fecha"] = item.Fecha;
+                    datoSR["Total"] = item.Total;
+
+                    dtDatosSubReport.Rows.Add(datoSR);
+
+                    dtDatos.Rows.Add(dato);
+                }
+
+
+                // Se genera el reporte deseado
+                ReportDocument rd = new ReportDocument();
+                string strRptPath = System.Web.HttpContext.Current.Server.MapPath("~/") + "Reportes//Nomina//rpt_NominaChofer.rpt";
+
+                rd.Load(strRptPath);
+
+                rd.SetDataSource(dsNomina);// Se asigna el dataset al datasorce del reporte
+                rd.Subreports[0].SetDataSource(dsTotal);
+                var tipoFormato = formato == "pdf" ? ExportFormatType.PortableDocFormat : ExportFormatType.Excel;
+                rd.ExportToHttpResponse(tipoFormato, System.Web.HttpContext.Current.Response, false, "Nómina_Chofer");
+            }
+        }
+
+        public void ReporteNominaTaller(string id, string formato)
+        {
+            if (id != String.Empty)
+            {
+                Planilla nomina = planillaService.Get(Convert.ToInt64(id));
+
+                // Se indica el data set a utilizar
+                ds_Nomina dsNomina = new ds_Nomina();
+                var dtReporte = dsNomina.Tables["Reporte"];
+                var dtDatos = dsNomina.Tables["Datos"];
+
+                // Subreporte
+                ds_NominaTotalHrs dsTotal = new ds_NominaTotalHrs();
+                var dtDatosSubReport = dsTotal.Tables["Datos"];
+
+                // Rows DataTable Reporte
+                DataRow row = dtReporte.NewRow();
+                row["Compania"] = nomina.Compania.Nombre;
+                row["FechaActual"] = DateTime.Now;
+                row["Descripcion"] = nomina.Descripcion;
+                dtReporte.Rows.Add(row);
+
+
+                foreach (var item in nomina.DetallesNomina)
+                {
+                    // Rows DataTable Datos
+                    DataRow dato = dtDatos.NewRow();
+                    dato["Fecha"] = item.Fecha;
+                    dato["CodEmpleado"] = item.Empleado.Codigo;
+                    dato["Empleado"] = item.Empleado.Nombre;
+                    dato["Entrada"] = item.Entrada;
+                    dato["Salida"] = item.Salida;
+                    dato["TotalHrs"] = item.TotalHoras;
+                    dato["HrsOrdinarias"] = item.HorasOrdinarias;
+                    dato["HrsExtra"] = item.HorasExtra;
+                    dato["MontoHrsOrdinarias"] = item.MontoOrdinario;
+                    dato["MontoHrsExtra"] = item.MontoExtra;
+                    dato["Total"] = item.Total;
+
+
+                    DataRow datoSR = dtDatosSubReport.NewRow();
+                    datoSR["CodEmpleado"] = item.Empleado.Codigo;
+                    datoSR["Empleado"] = item.Empleado.Nombre; ;
+                    datoSR["Fecha"] = item.Fecha;
+                    datoSR["Total"] = item.Total;
+
+                    dtDatosSubReport.Rows.Add(datoSR);
+
+                    dtDatos.Rows.Add(dato);
+                }
+
+
+                // Se genera el reporte deseado
+                ReportDocument rd = new ReportDocument();
+                string strRptPath = System.Web.HttpContext.Current.Server.MapPath("~/") + "Reportes//Nomina//rpt_NominaTaller.rpt";
+
+                rd.Load(strRptPath);
+
+                rd.SetDataSource(dsNomina);// Se asigna el dataset al datasorce del reporte
+                rd.Subreports[0].SetDataSource(dsTotal);
+                var tipoFormato = formato == "pdf" ? ExportFormatType.PortableDocFormat : ExportFormatType.Excel;
+                rd.ExportToHttpResponse(tipoFormato, System.Web.HttpContext.Current.Response, false, "Nómina_Taller");
+            }
+        }
         #endregion
     }
 }
