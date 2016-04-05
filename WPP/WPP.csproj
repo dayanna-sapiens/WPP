@@ -382,6 +382,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_TotalUnidadesPrefacturacion.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Datos\Nomina\ds_ColillaRecolector.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_ColillaRecolector.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Datos\Nomina\ds_Nomina.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -433,6 +438,7 @@
     <Compile Include="Helpers\WPPTipoCambio.cs" />
     <Compile Include="Models\Facturacion\PrefacturaModel.cs" />
     <Compile Include="Models\Generales\UsuarioModel.cs" />
+    <Compile Include="Models\Nomina\NominaRecolector.cs" />
     <Compile Include="Reportes\Administracion\rpt_ClienteBitacora.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -719,6 +725,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rpt_TotalUnidadesFacturacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Nomina\rpt_ColillaRecolector.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_ColillaRecolector.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Nomina\rpt_Compensacion.cs">
@@ -1268,6 +1280,17 @@
     </Content>
     <Content Include="Datos\Nomina\ds_Nomina.xsc">
       <DependentUpon>ds_Nomina.xsd</DependentUpon>
+    </Content>
+    <Content Include="Datos\Nomina\ds_ColillaRecolector.xsc">
+      <DependentUpon>ds_ColillaRecolector.xsd</DependentUpon>
+    </Content>
+    <None Include="Datos\Nomina\ds_ColillaRecolector.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_ColillaRecolector.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Datos\Nomina\ds_ColillaRecolector.xss">
+      <DependentUpon>ds_ColillaRecolector.xsd</DependentUpon>
     </Content>
     <None Include="Datos\Nomina\ds_Nomina.xsd">
       <SubType>Designer</SubType>
@@ -1905,6 +1928,10 @@
     <EmbeddedResource Include="Reportes\Facturacion\rpt_TotalUnidadesFacturacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rpt_TotalUnidadesFacturacion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Nomina\rpt_ColillaRecolector.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_ColillaRecolector.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Nomina\rpt_Compensacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

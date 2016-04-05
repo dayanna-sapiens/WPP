@@ -478,62 +478,18 @@ namespace WPP.Controllers
                     }
                     else
                     {
-                        // en caso que el dia laborado sea feriado por ley 
-                        IDictionary<string, object> criteriaFeriado = new Dictionary<string, object>();
-                        criteriaFeriado.Add("Dia", item.Fecha.Day);
-                        criteriaFeriado.Add("Mes", item.Fecha.Month);
-                        var feriado = feriadosService.Get(criteriaFeriado);
-                        if (feriado != null)
-                        {
-                            // Se busca la nomina que se genero hace una semana
-                            criteriaFeriado = new Dictionary<string, object>();
-                            criteriaFeriado.Add("IsDeletd", false);
-                            criteriaFeriado.Add("Compania", compania);
-                            criteriaFeriado.Add("Tipo", "Recolector");
-                            criteriaFeriado.Add("Estado", "Generada");
-                            var ListNomina = planillaService.GetAll(criteriaFeriado);
-                            ListNomina = ListNomina.Where(s => s.CreateDate >= DateTime.Now.AddDays(-9) && s.CreateDate <= DateTime.Now.AddDays(-5)).ToList();
-                            var nominaAnterior = ListNomina.FirstOrDefault();
-
-                            //Se selcciona los detalles de la nomina que corresponden al empleado actual
-                            var itemsAnterior = nominaAnterior.DetallesNomina.Where(s => s.Empleado.Id == item.Empleado.Id).ToList();
-
-                            //Si hay un dia feriado y se saca el promedio de la cantidad de toneladas que se hicieron durante esa semana
-                            //en caso que en esa semana tambien se haya dado un dia feriado, se saca el promedio entre los dias laborados
-                            if (itemsAnterior.Count > 0)
-                            {
-                                var totalToneladas = itemsAnterior.Sum(s => s.Toneladas);
-                                listCosto = costoHoraService.GetByDate("Recolector");
-                                listCosto = listCosto.Where(s => s.FechaInicio.AddDays(-1) <= item.Fecha && s.FechaFin.AddDays(1) >= item.Fecha).ToList();
-                                costoHora = listCosto.FirstOrDefault();
-
-                                totalToneladas = totalToneladas / 6;
-                                item.Salida = String.Empty;
-                                item.Entrada = String.Empty;
-                                item.TotalHoras = 8;
-                                item.HorasExtra = 0;
-                                item.HorasOrdinarias = 8;
-                                item.MontoExtra = 0;
-                                item.MontoOrdinario = 8 * costoHora.Monto;
-                                item.Toneladas = totalToneladas;
-                                item.Total = item.MontoOrdinario;
-                                item.Compensacion = totalToneladas > item.Total ? 0 : item.Total - totalToneladas;
-                            }
-                        }
-                        else
-                        {
-                            //En caso de que no se presentó 
-                            item.Salida = String.Empty;
-                            item.Entrada = String.Empty;
-                            item.TotalHoras = 0;
-                            item.Compensacion = 0;
-                            item.HorasExtra = 0;
-                            item.HorasOrdinarias = 0;
-                            item.MontoExtra = 0;
-                            item.MontoOrdinario = 0;
-                            item.Toneladas = 0;
-                            item.Total = 0;
-                        }
+                        //En caso de que no se presentó 
+                        item.Salida = String.Empty;
+                        item.Entrada = String.Empty;
+                        item.TotalHoras = 0;
+                        item.Compensacion = 0;
+                        item.HorasExtra = 0;
+                        item.HorasOrdinarias = 0;
+                        item.MontoExtra = 0;
+                        item.MontoOrdinario = 0;
+                        item.Toneladas = 0;
+                        item.Total = 0;
+                        
                     }
                 }
 
@@ -610,44 +566,17 @@ namespace WPP.Controllers
                     }
                     else
                     {
-                        // en caso que el dia laborado sea feriado por ley 
-                        IDictionary<string, object> criteriaFeriado = new Dictionary<string, object>();
-                        criteriaFeriado.Add("Dia", item.Fecha.Day);
-                        criteriaFeriado.Add("Mes", item.Fecha.Month);
-                        var feriado = feriadosService.Get(criteriaFeriado);
-                        if (feriado != null)
-                        {
-                            // Se busca la nomina que se genero hace una semana                           
-                            listCosto = costoHoraService.GetByDate("Chofer");
-                            listCosto = listCosto.Where(s => s.FechaInicio.AddDays(-1) <= item.Fecha && s.FechaFin.AddDays(1) >= item.Fecha).ToList();
-                            costoHora = listCosto.FirstOrDefault();
-
-                            item.Salida = String.Empty;
-                            item.Entrada = String.Empty;
-                            item.HorasOrdinarias = item.TotalHoras > 8 ? 8 : item.TotalHoras;
-                            item.HorasExtra = item.TotalHoras > 8 ? item.TotalHoras - 8 : 0;
-                            item.MontoExtra = item.HorasExtra * (costoHora.Monto * 1.5);
-                            item.MontoOrdinario = item.TotalHoras * costoHora.Monto;
-                            item.TotalHoras = item.HorasOrdinarias + item.HorasExtra;
-                            item.Toneladas = 0;
-                            item.Total = item.MontoOrdinario;
-                            item.Compensacion = 0;
-                            
-                        }
-                        else
-                        {
-                            //En caso de que no se presentó 
-                            item.Salida = String.Empty;
-                            item.Entrada = String.Empty;
-                            item.TotalHoras = 0;
-                            item.Compensacion = 0;
-                            item.HorasExtra = 0;
-                            item.HorasOrdinarias = 0;
-                            item.MontoExtra = 0;
-                            item.MontoOrdinario = 0;
-                            item.Toneladas = 0;
-                            item.Total = 0;
-                        }
+                        //En caso de que no se presentó 
+                        item.Salida = String.Empty;
+                        item.Entrada = String.Empty;
+                        item.TotalHoras = 0;
+                        item.Compensacion = 0;
+                        item.HorasExtra = 0;
+                        item.HorasOrdinarias = 0;
+                        item.MontoExtra = 0;
+                        item.MontoOrdinario = 0;
+                        item.Toneladas = 0;
+                        item.Total = 0;                        
                     }
                 }
 
@@ -724,45 +653,18 @@ namespace WPP.Controllers
 
                     }
                     else
-                    {
-                        // en caso que el dia laborado sea feriado por ley 
-                        IDictionary<string, object> criteriaFeriado = new Dictionary<string, object>();
-                        criteriaFeriado.Add("Dia", item.Fecha.Day);
-                        criteriaFeriado.Add("Mes", item.Fecha.Month);
-                        var feriado = feriadosService.Get(criteriaFeriado);
-                        if (feriado != null)
-                        {
-                            // Se busca la nomina que se genero hace una semana                           
-                            listCosto = costoHoraService.GetByDate("Taller");
-                            listCosto = listCosto.Where(s => s.FechaInicio.AddDays(-1) <= item.Fecha && s.FechaFin.AddDays(1) >= item.Fecha).ToList();
-                            costoHora = listCosto.FirstOrDefault();
-
-                            item.Salida = String.Empty;
-                            item.Entrada = String.Empty;
-                            item.HorasOrdinarias =  item.TotalHoras > 8 ? 8: item.TotalHoras;
-                            item.HorasExtra = item.TotalHoras > 8 ? item.TotalHoras - 8 : 0;
-                            item.MontoExtra = item.HorasExtra * (costoHora.Monto * 1.5);
-                            item.MontoOrdinario = item.HorasOrdinarias * costoHora.Monto;
-                            item.TotalHoras = item.HorasOrdinarias + item.HorasExtra;
-                            item.Toneladas = 0;
-                            item.Total = item.MontoOrdinario;
-                            item.Compensacion = 0;
-
-                        }
-                        else
-                        {
-                            //En caso de que no se presentó 
-                            item.Salida = String.Empty;
-                            item.Entrada = String.Empty;
-                            item.TotalHoras = 0;
-                            item.Compensacion = 0;
-                            item.HorasExtra = 0;
-                            item.HorasOrdinarias = 0;
-                            item.MontoExtra = 0;
-                            item.MontoOrdinario = 0;
-                            item.Toneladas = 0;
-                            item.Total = 0;
-                        }
+                    {                        
+                        //En caso de que no se presentó 
+                        item.Salida = String.Empty;
+                        item.Entrada = String.Empty;
+                        item.TotalHoras = 0;
+                        item.Compensacion = 0;
+                        item.HorasExtra = 0;
+                        item.HorasOrdinarias = 0;
+                        item.MontoExtra = 0;
+                        item.MontoOrdinario = 0;
+                        item.Toneladas = 0;
+                        item.Total = 0;                        
                     }
                 }
 

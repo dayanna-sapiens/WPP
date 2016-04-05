@@ -61,6 +61,9 @@
                                                             Fecha
                                                         </th>
                                                         <th>
+                                                            Toneladas
+                                                        </th>
+                                                        <th>
                                                             Entrada
                                                         </th>
                                                         <th>
@@ -83,10 +86,7 @@
                                                         </th>
                                                         <th>
                                                             Suma Ord + Ext
-                                                        </th>
-                                                        <th>
-                                                            Toneladas
-                                                        </th>
+                                                        </th>                                                       
                                                         <th>
                                                             Compensación
                                                         </th>
@@ -116,34 +116,34 @@
                                                                         @item.Fecha.ToString("dd/MM/yyyy")
                                                                     </td>
                                                                     <td>
+                                                                        @Math.Round(item.Toneladas, 2)
+                                                                    </td>
+                                                                    <td>
                                                                         @item.Entrada
                                                                     </td>
                                                                     <td>
                                                                         @item.Salida
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtHorasLunes" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+                                                                        <input type="number" min="0" id="txtHorasLunes" style="width:75px;" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtOrdLunes" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+                                                                        <input type="number" min="0" id="txtOrdLunes" style="width:75px;" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtExtLunes" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+                                                                        <input type="number" min="0" id="txtExtLunes" style="width:75px;" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtMontOrdLunes" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+                                                                        <input type="number" min="0" id="txtMontOrdLunes" style="width:110px;" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtMontExtLunes" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+                                                                        <input type="number" min="0" id="txtMontExtLunes" style="width:110px;" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtTotalLunes" class="form-control" value="@Math.Round(item.Total, 2)">
-                                                                    </td>
+                                                                        <input type="number" min="0" id="txtTotalLunes" style="width:110px;" class="form-control" value="@Math.Round(item.Total, 2)">
+                                                                    </td>                                                                
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtToneladasLunes" class="form-control" value="@Math.Round(item.Toneladas, 2)">
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="number" min="0" id="txtCompensacionLunes" class="form-control" value="@Math.Round(item.Compensacion, 2)">
+                                                                        <input type="number" min="0" id="txtCompensacionLunes" style="width:110px;" class="form-control" value="@Math.Round(item.Compensacion, 2)">
                                                                     </td>
                                                                 </tr>
                                                             }
@@ -170,6 +170,9 @@
                                                             Fecha
                                                         </th>
                                                         <th>
+                                                            Toneladas
+                                                        </th>
+                                                        <th>
                                                             Entrada
                                                         </th>
                                                         <th>
@@ -192,9 +195,6 @@
                                                         </th>
                                                         <th>
                                                             Suma Ord + Ext
-                                                        </th>
-                                                        <th>
-                                                            Toneladas
                                                         </th>
                                                         <th>
                                                             Compensación
@@ -225,34 +225,34 @@
                                                                         @item.Fecha.ToString("dd/MM/yyyy")
                                                                     </td>
                                                                     <td>
+                                                                        @Math.Round(item.Toneladas, 2)
+                                                                    </td>
+                                                                    <td>
                                                                         @item.Entrada
                                                                     </td>
                                                                     <td>
                                                                         @item.Salida
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtHorasMartes" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+                                                                        <input type="number" min="0" id="txtHorasMartes" style="width:75px;" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtOrdMartes" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+                                                                        <input type="number" min="0" id="txtOrdMartes" style="width:75px;" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtExtMartes" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+                                                                        <input type="number" min="0" id="txtExtMartes" style="width:75px;" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtMontOrdMartes" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+                                                                        <input type="number" min="0" id="txtMontOrdMartes" style="width:110px;" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtMontExtMartes" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+                                                                        <input type="number" min="0" id="txtMontExtMartes" style="width:110px;" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtTotalMartes" class="form-control" value="@Math.Round(item.Total, 2)">
+                                                                        <input type="number" min="0" id="txtTotalMartes" style="width:110px;" class="form-control" value="@Math.Round(item.Total, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtToneladasMartes" class="form-control" value="@Math.Round(item.Toneladas, 2)">
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="number" min="0" id="txtCompensacionMartes" class="form-control" value="@Math.Round(item.Compensacion, 2)">
+                                                                        <input type="number" min="0" id="txtCompensacionMartes" style="width:110px;" class="form-control" value="@Math.Round(item.Compensacion, 2)">
                                                                     </td>
                                                                 </tr>
                                                             }
@@ -279,6 +279,9 @@
                                                             Fecha
                                                         </th>
                                                         <th>
+                                                            Toneladas
+                                                        </th>
+                                                        <th>
                                                             Entrada
                                                         </th>
                                                         <th>
@@ -301,9 +304,6 @@
                                                         </th>
                                                         <th>
                                                             Suma Ord + Ext
-                                                        </th>
-                                                        <th>
-                                                            Toneladas
                                                         </th>
                                                         <th>
                                                             Compensación
@@ -334,34 +334,34 @@
                                                                         @item.Fecha.ToString("dd/MM/yyyy")
                                                                     </td>
                                                                     <td>
+                                                                        @Math.Round(item.Toneladas, 2)
+                                                                    </td>
+                                                                    <td>
                                                                         @item.Entrada
                                                                     </td>
                                                                     <td>
                                                                         @item.Salida
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtHorasMiercoles" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+                                                                        <input type="number" min="0" id="txtHorasMiercoles" style="width:75px;" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtOrdMiercoles" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+                                                                        <input type="number" min="0" id="txtOrdMiercoles" style="width:75px;" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtExtMiercoles" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+                                                                        <input type="number" min="0" id="txtExtMiercoles" style="width:75px;" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtMontOrdMiercoles" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+                                                                        <input type="number" min="0" id="txtMontOrdMiercoles" style="width:110px;" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtMontExtMiercoles" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+                                                                        <input type="number" min="0" id="txtMontExtMiercoles" style="width:110px;" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtTotalMiercoles" class="form-control" value="@Math.Round(item.Total, 2)">
+                                                                        <input type="number" min="0" id="txtTotalMiercoles" style="width:110px;" class="form-control" value="@Math.Round(item.Total, 2)">
                                                                     </td>
                                                                     <td>
-                                                                        <input type="number" min="0" id="txtToneladasMiercoles" class="form-control" value="@Math.Round(item.Toneladas, 2)">
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="number" min="0" id="txtCompensacionMiercoles" class="form-control" value="@Math.Round(item.Compensacion, 2)">
+                                                                        <input type="number" min="0" id="txtCompensacionMiercoles" style="width:110px;" class="form-control" value="@Math.Round(item.Compensacion, 2)">
                                                                         
                                                                     </td>
                                                                 </tr>
@@ -389,6 +389,9 @@
                                                             Fecha
                                                         </th>
                                                         <th>
+                                                            Toneladas
+                                                        </th>
+                                                        <th>
                                                             Entrada
                                                         </th>
                                                         <th>
@@ -411,9 +414,6 @@
                                                         </th>
                                                         <th>
                                                             Suma Ord + Ext
-                                                        </th>
-                                                        <th>
-                                                            Toneladas
                                                         </th>
                                                         <th>
                                                             Compensación
@@ -444,34 +444,34 @@
                                                             @item.Fecha.ToString("dd/MM/yyyy")
                                                         </td>
                                                         <td>
+                                                            @Math.Round(item.Toneladas, 2)
+                                                        </td>
+                                                        <td>
                                                             @item.Entrada
                                                         </td>
                                                         <td>
                                                             @item.Salida
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtHorasJueves" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+                                                            <input type="number" min="0" id="txtHorasJueves" style="width:75px;" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtOrdJueves" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+                                                            <input type="number" min="0" id="txtOrdJueves" style="width:75px;" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtExtJueves" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+                                                            <input type="number" min="0" id="txtExtJueves" style="width:75px;" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtMontOrdJueves" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+                                                            <input type="number" min="0" id="txtMontOrdJueves" style="width:110px;" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtMontExtJueves" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+                                                            <input type="number" min="0" id="txtMontExtJueves" style="width:110px;" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtTotalJueves" class="form-control" value="@Math.Round(item.Total, 2)">
+                                                            <input type="number" min="0" id="txtTotalJueves" style="width:110px;" class="form-control" value="@Math.Round(item.Total, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtToneladasJueves" class="form-control" value="@Math.Round(item.Toneladas, 2)">
-                                                        </td>
-                                                        <td>
-                                                            <input type="number" min="0" id="txtCompensacionJueves" class="form-control" value="@Math.Round(item.Compensacion, 2)">
+                                                            <input type="number" min="0" id="txtCompensacionJueves" style="width:110px;" class="form-control" value="@Math.Round(item.Compensacion, 2)">
                                                         </td>
                                                     </tr>
                                                     }
@@ -498,6 +498,9 @@
                                                             Fecha
                                                         </th>
                                                         <th>
+                                                            Toneladas
+                                                        </th>
+                                                        <th>
                                                             Entrada
                                                         </th>
                                                         <th>
@@ -520,9 +523,6 @@
                                                         </th>
                                                         <th>
                                                             Suma Ord + Ext
-                                                        </th>
-                                                        <th>
-                                                            Toneladas
                                                         </th>
                                                         <th>
                                                             Compensación
@@ -553,41 +553,40 @@
                                                             @item.Fecha.ToString("dd/MM/yyyy")
                                                         </td>
                                                         <td>
+                                                            @Math.Round(item.Toneladas, 2)
+                                                        </td>
+                                                        <td>
                                                             @item.Entrada
                                                         </td>
                                                         <td>
                                                             @item.Salida
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtHorasViernes" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+                                                            <input type="number" min="0" id="txtHorasViernes" style="width:75px;" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
                                                             
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtOrdViernes" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+                                                            <input type="number" min="0" id="txtOrdViernes" style="width:75px;" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
                                                             
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtExtViernes" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+                                                            <input type="number" min="0" id="txtExtViernes" style="width:75px;" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
                                                             
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtMontOrdViernes" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+                                                            <input type="number" min="0" id="txtMontOrdViernes" style="width:110px;" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
                                                             
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtMontExtViernes" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+                                                            <input type="number" min="0" id="txtMontExtViernes" style="width:110px;" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
                                                             
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtTotalViernes" class="form-control" value="@Math.Round(item.Total, 2)">
+                                                            <input type="number" min="0" id="txtTotalViernes" style="width:110px;" class="form-control" value="@Math.Round(item.Total, 2)">
                                                             
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtToneladasViernes" class="form-control" value="@Math.Round(item.Toneladas, 2)">
-                                                            
-                                                        </td>
-                                                        <td>
-                                                            <input type="number" min="0" id="txtCompensacionViernes" class="form-control" value="@Math.Round(item.Compensacion, 2)">
+                                                            <input type="number" min="0" id="txtCompensacionViernes" style="width:110px;" class="form-control" value="@Math.Round(item.Compensacion, 2)">
                                                             
                                                         </td>
                                                     </tr>
@@ -615,6 +614,9 @@
                                                             Fecha
                                                         </th>
                                                         <th>
+                                                            Toneladas
+                                                        </th>
+                                                        <th>
                                                             Entrada
                                                         </th>
                                                         <th>
@@ -637,9 +639,6 @@
                                                         </th>
                                                         <th>
                                                             Suma Ord + Ext
-                                                        </th>
-                                                        <th>
-                                                            Toneladas
                                                         </th>
                                                         <th>
                                                             Compensación
@@ -670,34 +669,34 @@
                                                             @item.Fecha.ToString("dd/MM/yyyy")
                                                         </td>
                                                         <td>
+                                                            @Math.Round(item.Toneladas, 2)
+                                                        </td>
+                                                        <td>
                                                             @item.Entrada
                                                         </td>
                                                         <td>
                                                             @item.Salida
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtHorasSabado" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
+                                                            <input type="number" min="0" id="txtHorasSabado" style="width:75px;" class="form-control" value="@Math.Round(item.TotalHoras, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtOrdSabado" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
+                                                            <input type="number" min="0" id="txtOrdSabado" style="width:75px;" class="form-control" value="@Math.Round(item.HorasOrdinarias, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtExtSabado" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
+                                                            <input type="number" min="0" id="txtExtSabado" style="width:75px;" class="form-control" value="@Math.Round(item.HorasExtra, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtMontOrdSabado" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
+                                                            <input type="number" min="0" id="txtMontOrdSabado" style="width:110px;" class="form-control" value="@Math.Round(item.MontoOrdinario, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtMontExtSabado" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
+                                                            <input type="number" min="0" id="txtMontExtSabado" style="width:110px;" class="form-control" value="@Math.Round(item.MontoExtra, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtTotalSabado" class="form-control" value="@Math.Round(item.Total, 2)">
+                                                            <input type="number" min="0" id="txtTotalSabado" style="width:110px;" class="form-control" value="@Math.Round(item.Total, 2)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="0" id="txtToneladasSabado" class="form-control" value="@Math.Round(item.Toneladas, 2)">
-                                                        </td>
-                                                        <td>
-                                                            <input type="number" min="0" id="txtCompensacionSabado" class="form-control" value="@Math.Round(item.Compensacion, 2)">
+                                                            <input type="number" min="0" id="txtCompensacionSabado" style="width:110px;" class="form-control" value="@Math.Round(item.Compensacion, 2)">
                                                         </td>
                                                     </tr>
                                                     }
@@ -811,15 +810,15 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var entrada = row.children[5].innerHTML;
-            var salida = row.children[6].innerHTML;
-            var horas = row.children[7].children[0].value;
-            var ord = row.children[8].children[0].value;
-            var ext = row.children[9].children[0].value;
-            var montoOrd = row.children[10].children[0].value;
-            var montoExt = row.children[11].children[0].value;
-            var total = row.children[12].children[0].value;
-            var toneladas = row.children[13].children[0].value;
+            var toneladas = row.children[5].children[0].value;
+            var entrada = row.children[6].innerHTML;
+            var salida = row.children[7].innerHTML;
+            var horas = row.children[8].children[0].value;
+            var ord = row.children[9].children[0].value;
+            var ext = row.children[10].children[0].value;
+            var montoOrd = row.children[11].children[0].value;
+            var montoExt = row.children[12].children[0].value;
+            var total = row.children[13].children[0].value;
             var compensacion = row.children[14].children[0].value;
 
             if (horas != "" && ord != "" && total != "" && toneladas != "" && compensacion != "" && montoOrd != "") {
@@ -848,15 +847,15 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var entrada = row.children[5].innerHTML;
-            var salida = row.children[6].innerHTML;
-            var horas = row.children[7].children[0].value;
-            var ord = row.children[8].children[0].value;
-            var ext = row.children[9].children[0].value;
-            var montoOrd = row.children[10].children[0].value;
-            var montoExt = row.children[11].children[0].value;
-            var total = row.children[12].children[0].value;
-            var toneladas = row.children[13].children[0].value;
+            var toneladas = row.children[5].children[0].value;
+            var entrada = row.children[6].innerHTML;
+            var salida = row.children[7].innerHTML;
+            var horas = row.children[8].children[0].value;
+            var ord = row.children[9].children[0].value;
+            var ext = row.children[10].children[0].value;
+            var montoOrd = row.children[11].children[0].value;
+            var montoExt = row.children[12].children[0].value;
+            var total = row.children[13].children[0].value;
             var compensacion = row.children[14].children[0].value;
 
             if (horas != "" && ord != "" && total != "" && toneladas != "" && compensacion != "" && montoOrd != "") {
@@ -885,15 +884,15 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var entrada = row.children[5].innerHTML;
-            var salida = row.children[6].innerHTML;
-            var horas = row.children[7].children[0].value;
-            var ord = row.children[8].children[0].value;
-            var ext = row.children[9].children[0].value;
-            var montoOrd = row.children[10].children[0].value;
-            var montoExt = row.children[11].children[0].value;
-            var total = row.children[12].children[0].value;
-            var toneladas = row.children[13].children[0].value;
+            var toneladas = row.children[5].children[0].value;
+            var entrada = row.children[6].innerHTML;
+            var salida = row.children[7].innerHTML;
+            var horas = row.children[8].children[0].value;
+            var ord = row.children[9].children[0].value;
+            var ext = row.children[10].children[0].value;
+            var montoOrd = row.children[11].children[0].value;
+            var montoExt = row.children[12].children[0].value;
+            var total = row.children[13].children[0].value;
             var compensacion = row.children[14].children[0].value;
 
             if (horas != "" && ord != "" && total != "" && toneladas != "" && compensacion != "" && montoOrd != "") {
@@ -922,15 +921,15 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var entrada = row.children[5].innerHTML;
-            var salida = row.children[6].innerHTML;
-            var horas = row.children[7].children[0].value;
-            var ord = row.children[8].children[0].value;
-            var ext = row.children[9].children[0].value;
-            var montoOrd = row.children[10].children[0].value;
-            var montoExt = row.children[11].children[0].value;
-            var total = row.children[12].children[0].value;
-            var toneladas = row.children[13].children[0].value;
+            var toneladas = row.children[5].children[0].value;
+            var entrada = row.children[6].innerHTML;
+            var salida = row.children[7].innerHTML;
+            var horas = row.children[8].children[0].value;
+            var ord = row.children[9].children[0].value;
+            var ext = row.children[10].children[0].value;
+            var montoOrd = row.children[11].children[0].value;
+            var montoExt = row.children[12].children[0].value;
+            var total = row.children[13].children[0].value;
             var compensacion = row.children[14].children[0].value;
 
             if (horas != "" && ord != "" && total != "" && toneladas != "" && compensacion != "" && montoOrd != "") {
@@ -959,15 +958,15 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var entrada = row.children[5].innerHTML;
-            var salida = row.children[6].innerHTML;
-            var horas = row.children[7].children[0].value;
-            var ord = row.children[8].children[0].value;
-            var ext = row.children[9].children[0].value;
-            var montoOrd = row.children[10].children[0].value;
-            var montoExt = row.children[11].children[0].value;
-            var total = row.children[12].children[0].value;
-            var toneladas = row.children[13].children[0].value;
+            var toneladas = row.children[5].children[0].value;
+            var entrada = row.children[6].innerHTML;
+            var salida = row.children[7].innerHTML;
+            var horas = row.children[8].children[0].value;
+            var ord = row.children[9].children[0].value;
+            var ext = row.children[10].children[0].value;
+            var montoOrd = row.children[11].children[0].value;
+            var montoExt = row.children[12].children[0].value;
+            var total = row.children[13].children[0].value;
             var compensacion = row.children[14].children[0].value;
 
             if (horas != "" && ord != "" && total != "" && toneladas != "" && compensacion != "" && montoOrd != "") {
@@ -996,15 +995,15 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var entrada = row.children[5].innerHTML;
-            var salida = row.children[6].innerHTML;
-            var horas = row.children[7].children[0].value;
-            var ord = row.children[8].children[0].value;
-            var ext = row.children[9].children[0].value;
-            var montoOrd = row.children[10].children[0].value;
-            var montoExt = row.children[11].children[0].value;
-            var total = row.children[12].children[0].value;
-            var toneladas = row.children[13].children[0].value;
+            var toneladas = row.children[5].children[0].value;
+            var entrada = row.children[6].innerHTML;
+            var salida = row.children[7].innerHTML;
+            var horas = row.children[8].children[0].value;
+            var ord = row.children[9].children[0].value;
+            var ext = row.children[10].children[0].value;
+            var montoOrd = row.children[11].children[0].value;
+            var montoExt = row.children[12].children[0].value;
+            var total = row.children[13].children[0].value;
             var compensacion = row.children[14].children[0].value;
 
             if (horas != "" && ord != "" && total != "" && toneladas != "" && compensacion != "" && montoOrd != "") {
