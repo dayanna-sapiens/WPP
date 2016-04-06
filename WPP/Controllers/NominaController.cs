@@ -23,6 +23,7 @@ using WPP.Model;
 using WPP.Datos.Nomina;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using WPP.Models.Nomina;
 
 namespace WPP.Controllers
 {
@@ -367,7 +368,7 @@ namespace WPP.Controllers
             }
             catch(Exception ex)
             {
-                ViewBag.Error = "El archivo a importar no cuebta con el formato necesario";
+                ViewBag.Error = "El archivo a importar no cuenta con el formato necesario";
                 RedirectToAction("Cargar");
             }
            return View();
@@ -377,6 +378,7 @@ namespace WPP.Controllers
         private PlanillaModel CargarNominaRecolector(IList<ItemNomina> DetallesNomina)
         {
             PlanillaModel model = new PlanillaModel();
+            List<NominaRecolector> ListaComprobantes = new List<NominaRecolector>();
             if (DetallesNomina.Count > 0)
             {
                 Compania compania = companiaService.Get(Session["Compania"] != null ? Convert.ToInt64(Session["Compania"].ToString()) : 0);
@@ -394,8 +396,10 @@ namespace WPP.Controllers
                     double toneladas = 0;
                     foreach (var otr in OTRs)
                     {
-                        var Cuadrilla = otr.Cuadrilla.ListaEmpleados.Where(s => s.Id == item.Empleado.Id && s.Puesto != "Chofer").ToList();
-                        if (Cuadrilla.Count > 0)
+
+                        var Cuadrilla = otr.Cuadrilla.ListaEmpleados.Where(s => s.Puesto != "Chofer").ToList();
+                        var CuadrillaEmpleado = otr.Cuadrilla.ListaEmpleados.Where(s=> s.Id == item.Empleado.Id && s.Puesto != "Chofer").ToList();
+                        if (CuadrillaEmpleado.Count > 0)
                         {
                             // se obtiene el costo de la ruta de recoleccion de la OTR
                             IDictionary<string, object> criteriaRuta = new Dictionary<string, object>();
@@ -426,6 +430,19 @@ namespace WPP.Controllers
                             // La cantidad de toneladas obtenidas se multiplican por el costo de la ruta
                             // y se divide entre la cantidad de recolectores de la cuadrilla
                             toneladas += (costo * peso) / Cuadrilla.Count;
+
+
+                            //------ Comprobante Planilla Recolector
+                            NominaRecolector comprobante = new NominaRecolector();
+                            comprobante.Empleado = item.Empleado.Codigo + " - " + item.Empleado.Nombre;
+                            comprobante.Entrada = item.Entrada;
+                            comprobante.Salida = item.Salida;
+                            comprobante.ToneladasXViaje = peso;
+                            comprobante.ToneladasXPersona = peso / Cuadrilla.Count;
+                            comprobante.Monto = (costo * peso) / Cuadrilla.Count;
+                            comprobante.RutaRecoleccion = otr.RutaRecoleccion.Descripcion;
+                            comprobante.Fecha = otr.Fecha;
+                            ListaComprobantes.Add(comprobante);
                         }
                     }
 
@@ -495,6 +512,7 @@ namespace WPP.Controllers
 
                 model = nominaMapper.GetBoletaNominaModel(nomina);
                 model.ListaDetalles = DetallesNomina;
+                Session["ComprobantesRecolector"] = ListaComprobantes;
                 return model;
             }
             else
@@ -747,7 +765,43 @@ namespace WPP.Controllers
                 rd.Subreports[2].SetDataSource(dsTotal);
                 var tipoFormato = formato == "pdf" ? ExportFormatType.PortableDocFormat : ExportFormatType.Excel;
                 rd.ExportToHttpResponse(tipoFormato, System.Web.HttpContext.Current.Response, false, "Nómina_Recolector");
+      
             }
+        }
+
+        public void ReporteComprobanteNominaRecolector(string formato)
+        {
+            var Comprobantes = (List<NominaRecolector>)Session["ComprobantesRecolector"];
+
+            // Se indica el data set a utilizar
+            ds_ColillaRecolector dsNomina = new ds_ColillaRecolector();
+            var dtDatos = dsNomina.Tables["Datos"];
+
+            foreach (var item in Comprobantes)
+            {
+                // Rows DataTable Datos
+                DataRow dato = dtDatos.NewRow();
+                dato["Fecha"] = item.Fecha;
+                dato["Empleado"] = item.Empleado.ToUpper();
+                dato["Entrada"] = item.Entrada;
+                dato["Salida"] = item.Salida;
+                dato["RutaRecoleccion"] = item.RutaRecoleccion;
+                dato["ToneladasXViaje"] = item.ToneladasXViaje;
+                dato["ToneladasXPersona"] = item.ToneladasXPersona;
+                dato["Monto"] = item.Monto;
+
+                dtDatos.Rows.Add(dato);
+            }
+            // Se genera el reporte deseado
+            ReportDocument rd = new ReportDocument();
+            string strRptPath = System.Web.HttpContext.Current.Server.MapPath("~/") + "Reportes//Nomina//rpt_ColillaRecolector.rpt";
+
+            rd.Load(strRptPath);
+
+            rd.SetDataSource(dsNomina);// Se asigna el dataset al datasorce del reporte
+            var tipoFormato = ExportFormatType.PortableDocFormat;
+            rd.ExportToHttpResponse(tipoFormato, System.Web.HttpContext.Current.Response, false, "Comprobante_Recolector");
+            
         }
 
         public void ReporteNominaChofer(string id, string formato)

@@ -22,6 +22,9 @@
 
                 <div class="container-fluid">
                     <div class="row">
+                        <div id="divLoader" class="col-md-12" style="display:none; text-align:center;">
+                            <img src="~/Images/loader.gif" alt="WPP" height="40" width="40" style="margin-top:-19px; margin-bottom:-20px;">
+                        </div>
                         <div class="col-md-12">
                             <div class="tabbable" id="tabs-779403">
                                 <ul class="nav nav-tabs">
@@ -716,6 +719,7 @@
             </div>
             <button id="btnSubmit" type="submit" class="btn btn-primary" style="display:none">Submmit</button>
             <a id="btnGuardar" class="btn btn-primary">Guardar</a>
+            <a id="btnComprobantes" class="btn btn-primary" style="display:none">Imprimir Comprobantes </a>
             @Html.ActionLink("Cancelar", "Cargar", "Nomina", null, new { @Class = "btn btn-primary" })
         }
     </div>
@@ -757,17 +761,20 @@
         CargarInformacion();
         
         $.ajax({
+            beforeSend: function () {
+                $("#divLoader").css('display', 'block');
+            },
             url: '/Nomina/GuardarNominaRecolector',
             data: $('#frmNomina').serializeArray(),
             type: 'POST',
             success: function (data) {
                 if (data != null) {
 
-                   // 
                     var formato = "excel";
+                    $("#btnComprobantes").css('display', 'inline-table');
                     swal("", "Se realizó el proceso de nomina de manera exitosa", "success");
-                    window.location.href = "/Nomina/Cargar";
                     window.location.assign("/Nomina/ReporteNominaRecolector?id=" + data + "&formato=" + formato);
+                    // window.location.href = "/Nomina/Cargar";
                 }
                 else {
                     swal("Error", "Se presento un error a la hora de generar el proceso de nomina", "error");
@@ -776,12 +783,20 @@
             error: function (xhr, textStatus, errorThrown) {
             },
             traditional: true
-        });    
+        }).always(function () {
+            $("#divLoader").hide();
+        });
         
+
     });
 
+    // Se guarda la informacion de la OTR y se valida que la informacion requerida haya sido completada
+    $("#btnComprobantes").click(function () {
+        window.location.href = "/Nomina/Cargar";
+        window.open("/Nomina/ReporteComprobanteNominaRecolector?formato=pdf", 'mywindow', 'fullscreen=yes, scrollbars=auto');
+        //               
 
-
+    });
 
     function convertDate(inputFormat) {
         function pad(s) { return (s < 10) ? '0' + s : s; }
@@ -810,7 +825,7 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var toneladas = row.children[5].children[0].value;
+            var toneladas = row.children[5].innerHTML;
             var entrada = row.children[6].innerHTML;
             var salida = row.children[7].innerHTML;
             var horas = row.children[8].children[0].value;
@@ -847,7 +862,7 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var toneladas = row.children[5].children[0].value;
+            var toneladas = row.children[5].innerHTML;
             var entrada = row.children[6].innerHTML;
             var salida = row.children[7].innerHTML;
             var horas = row.children[8].children[0].value;
@@ -884,7 +899,7 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var toneladas = row.children[5].children[0].value;
+            var toneladas = row.children[5].innerHTML;
             var entrada = row.children[6].innerHTML;
             var salida = row.children[7].innerHTML;
             var horas = row.children[8].children[0].value;
@@ -921,7 +936,7 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var toneladas = row.children[5].children[0].value;
+            var toneladas = row.children[5].innerHTML;
             var entrada = row.children[6].innerHTML;
             var salida = row.children[7].innerHTML;
             var horas = row.children[8].children[0].value;
@@ -958,7 +973,7 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var toneladas = row.children[5].children[0].value;
+            var toneladas = row.children[5].innerHTML;
             var entrada = row.children[6].innerHTML;
             var salida = row.children[7].innerHTML;
             var horas = row.children[8].children[0].value;
@@ -995,7 +1010,7 @@
 
             var empleado = row.children[1].innerHTML;
             var fecha = row.children[4].innerHTML;
-            var toneladas = row.children[5].children[0].value;
+            var toneladas = row.children[5].innerHTML;
             var entrada = row.children[6].innerHTML;
             var salida = row.children[7].innerHTML;
             var horas = row.children[8].children[0].value;

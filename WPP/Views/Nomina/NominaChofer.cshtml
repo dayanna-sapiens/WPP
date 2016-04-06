@@ -22,6 +22,9 @@
 
                 <div class="container-fluid">
                     <div class="row">
+                        <div id="divLoader" class="col-md-12" style="display:none; text-align:center;">
+                            <img src="~/Images/loader.gif" alt="WPP" height="40" width="40" style="margin-top:-19px; margin-bottom:-20px;">
+                        </div>
                         <div class="col-md-12">
                             <div class="tabbable" id="tabs-779403">
                                 <ul class="nav nav-tabs">
@@ -683,6 +686,9 @@
         CargarInformacion();
 
         $.ajax({
+            beforeSend: function () {
+                $("#divLoader").css('display', 'block');
+            },
             url: '/Nomina/GuardarNominaChofer',
             data: $('#frmNomina').serializeArray(),
             type: 'POST',
@@ -691,11 +697,9 @@
 
                     var formato = "excel";
                     swal("", "Se realizó el proceso de nomina de manera exitosa", "success");
-                    window.location.href = "/Nomina/Cargar";
+                   // window.location.href = "/Nomina/Cargar";
                     window.location.assign("/Nomina/ReporteNominaChofer?id=" + data + "&formato=" + formato);
 
-                    //swal("", "Se realizó el proceso de nomina de manera exitosa", "success");
-                    //window.location.href = "/Nomina/Cargar";
                 }
                 else {
                     swal("Error", "Se presento un error a la hora de generar el proceso de nomina", "error");
@@ -704,6 +708,8 @@
             error: function (xhr, textStatus, errorThrown) {
             },
             traditional: true
+        }).always(function () {
+            $("#divLoader").hide();
         });
 
     });

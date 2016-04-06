@@ -13,7 +13,7 @@ namespace WPP.Models.Nomina
         public String Entrada { set; get; }
         public String Salida { set; get; }
         public Double TotalHoras { set; get; }
-        public RutaRecoleccion RutaRecoleccion { set; get; }
+        public String RutaRecoleccion { set; get; }
         public Double ToneladasXViaje { set; get; }
         public Double ToneladasXPersona { set; get; }
         public Double Monto { set; get; }
