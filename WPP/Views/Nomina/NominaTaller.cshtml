@@ -694,13 +694,13 @@
             type: 'POST',
             success: function (data) {
                 if (data != null) {
+
+                    // Se muestra un reporte con la planilla generada
                     var formato = "excel";
                     swal("", "Se realizó el proceso de nomina de manera exitosa", "success");
                     //window.location.href = "/Nomina/Cargar";
                     window.location.assign("/Nomina/ReporteNominaTaller?id=" + data + "&formato=" + formato);
 
-                    //swal("", "Se realizó el proceso de nomina de manera exitosa", "success");
-                    //window.location.href = "/Nomina/Cargar";
                 }
                 else {
                     swal("Error", "Se presento un error a la hora de generar el proceso de nomina", "error");
@@ -717,7 +717,8 @@
 
 
 
-
+    // Esto metodo se utiliza para dar formato a las fechas,
+    // de manera que se muestre dd/MMM/yyyy
     function convertDate(inputFormat) {
         function pad(s) { return (s < 10) ? '0' + s : s; }
         var d = new Date(inputFormat);
@@ -725,8 +726,9 @@
     }
 
 
-    // Se obtiene la informacion ingresada de los puntos de ruta de recoleccion
-    // y se crea un json estos datos con el fin de guardar la informacion ingresada
+    // Se obtiene la informacion ingresada del trabajo realizado durante la semana (dia a dia)
+    // y se crea un json de estos datos con el fin de guardar la informacion ingresada
+    // y poder generar la planilla respectiva
     function CargarInformacion()
     {
         var tablaLunes = $("#tblLunes")[0];

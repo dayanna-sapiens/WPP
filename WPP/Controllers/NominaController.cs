@@ -64,57 +64,82 @@ namespace WPP.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Este método muestra la vista donde se permitira importar el excel de nomina generado por el reloj
+        /// </summary>
+        /// <returns>Vista Cargar</returns>
         public ActionResult Cargar()
         {
             ViewBag.Error = String.Empty;
             return View();
         }
 
-   
+        /// <summary>
+        /// Este método la vista con la informacion de Nomina de Recolector que fue obtenido del excel importado
+        /// ademas muestra esta informacion agrupada por dias de las semana y con algunos calculos realizados 
+        /// dependiendo de las horas laboradas durante el dia
+        /// </summary>
+        /// <returns>Vista NominaRecolector coon el modelo de la planilla</returns>
         public ActionResult NominaRecolector(PlanillaModel model)
         {
-            // Se divide los items obtenidos por dias y se retorna el modelo
-            var DetallesNomina = (List<ItemNomina>)Session["Detalles"];
-            ViewBag.ItemsLunes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Monday).ToList();
-            ViewBag.ItemsMartes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Tuesday).ToList();
-            ViewBag.ItemsMiercoles = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Wednesday).ToList();
-            ViewBag.ItemsJueves = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Thursday).ToList();
-            ViewBag.ItemsViernes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Friday).ToList();
-            ViewBag.ItemsSabado = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Saturday).ToList();
-            return View(model);
-        }
-        public ActionResult NominaChofer(PlanillaModel model)
-        {
-            // Se divide los items obtenidos por dias y se retorna el modelo
-            var DetallesNomina = (List<ItemNomina>)Session["Detalles"];
-            ViewBag.ItemsLunes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Monday).ToList();
-            ViewBag.ItemsMartes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Tuesday).ToList();
-            ViewBag.ItemsMiercoles = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Wednesday).ToList();
-            ViewBag.ItemsJueves = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Thursday).ToList();
-            ViewBag.ItemsViernes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Friday).ToList();
-            ViewBag.ItemsSabado = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Saturday).ToList();
-            return View(model);
-        }
-        public ActionResult NominaTaller(PlanillaModel model)
-        {
-            // Se divide los items obtenidos por dias y se retorna el modelo
-            var DetallesNomina = (List<ItemNomina>)Session["Detalles"];
-            ViewBag.ItemsLunes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Monday).ToList();
-            ViewBag.ItemsMartes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Tuesday).ToList();
-            ViewBag.ItemsMiercoles = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Wednesday).ToList();
-            ViewBag.ItemsJueves = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Thursday).ToList();
-            ViewBag.ItemsViernes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Friday).ToList();
-            ViewBag.ItemsSabado = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Saturday).ToList();
+            CargarInformacionSemanal();
             return View(model);
         }
 
+        /// <summary>
+        /// Este método la vista con la informacion de Nomina de Chofer que fue obtenido del excel importado
+        /// ademas muestra esta informacion agrupada por dias de las semana y con algunos calculos realizados 
+        /// dependiendo de las horas laboradas durante el dia
+        /// </summary>
+        /// <returns>Vista NominaChofer coon el modelo de la planilla</returns>
+        public ActionResult NominaChofer(PlanillaModel model)
+        {
+            CargarInformacionSemanal();
+            return View(model);
+        }
+
+
+        /// <summary>
+        /// Este método la vista con la informacion de Nomina de Taller que fue obtenido del excel importado
+        /// ademas muestra esta informacion agrupada por dias de las semana y con algunos calculos realizados 
+        /// dependiendo de las horas laboradas durante el dia
+        /// </summary>
+        /// <returns>Vista NominaTaller coon el modelo de la planilla</returns>
+        public ActionResult NominaTaller(PlanillaModel model)
+        {
+            CargarInformacionSemanal();
+            return View(model);
+        }
+
+
+        /// <summary>
+        /// Este método agrupa por el dia de la semana la informacion obtenida del excel 
+        /// y los guarda en un view bag con el fin de mostrarlos en la vista correspondiente
+        /// </summary>
+        public void CargarInformacionSemanal()
+        {
+            // Se divide los items obtenidos por dias y se retorna el modelo
+            var DetallesNomina = (List<ItemNomina>)Session["Detalles"];
+            ViewBag.ItemsLunes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Monday).ToList();
+            ViewBag.ItemsMartes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Tuesday).ToList();
+            ViewBag.ItemsMiercoles = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Wednesday).ToList();
+            ViewBag.ItemsJueves = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Thursday).ToList();
+            ViewBag.ItemsViernes = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Friday).ToList();
+            ViewBag.ItemsSabado = DetallesNomina.Where(s => s.Fecha.DayOfWeek == DayOfWeek.Saturday).ToList();
+        }
+
+        /// <summary>
+        /// Este método se encargada de obtener la informacion que se encuentra en la vista de NominaRecolector
+        /// y guardar dicha informacion con el fin de generar la planilla respectiva
+        /// </summary>
+        /// <returns>un json con el id de la planilla generada</returns>
+        /// 
         public JsonResult GuardarNominaRecolector(PlanillaModel model)
         {
             try
             {
                 List<ItemNominaModel> detalles = JsonConvert.DeserializeObject<List<ItemNominaModel>>(Request.Form["ListaDetallesModel"]);
                 
-
                 // Se crea la nomina 
                 Compania compania = companiaService.Get(Session["Compania"] != null ? Convert.ToInt64(Session["Compania"].ToString()) : 0);
                 Planilla nomina = new Planilla();
@@ -164,13 +189,18 @@ namespace WPP.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Este método se encargada de obtener la informacion que se encuentra en la vista de NominaChofer
+        /// y guardar dicha informacion con el fin de generar la planilla respectiva
+        /// </summary>
+        /// <returns>un json con el id de la planilla generada</returns>
         public JsonResult GuardarNominaChofer(PlanillaModel model)
         {
             try
             {
                 List<ItemNominaModel> detalles = JsonConvert.DeserializeObject<List<ItemNominaModel>>(Request.Form["ListaDetallesModel"]);
-
-
+                
                 // Se crea la nomina 
                 Compania compania = companiaService.Get(Session["Compania"] != null ? Convert.ToInt64(Session["Compania"].ToString()) : 0);
                 Planilla nomina = new Planilla();
@@ -221,6 +251,11 @@ namespace WPP.Controllers
         }
 
 
+        /// <summary>
+        /// Este método se encargada de obtener la informacion que se encuentra en la vista de NominaTaller
+        /// y guardar dicha informacion con el fin de generar la planilla respectiva
+        /// </summary>
+        /// <returns>un json con el id de la planilla generada</returns>
         public JsonResult GuardarNominaTaller(PlanillaModel model)
         {
             try
@@ -277,11 +312,19 @@ namespace WPP.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Este método se encargada de obtener la informacion que fue ingresada (tipo de nomina, descripcion y excel)
+        /// y lee la informacion que se encuentra en el excel con el fin de realizar los calculos necesarios y mosrtarlos 
+        /// por pantalla al usuario.
+        /// </summary>
+        /// <returns>la vista con el modelo segun el tipo de nomina seleccionada (Chofer, Recolector, Taller)</returns>
         [HttpPost]
         public ActionResult Cargar(HttpPostedFileBase excelfile)
         {
             try
             {
+                // Se valida que el contenido del excel a importar sea el deseado
                 if (excelfile == null || excelfile.ContentLength == 0)
                 {
                     ViewBag.Error = "Por favor seleccione el archivo excel que desea cargar";
@@ -338,6 +381,7 @@ namespace WPP.Controllers
                         String tipo = Request.Form["ddlTipo"] != null ? Request.Form["ddlTipo"] : "Recolector";
                         PlanillaModel model = new PlanillaModel();
                         String Action = String.Empty;
+                        // Dependiendo del tipo de nomina a cargar se realizan los calculos deseados de dicha informacion
                         switch (tipo)
                         {
                             case "Recolector":
@@ -375,6 +419,11 @@ namespace WPP.Controllers
         }
 
 
+        /// <summary>
+        /// Este método se encargada de realizar los calculos que se van a mostrar al usuario
+        /// que son necesarios para generar la planilla de recolectores
+        /// </summary>
+        /// <returns>el modelo de la planilla generada</returns>
         private PlanillaModel CargarNominaRecolector(IList<ItemNomina> DetallesNomina)
         {
             PlanillaModel model = new PlanillaModel();
@@ -396,7 +445,8 @@ namespace WPP.Controllers
                     double toneladas = 0;
                     foreach (var otr in OTRs)
                     {
-
+                        //Se obtiene cuadrilla de la que formo parte
+                        //Nota: las toneladas obtenidas y las divide entre la cantidada de recolectores que participaron en esa otr
                         var Cuadrilla = otr.Cuadrilla.ListaEmpleados.Where(s => s.Puesto != "Chofer").ToList();
                         var CuadrillaEmpleado = otr.Cuadrilla.ListaEmpleados.Where(s=> s.Id == item.Empleado.Id && s.Puesto != "Chofer").ToList();
                         if (CuadrillaEmpleado.Count > 0)
@@ -521,6 +571,11 @@ namespace WPP.Controllers
             }
         }
 
+        /// <summary>
+        /// Este método se encargada de realizar los calculos que se van a mostrar al usuario
+        /// que son necesarios para generar la planilla de choferes
+        /// </summary>
+        /// <returns>el modelo de la planilla generada</returns>
         private PlanillaModel CargarNominaChofer(IList<ItemNomina> DetallesNomina)
         {
             PlanillaModel model = new PlanillaModel();
@@ -608,6 +663,12 @@ namespace WPP.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Este método se encargada de realizar los calculos que se van a mostrar al usuario
+        /// que son necesarios para generar la planilla de talleres
+        /// </summary>
+        /// <returns>el modelo de la planilla generada</returns>
         private PlanillaModel CargarNominaTaller(IList<ItemNomina> DetallesNomina)
         {
 
@@ -698,6 +759,10 @@ namespace WPP.Controllers
 
         #region REPORTES
 
+
+        /// <summary>
+        /// Este método se encargada de generar el reporte de nomina de recolector
+        /// </summary>
         public void ReporteNominaRecolector(string id, string formato)
         {
             if (id != String.Empty)
@@ -769,6 +834,10 @@ namespace WPP.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Este método se encargada de generar el comprobante de recolector
+        /// </summary>
         public void ReporteComprobanteNominaRecolector(string formato)
         {
             var Comprobantes = (List<NominaRecolector>)Session["ComprobantesRecolector"];
@@ -804,6 +873,11 @@ namespace WPP.Controllers
             
         }
 
+
+
+        /// <summary>
+        /// Este método se encargada de generar el reporte de nomina de chofer
+        /// </summary>
         public void ReporteNominaChofer(string id, string formato)
         {
             if (id != String.Empty)
@@ -869,6 +943,11 @@ namespace WPP.Controllers
             }
         }
 
+
+
+        /// <summary>
+        /// Este método se encargada de generar el reporte de nomina de taller
+        /// </summary>
         public void ReporteNominaTaller(string id, string formato)
         {
             if (id != String.Empty)
