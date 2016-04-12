@@ -70,9 +70,9 @@ namespace WPP.Controllers
 
 
         /// <summary>
-        /// Este método carga el modelo del equipo que se desea obtener el detalle
+        /// Este método carga el modelo de la jornada que se desea obtener el detalle
         /// </summary>
-        /// <returns>La vista de Detalles con el modelo de equipo que se desea consultar</returns>
+        /// <returns>La vista de Detalles con el modelo de la jornada que se desea consultar</returns>
         [HttpGet]
         [AccessDeniedAuthorizeAttribute(Roles = WPPConstants.ROLES_ADMINISTRACION + "," + WPPConstants.ROLES_ADM_JORNADA + "," + WPPConstants.ROLES_CONS_JORNADA)]
         public ActionResult Detalles(long id)
@@ -93,9 +93,9 @@ namespace WPP.Controllers
 
 
         /// <summary>
-        /// Este método lista y filtra el listado de registros de equipos mostrados en el index
+        /// Este método lista y filtra el listado de registros de jornada mostrados en el index
         /// </summary>
-        /// <returns>Vista Index con el modelo IPageList(equipo)</returns>
+        /// <returns>Vista Index con el modelo IPageList(jornada)</returns>
         public ActionResult Buscar(string sortOrder, string currentFilterDescripcion, string currentFilterTipo, string searchStringDescripcion, 
               string searchStringTipo, string searchStringFilas, int? page)
         {

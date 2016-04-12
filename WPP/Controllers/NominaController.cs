@@ -804,7 +804,7 @@ namespace WPP.Controllers
                     dato["Compensacion"] = item.Compensacion;
                     dato["Total"] = item.Total;
 
-
+                    // se completan los datos para el subreporte
                     DataRow datoSR = dtDatosSubReport.NewRow();
                     datoSR["CodEmpleado"] = item.Empleado.Codigo;
                     datoSR["Empleado"] = item.Empleado.Nombre; ;
@@ -825,7 +825,7 @@ namespace WPP.Controllers
                 rd.Load(strRptPath);
 
                 rd.SetDataSource(dsNomina);// Se asigna el dataset al datasorce del reporte
-                rd.Subreports[0].SetDataSource(dsTotal);
+                rd.Subreports[0].SetDataSource(dsTotal);// Se asignan los subreportes
                 rd.Subreports[1].SetDataSource(dsTotal);
                 rd.Subreports[2].SetDataSource(dsTotal);
                 var tipoFormato = formato == "pdf" ? ExportFormatType.PortableDocFormat : ExportFormatType.Excel;

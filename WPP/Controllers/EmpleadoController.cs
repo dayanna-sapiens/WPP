@@ -55,9 +55,9 @@ namespace WPP.Controllers
         }
 
         /// <summary>
-        /// Este método actualiza la información del servicio seleccionado, según lo datos del modelo
+        /// Este método actualiza la información del empleado seleccionado, según lo datos del modelo
         /// </summary>
-        /// <returns>La vista Index</returns>
+        /// <returns>La vista Editar con el modelo</returns>
         [HttpPost]
         [AccessDeniedAuthorizeAttribute(Roles = WPPConstants.ROL_SUPER_USUARIO + "," + WPPConstants.ROLES_ADM_EMPLEADO)]
         public ActionResult Editar(EmpleadoRecoleccionModel model)
@@ -112,7 +112,7 @@ namespace WPP.Controllers
         }
 
         /// <summary>
-        /// Este método carga el modelo del servicio que se desea obtener el detalle
+        /// Este método carga el modelo del modelo que se desea obtener el detalle
         /// </summary>
         /// <returns>La vista de Detalles con el modelo de servicio que se desea consultar</returns>
         [HttpGet]

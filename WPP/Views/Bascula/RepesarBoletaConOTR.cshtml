@@ -207,19 +207,29 @@
         });
 
         $("#Eje1Tara").change(function () {
-            CalcularPesoBruto();
+            CalcularPesoTara();
         });
 
         $("#Eje2Tara").change(function () {
-            CalcularPesoBruto();
+            CalcularPesoTara();
         });
 
         $("#Eje3Tara").change(function () {
-            CalcularPesoBruto();
+            CalcularPesoTara();
         });
    
     });// end document ready
 
+    // Calcula el peso Tara segun la suma del peso de sus ejes 
+    function CalcularPesoTara() {
+        var eje1 = $("#Eje1Tara").val();
+        var eje2 = $("#Eje2Tara").val();
+        var eje3 = $("#Eje3Tara").val();
+
+        var suma = Number(eje1) + Number(eje2) + Number(eje3);
+        $("#PesoTara").val(suma);
+        CalcularPesoNeto();
+    }
 
     // Calcula el peso bruto, que es la suma de los 3 ejes
     function CalcularPesoBruto() {

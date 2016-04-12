@@ -130,9 +130,9 @@ namespace WPP.Controllers
 
                         contratoService.Update(item);
 
-                        //itemProducto.Estado = "Vencido";
+                        itemProducto.Estado = "Vencido";
 
-                        //productoContratoService.Update(itemProducto);
+                        productoContratoService.Update(itemProducto);
                     }
                 }
             }
