@@ -118,7 +118,7 @@
                                     Báscula
                                 </a>
                                 <ul class="dropdown-menu">
-                                    @if (Session["Roles"].ToString().Contains("Boletas de Báscula"))
+                                    @if (Session["Roles"].ToString().Contains("Boletas"))
                                     {
                                         <li><a href="@Url.Action("Index", "Bascula")"> Boletas</a></li>
                                     <li><a href="@Url.Action("Configuracion", "ConfiguracionPuerto")">Configuración Báscula</a></li>
@@ -400,7 +400,7 @@
                         }
                     </ul>
 
-                    @if (Request.IsAuthenticated)
+                    @if (Session["Usuario"] != null)
                     {
                         <ul class="nav navbar-nav navbar-right">
 

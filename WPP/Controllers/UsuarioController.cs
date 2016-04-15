@@ -94,6 +94,7 @@ namespace WPP.Controllers
                 criteriaUser.Add("IsDeleted", false);
                 Usuario usuario = UsuarioService.Get(criteriaUser);
                 Session["Roles"] = usuario.Roles;
+                Session["User"] = usuario;
 
                 return RedirectURL(returnUrl);
             }
@@ -147,9 +148,9 @@ namespace WPP.Controllers
         [HttpGet]
         public ActionResult Compania()
         {
-            //IDictionary<string, object> criteriaUser = new Dictionary<string, object>();
-            //criteriaUser.Add("Email",  Session["Usuario"].ToString());
-            Usuario usuario = ObtenerUsuarioActual();// UsuarioService.Get(criteriaUser);
+            IDictionary<string, object> criteriaUser = new Dictionary<string, object>();
+            criteriaUser.Add("Email",  Session["Usuario"].ToString());
+            Usuario usuario =  UsuarioService.Get(criteriaUser);//(Usuario)Session["User"];
 
             ViewBag.ListaCompanias = usuario.Companias;
             Session["Roles"] = usuario.Roles;

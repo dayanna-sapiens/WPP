@@ -426,7 +426,7 @@ namespace WPP.Controllers
             if (contrato != String.Empty)
             {
                 Contrato contratoActual = contratoService.Get(Convert.ToInt64(contrato));
-                criteria.Add("Contrato", contrato);
+                criteria.Add("Contrato", contratoActual);
             }
            // criteria.Add("Compania", compania);
             if (compania != String.Empty)
